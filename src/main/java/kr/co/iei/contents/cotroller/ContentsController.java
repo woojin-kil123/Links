@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/contents")
 public class ContentsController {
 	
-	@GetMapping("/movieList")
+	@GetMapping("/movie")
 	public String movieList() {
-		return "contents/movieList";
+		return "contents/movie";
 	}
 
 }

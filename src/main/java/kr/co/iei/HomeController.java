@@ -9,5 +9,8 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-
+	@GetMapping("/ref/sample")
+	public String sample() {
+		return "ref/sample";
+	}
 }
