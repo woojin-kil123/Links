@@ -24,7 +24,7 @@ public class ApiService {
     }
 
     public String getMovieDetails(int movieId) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiUrl +movieId)
+        String url = UriComponentsBuilder.fromHttpUrl(apiUrl +movieId+"?language=ko-KR")
                 .queryParam("api_key", apiKey)
                 .toUriString();
 
