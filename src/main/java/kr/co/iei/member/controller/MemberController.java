@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
-import kr.co.iei.member.vo.Member;
+import kr.co.iei.member.model.vo.Member;
 
 @Controller
 @RequestMapping(value="/member")
@@ -43,5 +43,18 @@ public class MemberController {
  @GetMapping(value="/agree")
  public String agree() {
 	 return "/member/agree";
+ }
+ @RequestMapping(value="/joinFrm")
+ public String joinFrm() {
+	 return "/member/joinFrm";
+ }
+ @PostMapping(value="/join")
+ 	public String join(Member m, Model model) {
+	 int result = memberService.insertMember(m);
+	 model.addAttribute("title","회원 가입 완료");
+	 model.addAttribute("text","회원 가입을 환영합니다");
+	 model.addAttribute("icon","success");
+	 model.addAttribute("loc","/member/loginFrm");
+	 return "common/msg";
  }
 }

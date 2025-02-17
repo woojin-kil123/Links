@@ -74,8 +74,9 @@ public class NewsController {
 		return "common/msg";
 	}
 	
-	@GetMapping(value="/view")
-	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
+	//@GetMapping(value="/view")
+	// @SessionAttribute(required = false) Member member
+	/*public String selectOneNews(int newsNo, String check, Model model) {
 		int memberNo = 0;
 		if(member != null) {
 			memberNo = member.getMemberNo();
@@ -152,5 +153,5 @@ public class NewsController {
 		String filepath = fileUtils.upload(savepath, upfile);
 		return filepath;
 	}
-
+*/
 }

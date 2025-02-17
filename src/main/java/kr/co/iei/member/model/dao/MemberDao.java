@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.iei.member.vo.Member;
-import kr.co.iei.member.vo.MemberRowMapper;
+import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.member.model.vo.MemberRowMapper;
 
 @Repository
 public class MemberDao {
@@ -26,6 +26,13 @@ public class MemberDao {
 			Member member =(Member)list.get(0);
 			return member;
 		}
+	}
+
+	public int insertMember(Member m) {
+		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,normal,0,N)";
+		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPW(),m.getMemberEmail(),m.getMemberPhone()};
+		int result= jdbc.update(query,params);
+		return result;
 	}
 
 }
