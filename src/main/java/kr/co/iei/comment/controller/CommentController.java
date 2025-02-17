@@ -19,4 +19,14 @@ public class CommentController {
 	public String mCommentMemberList() {
 		return "comment/mCommentMemberList";
 	}
+	
+	@GetMapping(value="/bCommentMemberList")
+	public String bCommentMemberList() {
+		return "comment/bCommentMemberList";
+	}
+	
+	@GetMapping(value="/mCommentList")
+	public String mCommentList() {
+		return "comment/mCommentList";
+	}
 }

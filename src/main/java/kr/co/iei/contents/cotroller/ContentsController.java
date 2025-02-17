@@ -14,5 +14,6 @@ public class ContentsController {
 	public String movieList() {
 		return "contents/movie";
 	}
-
+	
+	
 }
