@@ -35,4 +35,13 @@ public class MemberController {
 		 return "redirect:/";
 	 }
  }
+ @GetMapping(value="/logout")
+ public String logout(HttpSession session) {
+	 session.invalidate();
+	 return "redirect:/";
+ }
+ @GetMapping(value="/agree")
+ public String agree() {
+	 return "/member/agree";
+ }
 }
