@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>News view</title>
+<style>
+	.news-view-wrap{
+		width: 1200px;
+		margin: 0 auto;
+	}
+	.newsContent{
+		min-height: 300px;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section news-view-wrap">
+			<div class="page-title">소식</div>
+			<table class="tbl">
+				<tr>
+					<th colspan="6" th:text="${n.newsTitle}"></th>
+				</tr>
+				<tr>
+					<th style="width:20%;">작성자</th>
+					<td style="width:20%;" th:text="${n.memberId}"></th>
+					<th style="width:15%;">작성일</th>
+					<td style="width:15%;" th:text="${n.newsRegDate}"></th>
+					<th style="width:15%;">조회수</th>
+					<td style="width:15%;" th:text="${n.newsReadCount}"></th>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td colspan="5">
+						<th:block th:each="file : ${n.fileList}">
+							<img src="/image/file.png" style="width: 16px;">
+							<a th:href="@{/news/filedown(filename=${file.filename},filepath=${file.filepath})}"th:text="${file.filename}"></a>
+						</th:block>
+					</td>
+				</tr>
+				<tr>
+					<td class="left" colspan="6">
+						<div class="newsContent" th:utext="${n.newsContent}"></div>
+					</td>
+				</tr>
+				<tr th:if="${session.member !=null && session.member.memberId == n.memeberId}">
+					<td colspan="6">
+						<a class="btn-primary" th:href="@{/news/updateFrm(newsNo=${n.newsNo})}">수정</a>
+						<button class="btn-secondary" th:onclick="newsDelete([[${n.newsNo}]]);">삭제</button>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</main>
+	<script src="/js/sweetalert.min.js"></script>
+	<script>
+		function newsDelete(newsNo){
+			swal({
+				title : "소식 삭제",
+				text : "소식을 삭제하시겠습니까?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className : "btn-secondary",
+						cloaseModal : true
+					},
+					confirm : {
+						text : "삭제",
+						value : true,
+						visible : true,
+						className : "btn-primary",
+						cloaseModal : true
+					}
+				}
+			}).then(function(isConfirm){
+				if(isConfirm){
+					location.href="/news/delete?newsNo="+newsNo;
+				}
+			})
+		}
+
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
