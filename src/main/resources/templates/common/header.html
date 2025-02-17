@@ -50,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 d-flex">
                         <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">소식</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/news/list?reqPage=1">소식</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contents/movieList">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/">책</a></li>
                         <li class="nav-item"><a class="nav-link" href="/comment/mCommentList">코멘트</a></li>
@@ -62,7 +62,7 @@
                         </li>
                         <th:block th:if="${session.member==null}">
                         <li class="nav-item"><a class="nav-link" href="/member/loginFrm">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/agree">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/joinFrm">회원가입</a></li>
                         </th:block>
                            <th:block th:if="${session.member!=null}">
                         <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>

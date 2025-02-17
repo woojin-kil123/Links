@@ -40,7 +40,7 @@
 					<tr th:each="news : ${list}">
 						<td th:text="${news.newsNo}"></td>
 						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
-						<td th:text="${news.newsWriter}"></td>
+						<td th:text="${news.memberId}"></td>
 						<td th:text="${news.newsRegDate}"></td>
 						<td th:text="${news.newsReadCount}"></td>
 					</tr>

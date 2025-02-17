@@ -44,6 +44,7 @@ public class MemberController {
  public String agree() {
 	 return "/member/agree";
  }
+
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "/member/joinFrm";
@@ -56,5 +57,10 @@ public class MemberController {
 	 model.addAttribute("icon","success");
 	 model.addAttribute("loc","/member/loginFrm");
 	 return "common/msg";
+
+ @GetMapping(value="/joinFrm")
+ public String joinFrm() {
+	 return "member/joinFrm";
+
  }
 }
