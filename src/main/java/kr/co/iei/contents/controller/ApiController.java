@@ -1,4 +1,4 @@
-package kr.co.iei.contents.cotroller;
+package kr.co.iei.contents.controller;
 
 import java.io.IOException;
 
