@@ -73,7 +73,7 @@ public class NewsController {
 		model.addAttribute("loc", "/news/list?reqPage=1");
 		return "common/msg";
 	}
-	
+	/*
 	@GetMapping(value="/view")
 	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
 		int memberNo = 0;
@@ -93,6 +93,7 @@ public class NewsController {
 		}
 		
 	}
+	*/
 	
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {
