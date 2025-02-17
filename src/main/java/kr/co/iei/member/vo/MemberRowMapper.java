@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class MemberRowMapping implements RowMapper<Member>{
+public class MemberRowMapper implements RowMapper<Member>{
 	@Override
 	public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Member m = new Member();
