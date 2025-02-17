@@ -1,4 +1,4 @@
-package kr.co.iei.contents.cotroller;
+package kr.co.iei.contents.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ContentsController {
 	
 	@GetMapping("/movie")
-	public String movieList() {
+	public String movie() {
 		return "contents/movie";
+	}
+	
+	@GetMapping("/movieList")
+	public String movieList() {
+		return "contents/movieList";
 	}
 
 }
