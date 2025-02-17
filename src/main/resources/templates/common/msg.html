@@ -5,28 +5,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script src="/js/sweetalert.min.js"></script>   <!-- '/' : static 폴더 지칭 -->
-	<!-- 스크립트 내부에서 Controller가 등록해준 데이터 사용할 때 -->
+
+	<script src="/js/sweetalert.min.js"></script>
 	<script th:inline="javascript">
-		const title = [[${title}]];  /*[[${키값}]] : 데이터를 가져오기 위해 컴파일러에게 알려주는 문법*/
-		const text = [[${text}]];
-		const icon = [[${icon}]];
-		const loc = [[${loc}]];
-		
-		//sweetalert 사용방법
-		//1. 라이브러리 추가
-		//2 . swal() 함수
-		swal({
-			//key 값 입력
-			title : title,
-			text : text,
-			//icon에 들어가는 값에 따라서 아이콘이 변경(success, error, warning, info)
-			icon : icon
-		}).then(function(){   /*callback 함수 : 버튼을 누르면 돌아갈 함수*/   
-			location.href = loc;
-		})
-	
+	const title = [[${title}]];
+	const msg = [[${msg}]];
+	const icon = [[${icon}]];
+	const loc =[[${loc}]];
+	swal({
+		title:title,
+		text: msg,
+		icon: icon
+	}).then(function(){
+		location.href =loc;
+	})
 	</script>
+
 	
-</body>
+
 </html>

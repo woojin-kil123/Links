@@ -15,9 +15,10 @@ public class ContentsController {
 		return "contents/movie";
 	}
 	
+
 	@GetMapping("/movieList")
 	public String movieList() {
 		return "contents/movieList";
 	}
-
 }
+
