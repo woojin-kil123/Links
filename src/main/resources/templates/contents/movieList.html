@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>LinkS 영화</title>
+<style>
+	.movie-wrap{
+		margin : 10 auto;
+	}
+
+	.movie-wrap>.movie-box{
+		width: 20%;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+		<section class="page-section" id="services">
+            <div class="container">
+                <div class="text-left">
+                    <h2 class="section-heading text-uppercase">박스오피스 순위</h2>
+                    <a href="/contents/movie">영화세부</a>
+                    <a href="/api/insertref">DB에 데이터 넣기</a>
+                </div>
+                <div class="text-center d-flex movie-wrap">
+                	<div class="movie-box">
+	                    <table class="col-md-3 table">
+	                    	<tr>
+	                    		<td class="poster">포스터</td>
+	                    	</tr>
+	                    	<tr>
+		                        <td>
+		                        	<h4 class="my-3">영화 제목</h4>
+		                        	<h6 class="my-1">개봉연도</h6>
+		                        	<p class="text-muted my-2">평균 별점</p>
+		                        </td>
+	                    	</tr>	
+	                    	<tr>
+		                        <td><p class="text-muted">예매율3% 누적관객 0000명</p></td>
+	                    	</tr>
+	                    </table>
+                	</div>
+                </div>
+            </div>
+        </section>
+	<th:block th:include="common/footer"></th:block>
+</body>
+<script>
+	let currentPage = 1;
+	$.ajax({
+		url : "/api/movie",
+		type : "get",
+		data : {"currentPage":currentPage},
+		success : function(data){
+			console.log(data);
+			for(let i=0; i<data.length;i++){
+				const posterPath = "https://image.tmdb.org/t/p/original" + data[i].posterPath;				
+				
+			}
+		}
+	});
+
+</script>
+</html>
