@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.iei.member.vo.Member;
-import kr.co.iei.member.vo.MemberRowMapper;
+import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.member.model.vo.MemberRowMapper;
 
 @Repository
 public class MemberDao {

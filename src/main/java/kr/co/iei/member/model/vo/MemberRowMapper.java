@@ -1,4 +1,4 @@
-package kr.co.iei.member.vo;
+package kr.co.iei.member.model.vo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

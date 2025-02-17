@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
-import kr.co.iei.member.vo.Member;
+import kr.co.iei.member.model.vo.Member;
 
 @Controller
 @RequestMapping(value="/member")

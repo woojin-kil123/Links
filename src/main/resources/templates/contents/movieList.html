@@ -55,6 +55,30 @@
 			console.log(data);
 			for(let i=0; i<data.length;i++){
 				const posterPath = "https://image.tmdb.org/t/p/original" + data[i].posterPath;				
+				const movieBox = $("<div>");
+				div.addClass("movie-box");
+				
+				const table = $("<table>");
+				table.addClass("col-md-3").addClass("table");
+				
+				const tr1 = $("<tr>");
+				
+			/*
+				<tr>
+        		<td class="poster">포스터</td>
+        	</tr>
+        	<tr>
+                <td>
+                	<h4 class="my-3">영화 제목</h4>
+                	<h6 class="my-1">개봉연도</h6>
+                	<p class="text-muted my-2">평균 별점</p>
+                </td>
+        	</tr>	
+        	<tr>
+                <td><p class="text-muted">예매율3% 누적관객 0000명</p></td>
+        	</tr>
+        	*/
+				
 				
 			}
 		}

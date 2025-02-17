@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.iei.member.model.dao.MemberDao;
-import kr.co.iei.member.vo.Member;
+import kr.co.iei.member.model.vo.Member;
 
 @Service
 public class MemberSerivce {
