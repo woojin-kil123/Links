@@ -2,10 +2,12 @@ package kr.co.iei.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.vo.Member;
 
@@ -19,9 +21,18 @@ public class MemberController {
 	 return "member/login";
  }
  @PostMapping(value="/login")
- public String login(Member m) {
+ public String login(Member m,Model model, HttpSession session) {
 	 Member member = memberService.selectOneMember(m);
-	 System.out.println(member);
-	 return "redirect:/";
+
+	 if(member== null) {
+		 model.addAttribute("title","로그인 실페");
+		 model.addAttribute("text","아이디 또는 비밀번호를 확인하세요.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/loginFrm");
+		 return "common/msg";
+	 }else {
+		 session.setAttribute("member", member);
+		 return "redirect:/";
+	 }
  }
 }

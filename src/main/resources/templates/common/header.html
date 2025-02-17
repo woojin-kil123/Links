@@ -57,8 +57,14 @@
                         		<button style="background-color : transparent"><span class="material-icons nav-link">search</span></button>
                         	</form>
                         </li>
+                        <th:block th:id="${session.member==null}">
                         <li class="nav-item"><a class="nav-link" href="/member/loginFrm">로그인</a></li>
                         <li class="nav-item"><a class="nav-link" href="/">회원가입</a></li>
+                        </th:block>
+                           <th:block th:id="${session.member!=null}">
+                        <li class="nav-item"><a class="nav-link" href="/member/loginFrm">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">로그아웃</a></li>
+                        </th:block>
                         <li class="nav-item"><a class="nav-link d-flex" href="/">
                         <span class="material-icons nav-link">contact_support</span></a>
                         </li>
