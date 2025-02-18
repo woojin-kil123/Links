@@ -30,5 +30,10 @@ public class MemberSerivce {
 		int result=memberDao.updateMember(m);
 		return result;
 	}
+	@Transactional
+	public int deleteMember(int memberNo) {
+		int result=memberDao.deleteMember(memberNo);
+		return result;
+	}
 
 }

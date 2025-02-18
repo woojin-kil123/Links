@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
@@ -92,5 +93,34 @@ public class MemberController {
 	 }else {
 		 return "redirect:/";
 	 }
+ }
+ @GetMapping(value="/delete")
+ 
+ public String delete(@SessionAttribute Member member, Model model) {
+	 int memberNo = member.getMemberNo();
+	 int result =memberService.deleteMember(memberNo);
+	 model.addAttribute("title","회원 탈퇴 완료");
+	 model.addAttribute("text","수고하셨습니다");
+	 model.addAttribute("icon","success");
+	 model.addAttribute("loc","/member/logout");
+	 return "common/msg";
+ }
+ @ResponseBody
+ @GetMapping(value="/ajaxCheckId")
+ public boolean ajaxCheckId(String memberId) {
+	 Member m= memberService.selectOneMember(memberId);
+	 return m== null;
+ }
+ @GetMapping(value="/find")
+ public String find() {
+	 return "member/find";
+ }
+ @GetMapping(value="/idFind")
+ public String ifFind() {
+	 return "member/idfind";
+ }
+ @GetMapping(value="/pwFind")
+ public String pwFind() {
+	 return "member/pwfind";
  }
 }

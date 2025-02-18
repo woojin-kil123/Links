@@ -19,6 +19,12 @@
 	.join-button-box>button{
 		width: 100%
 	}
+	.valid{
+	color : blue;
+	}
+	.invalid{
+	color : red;
+	}
 	
 </style>
 </head>
@@ -90,11 +96,26 @@
 	</main>
 	<script>
 		$(".id-check-btn").on("click",function(){
-			window.open("","checkId","widhth=600, height=300px");
-			$("[name=checkIdFrm]").attr("target","checkId");
-			const inputId =$("#memberId").val();
-			$("[name=checkId]").val(inputId);
-			$("[name=checkIdFrm]").submit();
+			$(".id-check-msg").removeClass("invalid").removeClass("valid");
+			const memberId =$("#memberId").val();
+			$.ajax({
+				url:"/member/ajaxCheckId",
+				type :"get",
+				data : {memberId : memberId},
+				success: function(result){
+					if(result){
+						$(".id-check-msg").text("사용 가능한 아이디 입니다");
+						$(".id-check-msg").addClass("valid");
+					}else{
+						$(".id-check-msg").text("이미 사용중인 아이디 입니다");
+						$(".id-check-msg").addClass("invalid");
+					}
+					
+				},
+				error: function(){
+					
+				}
+			});
 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>

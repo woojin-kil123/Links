@@ -55,4 +55,11 @@ public class MemberDao {
 		return result;
 	}
 
+	public int deleteMember(int memberNo) {
+		String query ="delete from member where member_no=?";
+		Object[] params = {memberNo};
+		int result= jdbc.update(query,params);
+		return result;
+	}
+
 }

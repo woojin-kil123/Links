@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>AJAX</title>
+<style>
+	.ajax-wrap{
+		width: 800px;
+		margin: 0 auto;		
+	}
+	.ajaxResult{
+		margin-top : 10px;
+		min-height: 100px;
+		border: 1px solid var(--gray5);
+		 
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section ajax-wrap">
+			<div class="page-title">AJAX</div>
+			
+			
+			
+			<h3>1. 서버 호출하기</h3>
+			<button class="btn-point" id="ajax1">서버호출하기</button>
+			
+			<h3>2. 서버 호출하고 서버에서 전송한 데이터 받기</h3>
+			<button class="btn-point" id="ajax2">데이터받기</button>
+			
+			<!-- JSON =JavaScript Object Notaion -->
+			<h3>3. 서버에 데이터를 전송하고 결과 받기(기본형) aka.JSON</h3>
+			<input type = "text" id="su1">
+			+
+			<input type = "text" id="su2">
+			<button class="btn-point" id="ajax3">더하기</button>
+			<p class="ajaxResult" id="result"></p>
+			
+			<h3>4. 서버에 데이터 전송 후 결과 받기</h3>
+			<input type = "text" id="input4">
+			<button class="btn-point" id="ajax4">회원 정보 조회</button>
+			<p class="ajaxResult" id="result4"></p>
+			
+			<h3>5. 서버에서 데이터 받기(리스트,배열)</h3>
+			<button class="btn-point" id="ajax5">전체 회원정보 조회</button>
+			<p class="ajaxResult" id="result5"></p>
+			
+			<h3>6. 서버에서 데이터 전송하고 결과받기(객체)</h3>
+			<input type = "text" id="input6">
+			<button class="btn-point" id="ajax6">회원 정보 조회</button>
+			<p class="ajaxResult" id="result6"></p>
+			
+			<h3>7. 서버에서 데이터 받기(리스트,배열)</h3>
+			<button class="btn-point" id="ajax7">전체 회원정보 조회</button>
+			<p class="ajaxResult" id="result7"></p>
+			
+		</section>
+	</main>
+	
+	<script>
+		$("#ajax1").on("click",function(){
+			console.log("test1");
+			let data = 1;
+			//비동기요청 전송방식
+			// >>> $.ajax({}) 이런 함수가 있음
+			$.ajax({
+				url : "/etc/ajax1",			//form 태그의 action 역할
+				type : "get",				//form 태그의 method 역할
+				success : function(){		//비동기 요청이 성공적으로 끝나면 실행되는 함수
+					console.log("서버에서 요청 후 성공");
+				},
+				error : function(){
+					console.log("서버에서 요청 후 에러");	
+				},
+				complete : function(){  	//비동기 요청이 끝나면 성공/실패여부와 상관없이 무조건 실행되는 함수
+					console.log("성공이든 실패든 무조건 실행되는 함수");
+				}
+			});
+		});
+		
+		$("#ajax2").on("click",function(){
+			$.ajax({
+				url : "/etc/ajax2",
+				type : "get",
+				success : function (data){
+					//success : function () >>> ajax요청이 성공적으로 처리되면 실행되는 함수
+					//function(data) : 첫번째 매개변수로 서버에서 되돌려준 데이터가 들어옴..
+					console.log("성공");
+					console.log(data);
+				},
+				error : function (){
+					console.log("실패");
+				}
+			});
+		});
+		
+		$("#ajax3").on("click",function(){
+			const su1 = $("#su1").val();
+			const su2 = $("#su2").val();
+			
+			$.ajax({
+				url : "/etc/ajax3",
+				type : "get",
+				data : {su1: su1, num2 : su2},
+				success : function(result){
+					const m = JSON.parse(result);					
+					$("#result3").append(result);
+					console.log("성공");
+				},
+				error : function(){
+					console.log("실패");
+				}
+				
+			});
+			
+		});
+		$("#ajax4").on("click",function(){
+			const memberId = $("#input4").val();
+			$.ajax({
+				url : "/etc/ajax4",
+				type : "get",
+				data : {memberId: memberId},
+				dataType : "json", 					//받은 데이터를 json으로 변환
+				success : function(result){
+					console.log(result, typeof result);
+					//자바스크립트에서 문자열을 자바스크립트 객체타입으로 변환해주는 기능
+					//const m = JSON.parse(result);
+					//console.log(m);
+					
+					$("#result4").append("회원 번호 : "+result.memberNo+"<br>")
+					$("#result4").append("회원 아이디 : "+result.memberId+"<br>")
+					$("#result4").append("회원 이름 : "+result.memberName+"<br>")
+					$("#result4").append("전화 번호 : "+result.memberPhone+"<br>")
+					$("#result4").append("주소 : "+result.memberAddr+"<br>")
+					
+				
+					
+				},
+				error : function(){
+					$("#result4").append("회원정보를 찾을 수 없음")
+				}
+				
+			});
+		});
+		$("#ajax5").on("click",function(){
+			$.ajax({
+				url : "/etc/ajax5",
+				type : "post",
+				dataType : "json",
+				success :function(result){
+					console.log(result, typeof result);
+					for(let i=0;i<result.length;i++){
+						const div = $("<div>");
+						div.append(result[i].memberNo+"/");
+						div.append(result[i].memberId+"/");
+						div.append(result[i].memberName+"/");
+						div.append(result[i].memberPhone+"/");
+						div.append(result[i].memberPhone+"/");
+						div.append(result[i].memberAddr+"/");
+						$("#result5").append(div);
+					}
+				},
+				error : function(){
+					console.log("error");
+				}
+			});
+		});
+		
+		$("#ajax6").on("click",function(){
+			const memberId = $("#input6").val();
+			$.ajax({
+				url : "/etc/ajax6",
+				type : "get",
+				data : {memberId: memberId},
+				//dataType : "json", 					//받은 데이터를 json으로 변환
+				success : function(result){
+					console.log(result, typeof result);
+					//자바스크립트에서 문자열을 자바스크립트 객체타입으로 변환해주는 기능
+					
+					const m = JSON.parse(result);
+					console.log(m);
+					
+					$("#result6").append("회원 번호 : "+result.memberNo+"<br>")
+					$("#result6").append("회원 아이디 : "+result.memberId+"<br>")
+					$("#result6").append("회원 이름 : "+result.memberName+"<br>")
+					$("#result6").append("전화 번호 : "+result.memberPhone+"<br>")
+					$("#result6").append("주소 : "+result.memberAddr+"<br>")
+					
+				},
+				error : function(){
+					$("#result6").append("정보 X")
+				}
+				
+			});
+		});
+		
+		$("#ajax7").on("click",function(){
+			$.ajax({
+				url : "/etc/ajax7",
+				type : "post",
+				//dataType : "json",
+				success :function(result){
+					console.log(result, typeof result);
+					for(let i=0;i<result.length;i++){
+						const div = $("<div>");
+						div.append(result[i].memberNo+"/");
+						div.append(result[i].memberId+"/");
+						div.append(result[i].memberName+"/");
+						div.append(result[i].memberPhone+"/");
+						div.append(result[i].memberPhone+"/");
+						div.append(result[i].memberAddr+"/");
+						$("#result7").append(div);
+					}
+				},
+				error : function(){
+					console.log("error");
+				}
+			});
+		});
+		
+	</script>
+	
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
