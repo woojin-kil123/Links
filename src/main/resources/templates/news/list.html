@@ -6,9 +6,13 @@
 <link rel="stylesheet" href="/css/default.css" />
 <style>
 	.list-tbl-wrap{
-		width : 80%;
+		width: 80%;
 		height : 500px;
 		margin-top : 15px;
+		margin: auto;
+	}
+	.list-footer{
+		width: 80%;
 		margin: auto;
 	}
 	#pageNavi{
@@ -49,9 +53,8 @@
 					</tr>
 				</table>
 			</div>
-			<div class="list-footer">
-				<a th:if="${session.member != null}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
-				<!-- <a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a> -->
+			<div class="list-footer" style="display: flex; justify-content: flex-end;">
+				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
 			<div id="pageNavi" th:utext="${pageNavi}"></div>
 		</section>	
