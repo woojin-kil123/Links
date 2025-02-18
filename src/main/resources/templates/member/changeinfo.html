@@ -57,6 +57,7 @@
 	}
 	
 </style>
+<script src="/js/sweetalert.min.js"></script>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
@@ -111,12 +112,15 @@
 				</table>
 				<div class="change-btn">
 					<button type="submit" class="btn-primary">정보수정</button>
-					<button type="button" class="btn-secondary">회원탈퇴</button>
+					<button type="button" class="btn-secondary del-btn">회원탈퇴</button>
 				</div>
 				</form>
 			</div>
 		</section>
 	</main>
+	<script>
+		$(".del-btn")
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
