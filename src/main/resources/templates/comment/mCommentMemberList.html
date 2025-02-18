@@ -84,6 +84,8 @@
 		background-color: #D9D9D9;
 		margin-left:20px;
 		float: left;
+		cursor: pointer; 
+		
 	}
 	
 	.movie-comment{
@@ -150,7 +152,7 @@
 						<div class="partner"></div>
 						
 						<div class="movie-content">					
-							<div class="movie-summary"> </div>									
+							<div> <a href="/comment/mCommentList" class="movie-summary"> </a></div>									
 							<div th:text= "${c.commentContent}" class="movie-comment"> </div>
 												
 						</div>
