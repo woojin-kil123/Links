@@ -16,11 +16,11 @@ public class MemberRowMapper implements RowMapper<Member>{
 		m.setDel(rs.getString("del_yn"));
 		m.setMemberEmail(rs.getString("member_email"));
 		m.setMemberId(rs.getString("member_id"));
-		m.setMemberLevel(rs.getInt("member_level"));
+		m.setWaringLevel(rs.getInt("warning_level"));
 		m.setMemberName(rs.getString("member_name"));
 		m.setMemberNo(rs.getInt("member_no"));
 		m.setMemberPhone(rs.getString("member_phone"));
-		m.setMemberPW("member_pw");
+		m.setMemberPw("member_pw");
 		m.setMemberRole("member_role");
 		return m;
 		
