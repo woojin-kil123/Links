@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.mypage-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+.page-title{
+	 padding-bottom : 40px;
+	
+	 text-align: center;
+	}
+</style>
+</head>
+<body>
+<th:block th:include="common/header"></th:block>
+	<main class="content mypage-container">
+		<section class="section">
+			<div class="page-title">회원정보 수정</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

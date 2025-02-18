@@ -18,7 +18,7 @@ public class MemberDao {
 
 	public Member selectOneMember(Member m) {
 		String query ="select * from member where member_id=? and member_pw=?";
-		Object[] params = {m.getMemberId(),m.getMemberPW()};
+		Object[] params = {m.getMemberId(),m.getMemberPw()};
 		List list=jdbc.query(query,memberRowMapper, params);
 		if(list.isEmpty()) {
 			return null;
@@ -30,9 +30,22 @@ public class MemberDao {
 
 	public int insertMember(Member m) {
 		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,normal,0,N)";
-		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPW(),m.getMemberEmail(),m.getMemberPhone()};
+		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPw(),m.getMemberEmail(),m.getMemberPhone()};
 		int result= jdbc.update(query,params);
 		return result;
+	}
+
+	public Member selectOneMember(String checkId) {
+		String query ="select * from member where member_id=?";
+		Object[] params = {checkId};
+		List list=jdbc.query(query,memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member =(Member)list.get(0);
+			return member;
+		}
+	
 	}
 
 }

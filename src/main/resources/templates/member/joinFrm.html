@@ -27,6 +27,9 @@
 	<main class="content">
 		<section class="section join-wrap">
 			<div class="page-title">회원가입</div>
+			<form action="/member/checkId" name="checkIdFrm" method="get">
+				<input 	type="hidden" name="checkId">
+			</form>
 			<form action="/member/join" method="post" autocomplete="off">
 				<div class="input-wrap">
 					<div class="input-title">
@@ -87,7 +90,11 @@
 	</main>
 	<script>
 		$(".id-check-btn").on("click",function(){
-			window.open("","checkId","widhth=600, height=300px")
+			window.open("","checkId","widhth=600, height=300px");
+			$("[name=checkIdFrm]").attr("target","checkId");
+			const inputId =$("#memberId").val();
+			$("[name=checkId]").val(inputId);
+			$("[name=checkIdFrm]").submit();
 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>

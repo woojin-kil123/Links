@@ -100,7 +100,7 @@ public class NewsController {
 		}
 	}
 	*/
-	
+/*	
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {
 		String savepath = root+"/news/";

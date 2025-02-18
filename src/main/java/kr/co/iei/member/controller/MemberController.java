@@ -47,7 +47,7 @@ public class MemberController {
 
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
-	 return "/member/joinFrm";
+	 return "member/joinFrm";
  }
  @PostMapping(value="/join")
  	public String join(Member m, Model model) {
@@ -57,10 +57,20 @@ public class MemberController {
 	 model.addAttribute("icon","success");
 	 model.addAttribute("loc","/member/loginFrm");
 	 return "common/msg";
-
- @GetMapping(value="/joinFrm")
- public String joinFrm() {
-	 return "member/joinFrm";
-
+ }
+ @GetMapping(value="/checkId")
+ public String checkId(String checkId, Model model) {
+	 Member member =memberService.selectOneMember(checkId);
+	 if(member ==null) {
+		 model.addAttribute("result",0);
+	 }else {
+		 model.addAttribute("result",1);
+	 }
+	 model.addAttribute("memberId",checkId);
+	 return "member/checkId";
+ }
+ @GetMapping(value="/mypage")
+ public String mypage() {
+	 return "member/mypage";
  }
 }
