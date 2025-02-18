@@ -18,8 +18,21 @@ public class CommentService {
 		return list;
 	}
 
-	public List mCommentList(String contentNo) {
+	
+	public List mCommentList(String contentNo) {		
 		List list = commentDao.mCommentList(contentNo);
+		
 		return list;
 	}
+
+	public String selectMovieTitle(String contentNo) {
+		String partOne = contentNo.substring(0,1);
+		String partTwo = contentNo.substring(1);		
+		if(partOne.equals("m")) {		
+			String result = commentDao.movieTitle(partTwo);
+			System.out.println(result);
+		}		
+		return partTwo;
+	}
+	
 }

@@ -37,9 +37,14 @@ public class CommentController {
 	@GetMapping(value="/mCommentList")
 	public String mCommentList(String contentNo, Model model) {
 		List list = commentService.mCommentList(contentNo);
+		String movieTitle = commentService.selectMovieTitle(contentNo);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("movieTitle",movieTitle);
 		return "comment/mCommentList";
 	}
+	
+	 
 	
 	@GetMapping(value="/bCommentList")
 	public String bCommentList() {
