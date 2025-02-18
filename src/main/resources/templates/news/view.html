@@ -3,13 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>News view</title>
+<link rel="stylesheet" href="/css/default.css" />
 <style>
 	.news-view-wrap{
-		width: 1200px;
+		width: 80%;
 		margin: 0 auto;
 	}
 	.newsContent{
 		min-height: 300px;
+	}
+	.page-title{
+		width: 80%;
+	}
+	.section{
+		margin-top: 50px;
 	}
 </style>
 </head>
@@ -44,7 +51,7 @@
 						<div class="newsContent" th:utext="${n.newsContent}"></div>
 					</td>
 				</tr>
-				<tr th:if="${session.member !=null && session.member.memberId == n.memeberId}">
+				<tr th:if="${session.member !=null && session.member.memberId == n.memberId}">
 					<td colspan="6">
 						<a class="btn-primary" th:href="@{/news/updateFrm(newsNo=${n.newsNo})}">수정</a>
 						<button class="btn-secondary" th:onclick="newsDelete([[${n.newsNo}]]);">삭제</button>

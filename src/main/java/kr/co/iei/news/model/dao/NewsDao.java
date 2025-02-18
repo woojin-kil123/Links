@@ -34,8 +34,8 @@ public class NewsDao {
 	}
 
 	public int insertNews(News n) {
-		String query = "insert into news values(?,?,?,?,0,to_char(sysdate,'yyyy-mm-dd'))";
-		Object[] params = {n.getNewsNo(),n.getNewsTitle(),n.getMemberId(),n.getNewsContent()};
+		String query = "insert into news values(?,?,?,0,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		Object[] params = {n.getNewsNo(),n.getMemberId(),n.getNewsTitle(),n.getNewsContent(),n.getNewsNotice()};
 		int result = jdbc.update(query, params);
 		return result;
 	}

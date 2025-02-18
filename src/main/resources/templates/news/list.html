@@ -3,20 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>News List</title>
+<link rel="stylesheet" href="/css/default.css" />
 <style>
-	.news-list-wrap{
-		width : 1200px;
-		margin : 0 auto;
-	}
 	.list-tbl-wrap{
+		width: 80%;
 		height : 500px;
 		margin-top : 15px;
+		margin: auto;
+	}
+	.list-footer{
+		width: 80%;
+		margin: auto;
 	}
 	#pageNavi{
 		margin-top : 30px;
 	}
 	#write-btn{
 		display : inline-block;
+	}
+	.page-title{
+		width: 80%;
+		margin: auto;
+	}
+	.section{
+		margin-top: 50px;
 	}
 </style>
 </head>
@@ -25,9 +35,6 @@
 	<main class="content">
 		<section class="section">
 			<div class="page-title">소식</div>
-			<div class="list-header">
-				<a th:if="${session.member != null && session.member.memberLevel == 1}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
-			</div>
 			<div class="list-tbl-wrap">
 				<table class="tbl tbl-hover">
 					<tr>
@@ -45,6 +52,9 @@
 						<td th:text="${news.newsReadCount}"></td>
 					</tr>
 				</table>
+			</div>
+			<div class="list-footer" style="display: flex; justify-content: flex-end;">
+				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
 			<div id="pageNavi" th:utext="${pageNavi}"></div>
 		</section>	
