@@ -17,4 +17,9 @@ public class CommentService {
 		List list = commentDao.mCommentMemberList();
 		return list;
 	}
+
+	public List mCommentList(String contentNo) {
+		List list = commentDao.mCommentList(contentNo);
+		return list;
+	}
 }

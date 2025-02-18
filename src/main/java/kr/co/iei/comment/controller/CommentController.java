@@ -30,12 +30,14 @@ public class CommentController {
 	}
 	
 	@GetMapping(value="/bCommentMemberList")
-	public String bCommentMemberList() {
+	public String bCommentMemberList() {		
 		return "comment/bCommentMemberList";
 	}
 	
 	@GetMapping(value="/mCommentList")
-	public String mCommentList() {
+	public String mCommentList(String contentNo, Model model) {
+		List list = commentService.mCommentList(contentNo);
+		model.addAttribute("list", list);
 		return "comment/mCommentList";
 	}
 	

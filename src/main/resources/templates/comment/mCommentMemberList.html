@@ -136,8 +136,8 @@
 								<th style="width:1%;"></th>
 								<th class="profile" style="width:3%;"></th>
 								<th style="width:2%;"></th>
-								<th style="width:10%;"></th>
-								<th th:text= "${c.contentNo}" style="width:67%;"></th>
+								<th th:text= "${c.memberId}" style="width:13%;"></th>
+								<th th:text= "${c.contentNo}" style="width:64%;"></th>
 								<th class="star-wrap" style="width:17%;">
 									<span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
@@ -152,7 +152,7 @@
 						<div class="partner"></div>
 						
 						<div class="movie-content">					
-							<div> <a href="/comment/mCommentList" class="movie-summary"> </a></div>									
+							<div> <a th:href="@{/comment/mCommentList(contentNo=${c.contentNo})}" class="movie-summary"></a></div>									
 							<div th:text= "${c.commentContent}" class="movie-comment"> </div>
 												
 						</div>
