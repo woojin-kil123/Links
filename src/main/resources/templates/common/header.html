@@ -62,10 +62,18 @@
                         </li>
                         <th:block th:if="${session.member==null}">
                         <li class="nav-item"><a class="nav-link" href="/member/loginFrm">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/joinFrm">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/agree">회원가입</a></li>
                         </th:block>
                            <th:block th:if="${session.member!=null}">
-                        <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+                           <th:block th:if="${session.member.memberRole == 'normal'}">
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        </th:block>
+                          <th:block th:if="${session.member.memberRole=='business'}">
+                        <li class="nav-item"><a class="nav-link" href="/">문의페이지</a></li>
+                        </th:block>
+                          <th:block th:if="${session.member.memberRole=='admin'}">
+                        <li class="nav-item"><a class="nav-link" href="/">관리자페이지</a></li>
+                        </th:block>
                         <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
                         </th:block>
                         <li class="nav-item"><a class="nav-link d-flex" href="/">

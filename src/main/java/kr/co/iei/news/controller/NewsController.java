@@ -73,9 +73,23 @@ public class NewsController {
 		model.addAttribute("loc", "/news/list?reqPage=1");
 		return "common/msg";
 	}
+
+
+	
+	//@GetMapping(value="/view")
+	// @SessionAttribute(required = false) Member member
+	/*public String selectOneNews(int newsNo, String check, Model model) {
+
+	/*
+	@GetMapping(value="/view")
+	//@SessionAttribute(required = false) Member member
+	public String selectOneNews(int newsNo, String check, Model model ) {
+
+
 	
 	@GetMapping(value="/view")
 	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
+
 		int memberNo = 0;
 		if(member != null) {
 			memberNo = member.getMemberNo();
@@ -92,7 +106,12 @@ public class NewsController {
 			return "news/view";
 		}
 	}
+
+	*/
+/*	
+
 	
+
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {
 		String savepath = root+"/news/";
@@ -151,5 +170,5 @@ public class NewsController {
 		String filepath = fileUtils.upload(savepath, upfile);
 		return filepath;
 	}
-
+*/
 }

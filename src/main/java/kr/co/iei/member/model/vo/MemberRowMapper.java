@@ -1,4 +1,4 @@
-package kr.co.iei.member.vo;
+package kr.co.iei.member.model.vo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,12 +16,18 @@ public class MemberRowMapper implements RowMapper<Member>{
 		m.setDel(rs.getString("del_yn"));
 		m.setMemberEmail(rs.getString("member_email"));
 		m.setMemberId(rs.getString("member_id"));
+		m.setWarningLevel(rs.getInt("warning_level"));
+		m.setMemberName(rs.getString("member_name"));
+		m.setMemberNo(rs.getInt("member_no"));
+		m.setMemberPhone(rs.getString("member_phone"));
+		m.setMemberPw(rs.getString("member_pw"));
+		m.setMemberRole(rs.getString("member_role"));
 		m.setWaringLevel(rs.getInt("warning_level"));
 		m.setMemberName(rs.getString("member_name"));
 		m.setMemberNo(rs.getInt("member_no"));
 		m.setMemberPhone(rs.getString("member_phone"));
-		m.setMemberPw("member_pw");
-		m.setMemberRole("member_role");
+		m.setMemberPw(rs.getString("member_pw"));
+		m.setMemberRole(rs.getString("member_role"));
 		return m;
 		
 	}

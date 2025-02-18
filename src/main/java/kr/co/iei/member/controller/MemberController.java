@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
-import kr.co.iei.member.vo.Member;
+import kr.co.iei.member.model.vo.Member;
 
 @Controller
 @RequestMapping(value="/member")
@@ -44,8 +45,52 @@ public class MemberController {
  public String agree() {
 	 return "/member/agree";
  }
- @GetMapping(value="/joinFrm")
+
+ @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "member/joinFrm";
+ }
+ @PostMapping(value="/join")
+ 	public String join(Member m, Model model) {
+	 int result = memberService.insertMember(m);
+	 model.addAttribute("title","회원 가입 완료");
+	 model.addAttribute("text","회원 가입을 환영합니다");
+	 model.addAttribute("icon","success");
+	 model.addAttribute("loc","/member/loginFrm");
+	 return "common/msg";
+ }
+ @GetMapping(value="/checkId")
+ public String checkId(String checkId, Model model) {
+	 Member member =memberService.selectOneMember(checkId);
+	 if(member ==null) {
+		 model.addAttribute("result",0);
+	 }else {
+		 model.addAttribute("result",1);
+	 }
+	 model.addAttribute("memberId",checkId);
+	 return "member/checkId";
+ }
+ @GetMapping(value="/mypage")
+ public String mypage() {
+	 return "member/mypage";
+ }
+ @GetMapping(value="/changeinfo")
+ public String changeinfo() {
+	 return "member/changeinfo";
+ }
+ @PostMapping(value="/update")
+ public String update(Member m, @SessionAttribute Member member) {
+	 int memberNo = member.getMemberNo();
+	 m.setMemberNo(memberNo);
+	 int result =memberService.updateMember(m);
+
+	 if(result >0) {
+		 member.setMemberPw(m.getMemberPw());
+		 member.setMemberPhone(m.getMemberPhone());
+		 member.setMemberEmail(m.getMemberEmail());
+		 return "redirect:/member/mypage";
+	 }else {
+		 return "redirect:/";
+	 }
  }
 }
