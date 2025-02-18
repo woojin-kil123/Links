@@ -19,7 +19,8 @@ public class CommentRowMapper implements RowMapper<Comment>{
 		c.setReadCount(rs.getInt("read_count"));
 		c.setRegDate(rs.getString("reg_date"));
 		//c.setContentTitle(rs.getString("Content_title"));
-		
+//		c.setLikeCount(rs.getInt("like_count"));
+//		c.setIsLike(rs.getInt("is_like"));
 		return c;
 	}
 	
