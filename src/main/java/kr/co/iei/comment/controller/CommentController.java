@@ -1,22 +1,31 @@
 package kr.co.iei.comment.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.co.iei.comment.model.service.CommentService;
 
 
 
 @Controller
 @RequestMapping(value="/comment")
 public class CommentController {
-
+	
+	@Autowired
+	CommentService commentService;
 	
 	
 	
 	
-	@GetMapping(value="/mCommentMemberList")
-	public String mCommentMemberList() {
+	@GetMapping(value="/mCommentMemberList")	
+	public String mCommentMemberList(Model model) {
+		List list = commentService.mCommentMemberList();
+		model.addAttribute("list", list);
 		return "comment/mCommentMemberList";
 	}
 	

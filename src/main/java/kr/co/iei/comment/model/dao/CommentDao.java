@@ -1,5 +1,7 @@
 package kr.co.iei.comment.model.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,4 +16,11 @@ public class CommentDao {
 	
 	@Autowired
 	private CommentRowMapper commentRowMapper;
+
+	public List mCommentMemberList() {
+		String query = "select * from comm";
+		List list = jdbc.query(query,commentRowMapper);
+		
+		return list;
+	}
 }
