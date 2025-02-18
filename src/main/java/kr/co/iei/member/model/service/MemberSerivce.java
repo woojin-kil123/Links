@@ -25,5 +25,10 @@ public class MemberSerivce {
 		Member member =memberDao.selectOneMember(checkId);
 		return member;
 	}
+	@Transactional
+	public int updateMember(Member m) {
+		int result=memberDao.updateMember(m);
+		return result;
+	}
 
 }

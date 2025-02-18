@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
@@ -72,5 +73,24 @@ public class MemberController {
  @GetMapping(value="/mypage")
  public String mypage() {
 	 return "member/mypage";
+ }
+ @GetMapping(value="/changeinfo")
+ public String changeinfo() {
+	 return "member/changeinfo";
+ }
+ @PostMapping(value="/update")
+ public String update(Member m, @SessionAttribute Member member) {
+	 int memberNo = member.getMemberNo();
+	 m.setMemberNo(memberNo);
+	 int result =memberService.updateMember(m);
+
+	 if(result >0) {
+		 member.setMemberPw(m.getMemberPw());
+		 member.setMemberPhone(m.getMemberPhone());
+		 member.setMemberEmail(m.getMemberEmail());
+		 return "redirect:/member/mypage";
+	 }else {
+		 return "redirect:/";
+	 }
  }
 }
