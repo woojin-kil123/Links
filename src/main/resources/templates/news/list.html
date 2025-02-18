@@ -31,9 +31,6 @@
 	<main class="content">
 		<section class="section">
 			<div class="page-title">소식</div>
-			<div class="list-header">
-				<a th:if="${session.member != null && session.member.memberLevel == 1}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
-			</div>
 			<div class="list-tbl-wrap">
 				<table class="tbl tbl-hover">
 					<tr>
@@ -51,6 +48,10 @@
 						<td th:text="${news.newsReadCount}"></td>
 					</tr>
 				</table>
+			</div>
+			<div class="list-footer">
+				<a th:if="${session.member != null}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
+				<!-- <a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a> -->
 			</div>
 			<div id="pageNavi" th:utext="${pageNavi}"></div>
 		</section>	
