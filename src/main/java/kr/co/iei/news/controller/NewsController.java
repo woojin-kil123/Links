@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.iei.member.vo.Member;
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.NewsFile;
@@ -72,10 +73,9 @@ public class NewsController {
 		model.addAttribute("loc", "/news/list?reqPage=1");
 		return "common/msg";
 	}
-	/*
+	
 	@GetMapping(value="/view")
-	//@SessionAttribute(required = false) Member member
-	public String selectOneNews(int newsNo, String check, Model model ) {
+	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
 		int memberNo = 0;
 		if(member != null) {
 			memberNo = member.getMemberNo();
@@ -92,7 +92,6 @@ public class NewsController {
 			return "news/view";
 		}
 	}
-	*/
 	
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {
