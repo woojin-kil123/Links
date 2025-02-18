@@ -16,6 +16,7 @@ public class News {
 	private String newsContent;
 	private int newsReadCount;
 	private String newsRegDate;
+	private int newsNotice;
 	private List<NewsFile> fileList;
 }
 
