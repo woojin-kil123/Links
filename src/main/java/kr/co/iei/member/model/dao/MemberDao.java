@@ -29,7 +29,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
-		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,normal,0,N)";
+		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,'normal',1,'N')";
 		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPw(),m.getMemberEmail(),m.getMemberPhone()};
 		int result= jdbc.update(query,params);
 		return result;
@@ -67,6 +67,32 @@ public class MemberDao {
 		Object[] params = {memberNo};
 		int result2= jdbc.update(query,params);
 		return result2;
+	}
+
+	public Member selectOneMember2(Member m) {
+		String query ="select * from member where member_name=? and member_phone=?";
+		Object[] params = {m.getMemberName(),m.getMemberPhone()};
+		List list=jdbc.query(query,memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member =(Member)list.get(0);
+			return member;
+		}
+	
+	}
+
+	public Member selectOneMember3(Member m) {
+		String query ="select * from member where member_id=? and member_name=? and member_email=?";
+		Object[] params = {m.getMemberId(),m.getMemberName(),m.getMemberEmail()};
+		List list=jdbc.query(query,memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member =(Member)list.get(0);
+			return member;
+		}
+	
 	}
 
 }

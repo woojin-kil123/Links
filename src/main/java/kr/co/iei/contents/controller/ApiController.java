@@ -27,7 +27,7 @@ public class ApiController {
 	private ApiService apiService;
 	
 	 @ResponseBody
-	 @GetMapping(value="/movie")
+	 @GetMapping(value="/nowPlaying")
 	    public List nowPlayingMovies() {
 		 	List movieList = null;
 			try {
@@ -49,7 +49,8 @@ public class ApiController {
 			e.printStackTrace();
 		}
 		model.addAttribute("movie",movie);
-        return "contents/movie";
+		System.out.println(movie);
+        return "contents/movieDetail";
 	}
 	/*
 	@ResponseBody

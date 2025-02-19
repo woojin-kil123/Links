@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>LinkS 영화</title>
+<link rel ="stylesheet" href="/css/contentDetail.css">
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+		<div class="back-drop">
+			<img class="backdrop-img" th:src="@{'https://image.tmdb.org/t/p/original'+${movie.backdropPath}}">
+			<div class="outline">
+				<div class="title" th:text="${movie.title}"></div>	
+				<div th:text="${movie.originalTitle}"></div>
+				<div>
+					<span th:text="${movie.releaseDate}"></span>
+					<span th:text="${movie.originCountry}"></span>
+				</div>
+				<div th:text="${movie.runtime}+'분'"></div>
+				<div>
+					<th:block th:each="id : ${movie.genreIds}">
+						<span th:text="${id}"></span>
+					</th:block>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="poster">
+				<img class="poster-img" th:src="@{'https://image.tmdb.org/t/p/w342'+${movie.posterPath}}">
+			</div>
+			<table class="table detail-tbl">
+				<tr class="row-1">
+					<td>
+					<div class= "star-box star-off">
+						<span class="material-icons">star</span>
+						<span class="material-icons">star</span>
+						<span class="material-icons">star</span>
+						<span class="material-icons">star</span>
+						<span class="material-icons">star</span>
+				        <div class="star-on">
+				            <div class="star-box star-on-box">
+				                <span class="material-icons">star</span>
+				                <span class="material-icons">star</span>
+				                <span class="material-icons">star</span>
+				                <span class="material-icons">star</span>
+				                <span class="material-icons">star</span>
+				            </div>
+				        </div> 
+				    </div>
+					</td>
+					<td>
+						<div class="avg-star">
+							<p class="fs-2">3.4</p>
+							<p class="fs-6 text-muted">평균 별점</p>
+						</div>
+					</td>
+					<td>
+					<!-- <span class="material-icons">favorite</span> -->
+						<div class="btn-wrap">
+							<th:block th:if="${session.member==null}">
+							<span class="material-icons btn btn-primary toLogin" >favorite_border</span>
+							<span class="material-icons btn btn-primary toLogin" >rate_review</span>
+							</th:block>
+							<th:block th:if="${session.member!=null}">
+							<span class="material-icons btn btn-primary" id="like">favorite_border</span>
+							<span class="material-icons btn btn-primary" id="comment" data-bs-toggle="modal" data-bs-target="#modal">rate_review</span>
+							</th:block>
+							<span class="material-icons btn btn-primary" id="link">link</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="text-box table-bordered" colspan='3'>
+						<div class="fs-6" th:text="${movie.overview}"></div>
+					</td>
+				</tr>
+			</table>			
+		</div>
+		<!-- 모달 -->
+		<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <span class="item-intro fs-1 fw-bolder" th:text="${movie.title}"></span>
+                                    <span class="item-intro fs-1 fw-bolder text-muted">에</span>
+                                    <p class="item-intro fs-1 fw-bolder text-muted"> 코멘트를 남겨주세요 !</p>
+                                    <div class="mb-3 text-left">
+			                        	<label for="comment" class="form-label fs-3">코멘트</label>
+  										<textarea class="form-control" id="content"  style="height:80%; background-color:rgba(255, 241, 0, 0.2); resize: none;"></textarea>
+                                    </div>
+                                    <div class="btn-wrap">
+	                                    <button class="btn btn-primary btn-xl submit" data-bs-dismiss="modal" type="submit">
+	                                    	<span class="material-icons" style="font-size : 25px;">radio_button_unchecked</span>작성</button>		
+	                                    <button class="btn btn-secondary btn-xl" data-bs-dismiss="modal" type="button">
+	                                    	<span class="material-icons" style="font-size : 25px;">close</span>취소</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	<th:block th:include="common/footer"></th:block>
+	<script th:inline="javascript">
+		$(".star-box").on("mouseover",function(){
+			$(".star-box>span").css("color","gold");
+		    $(this).nextAll().css("color","lightgray");
+		});
+	
+		const movieId = [[${movie.movieId}]];
+		const memberId = [[${session.member?.memberId}]];
+		console.log(memberId);
+		
+		$(".toLogin").on("click",function(){
+			location.href= "/member/loginFrm";
+		});
+
+		$(".submit").on("click",function(){
+			const commentContent = $(this).parent().prev().find("#content").val();
+			console.log(commentContent);
+			 
+			$.ajax({
+				url : "/comment/insertComment",
+				type : "post",
+				data : {"contentNo" : "m"+movieId, "memberId":memberId,"commentContent" : commentContent},
+				success: function(data){
+					if(data>0){
+						//console.log("comment 입력 결과 : "+ data);
+					}
+				}
+			});			
+		}) 
+		function selectMovie(){
+			 $.ajax({
+					url : "/contents/selectMovie",
+					type : "get",
+					data : {"movieId":movieId},
+					success: function(data){
+						console.log("movie 조회결과 : "+ data);
+						if(data==""){
+							console.log("null결과 : "+ data);
+							const movieTitle = [[${movie.title}]];
+							const posterPath = [[${movie.posterPath}]];
+							$.ajax({
+								url : "/contents/insertMovie",
+								type : "post",
+								data : {"movieId":movieId, "movieTitle" : movieTitle, "posterPath" : posterPath},
+								success: function(data){
+									//console.log("movie 입력 결과 : "+ data);
+								},
+								error : function(){
+									console.log("insert error");						
+								}
+							})
+						}
+					},
+					error : function(){
+						console.log("select error");						
+					}
+				});
+		 };
+ 		selectMovie();
+	</script>	
+</body>
+
+</html>

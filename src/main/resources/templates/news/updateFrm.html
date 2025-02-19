@@ -45,7 +45,7 @@
 	<main class="content">
 		<section class="section news-update-wrap">
 			<div class="page-title">소식 수정</div>
-			<form action="/news/update" class="news-update-frm" method="post" enctype="multipart/form-data">
+			<form id="newsForm" action="/news/update" class="news-update-frm" method="post" enctype="multipart/form-data">
 				<table class="tbl">
 					<tr>
 						<th style="width:15%;">제목</th>
@@ -82,8 +82,8 @@
 						<td colspan="2">
 <<<<<<< HEAD
 							<div class="insert" style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-							      <input class="form-check-input" type="checkbox" id="newsNotice" name="newsNotice" value="1">
-							      <label class="form-check-label" for="newsNotice">상단에 고정하기</label>
+							    <input class="form-check-input" type="checkbox" id="newsNotice" name="newsNotice" value="1" th:checked="${n.newsNotice == 1}">
+							    <label class="form-check-label" for="newsNotice">상단에 고정하기</label>
 						    </div>
 =======
 >>>>>>> parent of f8e864b (2.18)
@@ -133,6 +133,15 @@
 					$(obj).parent().remove();
 				}
 			});
+			
+			/*
+		    document.getElementById("newsForm").addEventListener("submit", function() {
+		        let checkbox = document.getElementById("newsNotice");
+		        if (!checkbox.checked) {
+		            checkbox.value = "0";
+		        }
+		    });
+			*/
 		}
 	</script>
 	<script src="/summernote/summernote-lite.js"></script>

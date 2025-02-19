@@ -17,5 +17,4 @@ public class Comment {
 	private String contentTitle;
 	private int likeCount;
 	private int isLike;
-	
 }

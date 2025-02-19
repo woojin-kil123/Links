@@ -4,23 +4,111 @@
 <title>Links-Home</title>
 <style>
 	.home-ad{
-		width : 100%;
-		position : relative;
+		width: 100%;
+	    max-width: 1200px; /* 필요에 따라 조정 */
+	    margin: 4px auto;
+	    aspect-ratio: 16 / 9; /* 16:9 비율 유지 */
 	}
 	.home-ad>iframe{
-		width : 100%;
-		object-fit : cover;
+		width: 100%;
+	    height: 100%;
+	    border: none;
 	}
 	.intro{
 		width : 100%;
 		top : 650px;
 		padding-top : 50px;
-		background-color: black;
+		background-color: white;
 		position : absolute;
 		color : white;
 	}
 	.space{
 		height: 500px;
+	}
+	#ranking1{
+		padding: 0px;
+	}
+	.section-heading {
+	    padding-left: 50px;
+	}
+	
+	.section-subheading {
+	    padding-left: 50px;
+	}
+	body {
+	    font-family: Arial, sans-serif;
+	    background-color: transparent;
+	    margin: 0;
+	    padding: 20px;
+	}
+	
+	/* 랭킹 섹션 스타일 */
+	.ranking-section {
+	    max-width: 1200px;
+	    margin: 0 auto;
+	    padding: 0;
+	    margin-bottom: 50px;
+	}
+	
+	.ranking-section h2 {
+	    font-size: 22px;
+	    font-weight: bold;
+	    margin-bottom: 15px;
+	}
+	
+	/* 카드 컨테이너 */
+	.ranking-container {
+	    display: flex;
+	    gap: 20px;
+	    overflow-x: auto; /* 좌우 스크롤 가능 */
+	    padding-bottom: 10px;
+	    justify-content: space-between;
+	}
+	
+	/* 개별 카드 스타일 */
+	.ranking-card {
+	    position: relative;
+	    background: white;
+	    border-radius: 10px;
+	    overflow: hidden;
+	    text-align: center;
+	    width: 200px;
+	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	    flex-shrink: 0;
+	}
+	
+	.ranking-card img {
+	    width: 100%;
+	    height: 280px;
+	    object-fit: cover;
+	}
+	
+	.ranking-card h3 {
+	    font-size: 16px;
+	    margin: 10px 0;
+	}
+	
+	.ranking-card p {
+	    font-size: 14px;
+	    color: #666;
+	    margin-bottom: 10px;
+	}
+	
+	/* 랭킹 배지 스타일 */
+	.rank-badge {
+	    position: absolute;
+	    top: 10px;
+	    left: 10px;
+	    background: black;
+	    color: white;
+	    padding: 5px 8px;
+	    font-size: 14px;
+	    border-radius: 5px;
+	    font-weight: bold;
+	}
+	
+	.rank-badge.new {
+	    background: red; /* NEW 표시 스타일 */
 	}
 </style>
 </head>
@@ -28,19 +116,90 @@
 	<th:block th:include="common/header"></th:block>
 	    <div class="home-ad">
 			<iframe width="100%" height="700" src="https://www.youtube.com/embed/fYhSVx-ys-Q?autoplay=1&controls=0&mute=1" title="[미키 17] 2차 예고편" frameborder="0" allow=" autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<div class="intro">
-	    		<div class="page-section" id="services">
-		            <div class="container">
-		                <div class="text-center">
-		                    <h2 class="section-heading text-uppercase">Services</h2>
-		                    <h3 class="section-subheading text-muted">KH 정보교육원 짱</h3>
-		                </div>
-			    	</div>
-			    </div>		    
-			</div>   
-	    </div>
-	    <div class="space">
+			<div class="intro"></div>   
+			<div class="ad-banner">
+				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
+			</div>
+			 <section class="ranking-section">
+		        <h2>링스 HOT 랭킹</h2>
+		        <div class="ranking-container">
+		            <div class="ranking-card">
+		                <span class="rank-badge">1</span>
+		                <img src="movie1.jpg" alt="멜로무비">
+		                <h3>멜로무비</h3>
+		                <p>평균 ★ 3.4</p>
+		            </div>
+
+		            <div class="ranking-card">
+		                <span class="rank-badge new">AD</span>
+		                <img src="movie2.jpg" alt="캡틴 아메리카">
+		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
+		                <p>평균 ★ 3.0</p>
+		            </div>
+		
+		            <div class="ranking-card">
+		                <span class="rank-badge">2</span>
+		                <img src="movie3.jpg" alt="굿데이">
+		                <h3>굿데이</h3>
+		                <p>평균 ★ 3.8</p>
+		            </div>
+		
+		            <div class="ranking-card">
+		                <span class="rank-badge">3</span>
+		                <img src="movie4.jpg" alt="그놈은 흑염룡">
+		                <h3>그놈은 흑염룡</h3>
+		                <p>평균 ★ 2.9</p>
+		            </div>
+		            
+		            <div class="ranking-card">
+		                <span class="rank-badge">4</span>
+		                <img src="movie4.jpg" alt="그놈은 흑염룡">
+		                <h3>그놈은 흑염룡</h3>
+		                <p>평균 ★ 2.9</p>
+		            </div>
+		        </div>
+		    </section>    
+		    <section class="ranking-section">
+		        <h2>박스오피스 순위</h2>
+		        <div class="ranking-container">
+		            
+		            <div class="ranking-card">
+		                <span class="rank-badge">1</span>
+		                <img src="movie1.jpg" alt="멜로무비">
+		                <h3>멜로무비</h3>
+		                <p>평균 ★ 3.4</p>
+		            </div>
+
+		            <div class="ranking-card">
+		                <span class="rank-badge new">AD</span>
+		                <img src="movie2.jpg" alt="캡틴 아메리카">
+		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
+		                <p>평균 ★ 3.0</p>
+		            </div>
+		
+		            <div class="ranking-card">
+		                <span class="rank-badge">2</span>
+		                <img src="movie3.jpg" alt="굿데이">
+		                <h3>굿데이</h3>
+		                <p>평균 ★ 3.8</p>
+		            </div>
+		
+		            <div class="ranking-card">
+		                <span class="rank-badge">3</span>
+		                <img src="movie4.jpg" alt="그놈은 흑염룡">
+		                <h3>그놈은 흑염룡</h3>
+		                <p>평균 ★ 2.9</p>
+		            </div>
+		            
+		            <div class="ranking-card">
+		                <span class="rank-badge">4</span>
+		                <img src="movie4.jpg" alt="그놈은 흑염룡">
+		                <h3>그놈은 흑염룡</h3>
+		                <p>평균 ★ 2.9</p>
+		            </div>
+		        </div>
+		    </section>    
 	    </div>
    	<th:block th:include="common/footer"></th:block>
-    </body>
+</body>
 </html>

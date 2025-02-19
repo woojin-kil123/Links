@@ -34,7 +34,7 @@ public class NewsDao {
 	}
 
 	public int insertNews(News n) {
-		String query = "insert into news values(?,?,?,0,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query = "insert into news values(?,?,?,0,to_char(sysdate,'yy-MM-dd hh:mi'),?,?)";
 		Object[] params = {n.getNewsNo(),n.getMemberId(),n.getNewsTitle(),n.getNewsContent(),n.getNewsNotice()};
 		int result = jdbc.update(query, params);
 		return result;
@@ -87,8 +87,8 @@ public class NewsDao {
 	}
 
 	public int updateNews(News n) {
-		String query = "update news set news_title = ?, news_content = ? where news_no = ?";
-		Object[] params = {n.getNewsTitle(),n.getNewsContent(),n.getNewsNo()};
+		String query = "update news set news_title = ?, news_content = ?, news_notice = ? where news_no = ?";
+		Object[] params = {n.getNewsTitle(),n.getNewsContent(),n.getNewsNotice(),n.getNewsNo()};
 		int result = jdbc.update(query,params);
 		return result;
 	}
@@ -107,5 +107,4 @@ public class NewsDao {
 		int result = jdbc.update(query,params);
 		return result;
 	}
-
 }

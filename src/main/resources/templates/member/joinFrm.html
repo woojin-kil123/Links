@@ -34,7 +34,7 @@
 		<section class="section join-wrap">
 			<div class="page-title">회원가입</div>
 			<form action="/member/checkId" name="checkIdFrm" method="get">
-				<input 	type="hidden" name="checkId">
+				<input type="hidden" name="checkId">
 			</form>
 			<form action="/member/join" method="post" autocomplete="off">
 				<div class="input-wrap">
@@ -63,6 +63,7 @@
 					<div class="input-type">
 						<input type="password" name="memberPw" id="memberPw">
 					</div>
+					<p class="input-msg pw-check-msg"></p>
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
@@ -83,10 +84,20 @@
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberEmail">이메일</label>
+						
 					</div>
 					<div class="input-type">
 						<input type="text" name="memberEmail" id="memberEmail">
+						<span>@</span>
+						<input type="text" name="memberEmail" id="memberEmail">
+						<button type="button">인증번호 발송</button>
 					</div>
+					<div class="input-title">
+						<label for="Number">인증번호</label>
+				</div>
+				<div class="input-type">
+					<input type="text" name="Number" id="Number">
+				</div>
 				</div>
 				<div class=" join-button-box">
 					<button type="submit" class="btn-primary lg">회원가입</button>
@@ -117,6 +128,18 @@
 				}
 			});
 		});
+		$("#memberPwRe").on("focusout",function(){
+			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
+		    const pwValue = memberPw.value;
+		    const pwReValue = memberPwRe.value;
+		    if(pwValue!==pwReValue){
+				$(".pw-check-msg").text("비밀번호가 서로 다릅니다");
+				$(".pw-check-msg").addClass("invalid");
+			}else{
+				$(".pw-check-msg").text("비밀번호가 일치합니다");
+				$(".pw-check-msg").addClass("valid");
+			}
+		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

@@ -5,17 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.ui.Model;
 
 import kr.co.iei.comment.model.dao.CommentDao;
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.contents.model.vo.DbMovie;
 
+
+import kr.co.iei.comment.model.dao.CommentDao;
+import kr.co.iei.comment.model.vo.Comment;
+
+
 @Service
 public class CommentService {
 	
 	@Autowired
 	private CommentDao commentDao;
+	
+	@Transactional
+	public int insertComment(Comment comment) {
+		/*
+		String category = comment.getContentNo().substring(0, 1);
+		String id = comment.getContentNo().substring(1);
+		*/
+		int result = commentDao.insertComment(comment);
+		return result;
+	}
 
 	public List mCommentMemberList() {
 		List<Comment> list = commentDao.mCommentMemberList();
@@ -54,6 +70,7 @@ public class CommentService {
 		return partTwo;
 	}
 
+
 	@Transactional
 	public int deleteComm(int commentNo) {
 		int result = commentDao.deleteComm(commentNo);
@@ -68,6 +85,7 @@ public class CommentService {
 		
 		return c;
 	}
+
 
 
 

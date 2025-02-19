@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>이메일</title>
+<style>
+	.email-wrap{
+		width: 1000px;
+		margin: 0 auto;
+	}
+	.email-auth-wrap{
+		display: flex;
+		gap : 50px;
+		align-items: center;
+	}
+	#auth{
+		align-items: center;
+	}
+</style>
+
+
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section email-wrap">
+			<div class="page-title">이메일 전송하기</div>
+			<h2>1. 이메일 전송하기</h2>
+			<form action="/api/sendMail" method="post">
+				<table class="tbl">
+					<tr>
+						<th style="width: 20%;">제목</th>
+						<td>
+							<div class="input-item">
+								<input type="text" name="emailTitle">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th style="width: 20%;">받는사람</th>
+						<td>
+							<div class="input-item">
+								<input type="text" name="receiver">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>
+							<div class="input-item">
+								<textarea name="emailContent"></textarea>
+							</div>
+						</td>
+					</tr>					
+					<tr>
+						<td colspan="2">
+							<button class="btn-primary lg" type="submit">메일전송</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<hr>
+			<h2>2. 이메일 인증</h2>
+			<div class="email-auth-wrap">
+				<div class="input-item">
+					<input type="text" id="email">
+					<button class="btn-primary" id="send-btn">이메일 전송</button>
+				</div>
+				
+				<div id="auth" class="input-item" style="display: none;">
+					<input type="text" id="auth-code" placeholder="인증번호 입력">
+					<button class="btn-primary" id="auth-btn">인증하기</button>
+					<span id="time-zone"></span>
+					<span id="authMsg"></span>
+				</div>
+			</div>	
+			
+		</section>
+	</main>
+	<script>
+		let mailCode = null;
+		$("#send-btn").on("click",function(){
+			const receiver = $("#email").val();
+			$.ajax({
+				url : "/api/sendCode",
+				data : {receiver : receiver},
+				success : function(data){
+					console.log(data);
+					mailCode = data;
+					$("#auth").show();
+					authTime();
+				}
+			});
+		});
+		$("#auth-btn").on("click",function(){
+			const inputCode = $("#auth-code").val();
+			if(inputCode === mailCode){
+				// 인증만료  >> 랜덤코드가 만료  
+				window.clearInterval(intervalId);
+				mailCode = null;
+				$("#authMsg").text("인증 만료");
+				$("#authMsg").css("color","green");
+				
+				$("#email").prop("readonly",true);
+				$("#send-btn").prop("disabled",true);
+				$("#auth-code").prop("readonly",true);
+				$("#auth-btn").prop("disabled",true);
+				$("#time-zone").remove;
+			}else{
+				$("#authMsg").text("인증 번호를 확인해 주세요");
+				$("#authMsg").css("color","red");
+			}
+		});
+		let intervalId =null;
+		function authTime(){
+			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
+			
+			intervalId = window.setInterval(function(){
+				const min =$("#min").text();
+				const sec =$("#sec").text();
+				if(sec === "00"){
+					//읽어온 값이 00초면 분을 내리고
+					if(min === "0" ){
+						// 인증만료  >> 랜덤코드가 만료  
+						window.clearInterval(intervalId);
+						mailCode = null;
+						$("#authMsg").text("인증 만료");
+						$("#authMsg").css("color","red");
+					}else{
+						const newMin = Number(min) -1;
+						$("#min").text(newMin);
+						$("#sec").text(59);
+						
+					}
+						
+				}else{
+					//읽어온 값이 00초가 아니면 초만 내리면 됨
+					const newSec=Number(sec) - 1;
+					if(newSec<10){
+						$("#sec").text("0"+newSec);
+					}else{
+						$("#sec").text(newSec);
+					}
+				}
+			},1000);
+		}
+	</script>
+	
+	<th:block th:include="common/footer"></th:block>
+
+</body>
+</html>
