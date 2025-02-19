@@ -39,10 +39,13 @@ public class CommentService {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
 			String contentNo = c.getContentNo().substring(1);
 			DbMovie movie = commentDao.selectMovieInfo(contentNo);
+			movie.getMovieTitle();
+			movie.getPosterPath();
 			
 			//2. 조회 결과를 c에 저장
-			c.setContentTitle("1");
-			
+			c.setContentTitle(movie.getMovieTitle());
+			c.setPosterPath(movie.getPosterPath());		
+		
 		}
 		//코멘트 테이블에서 데이터 읽어온 Comment 객체마다 movieTitle 변수와 posterPath 변수에 데이터 저장
 		return list;
