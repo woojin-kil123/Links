@@ -126,12 +126,11 @@ public class MemberController {
  }
  @GetMapping(value="/idFind")
  public String idFind() {
-	 return "member/idfind";
+	 return "common/msg";
  }
  @GetMapping(value="/pwFindFrm")
  public String pwFindFrm() {
-	 return "common/msg";
-
+	 return "member/pwfindFrm";
  }
  @GetMapping(value="/pwFind")
  public String pwFind() {
