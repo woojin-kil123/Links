@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.comment.model.service.CommentService;
+import kr.co.iei.comment.model.vo.Comment;
 
 import org.springframework.stereotype.Controller;
 
@@ -21,6 +24,13 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@ResponseBody
+	@PostMapping("/insertComment")
+	public int insertComment(Comment comment) {
+		int result = commentService.insertComment(comment);
+		return result;
+	}
 	
 	@GetMapping(value="/mCommentMemberList")	
 	public String mCommentMemberList(Model model) {

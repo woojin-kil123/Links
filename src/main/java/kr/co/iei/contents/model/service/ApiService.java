@@ -88,7 +88,7 @@ public class ApiService {
  		String engCountry = object.get("origin_country").getAsJsonArray().get(0).getAsString();
  		String korCountry = apiDao.selectKorCountry(engCountry);
  		movie.setOriginCountry(korCountry);
- 		//movie.setMovieId(object.get("id").getAsString());
+ 		movie.setMovieId(object.get("id").getAsString());
  		movie.setTitle(object.get("title").getAsString());
  		movie.setOriginalTitle(object.get("original_title").getAsString());
  		movie.setOverview(object.get("overview").getAsString());
