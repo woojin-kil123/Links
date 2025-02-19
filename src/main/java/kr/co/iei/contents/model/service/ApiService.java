@@ -26,10 +26,8 @@ public class ApiService {
 
 	@Autowired
 	private ApiDao apiDao;
-	@Autowired
-	private RestTemplate restTemplate; //jsoup 로 바꾸면 없애야함
 	
-    public List nowPlayingMovies(int currentPage) throws IOException {
+    public List nowPlayingMovies() throws IOException {
     	List movieList = new ArrayList<ApiMovie>();
     	String query = "now_playing?language=ko-KR&page=1&region=KR";
     	String result = Jsoup.connect(url+query)
@@ -41,13 +39,12 @@ public class ApiService {
 				.get()
 				.text();
     	
-    	int numPerPage = 5;
 	 	JsonObject object = (JsonObject)JsonParser.parseString(result);
 	 	JsonArray results = object.get("results").getAsJsonArray();
-	 	for(int i=currentPage-1; i<numPerPage; i++){
+	 	for(int i=0; i<results.size(); i++){
 	 		ApiMovie movie = new ApiMovie();
 	 		JsonObject movieInfo = results.get(i).getAsJsonObject();
-	 		movie.setBackdropPath(movieInfo.get("backdrop_path").getAsString());
+	 		//movie.setBackdropPath(movieInfo.get("backdrop_path").getAsString());
 	 		
 	 		JsonArray genres = movieInfo.get("genre_ids").getAsJsonArray();
 	 		List genresList = new ArrayList<String>();
@@ -59,15 +56,50 @@ public class ApiService {
 	 		movie.setGenreIds(genresList);
 	 		movie.setMovieId(movieInfo.get("id").getAsString());
 	 		movie.setTitle(movieInfo.get("title").getAsString());
-	 		movie.setOriginalTitle(movieInfo.get("original_title").getAsString());
-	 		movie.setOverview(movieInfo.get("overview").getAsString());
+	 		//movie.setOriginalTitle(movieInfo.get("original_title").getAsString());
+	 		//movie.setOverview(movieInfo.get("overview").getAsString());
 	 		movie.setPosterPath(movieInfo.get("poster_path").getAsString());
 	 		movie.setReleaseDate(movieInfo.get("release_date").getAsString());
 	 		movieList.add(movie);
 	 	}
-    	
         return movieList;
     }
+	public ApiMovie movieDetail(int movieId) throws IOException {
+		ApiMovie movie = new ApiMovie();
+		
+    	String query = movieId+"?language=ko-kr";
+    	String result = Jsoup.connect(url+query)
+				.data("api_key",apiKey)
+				.data("resultType", "json")
+				.ignoreContentType(true)
+				.get()
+				.text();
+    	JsonObject object = (JsonObject)JsonParser.parseString(result);
+	 	
+ 		movie.setBackdropPath(object.get("backdrop_path").getAsString());
+ 		JsonArray genres = object.get("genres").getAsJsonArray();
+ 		List genresList = new ArrayList<String>();
+ 		for(int j=0;j<genres.size();j++) {
+ 			String hashId = "mg"+ genres.get(j).getAsJsonObject().get("id").getAsString();
+ 			String genreName = apiDao.selectGenreName(hashId);
+ 			genresList.add(genreName);
+ 		}
+ 		movie.setGenreIds(genresList);
+ 		String engCountry = object.get("origin_country").getAsJsonArray().get(0).getAsString();
+ 		String korCountry = apiDao.selectKorCountry(engCountry);
+ 		movie.setOriginCountry(korCountry);
+ 		movie.setMovieId(object.get("id").getAsString());
+ 		movie.setTitle(object.get("title").getAsString());
+ 		movie.setOriginalTitle(object.get("original_title").getAsString());
+ 		movie.setOverview(object.get("overview").getAsString());
+ 		movie.setPosterPath(object.get("poster_path").getAsString());
+ 		movie.setReleaseDate(object.get("release_date").getAsString());
+ 		movie.setRuntime(object.get("runtime").getAsString());
+    	
+		return movie;
+	}
+    
+    
     /*
     public String getMovieDetails(int movieId) {
         String url = UriComponentsBuilder.fromHttpUrl(url +movieId+"?language=ko-KR")
@@ -102,6 +134,7 @@ public class ApiService {
 			e.printStackTrace();
 		}
     }
+
 	@Transactional
 	public void insertCountry() {
 		String url = "https://api.themoviedb.org/3/configuration/countries?api_key=7bf2a455f3dd6b2ff509cd182bb2888f&language=ko";
@@ -124,4 +157,5 @@ public class ApiService {
 		}
     }
     */
+
 }

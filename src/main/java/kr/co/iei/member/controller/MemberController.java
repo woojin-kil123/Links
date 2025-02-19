@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.Member;
@@ -26,8 +26,14 @@ public class MemberController {
 	 Member member = memberService.selectOneMember(m);
 
 	 if(member== null) {
-		 model.addAttribute("title","로그인 실페");
+		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","아이디 또는 비밀번호를 확인하세요.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/loginFrm");
+		 return "common/msg";
+	 }else if(member.getDel()=="Y"){
+		 model.addAttribute("title","로그인 실패");
+		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
@@ -45,7 +51,6 @@ public class MemberController {
  public String agree() {
 	 return "/member/agree";
  }
-
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "member/joinFrm";
@@ -53,10 +58,17 @@ public class MemberController {
  @PostMapping(value="/join")
  	public String join(Member m, Model model) {
 	 int result = memberService.insertMember(m);
+	 if(result>0) {
 	 model.addAttribute("title","회원 가입 완료");
 	 model.addAttribute("text","회원 가입을 환영합니다");
 	 model.addAttribute("icon","success");
 	 model.addAttribute("loc","/member/loginFrm");
+	 }else {
+		 model.addAttribute("title","회원 가입 실패");
+		 model.addAttribute("text","회원 가입을 실패하였습니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/joinFrm");
+	 }
 	 return "common/msg";
  }
  @GetMapping(value="/checkId")
@@ -91,6 +103,80 @@ public class MemberController {
 		 return "redirect:/member/mypage";
 	 }else {
 		 return "redirect:/";
+	 }
+ }
+ @GetMapping(value="/delete")
+ 
+ public String delete(@SessionAttribute Member member, Model model) {
+	 int memberNo = member.getMemberNo();
+	 int result =memberService.deleteMember(memberNo);
+	 int result2 =memberService.insertdeleteMember(memberNo);
+	 model.addAttribute("title","회원 탈퇴 완료");
+	 model.addAttribute("text","수고하셨습니다");
+	 model.addAttribute("icon","success");
+	 model.addAttribute("loc","/member/logout");
+	 return "common/msg";
+ }
+ @ResponseBody
+ @GetMapping(value="/ajaxCheckId")
+ public boolean ajaxCheckId(String memberId) {
+	 Member m= memberService.selectOneMember(memberId);
+	 return m== null;
+ }
+ @GetMapping(value="/find")
+ public String find() {
+	 return "member/find";
+ }
+ @GetMapping(value="/idFindFrm")
+ public String ifFindFrm() {
+	 return "member/idfindFrm";
+ }
+ @GetMapping(value="/idFind")
+ public String idFind(Member m,Model model) {
+	 Member member = memberService.selectOneMember2(m);
+	
+	 if(member== null) {
+		 model.addAttribute("title","아이디 찾기 실패");
+		 model.addAttribute("text","없는 회원입니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else if(member.getDel()=="Y"){
+		 model.addAttribute("title","아이디 찾기 실패");
+		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else {
+		 model.addAttribute("title","아이디 찾기 성공");
+		 model.addAttribute("text",member.getMemberId());
+		 model.addAttribute("icon","success");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }
+	
+ }
+ @GetMapping(value="/pwFindFrm")
+ public String pwFindFrm() {
+	 return "member/pwfindFrm";
+ }
+ @GetMapping(value="/pwFind")
+ public String pwFind(Member m,Model model) {
+	 Member member = memberService.selectOneMember3(m);
+	 if(member== null) {
+		 model.addAttribute("title","비밀번호 찾기 실패");
+		 model.addAttribute("text","없는 회원입니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else if(member.getDel()=="Y"){
+		 model.addAttribute("title","비밀번호 찾기 실패");
+		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else {
+		 return "/member/changepw";
 	 }
  }
 }

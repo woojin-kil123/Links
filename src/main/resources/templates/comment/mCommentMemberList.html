@@ -39,6 +39,10 @@
 		padding-top: 10px;
 		
 		background-color: #F3EEEE;
+<<<<<<< HEAD
+		margin-bottom: 30px;
+=======
+>>>>>>> parent of f8e864b (2.18)
 		
 	}
 	.line1{
@@ -83,6 +87,11 @@
 		background-color: #D9D9D9;
 		margin-left:20px;
 		float: left;
+<<<<<<< HEAD
+		cursor: pointer; 
+		
+=======
+>>>>>>> parent of f8e864b (2.18)
 	}
 	
 	.movie-comment{
@@ -123,16 +132,29 @@
 			</div>
 			<div class="content">
 				<div class="page-title">무비 매니아들의 코멘트</div>		
+<<<<<<< HEAD
+				
+				
+									
+				<div class="list-wrap">
+					<div th:each= "c: ${list}" class="comment-box">
+=======
 									
 				<div class="list-wrap">
 					<div class="comment-box">
+>>>>>>> parent of f8e864b (2.18)
 						<table class="line1">
 							<tr>
 								<th style="width:1%;"></th>
 								<th class="profile" style="width:3%;"></th>
 								<th style="width:2%;"></th>
+<<<<<<< HEAD
+								<th th:text= "${c.memberId}" style="width:13%;"></th>
+								<th th:text= "${c.contentNo}" style="width:64%;"></th>
+=======
 								<th style="width:10%;"> 유저_01</th>
 								<th style="width:67%;">movie-title</th>
+>>>>>>> parent of f8e864b (2.18)
 								<th class="star-wrap" style="width:17%;">
 									<span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
@@ -140,13 +162,24 @@
 							        <span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
 								</th>
+<<<<<<< HEAD
+							</tr>
+							
+						
+=======
 							<tr>			
+>>>>>>> parent of f8e864b (2.18)
 						</table>
 						<div class="partner"></div>
 						
 						<div class="movie-content">					
+<<<<<<< HEAD
+							<div> <a th:href="@{/comment/mCommentList(contentNo=${c.contentNo})}" class="movie-summary"></a></div>									
+							<div th:text= "${c.commentContent}" class="movie-comment"> </div>
+=======
 							<div class="movie-summary"> </div>									
 							<div class="movie-comment"> </div>
+>>>>>>> parent of f8e864b (2.18)
 												
 						</div>
 						
@@ -159,6 +192,10 @@
 							<span class="count"> 0 </span>	
 						</div>
 						
+<<<<<<< HEAD
+						
+=======
+>>>>>>> parent of f8e864b (2.18)
 					</div>	
 							
 				</div>
@@ -168,4 +205,34 @@
 	
 	<th:block th:include="common/footer"></th:block>
 </body>
+<<<<<<< HEAD
 </html>
+
+
+
+<!-- 
+			<div class="list-tbl-wrap">
+				<table class="tbl tbl_hover">
+					<tr>
+						<th style="width:10%;">일단영화제목</th>
+						<th style="width:45%;">유저</th>
+						<th style="width:15%;">내용</th>
+						<th style="width:20%;">카운트</th>
+						<th style="width:10%;">작성일</th>
+					</tr>
+					<tr>
+					<tr th:each= "c: ${list}">
+						<td th:text= "${c.contentNo}"> </td>
+						<td th:text= "${c.memberId}"></td>
+						<td th:text= "${c.commentContent}"> </td>						
+						<td th:text= "${c.readCount}"> </td>
+						<td th:text= "${c.regDate}"> </td>
+					</tr>
+					
+				</table>			
+			</div>
+-->
+			
+=======
+</html>
+>>>>>>> parent of f8e864b (2.18)

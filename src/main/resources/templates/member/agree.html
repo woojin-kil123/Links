@@ -3,11 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.login-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+	.login-wrap{
+		width: 500px;
+	}
+	h3{
+	text-align: center;
+	}
+	.login-wrap  .input-wrap{
+	padidng :15px 30px;
+	}
+	.login-button-box{
+		padding : 20px 30px;
+		display : flex;
+		justify-content: center;
+	}
+	.login-button-box>button{
+	width:100%;
+	}
+	.page-title{
+	 padding-bottom : 40px;
+	 padding-left : 230px;
+	}
+	.member-link-box{
+		display: flex;
+		justify-content: center;
+		gap : 30px;
+	}
+	.member-link-box>a:hover{
+	text-decoration: underline;
+	}
+	input{
+	border :none;
+	border-bottom: 1px solid black;
+	width : 100%
+	}
+	.check{
+	width:15px;
+	height: 15px;
+	}
+	
+	.agree-button-box{
+	padding-top :20px;
+    text-align: center;
+   
+}
+.agree-button-box>*{
+    width: 148px;
+    height: 43px;
+    border: none;
+    font-size: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 5px;
+    color: #fff;
+    margin: 3px;
+}
+	#back{
+	    background-color: #fff;
+	    color: #000;
+	    border: 1px solid #eee;
+		}
+		#next{
+	    background-color: #f00;
+	    color: #fff;
+	}
+	#red{
+		color: red;
+	}
+	.loc{
+	display: flex;
+	}
+</style>
 </head>
-<body>
-<a href="/member/joinFrm">회원가입</a>
 
-<button href="/member/joinFrm">회원가입</button>
+<body>
+
+<th:block th:include="common/header"></th:block>
+
+
+
+<main class="content login-container">
+		<section class="section login-wrap">
+			<div class="page-title">약관동의</div>
+			 <div class="agree-all-wrap">
+            <div class="agree-wrap">
+            <div class="agree-title">
+        <h3>약관동의</h3>
+            </div>
+        <div class="agree-content">
+            <div class="agree">
+                <div class="all-agree loc">
+                    <input type="checkbox" name="check1" class="all-check check" id="check1">
+                    <label class="check-massage">
+                    모든 약관을 확인하고 전체 동의합니다
+                    </label>
+                    </div>
+            <div class="agree-name">
+                <div class="agree-check loc">
+                    <input type="checkbox"  class="check" name="check2" id="check2">
+                    <label class="check-massage">
+                    <span id="red">(필수)</span>이용 약관에 동의합니다.
+                    </label>
+                    </div>
+            </div>
+        </div>
+            <div class="agree-name ">
+                <div class="agree-check loc">
+                    <input type="checkbox"  class="check" name="check3" id="check3">
+                    <label class="check-massage">
+                    <span id="red">(필수)</span> 개인정보 수집 및 이용에 동의합니다.
+                    </label>
+                </div>
+        </div>
+    </div>
+        <div class="agree-button-box">
+            <button type="button" id="back">이전단계</button>
+            <button type="button" id="next">다음단계</button>
+        </div>
+    </div>
+    </div>
+		</section>
+	</main>
+<script>
+const check1= document.querySelector("#check1")
+const check2= document.querySelector("#check2")
+const check3= document.querySelector("#check3")
+check1.addEventListener("click",function(){
+    const status = check1.checked;
+    if(status){
+        check2.checked=true;
+        check3.checked=true;
+    }else{
+        check2.checked=false;
+        check3.checked=false;
+    }
+})
+check2.addEventListener("click",function(){
+    const status = check2.checked;
+    if(status){
+        if (check3.checked){
+        check1.checked=true;
+        }else{
+            check1.checked=false;
+        }
+    }else{
+        check1.checked=false;
+    }
+})
+
+check3.addEventListener("click",function(){
+    const status = check3.checked;
+    if(status){
+        if (check2.checked){
+        check1.checked=true;
+        }else{
+            check1.checked=false;
+        }
+    }else{
+        check1.checked=false;
+    }
+})
+$("#back").on("click",function(){
+	location.href="/member/loginFrm";
+})
+$("#next").on("click",function(){
+	if(check1.checked){
+		
+	location.href="/member/joinFrm";
+	}else{
+		alert("동의가 되어있지 않습니다");
+	}
+})
+</script>
+<th:block th:include="common/footer"></th:block>
 
 </body>
 </html>

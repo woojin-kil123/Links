@@ -4,61 +4,124 @@
 <meta charset="UTF-8">
 <title>LinkS 영화</title>
 <style>
-	.movie-wrap{
-		margin : 10 auto;
+	.container>.swiper {
+	    width: 100%;
+	    height: 600px;
+	    margin: 0 auto;
 	}
-
+	.swiper-wrapper{
+		width : 100%;
+	}
+	.movie-wrap{
+		display : flex;
+		justify-content: center;
+	}
 	.movie-wrap>.movie-box{
-		width: 20%;
+		margin : 20px;
+		width : 20%;
+	}
+	.poster{
+		height : 300px;
+	}
+	.flex{
+		display : flex;
+		flex-wrap : wrap;
+		gap : 10px;
+		justify-content: center;
 	}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 		<section class="page-section" id="services">
+		 <a href="/api">영화세부</a>
             <div class="container">
                 <div class="text-left">
-                    <h2 class="section-heading text-uppercase">박스오피스 순위</h2>
-                    <a href="/contents/movie">영화세부</a>
-                    <a href="/api/insertref">DB에 데이터 넣기</a>
+                    <h2 class="section-heading text-uppercase text-left">박스오피스 순위</h2>
                 </div>
-                <div class="text-center d-flex movie-wrap">
-                	<div class="movie-box">
-	                    <table class="col-md-3 table">
-	                    	<tr>
-	                    		<td class="poster">포스터</td>
-	                    	</tr>
-	                    	<tr>
-		                        <td>
-		                        	<h4 class="my-3">영화 제목</h4>
-		                        	<h6 class="my-1">개봉연도</h6>
-		                        	<p class="text-muted my-2">평균 별점</p>
-		                        </td>
-	                    	</tr>	
-	                    	<tr>
-		                        <td><p class="text-muted">예매율3% 누적관객 0000명</p></td>
-	                    	</tr>
-	                    </table>
-                	</div>
-                </div>
+				<div class="swiper">
+			    	<div class="swiper-wrapper text-center">
+						<!-- <div class="swiper-slide"></div>
+						<div class="swiper-slide"></div>
+						<div class="swiper-slide"></div>
+						<div class="swiper-slide"></div> -->
+			    	</div>
+		    	</div>	
+		   		<!-- Add Arrows -->
+			    <div class="swiper-button-next">오른쪽</div>
+			    <div class="swiper-button-prev">왼쪽</div>
             </div>
         </section>
 	<th:block th:include="common/footer"></th:block>
 </body>
 <script>
-	let currentPage = 1;
-	$.ajax({
-		url : "/api/movie",
-		type : "get",
-		data : {"currentPage":currentPage},
-		success : function(data){
-			console.log(data);
-			for(let i=0; i<data.length;i++){
-				const posterPath = "https://image.tmdb.org/t/p/original" + data[i].posterPath;				
-				
+	function nowPlaying(){
+		const numPerPage = 4;
+		$.ajax({
+			url : "/api/nowPlaying",
+			type : "get",
+			success : function(data){
+				console.log(data);
+				let slideSize = data.length%numPerPage==0 ? data.length/numPerPage : (data.length/numPerPage)+1;
+				console.log(slideSize);
+				for(let j=0; j<slideSize; j++){
+					const slide = $("<div>");
+					slide.addClass("swiper-slide");
+					const movieWrap= $("<div>");
+					movieWrap.addClass("movie-wrap");
+					slide.append(movieWrap);
+					for(let i=0; i<numPerPage;i++){
+						let index = i+j*numPerPage
+						//const a = $("<a>");
+						//a.attr("href","/api/movieDetail?movieId="+data[index].movieId);
+						const movieBox = $("<div>");
+						movieBox.addClass("movie-box").addClass("col-md-3")
+						movieBox.on("click",function(){
+							location.href= "/api/movieDetail?movieId="+data[index].movieId;
+						});
+						const posterDiv = $("<div>");
+						const poster = $("<img>");
+						const posterPath = "https://image.tmdb.org/t/p/original" + data[index].posterPath;
+						poster.attr("src",posterPath).css("width",'100%').css("height","100%").css("object-fit","fill");
+						posterDiv.addClass("poster").append(poster);
+						
+						const titleDiv = $("<div>");
+						const title = $("<p>").text(data[index].title);
+						const release = $("<p>").text(data[index].releaseDate);
+						titleDiv.append(title).append(release);
+						//상단부 끝
+						const starpoint = $("<p>");
+						starpoint.text("3.5점");
+						const genre = $("<div>");
+						genre.addClass("flex");
+						data[i].genreIds.forEach(function(item,index){
+							const span = $("<span>");
+							span.text(item+" ");
+							genre.append(span);
+						});
+						//하단부 끝
+						movieBox.append(posterDiv).append(titleDiv).append(starpoint).append(genre);
+						movieWrap.append(movieBox);
+					}
+					slide.append(movieWrap);
+					$(".swiper-wrapper").append(slide);
+					const swiper = new Swiper('.swiper', {
+						slidesOffsetBefore : 0,
+						slidesOffsetAfter : 0,
+						centeredSlides: true,
+					    navigation: {
+					      nextEl: '.swiper-button-next',
+					      prevEl: '.swiper-button-prev',
+					    }
+					});			
+				}
 			}
-		}
-	});
+		});
+	}
+	
+	
 
+	nowPlaying();
+	
 </script>
 </html>

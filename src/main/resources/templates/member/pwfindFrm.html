@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.find-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+.page-title{
+	 padding-bottom : 40px;
+	 text-align: center;
+	}
+	
+	.find-wrap .input-wrap{
+		padding : 15px 30px;
+	}
+	.pwfind-button-box{
+	padding : 20px 30px;
+	}
+	.pwfind-button-box>button{
+		width: 100%
+	}
+	
+</style>
+</head>
+<body>
+<th:block th:include="common/header"></th:block>
+	<main class="content find-container">
+		<section class="section find-wrap">
+			<div class="page-title">아이디 찾기</div>
+			<form action="/member/pwFind" method="get">
+			<div class="input-wrap">
+			<div class="input-title">
+				<label for="memberName">이름</label>
+			</div>
+				<div class="input-type">
+						<input type="text" name="memberName" id="memberName">
+				</div>
+				<div class="input-title">
+				<label for="memberId">아이디</label>
+			</div>
+				<div class="input-type">
+						<input type="text" name="memberId" id="memberId">
+				</div>
+				<div class="input-title">
+						<label for="memberEmail">이메일</label>
+				</div>
+				<div class="input-type">
+					<input type="text" name="memberEmail" id="memberEmail">
+					<button type="button">인증번호 발송</button>
+				</div>
+				<div class="input-title">
+						<label for="Number">인증번호</label>
+				</div>
+				<div class="input-type">
+					<input type="text" name="Number" id="Number">
+				</div>
+				<div class="pwfind-button-box">
+					<button type="submit" class="btn-primary lg">비밀번호찾기</button>
+				</div>
+				</div>
+			</form>
+		</section>
+	</main>
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>

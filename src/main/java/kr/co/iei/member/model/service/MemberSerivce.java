@@ -3,7 +3,6 @@ package kr.co.iei.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import kr.co.iei.member.model.dao.MemberDao;
 import kr.co.iei.member.model.vo.Member;
 
@@ -30,5 +29,23 @@ public class MemberSerivce {
 		int result=memberDao.updateMember(m);
 		return result;
 	}
+	@Transactional
+	public int deleteMember(int memberNo) {
+		int result1=memberDao.deleteMember(memberNo);
+		return result1;
+	}
+	public int insertdeleteMember(int memberNo) {
+		int result2 =memberDao.insertdeleteMember(memberNo);
+		return result2;
+	}
+	public Member selectOneMember2(Member m) {
+		Member member= memberDao.selectOneMember2(m);
+		return member;
+	}
+	public Member selectOneMember3(Member m) {
+		Member member= memberDao.selectOneMember3(m);
+		return member;
+	}
+
 
 }

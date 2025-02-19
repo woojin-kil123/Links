@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>News Update</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="/css/default.css" />
+=======
+>>>>>>> parent of f8e864b (2.18)
 <style>
 	.news-update-wrap{
 		width: 1000px;
@@ -26,12 +29,15 @@
 		cursor: pointer;
 		color: #ff3d00;
 	}
+<<<<<<< HEAD
 	.section{
 		margin-top: 50px;
 	}
 	.insert{
 		margin-bottom: 20px;
 	}
+=======
+>>>>>>> parent of f8e864b (2.18)
 </style>
 </head>
 <body>
@@ -74,10 +80,13 @@
 					</tr>
 					<tr>
 						<td colspan="2">
+<<<<<<< HEAD
 							<div class="insert" style="display: flex; align-items: center; gap: 10px; justify-content: center;">
 							    <input class="form-check-input" type="checkbox" id="newsNotice" name="newsNotice" value="1" th:checked="${n.newsNotice == 1}">
 							    <label class="form-check-label" for="newsNotice">상단에 고정하기</label>
 						    </div>
+=======
+>>>>>>> parent of f8e864b (2.18)
 							<button type="submit" class="btn-primary lg">수정하기</button>
 							<a class="btn-secondary lg" th:href="@{/news/view(newsNo=${n.newsNo},check)}">취소</a>
 						</td>
@@ -115,7 +124,11 @@
 					const input = $("<input>");
 					input.attr("name","delFileNo");
 					input.attr("type","hidden");
+<<<<<<< HEAD
 					input.val(newsFileNo);
+=======
+					input.val(noticeFileNo);
+>>>>>>> parent of f8e864b (2.18)
 					$(".news-update-frm").append(input);
 					$(obj).parent().remove();
 				}

@@ -15,10 +15,6 @@ public class Member {
  private String memberEmail;
  private String memberPhone;
  private String memberRole;
-
  private int warningLevel;
-
- private int waringLevel;
-
  private String del;
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.change-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+.page-title{
+	 padding-bottom : 40px;
+	 text-align: center;
+	}
+	
+	.find-wrap .input-wrap{
+		padding : 15px 30px;
+	}
+	.pwchange-button-box{
+	padding : 20px 30px;
+	}
+	.pwchange-button-box>button{
+		width: 100%
+	}
+	
+</style>
+</head>
+<body>
+<th:block th:include="common/header"></th:block>
+	<main class="content change-container">
+		<section class="section find-wrap">
+			<div class="page-title">비밀번호 변경</div>
+			<form action="/member/pwchange" method="get">
+			<div class="input-wrap">
+			<div class="input-title">
+				<label for="memberPw">새 비밀번호</label>
+			</div>
+				<div class="input-type">
+						<input type="password" name="memberPw" id="memberPw">
+				</div>
+				<div class="input-title">
+						<label for="memberPwRe">새 비밀번호확인</label>
+				</div>
+				<div class="input-type">
+					<input type="password" name="memberPwRe" id="memberPwRe">
+				</div>
+				<div class="pwchange-button-box">
+					<button type="submit" class="btn-primary lg">비밀번호 변경</button>
+				</div>
+				</div>
+			</form>
+		</section>
+	</main>
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>

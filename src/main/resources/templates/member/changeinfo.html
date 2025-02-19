@@ -46,8 +46,7 @@
 	.btn-secondary{
 		width: 100px;
 		height: 50px;
-		border-radius:10px;
-		margin-left: 20px;
+		border-radius:10px;	
 	}
 	.change-btn{
 		display: flex;
@@ -119,7 +118,33 @@
 		</section>
 	</main>
 	<script>
-		$(".del-btn")
+		$(".del-btn").on("click", function(){
+			swal({
+				title: "회원탈퇴",
+				text:" 회원탈최 하시겠습니까",
+				icon: "warning",
+				buttons :{
+					cancel:{
+						text:"취소",
+						value:false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm:{
+						text:"탈퇴하기",
+						value:true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true
+					}
+				}
+			}).then(function(isConfirm){
+				if(isConfirm){
+					lacation.href ="/member/delete";
+				}
+			});
+		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
