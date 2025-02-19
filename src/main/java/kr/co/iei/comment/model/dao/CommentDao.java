@@ -20,7 +20,7 @@ public class CommentDao {
 	private CommentRowMapper commentRowMapper;
 
 	public int insertComment(Comment comment) {
-		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi')";
+		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi'))";
 		Object[] params = {comment.getMemberId(), comment.getContentNo(), comment.getCommentContent()};
 		int result = jdbc.update(query, params);
 		return result;
