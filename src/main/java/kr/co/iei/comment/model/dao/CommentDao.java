@@ -38,12 +38,15 @@ public class CommentDao {
 		return list;
 	}
 
-	public String movieTitle(String partTwo) {
-		String query = "select movie_title from movie where movie_no = ?";
+	public String movieCode(String partTwo) {
+		String query = "select movie_title from movie where movie_id = ?";
 		Object[] params= {partTwo};
 		String result = jdbc.queryForObject(query,String.class,params);
 		return result;
 	}
+	
+	
+	
 
 	public int deleteComm(int commentNo) {
 		String query = "delete from comm where comment_no = ?";
@@ -65,6 +68,8 @@ public class CommentDao {
 		}
 		
 	}
+
+	
 	
 }
 

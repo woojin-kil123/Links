@@ -41,8 +41,10 @@ public class CommentController {
 		List list = commentService.mCommentList(contentNo);
 		String movieTitle = commentService.selectMovieTitle(contentNo);
 		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("movieTitle",movieTitle);
+		
 		return "comment/mCommentList";
 	}
 	
