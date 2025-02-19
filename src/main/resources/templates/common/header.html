@@ -1,85 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>LinkS</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-		<script src="/js/jquery-3.7.1.js"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/BootStrapStyles.css" rel="stylesheet" />
-    <style>
-		.navbar{
-			background-color: black;
-			height : 80px;
-		}
-		.nav-item .material-icons{
-			font-size : 30px;
-		}
-		.nav-item button{
-			border : none;
-		}
-		.d-flex{
-			align-items: center;
-		}
-		form{
-			margin-block-end: auto;
-		}
-    </style>   
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" > <!-- id="mainNav" -->
-            <div class="container">
-            <!-- 햄버거 버튼 -->
-                <a class="navbar-brand" href="/ref/sample"><img src="/image/links_logo.svg"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-            <!-- 햄버거 버튼 -->
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 d-flex">
-                        <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/news/list?reqPage=1">소식</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contents/movieList">영화</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">책</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/comment/mCommentList">코멘트</a></li>
-                        <li class="nav-item d-flex">
-                        	<form action="#" method="get" class="d-flex">
-                        		<input type="text" class="form-control" placeholder="책,도서,유저 검색">
-                        		<button style="background-color : transparent"><span class="material-icons nav-link">search</span></button>
-                        	</form>
-                        </li>
-                        <th:block th:if="${session.member==null}">
-                        <li class="nav-item"><a class="nav-link" href="/member/loginFrm">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/agree">회원가입</a></li>
-                        </th:block>
-                           <th:block th:if="${session.member!=null}">
-                           <th:block th:if="${session.member.memberRole == 'normal'}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>LinkS</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+	<script src="/js/jquery-3.7.1.js"></script>
+	<!-- Bootstrap Bundle with Popper (필수) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/BootStrapStyles.css" rel="stylesheet" />
+<style>
+	.navbar {
+	    background-color: black;
+	    height: 80px;
+	}
+	.nav-item .material-icons {
+	    font-size: 30px;
+	    color: white; /* 아이콘 색상을 명확하게 */
+	}
+	.nav-item button {
+	    border: none;
+	}
+	.d-flex {
+	    align-items: center;
+	}
+	form {
+	    margin-block-end: auto;
+	}
+	.navbar-nav .nav-link {
+	    font-family: ns-r;
+	}
+	/* 검색 입력창 스타일 */
+	.search-input {
+	    height: 40px; /* 버튼과 같은 높이 */
+	    font-size: 16px;
+	}
+	/* 버튼 스타일 */
+	.search-btn {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    height: 40px; /* 입력창과 동일한 높이 */
+	    width: 40px; /* 정사각형 */
+	    border: none;
+	    background-color: transparent; /* 배경 제거 */
+	    padding: 0;
+	}
+	/* 아이콘 크기 조정 */
+	.search-btn .material-icons {
+	    font-size: 30px; /* 아이콘 크기 */
+	    color: white; /* 아이콘 색상 */
+	}
+	/* 네비게이션 메뉴 줄바꿈 방지 */
+	.navbar-nav {
+	    display: flex;
+	    flex-wrap: nowrap; /* 자동 줄바꿈 방지 */
+	    justify-content: flex-end; /* 오른쪽 정렬 */
+	    gap: 15px; /* 메뉴 간격 */
+	}
+	.navbar-nav .nav-link {
+	    white-space: nowrap; /* 줄바꿈 방지 */
+	    overflow: hidden; /* 넘치는 텍스트 숨김 */
+	    text-overflow: ellipsis; /* 넘칠 경우 ... 표시 */
+	}
+	/* 알림 버튼이 포함된 리스트 아이템 */
+	.nav-item.notifications {
+	    position: relative; /* 알림 창을 절대 위치로 배치하기 위한 기준 */
+	}
+	/* ✅ 알림 버튼이 포함된 리스트 아이템 */
+	.nav-item.notifications {
+	    position: relative; /* 알림 창이 아이콘 아래에 위치하도록 설정 */
+	}
+	/* ✅ 알림 창 기본적으로 숨김 */
+	.notification-popup {
+	    position: absolute;
+	    top: 50px;
+	    right: -50px; /* 우측 정렬 조정 */
+	    width: 250px;
+	    background-color: white;
+	    border: 1px solid #ddd;
+	    border-radius: 10px;
+	    padding: 15px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	    display: none; /* 🚨 기본적으로 숨김 */
+	    z-index: 1000;
+	}
+	/* ✅ 알림 창이 보일 때 */
+	.notification-popup.show {
+	    display: block; /* 🚀 클릭 시 보이게 설정 */
+	    animation: fadeIn 0.3s ease-in-out;
+	}
+	/* ✅ 알림 창 내부 스타일 */
+	.notification-popup h5 {
+	    margin: 0 0 10px 0;
+	    font-size: 16px;
+	    font-weight: bold;
+	}
+	/* ✅ 알림 리스트 스타일 */
+	.notification-list {
+	    list-style: none;
+	    padding: 0;
+	    margin: 0;
+	}
+	.notification-list li {
+	    padding: 8px 0;
+	    border-bottom: 1px solid #eee;
+	    font-size: 14px;
+	}
+	.notification-list li:last-child {
+	    border-bottom: none;
+	}
+	@keyframes fadeIn {
+	    from { opacity: 0; transform: translateY(-10px); }
+	    to { opacity: 1; transform: translateY(0); }
+	}
+	/* ✅ 992px 이하에서 알림 아이콘 중앙 정렬 */
+	@media (max-width: 992px) {
+	    .navbar-collapse {
+	        position: absolute;
+	        top: 80px;
+	        left: 0;
+	        width: 100%;
+	        background-color: black;
+	        z-index: 1000;
+	        text-align: center;
+	    }
+	    .navbar-nav {
+	        display: flex;
+	        flex-direction: column; /* 세로 정렬 */
+	        align-items: center; /* 중앙 정렬 */
+	    }
+	    .notification-popup {
+	        right: auto;
+	        left: 50%;
+	        transform: translateX(-50%); /* 중앙 정렬 */
+	    }
+	}
+	@media (max-width: 992px) {
+	    .navbar-nav .nav-link {
+	        font-size: 0.9rem; /* 글씨 크기 축소 */
+	    }
+	    /* ✅ 수정: 메뉴 숨기지 않고 Bootstrap의 collapse 기능 유지 */
+	    .navbar-collapse {
+	        position: absolute;
+	        top: 80px; /* 네비게이션 바 아래 위치 */
+	        left: 0;
+	        width: 100%;
+	        background-color: black; /* 배경색 추가 */
+	        z-index: 1000;
+	        text-align: center;
+	    }
+	    .container {
+	        height: 80px;
+	        position: relative;
+	    }
+	    .navbar {
+	        display: flex;
+	        justify-content: space-between; /* 로고와 버튼을 좌우 정렬 */
+	        align-items: center; /* 세로 중앙 정렬 */
+	        height: 80px; /* 네비게이션 바 높이 유지 */
+	        padding: 0 15px; /* 좌우 여백 추가 */
+	        position: relative;
+	    }
+	
+	    /* ✅ 로고를 상단 맨 위에 정렬 */
+	    .navbar-brand > img {
+	        height: 80px;
+	        position: absolute;
+	        top: 0; /* 상단에 배치 */
+	        left: 15px; /* 좌측 정렬 */
+	    }
+	    /* ✅ 햄버거 버튼 정상 작동 */
+	    .navbar-toggler {
+	        position: absolute;
+	        right: 15px; /* 햄버거 버튼 오른쪽 정렬 */
+	    }
+	}
+	.notification-list {
+   		text-align: center; /* 리스트 내부의 텍스트 및 링크 가운데 정렬 */
+	}
+	
+	.notification-list a {
+	    text-decoration: none; /* 밑줄 제거 */
+	    color: inherit; /* 부모 요소의 색상 유지 */
+	    display: inline-block; /* 요소를 인라인 블록으로 설정 */
+	}
+   </style>   
+</head>
+<body>
+    <!-- Navigation-->
+  	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <!-- 로고 -->
+        <a class="navbar-brand" href="/ref/sample">
+            <img src="/image/links_logo.svg">
+        </a>
+
+        <!-- 햄버거 버튼 -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+		        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		    <i class="fas fa-bars"></i>
+		</button>
+
+        <!-- 네비게이션 메뉴 -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto d-flex align-items-center gap-3">
+                <!-- ✅ 알림 아이콘 (클릭 시 창이 뜨도록 설정) -->
+                <li class="nav-item notifications">
+                    <a class="nav-link d-flex align-items-center" href="#" id="notificationBtn">
+                        <span class="material-icons">notifications</span>
+                    </a>
+
+                    <!-- ✅ 알림 창 -->
+                    <div class="notification-popup" id="notificationPopup">
+                        <h5>알림</h5>
+                        <ul class="notification-list">
+                            <li><a href="/news/view?newsNo=9">📢 메인 소식으로 이동하기</a></li>
+                            <li><a href="/comment/">💬 뜨는 코멘트로 이동하기</a></li>
+                            <li>🔔 경고 메세지 연동예정.</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="/news/list?reqPage=1">소식</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contents/movieList">영화</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">책</a></li>
+                <li class="nav-item"><a class="nav-link" href="/comment/mCommentMemberList">코멘트</a></li>
+
+                <!-- 검색창 -->
+                <li class="nav-item d-flex">
+                    <form action="#" method="get" class="d-flex gap-2">
+				        <input type="text" class="form-control search-input" placeholder="영화, 책, #해시태그 검색">
+				        <button type="submit" class="search-btn">
+				            <span class="material-icons">search</span>
+				        </button>
+				    </form>
+                </li>
+
+                <!-- 로그인 / 회원가입 -->
+                <th:block th:if="${session.member == null}">
+                    <li class="nav-item"><a class="nav-link" href="/member/loginFrm">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/member/agree">회원가입</a></li>
+                </th:block>
+
+                <!-- 로그인 후 메뉴 -->
+                <th:block th:if="${session.member != null}">
+                    <th:block th:if="${session.member.memberRole == 'normal'}">
                         <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
-                        </th:block>
-                          <th:block th:if="${session.member.memberRole=='business'}">
+                    </th:block>
+                    <th:block th:if="${session.member.memberRole == 'business'}">
                         <li class="nav-item"><a class="nav-link" href="/">문의페이지</a></li>
-                        </th:block>
-                          <th:block th:if="${session.member.memberRole=='admin'}">
+                    </th:block>
+                    <th:block th:if="${session.member.memberRole == 'admin'}">
                         <li class="nav-item"><a class="nav-link" href="/">관리자페이지</a></li>
-                        </th:block>
-                        <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
-                        </th:block>
-                        <li class="nav-item"><a class="nav-link d-flex" href="/">
-                        <span class="material-icons nav-link">contact_support</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    </th:block>
+                    <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+                </th:block>
+
+                <!-- 문의 아이콘 -->
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="/">
+                        <span class="material-icons">contact_support</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+       const notificationBtn = document.getElementById("notificationBtn");
+       const notificationPopup = document.getElementById("notificationPopup");
+
+       // ✅ 알림 버튼 클릭 시 알림 창 표시/숨김 토글
+       notificationBtn.addEventListener("click", function(event) {
+           event.preventDefault(); // 기본 링크 동작 방지
+           notificationPopup.classList.toggle("show");
+       });
+
+       // ✅ 화면 클릭 시 알림 창 닫기 (버튼 제외)
+       document.addEventListener("click", function(event) {
+           if (!notificationBtn.contains(event.target) && !notificationPopup.contains(event.target)) {
+               notificationPopup.classList.remove("show");
+           }
+       });
+   });
+	
+   window.setInterval(function(){
+		$.ajax({
+			url : "컨트롤러"
+			
+		})
+	},10000);
+</script>
+</body>

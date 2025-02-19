@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>News List</title>
 <link rel="stylesheet" href="/css/default.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <style>
 	.list-tbl-wrap{
 		width: 80%;
@@ -44,7 +46,14 @@
 						<th style="width:20%;">작성일</th>
 						<th style="width:10%;">조회수</th>
 					</tr>
-					<tr th:each="news : ${list}">
+					<tr th:each="news : ${list}" th:if="${news.newsNotice == 1}">
+						<td><span class="material-icons">flag</span></td>
+						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
+						<td th:text="${news.memberId}"></td>
+						<td th:text="${news.newsRegDate}"></td>
+						<td th:text="${news.newsReadCount}"></td>
+					</tr>
+					<tr th:each="news : ${list}" th:if="${news.newsNotice == 0}">
 						<td th:text="${news.newsNo}"></td>
 						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
 						<td th:text="${news.memberId}"></td>
