@@ -2,7 +2,10 @@ package kr.co.iei.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Transactional;
+=======
+>>>>>>> parent of f8e864b (2.18)
 
 import kr.co.iei.member.model.dao.MemberDao;
 import kr.co.iei.member.model.vo.Member;
@@ -16,6 +19,7 @@ public class MemberSerivce {
 		Member member= memberDao.selectOneMember(m);
 		return member;
 	}
+<<<<<<< HEAD
 	@Transactional
 	public int insertMember(Member m) {
 		int result =memberDao.insertMember(m);
@@ -40,4 +44,7 @@ public class MemberSerivce {
 		return result2;
 	}
  
+=======
+
+>>>>>>> parent of f8e864b (2.18)
 }

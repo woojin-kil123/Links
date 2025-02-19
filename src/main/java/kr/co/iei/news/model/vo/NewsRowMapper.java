@@ -18,7 +18,10 @@ public class NewsRowMapper implements RowMapper<News> {
 		n.setMemberId(rs.getString("member_id"));
 		n.setNewsReadCount(rs.getInt("news_read_count"));
 		n.setNewsRegDate(rs.getString("news_reg_date"));
+<<<<<<< HEAD
 		n.setNewsNotice(rs.getInt("news_notice"));
+=======
+>>>>>>> parent of f8e864b (2.18)
 		return n;
 	}
 }

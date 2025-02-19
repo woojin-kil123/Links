@@ -2,11 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>소식 작성</title>
-<<<<<<< HEAD
-<link rel="stylesheet" href="/css/default.css" />
-=======
->>>>>>> parent of f8e864b (2.18)
+<title>News 작성</title>
 <style>
 	.news-write-container{
 		display: flex;
@@ -23,12 +19,6 @@
 	.news-write-wrap .input-item>textarea{
 		height: 300px;
 	}
-<<<<<<< HEAD
-	.section{
-		margin-top: 50px;
-	}
-=======
->>>>>>> parent of f8e864b (2.18)
 </style>
 </head>
 <body>
@@ -58,56 +48,21 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="left" colspan="4">
-							<textarea name="newsContent"></textarea>
+						<td colspan="4">
+							<div class="input-item">
+								<textarea name="newsContent"></textarea>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4">
-<<<<<<< HEAD
-						    <div class="insert" style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-						      <input class="form-check-input" type="checkbox" id="newsNotice" name="newsNotice" value="1">
-						      <label class="form-check-label" for="newsNotice">상단에 고정하기</label>
-						      <button type="submit" class="btn btn-primary">소식 등록</button>
-						    </div>
-					 	</td>
-=======
 							<button type="submit" class="btn-primary lg">소식 등록</button>
 						</td>
->>>>>>> parent of f8e864b (2.18)
 					</tr>
 				</table>
 			</form>
 		</section>
 	</main>
-	<script src="/summernote/summernote-lite.js"></script>
-	<script src="/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/summernote/summernote-lite.css">
-	<script>
-		$("[name=newsContent]").summernote({
-			height: 500,
-			lang: "ko-KR",
-			callbacks : {
-				onImageUpload : function(file){
-					uploadImage(file[0],this);
-				}
-			}
-		});
-		function uploadImage(file, editor){
-			const form = new FormData();
-			form.append("upfile",file);
-			$.ajax({
-				url : "/news/editorImage",
-				type : "post",
-				data : form,
-				processData : false,
-				contentType : false,
-				success : function(data){
-					$(editor).summernote("insertImage","/news/editor/"+data);
-				}
-			});
-		}
-	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

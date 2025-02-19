@@ -14,8 +14,11 @@ public class Comment {
 	private String commentContent;
 	private int readCount;
 	private String regDate;
+<<<<<<< HEAD
 	private String contentTitle;
 	private int likeCount;
 	private int isLike;
 	
+=======
+>>>>>>> parent of f8e864b (2.18)
 }

@@ -34,8 +34,13 @@ public class NewsDao {
 	}
 
 	public int insertNews(News n) {
+<<<<<<< HEAD
 		String query = "insert into news values(?,?,?,0,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		Object[] params = {n.getNewsNo(),n.getMemberId(),n.getNewsTitle(),n.getNewsContent(),n.getNewsNotice()};
+=======
+		String query = "insert into news values(?,?,?,?,0,to_char(sysdate,'yyyy-mm-dd'))";
+		Object[] params = {n.getNewsNo(),n.getNewsTitle(),n.getMemberId(),n.getNewsContent()};
+>>>>>>> parent of f8e864b (2.18)
 		int result = jdbc.update(query, params);
 		return result;
 	}

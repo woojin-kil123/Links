@@ -18,7 +18,11 @@ public class MemberDao {
 
 	public Member selectOneMember(Member m) {
 		String query ="select * from member where member_id=? and member_pw=?";
+<<<<<<< HEAD
 		Object[] params = {m.getMemberId(),m.getMemberPw()};
+=======
+		Object[] params = {m.getMemberId(),m.getMemberPW()};
+>>>>>>> parent of f8e864b (2.18)
 		List list=jdbc.query(query,memberRowMapper, params);
 		if(list.isEmpty()) {
 			return null;
@@ -28,6 +32,7 @@ public class MemberDao {
 		}
 	}
 
+<<<<<<< HEAD
 	public int insertMember(Member m) {
 		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,normal,0,N)";
 		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPw(),m.getMemberEmail(),m.getMemberPhone()};
@@ -69,4 +74,6 @@ public class MemberDao {
 		return result2;
 	}
 
+=======
+>>>>>>> parent of f8e864b (2.18)
 }

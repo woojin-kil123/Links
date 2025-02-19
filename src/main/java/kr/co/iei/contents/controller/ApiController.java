@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +25,7 @@ public class ApiController {
 	@Autowired
 	private ApiService apiService;
 	
+<<<<<<< HEAD
 	@ResponseBody
 	@GetMapping(value="/movie")
     public List nowPlayingMovies() {
@@ -38,28 +38,31 @@ public class ApiController {
 		}
 		System.out.println(movieList.toString());
 		return movieList;
+=======
+	 @ResponseBody
+	 @GetMapping(value="/movie")
+	    public List nowPlayingMovies(int currentPage) {
+		 	List movieList = null;
+			try {
+				movieList = apiService.nowPlayingMovies(currentPage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(movieList.toString());
+			return movieList;
+>>>>>>> parent of f8e864b (2.18)
 	}
-    @GetMapping(value="/movieDetail")
-    public String MovieDetail(int movieId, Model model ) {
-		ApiMovie movie = null;
-		try {
-			movie = apiService.movieDetail(movieId);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("movie",movie);
-        return "contents/movie";
-	}
-	/*
 	@ResponseBody
-	@GetMapping("/insertref")
-	public String insertRef() {
-		apiService.insertCountry();
-		return "redirect:/contents/movieList";
+    @GetMapping(value="/movieId", produces="plain/text; charset=utf-8")
+    public String getMovieDetails(int movieId) {
+        return apiService.getMovieDetails(movieId);
 	}
+<<<<<<< HEAD
 	*/
 	
+=======
+>>>>>>> parent of f8e864b (2.18)
 	//@ResponseBody
 	//@GetMapping("/insertref")
 	//public String insertRef() {

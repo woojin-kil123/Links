@@ -29,11 +29,6 @@ public class ApiDao {
 		String name = jdbc.queryForObject(query,String.class,params);
 		return name;
 	}
-
-	public String selectKorCountry(String engCountry) {
-		String query = "select ko from country where en=?";
-		Object[] params = {engCountry};
-		String kor = jdbc.queryForObject(query,String.class,params);
-		return kor;
-	}
+	
+	
 }
