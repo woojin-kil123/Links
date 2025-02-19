@@ -38,6 +38,14 @@ public class MemberSerivce {
 		int result2 =memberDao.insertdeleteMember(memberNo);
 		return result2;
 	}
- 
+	public Member selectOneMember2(Member m) {
+		Member member= memberDao.selectOneMember2(m);
+		return member;
+	}
+	public Member selectOneMember3(Member m) {
+		Member member= memberDao.selectOneMember3(m);
+		return member;
+	}
+
 
 }

@@ -69,4 +69,30 @@ public class MemberDao {
 		return result2;
 	}
 
+	public Member selectOneMember2(Member m) {
+		String query ="select * from member where member_name=? and member_phone=?";
+		Object[] params = {m.getMemberName(),m.getMemberPhone()};
+		List list=jdbc.query(query,memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member =(Member)list.get(0);
+			return member;
+		}
+	
+	}
+
+	public Member selectOneMember3(Member m) {
+		String query ="select * from member where member_id=? and member_name=? and member_phone=?";
+		Object[] params = {m.getMemberId(),m.getMemberName(),m.getMemberPhone()};
+		List list=jdbc.query(query,memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member =(Member)list.get(0);
+			return member;
+		}
+	
+	}
+
 }
