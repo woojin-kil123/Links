@@ -26,7 +26,7 @@ public class MemberController {
 	 Member member = memberService.selectOneMember(m);
 
 	 if(member== null) {
-		 model.addAttribute("title","로그인 실페");
+		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","아이디 또는 비밀번호를 확인하세요.");
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
@@ -120,12 +120,20 @@ public class MemberController {
  public String find() {
 	 return "member/find";
  }
+ @GetMapping(value="/idFindFrm")
+ public String ifFindFrm() {
+	 return "member/idfindFrm";
+ }
  @GetMapping(value="/idFind")
  public String ifFind() {
-	 return "member/idfind";
+	 return "member/idfindFrm";
+ }
+ @GetMapping(value="/pwFindFrm")
+ public String pwFindFrm() {
+	 return "common/msg";
  }
  @GetMapping(value="/pwFind")
  public String pwFind() {
-	 return "member/pwfind";
+	 return "member/pwChange";
  }
 }
