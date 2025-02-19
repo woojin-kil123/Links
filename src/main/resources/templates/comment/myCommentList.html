@@ -11,6 +11,29 @@
 		width: 1400px;
 		margin: 0 auto;
 	}
+	.page-title-top{
+		font-size: 27px;
+		font-weight: 600;
+		margin-left: 30px;
+		padding-bottom: 20px;	
+	}
+	.navi{
+		overflow: hidden;
+		border-bottom: 2px solid #D9D9D9;
+	}
+	.movie-tag{
+		text-align: center;
+		width: 120px;
+		height: 35px;
+		float: left;
+	}
+	.book-tag{
+		text-align: center;
+		width: 120px;
+		height: 35px;
+		float: left;
+	}
+	
 	
 	.order-by>.down{
 		font-size: 15px;
@@ -21,13 +44,8 @@
 		width: 1200px;
 		margin: 0 auto;
 	}
-	.page-title{		
-		
-		font-size: 27px;
-		font-weight: 600;
-		margin-left: 30px;
-		padding-bottom: 20px;	
-	}
+	
+	
 	.list-wrap{
 		width: 1200px;
 		
@@ -95,6 +113,7 @@
 		margin-left:20px;
 		float: left;
 	}
+	
 	.btn-opt{
 		
 		overflow: hidden;
@@ -114,16 +133,19 @@
 	}
 	
 	
-
 </style>
 
 </head>
 <body>
-	<th:block th:include="common/header"></th:block>
-	
+	<th:block th:include="common/header"></th:block>	
 	
 	<main class="content-wrap">
 		<section class="section movie-comment-list-wrap">
+		<div class="page-title-top">코멘트 히스토리</div>
+		<div class="navi">
+			<div class="movie-tag">영화</div>
+			<div class="book-tag">책</div>
+		</div>
 			<div class="order-by">
 				<span>최신 순</span>
 				<span class="material-icons down">keyboard_double_arrow_down</span>
@@ -132,21 +154,17 @@
 				<span>별점 순</span>
 				<span class="material-icons down">keyboard_double_arrow_down</span>
 			</div>
-			<div class="content">
-				<div class="page-title">무비 매니아들의 코멘트</div>		
-									
+			<div class="content">			
 				<div class="list-wrap">
-					<div th:each= "c: ${list}" class="comment-box">
-									
-				 
-					
+				
+					<div th:each= "comm : ${list}" class="comment-box">									
 						<table class="line1">
 							<tr>
 								<th style="width:1%;"></th>
 								<th class="profile" style="width:3%;"></th>
 								<th style="width:2%;"></th>
-								<th th:text= "${c.memberId}" style="width:13%;"></th>
-								<th th:text= "${c.contentNo}" style="width:64%;"></th>								
+								<th style="width:13%;">유저02</th>
+								<th style="width:64%;">무비 타이틀</th>								
 								<th class="star-wrap" style="width:17%;">
 									<span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
@@ -161,8 +179,8 @@
 						
 						<div class="movie-content">	
 										
-							<div> <a th:href="@{/comment/mCommentList(contentNo=${c.contentNo})}" class="movie-summary"></a></div>																						
-							<div th:text="${c.commentContent}" class="movie-comment"> </div>
+							<div  class="movie-summary"></div>																						
+							<div  class="movie-comment"></div>
 												
 						</div>
 						
@@ -176,20 +194,22 @@
 								<span class="count"> 0 </span>
 							</div>	
 							<div class="right-icon">
-								<a class="material-icons" th:href="@{/comment/updateFrm(commentNo=${c.commentNo})}">create </a>								
-							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever </span>
+								<span class="material-icons">create </span>								
+							    <span class="material-icons" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever </span>
 							     
 							</div>
-						</div>						
+						</div>
+						
 						
 					</div>
-					   
-							
-				</div>
+					
+							 
+				</div>  
 			</div>
+				
 		</section>
 	</main>
-		<script src="/js/sweetalert.min.js"></script>
+	<script src="/js/sweetalert.min.js"></script>
 	<script>
 		function commDelete(commentNo){
 			swal({
@@ -226,7 +246,4 @@
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
-
-
-
 

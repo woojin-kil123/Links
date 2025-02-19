@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import kr.co.iei.comment.model.dao.CommentDao;
+import kr.co.iei.comment.model.vo.Comment;
 
 @Service
 public class CommentService {
@@ -24,7 +27,8 @@ public class CommentService {
 		
 		return list;
 	}
-
+	
+	@Transactional
 	public String selectMovieTitle(String contentNo) {
 		String partOne = contentNo.substring(0,1);
 		String partTwo = contentNo.substring(1);		
@@ -34,5 +38,23 @@ public class CommentService {
 		}		
 		return partTwo;
 	}
+
+	@Transactional
+	public int deleteComm(int commentNo) {
+		int result = commentDao.deleteComm(commentNo);
+		return result;
+	}
+
+
+	
+	@Transactional
+	public Comment selectOneComm(int commentNo) {
+		Comment c = commentDao.selectOneComm(commentNo);
+		
+		return c;
+	}
+
+
+
 	
 }
