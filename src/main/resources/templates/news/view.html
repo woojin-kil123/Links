@@ -3,21 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>News view</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="/css/default.css" />
 <style>
 	.news-view-wrap{
 		width: 80%;
+=======
+<style>
+	.news-view-wrap{
+		width: 1200px;
+>>>>>>> parent of f8e864b (2.18)
 		margin: 0 auto;
 	}
 	.newsContent{
 		min-height: 300px;
 	}
+<<<<<<< HEAD
 	.page-title{
 		width: 80%;
 	}
 	.section{
 		margin-top: 50px;
 	}
+=======
+>>>>>>> parent of f8e864b (2.18)
 </style>
 </head>
 <body>
@@ -51,7 +60,11 @@
 						<div class="newsContent" th:utext="${n.newsContent}"></div>
 					</td>
 				</tr>
+<<<<<<< HEAD
 				<tr th:if="${session.member !=null && session.member.memberId == n.memberId}">
+=======
+				<tr th:if="${session.member !=null && session.member.memberId == n.memeberId}">
+>>>>>>> parent of f8e864b (2.18)
 					<td colspan="6">
 						<a class="btn-primary" th:href="@{/news/updateFrm(newsNo=${n.newsNo})}">수정</a>
 						<button class="btn-secondary" th:onclick="newsDelete([[${n.newsNo}]]);">삭제</button>

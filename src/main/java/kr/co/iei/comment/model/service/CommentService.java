@@ -11,7 +11,7 @@ import kr.co.iei.comment.model.dao.CommentDao;
 public class CommentService {
 	
 	@Autowired
-	public CommentDao commentDao;
+	private CommentDao commentDao;
 
 	public List mCommentMemberList() {
 		List list = commentDao.mCommentMemberList();

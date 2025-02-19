@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.comment.model.service.CommentService;
 
+import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value="/comment")
 public class CommentController {
 	
 	@Autowired
-	CommentService commentService;
-	
-	
-	
+	private CommentService commentService;
 	
 	@GetMapping(value="/mCommentMemberList")	
 	public String mCommentMemberList(Model model) {
@@ -30,7 +30,7 @@ public class CommentController {
 	}
 	
 	@GetMapping(value="/bCommentMemberList")
-	public String bCommentMemberList() {		
+	public String bCommentMemberList() {
 		return "comment/bCommentMemberList";
 	}
 	
@@ -44,7 +44,9 @@ public class CommentController {
 		return "comment/mCommentList";
 	}
 	
-	 
+	public String mCommentList() {
+		return "comment/mCommentList";
+	}
 	
 	@GetMapping(value="/bCommentList")
 	public String bCommentList() {

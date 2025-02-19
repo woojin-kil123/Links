@@ -14,7 +14,6 @@ public class ContentsController {
 	public String movie() {
 		return "contents/movie";
 	}
-	
 
 	@GetMapping("/movieList")
 	public String movieList() {

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.Member;
@@ -27,7 +26,7 @@ public class MemberController {
 	 Member member = memberService.selectOneMember(m);
 
 	 if(member== null) {
-		 model.addAttribute("title","로그인 실페");
+		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","아이디 또는 비밀번호를 확인하세요.");
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
@@ -39,7 +38,6 @@ public class MemberController {
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
 	 }else {
-		 
 		 session.setAttribute("member", member);
 		 return "redirect:/";
 	 }
@@ -53,7 +51,6 @@ public class MemberController {
  public String agree() {
 	 return "/member/agree";
  }
-
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "member/joinFrm";
@@ -123,12 +120,21 @@ public class MemberController {
  public String find() {
 	 return "member/find";
  }
+ @GetMapping(value="/idFindFrm")
+ public String ifFindFrm() {
+	 return "member/idfindFrm";
+ }
  @GetMapping(value="/idFind")
  public String idFind() {
 	 return "member/idfind";
  }
+ @GetMapping(value="/pwFindFrm")
+ public String pwFindFrm() {
+	 return "common/msg";
+
+ }
  @GetMapping(value="/pwFind")
  public String pwFind() {
-	 return "member/pwfind";
+	 return "member/pwChange";
  }
 }

@@ -22,12 +22,7 @@ public class MemberRowMapper implements RowMapper<Member>{
 		m.setMemberPhone(rs.getString("member_phone"));
 		m.setMemberPw(rs.getString("member_pw"));
 		m.setMemberRole(rs.getString("member_role"));
-		m.setWaringLevel(rs.getInt("warning_level"));
-		m.setMemberName(rs.getString("member_name"));
-		m.setMemberNo(rs.getInt("member_no"));
-		m.setMemberPhone(rs.getString("member_phone"));
-		m.setMemberPw(rs.getString("member_pw"));
-		m.setMemberRole(rs.getString("member_role"));
+		m.setWarningLevel(rs.getInt("warning_level"));
 		return m;
 		
 	}

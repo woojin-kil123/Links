@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.CommentRowMapper;
-import kr.co.iei.member.vo.Member;
+import kr.co.iei.comment.model.vo.CommentRowMapper;
 
 @Repository
 public class CommentDao {

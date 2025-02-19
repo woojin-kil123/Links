@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>News List</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="/css/default.css" />
 <style>
 	.list-tbl-wrap{
@@ -14,6 +15,16 @@
 	.list-footer{
 		width: 80%;
 		margin: auto;
+=======
+<style>
+	.news-list-wrap{
+		width : 1200px;
+		margin : 0 auto;
+	}
+	.list-tbl-wrap{
+		height : 500px;
+		margin-top : 15px;
+>>>>>>> parent of f8e864b (2.18)
 	}
 	#pageNavi{
 		margin-top : 30px;
@@ -21,6 +32,7 @@
 	#write-btn{
 		display : inline-block;
 	}
+<<<<<<< HEAD
 	.page-title{
 		width: 80%;
 		margin: auto;
@@ -28,6 +40,8 @@
 	.section{
 		margin-top: 50px;
 	}
+=======
+>>>>>>> parent of f8e864b (2.18)
 </style>
 </head>
 <body>
@@ -35,6 +49,12 @@
 	<main class="content">
 		<section class="section">
 			<div class="page-title">소식</div>
+<<<<<<< HEAD
+=======
+			<div class="list-header">
+				<a th:if="${session.member != null && session.member.memberLevel == 1}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
+			</div>
+>>>>>>> parent of f8e864b (2.18)
 			<div class="list-tbl-wrap">
 				<table class="tbl tbl-hover">
 					<tr>
@@ -53,9 +73,12 @@
 					</tr>
 				</table>
 			</div>
+<<<<<<< HEAD
 			<div class="list-footer" style="display: flex; justify-content: flex-end;">
 				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
+=======
+>>>>>>> parent of f8e864b (2.18)
 			<div id="pageNavi" th:utext="${pageNavi}"></div>
 		</section>	
 	</main>
