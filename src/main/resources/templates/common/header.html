@@ -55,7 +55,7 @@
                         <li class="nav-item"><a class="nav-link" href="/news/list?reqPage=1">소식</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contents/movieList">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/">책</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/comment/mCommentList">코멘트</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/comment/mCommentMemberList">코멘트</a></li>
                         <li class="nav-item d-flex">
                         	<form action="#" method="get" class="d-flex">
                         		<input type="text" class="form-control" placeholder="책,도서,유저 검색">
@@ -67,7 +67,15 @@
                         <li class="nav-item"><a class="nav-link" href="/member/agree">회원가입</a></li>
                         </th:block>
                            <th:block th:if="${session.member!=null}">
-                        <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+                           <th:block th:if="${session.member.memberRole == 'normal'}">
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        </th:block>
+                          <th:block th:if="${session.member.memberRole=='business'}">
+                        <li class="nav-item"><a class="nav-link" href="/">문의페이지</a></li>
+                        </th:block>
+                          <th:block th:if="${session.member.memberRole=='admin'}">
+                        <li class="nav-item"><a class="nav-link" href="/">관리자페이지</a></li>
+                        </th:block>
                         <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
                         </th:block>
                         <li class="nav-item"><a class="nav-link d-flex" href="/">

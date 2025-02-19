@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>영화 into the 코멘트 리스트</title>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=star_rate" />
+    <link rel="stylesheet" href="css/star.css">
+<style>
+	.content-wrap{
+		width: 1400px;
+		margin: 0 auto;
+	}
+	.order-by{
+		cursor: pointer;
+	}
+	
+	.order-by>.down{
+		font-size: 15px;
+		color: red;
+		margin-bottom: 40px;
+	}
+	.content{
+		width: 1200px;
+		margin: 0 auto;
+	}
+	.page-title{		
+		width:800px;
+		height: 200px;		
+		overflow: hidden;
+	}
+	
+	
+	.movie-title{
+		margin-left: 10px;
+		margin-top: 10px;
+		font-size: 27px;
+		font-weight: 600;
+		background-color: #D9D9D9;			
+		float: left;
+	
+	}
+	.movie-summary{		
+		width: 100px;
+		height: 150px;
+		margin-right: 20px;
+		margin-top: 20px;
+		background-color: #D9D9D9;		
+		float: right;	
+	}
+		
+		
+	.list-wrap{
+		width: 1200px;
+		
+		margin-left: 0px;
+	}
+	.comment-box{
+		width: 800px;
+		height: 235px;
+		padding-top: 10px;
+		
+		
+		background-color: #F3EEEE;
+		border-bottom : 3px solid #D9D9D9;
+		
+		margin-bottom: 90px;
+		
+	}
+	.line1{
+		width: 780px;
+		height: 25px;
+		margin: 0 auto;
+	}
+	.profile{
+		width: 25px;
+		height: 25px;
+		border-radius: 25px;
+		
+		
+		
+		background-color: #D9D9D9;
+	}
+	.star-wrap{
+		overflow: hidden;
+	}	
+	.star-wrap>span{
+	    float: left;
+	    font-size: 18px;
+	    color: #D9D9D9;
+	    cursor: pointer;
+	}
+	
+	.partner{
+		width: 750px;
+		margin: 0 auto;
+		padding: 0;
+		
+		
+		margin : 7px 7px;			
+	}
+	
+		
+	.movie-comment{
+		width: 625px;
+		height:145px;
+		background-color: #D9D9D9;
+		
+		
+		margin-left:110px;
+		
+	}
+	.btn-opt>span{
+		width: 18px;
+		height: 18px;
+		margin-top: 5px;
+		margin-left: 15px;
+		cursor: pointer;			
+	}
+	.btn-box{
+		width:800px;
+		height: 50px;		
+		border-top: 2px solid #C4C4C4;
+		background-color: #FFF9F9;	
+		overflow: hidden;
+	}
+	
+	.choice-like{
+		margin-top: 8px;
+		margin-left: 200px;
+		float: left;
+		cursor: pointer; 
+		
+	}
+	.choice-comment{
+		margin-top: 8px;
+		margin-left: 490px;
+		float: lift;
+		cursor: pointer;
+	}
+</style>
+
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	
+	
+	<main class="content-wrap">
+		<section class="section movie-comment-list-wrap">
+			<div class="order-by">
+				<span>최신 순</span>
+				<span class="material-icons down">keyboard_double_arrow_down</span>
+				<span>좋아요 순</span>
+				<span class="material-icons down">keyboard_double_arrow_down</span>
+				<span>별점 순</span>
+				<span class="material-icons down">keyboard_double_arrow_down</span>
+			</div>
+			<div class="content">
+				<div class="page-title">
+					<div th:text=${movieTitle} class="movie-title" >제목</div>
+					<div class="movie-summary"></div>					
+				</div>		
+									
+				<div class="list-wrap">
+					<div th:each= "comm: ${list}" class="comment-box" >
+						<table class="line1">
+							<tr>
+								<th style="width:1%;"></th>
+								<th class="profile" style="width:3%;"></th>
+								<th style="width:2%;"></th>
+								<th th:text= "${comm.memberId}" style="width:10%;"></th>
+								<th style="width:67%;"></th>
+								<th class="star-wrap" style="width:17%;">
+									<span class="material-symbols-outlined"> star_rate</span>
+							        <span class="material-symbols-outlined"> star_rate</span>
+							        <span class="material-symbols-outlined"> star_rate</span>
+							        <span class="material-symbols-outlined"> star_rate</span>
+							        <span class="material-symbols-outlined"> star_rate</span>
+								</th>
+							<tr>			
+						</table>
+						<div class="partner"></div>					
+						
+						<div th:text= "${comm.commentContent}" class="movie-comment"></div>
+						
+						<div class="btn-opt">
+							<span class="material-icons">thumb_up</span>
+							<span class="count"> 0 </span>
+							<span class="material-icons">textsms </span>
+							<span class="count"> 0 </span>	
+						</div>
+						
+						<div class="btn-box">						
+		                    <div class="choice-like">
+		                    	<span class="material-icons">thumb_up</span>
+		                        <span>좋아요</span>
+		                        <span>0</span>
+		                    </div>
+		                    <div class="choice-comment">
+		                    	<span class="material-icons">textsms </span>
+		                        <span>댓글</span>
+		                        <span>0</span>
+		                    </div>
+	                	</div>
+							
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
+
+
+
+<!-- 
+			<div class="list-tbl-wrap">
+				<table class="tbl tbl_hover">
+					<tr>
+						<th style="width:10%;">일단영화제목</th>
+						<th style="width:45%;">유저</th>
+						<th style="width:15%;">내용</th>
+						<th style="width:20%;">카운트</th>
+						<th style="width:10%;">작성일</th>
+					</tr>
+					<tr>
+					<tr th:each= "c: ${list}">
+						<td th:text= "${c.contentNo}"> </td>
+						<td th:text= "${c.memberId}"></td>
+						<td th:text= "${c.commentContent}"> </td>						
+						<td th:text= "${c.readCount}"> </td>
+						<td th:text= "${c.regDate}"> </td>
+					</tr>
+					
+				</table>			
+			</div>
+-->

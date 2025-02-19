@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>News List</title>
+<link rel="stylesheet" href="/css/default.css" />
+<style>
+	.list-tbl-wrap{
+		width: 80%;
+		height : 500px;
+		margin-top : 15px;
+		margin: auto;
+	}
+	.list-footer{
+		width: 80%;
+		margin: auto;
+	}
+	#pageNavi{
+		margin-top : 30px;
+	}
+	#write-btn{
+		display : inline-block;
+	}
+	.page-title{
+		width: 80%;
+		margin: auto;
+	}
+	.section{
+		margin-top: 50px;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section">
+			<div class="page-title">소식</div>
+			<div class="list-tbl-wrap">
+				<table class="tbl tbl-hover">
+					<tr>
+						<th style="width:10%;">글번호</th>
+						<th style="width:45%;">제목</th>
+						<th style="width:15%;">작성자</th>
+						<th style="width:20%;">작성일</th>
+						<th style="width:10%;">조회수</th>
+					</tr>
+					<tr th:each="news : ${list}">
+						<td th:text="${news.newsNo}"></td>
+						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
+						<td th:text="${news.memberId}"></td>
+						<td th:text="${news.newsRegDate}"></td>
+						<td th:text="${news.newsReadCount}"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="list-footer" style="display: flex; justify-content: flex-end;">
+				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
+			</div>
+			<div id="pageNavi" th:utext="${pageNavi}"></div>
+		</section>	
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

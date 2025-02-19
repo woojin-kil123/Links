@@ -26,18 +26,18 @@ public class ApiController {
 	@Autowired
 	private ApiService apiService;
 	
-	 @ResponseBody
-	 @GetMapping(value="/movie")
-	    public List nowPlayingMovies() {
-		 	List movieList = null;
-			try {
-				movieList = apiService.nowPlayingMovies();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(movieList.toString());
-			return movieList;
+	@ResponseBody
+	@GetMapping(value="/movie")
+    public List nowPlayingMovies() {
+	 	List movieList = null;
+		try {
+			movieList = apiService.nowPlayingMovies();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(movieList.toString());
+		return movieList;
 	}
     @GetMapping(value="/movieDetail")
     public String MovieDetail(int movieId, Model model ) {
@@ -59,4 +59,11 @@ public class ApiController {
 		return "redirect:/contents/movieList";
 	}
 	*/
+	
+	//@ResponseBody
+	//@GetMapping("/insertref")
+	//public String insertRef() {
+	//	apiService.insertCountry();
+	//	return "redirect:/contents/movieList";
+	//}
 }
