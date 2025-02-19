@@ -195,7 +195,24 @@
 	    color: inherit; /* 부모 요소의 색상 유지 */
 	    display: inline-block; /* 요소를 인라인 블록으로 설정 */
 	}
-   </style>   
+	.rowft {
+		width: 100%;
+	    display: flex; /* Flexbox 적용 */
+	    align-items: center; /* 세로 중앙 정렬 */
+	    gap: 10px; /* span 요소 간격 조절 */
+	    height: 50px; /* 예시 높이 (필요 시 조정) */
+	    justify-content: center;
+	    background-color: #FDFD96;
+	    font-size: 20px;
+	    font-weight: bold;
+	}
+	.rowft span:nth-child(2), 
+	.rowft span:nth-child(3), 
+	.rowft span:nth-child(4) {
+	    color: FF9D23; /* 글씨색을 빨간색으로 변경 */
+	}
+		
+</style>   
 </head>
 <body>
     <!-- Navigation-->

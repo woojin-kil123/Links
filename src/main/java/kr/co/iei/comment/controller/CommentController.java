@@ -62,4 +62,11 @@ public class CommentController {
 	public String bCommentList() {
 		return "comment/bCommentList";
 	}
+	
+	// 푸터에 코멘트 개수 전달
+    @ResponseBody
+    @GetMapping("/count")
+    public int getCommentCount() {
+    	return commentService.getTotalCommentCount();
+    }
 }

@@ -76,12 +76,8 @@ public class NewsController {
 	}
 
 
-	/*
 	@GetMapping(value="/view")
-	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
-	@GetMapping(value="/view")
-	//@SessionAttribute(required = false) Member member
-	public String selectOneNews(int newsNo, String check, Model model ) {
+	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member ) {
 		int memberNo = 0;
 		if(member != null) {
 			memberNo = member.getMemberNo();
@@ -98,8 +94,6 @@ public class NewsController {
 			return "news/view";
 		}
 	}
-
-	*/
 	
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {

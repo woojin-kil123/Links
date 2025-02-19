@@ -46,7 +46,10 @@ public class CommentService {
 		}		
 		return partTwo;
 	}
-
-
+	
+	// 코멘트 개수 반환
+    public int getTotalCommentCount() {
+        return commentDao.getCommentCount();
+    }
 	
 }

@@ -52,9 +52,12 @@ public class CommentDao {
 		String result = jdbc.queryForObject(query,String.class,params);
 		return result;
 	}
-
 	
-	
+	//총 코멘트 개수 조회
+	public int getCommentCount() {
+        String sql = "SELECT COUNT(*) FROM comm";
+        return jdbc.queryForObject(sql, Integer.class);
+    }
 }
 
 

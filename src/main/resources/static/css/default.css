@@ -46,7 +46,6 @@
   outline: 0;
   font-family: ns-r;
   list-style-type: none;
-  color : var(--main1);
 }
 a {
   text-decoration: none;
@@ -57,11 +56,9 @@ body {
   flex-direction: column;
   min-width: 800px;
   position: relative;
-  background-color: var(--box-bg);
 }
 
 .header {
-  background-color: var(--main2);
   width: 100%;
   position: sticky;
 
@@ -149,32 +146,6 @@ body {
   font-size: 20px;
   color: var(--gray1);
 }
-.footer {
-  background-color: var(--gray6);
-}
-.footer > div {
-  max-width: 1400px;
-  padding: 20px 10px;
-  margin: 0 auto;
-}
-.footer > div > p {
-  margin: 10px 0px;
-  font-family: ns-b;
-  font-size: 16px;
-}
-
-.footer > div > ul {
-  list-style-type: none;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.footer > div > ul > li {
-  float: left;
-}
-.footer > div > ul > li > a {
-  padding-right: 20px;
-}
-
 
 section.section {
   padding: 20px;

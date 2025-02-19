@@ -3,11 +3,15 @@
 <meta charset="UTF-8">
 <title>Links-Home</title>
 <style>
-	.home-ad{
+	.home-ad1{
 		width: 100%;
 	    max-width: 1200px; /* 필요에 따라 조정 */
 	    margin: 4px auto;
 	    aspect-ratio: 16 / 9; /* 16:9 비율 유지 */
+	    position: relative;
+	}
+	.ad-banner{
+		text-align: center;
 	}
 	.home-ad>iframe{
 		width: 100%;
@@ -16,11 +20,11 @@
 	}
 	.intro{
 		width : 100%;
-		top : 650px;
 		padding-top : 50px;
 		background-color: white;
 		position : absolute;
 		color : white;
+		bottom: 0;
 	}
 	.space{
 		height: 500px;
@@ -39,7 +43,6 @@
 	    font-family: Arial, sans-serif;
 	    background-color: transparent;
 	    margin: 0;
-	    padding: 20px;
 	}
 	
 	/* 랭킹 섹션 스타일 */
@@ -115,8 +118,10 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	    <div class="home-ad">
-			<iframe width="100%" height="700" src="https://www.youtube.com/embed/fYhSVx-ys-Q?autoplay=1&controls=0&mute=1" title="[미키 17] 2차 예고편" frameborder="0" allow=" autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<div class="intro"></div>   
+	    	<div class="home-ad1">
+				<iframe width="100%" height="700" src="https://www.youtube.com/embed/fYhSVx-ys-Q?autoplay=1&controls=0&mute=1" title="[미키 17] 2차 예고편" frameborder="0" allow=" autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				<div class="intro"></div>
+			</div>
 			<div class="ad-banner">
 				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
 			</div>
