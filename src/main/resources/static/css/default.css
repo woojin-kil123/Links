@@ -64,7 +64,7 @@ body {
   background-color: var(--main2);
   width: 100%;
   position: sticky;
-  top: 0;
+
   z-index:1;
 }
 .header > div {
@@ -536,7 +536,7 @@ section.section.bg-section {
   line-height: 40px;
 }
 .pagination .page-item.active-page {
-  background-color: var(--main2);
+  background-color: var(--main5);
   color: rgb(0, 0, 0);
 }
 

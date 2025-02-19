@@ -14,6 +14,9 @@
 	
 	 text-align: center;
 	}
+	section{
+	width: 500px;
+	}
 </style>
 </head>
 <body>
@@ -21,11 +24,41 @@
 	<main class="content mypage-container">
 		<section class="section">
 			<div class="page-title">마이페이지</div>
-			<a href="/member/changeinfo">정보수정</a>
-			<a href="/comment/myCommentList">코멘트</a>
-			<a href="/">평가</a>
+			<div class="main">
+			<div th:text="${session.member.memberName}"></div>
+			<div th:text="${session.member.memberId}"></div>
+			<button class="change">정보수정</button>
+			</div>
+		<div>
+			<button class="comm">코멘트</button>
+			<button class="star">평가</button>
+		</div>
+		<div> 
+				<div>찜하기</div>		
+				<div>
+				<div class="movie">영화</div>
+				<div class="book">책</div>
+				</div>
+		</div>
+		
 		</section>
 	</main>
+	<script>$(".change").on("click",function(){
+	location.href="/member/changeinfo";
+	});
+	$(".comm").on("click",function(){
+	location.href="/comment/myCommentList"
+	});
+	$(".star").on("click",function(){
+		location.href="/"
+		});
+	$(".book").on("click",function(){
+		location.href="/"
+		});
+	$(".movie").on("click",function(){
+		location.href="/"
+		});
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
