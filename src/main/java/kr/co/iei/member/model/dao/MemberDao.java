@@ -29,7 +29,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
-		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,normal,0,N)";
+		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,'normal',1,'N')";
 		Object[] params= {m.getMemberName(), m.getMemberId(), m.getMemberPw(),m.getMemberEmail(),m.getMemberPhone()};
 		int result= jdbc.update(query,params);
 		return result;

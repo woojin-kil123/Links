@@ -58,10 +58,17 @@ public class MemberController {
  @PostMapping(value="/join")
  	public String join(Member m, Model model) {
 	 int result = memberService.insertMember(m);
+	 if(result>0) {
 	 model.addAttribute("title","회원 가입 완료");
 	 model.addAttribute("text","회원 가입을 환영합니다");
 	 model.addAttribute("icon","success");
 	 model.addAttribute("loc","/member/loginFrm");
+	 }else {
+		 model.addAttribute("title","회원 가입 실패");
+		 model.addAttribute("text","회원 가입을 실패하였습니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/joinFrm");
+	 }
 	 return "common/msg";
  }
  @GetMapping(value="/checkId")

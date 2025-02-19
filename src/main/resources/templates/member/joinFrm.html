@@ -87,6 +87,8 @@
 					</div>
 					<div class="input-type">
 						<input type="text" name="memberEmail" id="memberEmail">
+						<span>@</span>
+						<input type="checkbox">
 					</div>
 				</div>
 				<div class=" join-button-box">
@@ -118,6 +120,13 @@
 				}
 			});
 		});
+		$("#memberPwRe").on("focusout",function(){
+		    const pwValue = memberPw.value;
+		    const pwReValue = memberPwRe.value;
+		    if(pwValue!==pwReValue){
+		        alert("비밀번호와 비밀번호 확인이 다름니다")
+		    }
+		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
