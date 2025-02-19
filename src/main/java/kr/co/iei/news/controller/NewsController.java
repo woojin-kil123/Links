@@ -17,10 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
 import kr.co.iei.member.model.vo.Member;
-=======
->>>>>>> parent of f8e864b (2.18)
 import kr.co.iei.news.model.service.NewsService;
 import kr.co.iei.news.model.vo.News;
 import kr.co.iei.news.model.vo.NewsFile;
@@ -76,17 +73,14 @@ public class NewsController {
 		model.addAttribute("loc", "/news/list?reqPage=1");
 		return "common/msg";
 	}
-<<<<<<< HEAD
 
 
+	/*
 	@GetMapping(value="/view")
 	public String selectOneNews(int newsNo, String check, Model model, @SessionAttribute(required = false) Member member) {
-=======
-	/*
 	@GetMapping(value="/view")
 	//@SessionAttribute(required = false) Member member
 	public String selectOneNews(int newsNo, String check, Model model ) {
->>>>>>> parent of f8e864b (2.18)
 		int memberNo = 0;
 		if(member != null) {
 			memberNo = member.getMemberNo();
@@ -103,12 +97,9 @@ public class NewsController {
 			return "news/view";
 		}
 	}
-<<<<<<< HEAD
 
-=======
 	*/
 	
->>>>>>> parent of f8e864b (2.18)
 	@GetMapping(value="/filedown")
 	public void filedown(NewsFile newsFile, HttpServletResponse response) {
 		String savepath = root+"/news/";
@@ -167,8 +158,5 @@ public class NewsController {
 		String filepath = fileUtils.upload(savepath, upfile);
 		return filepath;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of f8e864b (2.18)
 }

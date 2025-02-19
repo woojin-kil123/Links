@@ -6,12 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-=======
->>>>>>> parent of f8e864b (2.18)
-
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.Member;
@@ -35,7 +31,6 @@ public class MemberController {
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
-<<<<<<< HEAD
 	 }else if(member.getDel()=="Y"){
 		 model.addAttribute("title","로그인 실페");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
@@ -43,10 +38,6 @@ public class MemberController {
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
 	 }else {
-		 
-=======
-	 }else {
->>>>>>> parent of f8e864b (2.18)
 		 session.setAttribute("member", member);
 		 return "redirect:/";
 	 }
@@ -60,8 +51,6 @@ public class MemberController {
  public String agree() {
 	 return "/member/agree";
  }
-<<<<<<< HEAD
-
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "member/joinFrm";
@@ -139,6 +128,4 @@ public class MemberController {
  public String pwFind() {
 	 return "member/pwfind";
  }
-=======
->>>>>>> parent of f8e864b (2.18)
 }
