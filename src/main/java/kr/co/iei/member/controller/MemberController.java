@@ -124,7 +124,7 @@ public class MemberController {
 	 return "member/find";
  }
  @GetMapping(value="/idFind")
- public String ifFind() {
+ public String idFind() {
 	 return "member/idfind";
  }
  @GetMapping(value="/pwFind")
