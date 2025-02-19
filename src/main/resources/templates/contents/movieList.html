@@ -58,7 +58,7 @@
 	function nowPlaying(){
 		const numPerPage = 4;
 		$.ajax({
-			url : "/api/movie",
+			url : "/api/nowPlaying",
 			type : "get",
 			success : function(data){
 				console.log(data);

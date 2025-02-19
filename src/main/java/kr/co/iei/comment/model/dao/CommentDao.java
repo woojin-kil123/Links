@@ -19,6 +19,13 @@ public class CommentDao {
 	@Autowired
 	private CommentRowMapper commentRowMapper;
 
+	public int insertComment(Comment comment) {
+		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi')";
+		Object[] params = {comment.getMemberId(), comment.getContentNo(), comment.getCommentContent()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+	
 	public List mCommentMemberList() {
 		String query = "select * from comm";
 		List list = jdbc.query(query,commentRowMapper);
@@ -45,6 +52,8 @@ public class CommentDao {
 		String result = jdbc.queryForObject(query,String.class,params);
 		return result;
 	}
+
+	
 	
 }
 
