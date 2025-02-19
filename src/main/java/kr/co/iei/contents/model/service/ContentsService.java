@@ -13,15 +13,14 @@ public class ContentsService {
 	@Autowired
 	private ContentsDao contentsDao;
 	
+	public DbMovie selectMovie(String movieId) {
+		DbMovie movie = contentsDao.selectMovie(movieId);
+		return movie;
+	}
 	@Transactional
 	public int insertMovie(DbMovie movie) {
 		int result = contentsDao.insertMovie(movie);
 		return result;
-	}
-
-	public DbMovie selectMovie(String movieId) {
-		DbMovie movie = contentsDao.selectMovie(movieId);
-		return movie;
 	}
 
 }

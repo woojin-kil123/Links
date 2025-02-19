@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.CommentRowMapper;
-import kr.co.iei.comment.model.vo.CommentRowMapper;
 
 @Repository
 public class CommentDao {
@@ -20,7 +19,7 @@ public class CommentDao {
 	private CommentRowMapper commentRowMapper;
 
 	public int insertComment(Comment comment) {
-		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi')";
+		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi'))";
 		Object[] params = {comment.getMemberId(), comment.getContentNo(), comment.getCommentContent()};
 		int result = jdbc.update(query, params);
 		return result;
@@ -46,8 +45,8 @@ public class CommentDao {
 		return list;
 	}
 
-	public String movieTitle(String partTwo) {
-		String query = "select movie_title from movie where movie_no = ?";
+	public String movieCode(String partTwo) {
+		String query = "select movie_title from movie where movie_id = ?";
 		Object[] params= {partTwo};
 		String result = jdbc.queryForObject(query,String.class,params);
 		return result;
@@ -58,6 +57,26 @@ public class CommentDao {
         String sql = "SELECT COUNT(*) FROM comm";
         return jdbc.queryForObject(sql, Integer.class);
     }
+
+	public int deleteComm(int commentNo) {
+		String query = "delete from comm where comment_no = ?";
+		Object[] params = {commentNo};
+		int result = jdbc.update(query,params);
+ 		
+		return result;
+	}
+
+	public Comment selectOneComm(int commentNo) {
+		String query = "select * from comm where comment_no = ? ";
+		Object[] params = {commentNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Comment c = (Comment)list.get(0);
+			return c;
+		}
+	}
 }
 
 

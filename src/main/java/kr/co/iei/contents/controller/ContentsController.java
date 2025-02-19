@@ -34,9 +34,8 @@ public class ContentsController {
 		return movie;
 	}
 	
-	
 	@ResponseBody
-	@GetMapping("/insertMovie")
+	@PostMapping("/insertMovie")
 	public int insertMovie(DbMovie movie) {
 		int result = contentsService.insertMovie(movie);
 		return result;

@@ -34,7 +34,6 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 		<section class="page-section" id="services">
-		 <a href="/api">영화세부</a>
             <div class="container">
                 <div class="text-left">
                     <h2 class="section-heading text-uppercase text-left">박스오피스 순위</h2>
@@ -61,9 +60,9 @@
 			url : "/api/nowPlaying",
 			type : "get",
 			success : function(data){
-				console.log(data);
+				//console.log(data);
 				let slideSize = data.length%numPerPage==0 ? data.length/numPerPage : (data.length/numPerPage)+1;
-				console.log(slideSize);
+				//console.log(slideSize);
 				for(let j=0; j<slideSize; j++){
 					const slide = $("<div>");
 					slide.addClass("swiper-slide");

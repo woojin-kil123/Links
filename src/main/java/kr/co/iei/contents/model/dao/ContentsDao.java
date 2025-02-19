@@ -1,5 +1,7 @@
 package kr.co.iei.contents.model.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,12 +25,14 @@ public class ContentsDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
-
 	public DbMovie selectMovie(String movieId) {
-		String query = "select * from movie where movie_id=?";
+		String query = "select * from movie where movie_id= ?";
 		Object[] params = {movieId};
-		DbMovie movie = (DbMovie)jdbc.query(query,dbMovieRowMapper,params).get(0);
+		List list = jdbc.query(query,dbMovieRowMapper,params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		DbMovie movie = (DbMovie)list.get(0);
 		return movie;
 	}
-
 }
