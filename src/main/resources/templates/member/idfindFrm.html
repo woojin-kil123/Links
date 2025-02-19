@@ -15,15 +15,40 @@
 	 text-align: center;
 	}
 	
+	.find-wrap .input-wrap{
+		padding : 15px 30px;
+	}
+	.idfind-button-box{
+	padding : 20px 30px;
+	}
+	.idfind-button-box>button{
+		width: 100%
+	}
 	
 </style>
 <body>
-th:block th:include="common/header"></th:block>
+<th:block th:include="common/header"></th:block>
 	<main class="content find-container">
 		<section class="section find-wrap">
 			<div class="page-title">아이디 찾기</div>
 			<form action="/member/idFind" method="get">
-			<button type="submit">아이디 찾기</button>
+			<div class="input-wrap">
+			<div class="input-title">
+				<label for="memberName">이름</label>
+			</div>
+				<div class="input-type">
+						<input type="text" name="memberName" id="memberName">
+				</div>
+				<div class="input-title">
+						<label for="memberPhone">전화번호</label>
+				</div>
+				<div class="input-type">
+					<input type="text" name="memberPhone" id="memberPhone">
+				</div>
+				<div class="idfind-button-box">
+					<button type="submit" class="btn-primary lg">아이디찾기</button>
+				</div>
+				</div>
 			</form>
 		</section>
 	</main>

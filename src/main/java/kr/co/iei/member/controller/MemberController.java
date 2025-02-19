@@ -32,7 +32,7 @@ public class MemberController {
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
 	 }else if(member.getDel()=="Y"){
-		 model.addAttribute("title","로그인 실페");
+		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
@@ -125,15 +125,51 @@ public class MemberController {
 	 return "member/idfindFrm";
  }
  @GetMapping(value="/idFind")
- public String ifFind() {
-	 return "member/idfindFrm";
+ public String idFind(Member m,Model model) {
+	 Member member = memberService.selectOneMember2(m);
+	
+	 if(member== null) {
+		 model.addAttribute("title","아이디 찾기 실패");
+		 model.addAttribute("text","없는 회원입니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else if(member.getDel()=="Y"){
+		 model.addAttribute("title","아이디 찾기 실패");
+		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else {
+		 model.addAttribute("title","아이디 찾기 성공");
+		 model.addAttribute("text",member.getMemberId());
+		 model.addAttribute("icon","success");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }
+	
  }
  @GetMapping(value="/pwFindFrm")
  public String pwFindFrm() {
-	 return "common/msg";
+	 return "member/pwfindFrm";
  }
  @GetMapping(value="/pwFind")
- public String pwFind() {
-	 return "member/pwChange";
+ public String pwFind(Member m,Model model) {
+	 Member member = memberService.selectOneMember3(m);
+	 if(member== null) {
+		 model.addAttribute("title","비밀번호 찾기 실패");
+		 model.addAttribute("text","없는 회원입니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else if(member.getDel()=="Y"){
+		 model.addAttribute("title","비밀번호 찾기 실패");
+		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
+	 }else {
+		 return "/member/changepw";
+	 }
  }
 }

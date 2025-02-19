@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	.find-container{
+	.change-container{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,10 +17,10 @@
 	.find-wrap .input-wrap{
 		padding : 15px 30px;
 	}
-	.pwfind-button-box{
+	.pwchange-button-box{
 	padding : 20px 30px;
 	}
-	.pwfind-button-box>button{
+	.pwchange-button-box>button{
 		width: 100%
 	}
 	
@@ -28,32 +28,25 @@
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
-	<main class="content find-container">
+	<main class="content change-container">
 		<section class="section find-wrap">
-			<div class="page-title">아이디 찾기</div>
-			<form action="/member/pwFind" method="get">
+			<div class="page-title">비밀번호 변경</div>
+			<form action="/member/pwchange" method="get">
 			<div class="input-wrap">
 			<div class="input-title">
-				<label for="memberName">이름</label>
+				<label for="memberPw">새 비밀번호</label>
 			</div>
 				<div class="input-type">
-						<input type="text" name="memberName" id="memberName">
+						<input type="password" name="memberPw" id="memberPw">
 				</div>
 				<div class="input-title">
-				<label for="memberId">아이디</label>
-			</div>
-				<div class="input-type">
-						<input type="text" name="memberId" id="memberId">
-				</div>
-				<div class="input-title">
-						<label for="memberPhone">전화번호</label>
+						<label for="memberPwRe">새 비밀번호확인</label>
 				</div>
 				<div class="input-type">
-					<input type="text" name="memberPhone" id="memberPhone">
+					<input type="password" name="memberPwRe" id="memberPwRe">
 				</div>
-			
-				<div class="pwfind-button-box">
-					<button type="submit" class="btn-primary lg">비밀번호찾기</button>
+				<div class="pwchange-button-box">
+					<button type="submit" class="btn-primary lg">비밀번호 변경</button>
 				</div>
 				</div>
 			</form>
