@@ -153,5 +153,4 @@ public class NewsController {
 		String filepath = fileUtils.upload(savepath, upfile);
 		return filepath;
 	}
-
 }
