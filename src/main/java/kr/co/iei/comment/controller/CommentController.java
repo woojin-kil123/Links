@@ -46,9 +46,7 @@ public class CommentController {
 		return "comment/mCommentList";
 	}
 	
-	public String mCommentList() {
-		return "comment/mCommentList";
-	}
+	
 	
 	@GetMapping(value="/bCommentList")
 	public String bCommentList() {

@@ -175,14 +175,40 @@
 								<span class="material-icons">textsms </span>
 								<span class="count"> 0 </span>
 							</div>	
-							<div class="right-icon">
-								<a class="material-icons" th:href="@{/comment/updateFrm(commentNo=${c.commentNo})}">create </a>								
+							<div class="right-icon">								
+								<span class="material-icons" th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span>								
 							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever </span>
 							     
 							</div>
 						</div>						
 						
 					</div>
+					
+					<!-- 댓글 출력창 -->
+					<div class="inputCommentBox">
+						<form action="/comment/insertComment" method="post">
+							<ul>
+								<li>
+									<span class="material-icons">account_box</span>									
+								</li>  
+								<li>
+									<input type="hidden" name="memberId">
+									<div class="input-item">
+										<textarea name="reCommContent"></textarea>
+									</div>
+								</li>
+								<li>
+									<button type="submit" class="btn-primary">등록</button>
+								</li>
+							</ul>
+						</form>
+					</div>
+				
+				
+				
+				
+				
+			
 					   
 							
 				</div>
