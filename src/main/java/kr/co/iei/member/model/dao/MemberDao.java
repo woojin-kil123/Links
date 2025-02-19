@@ -83,8 +83,8 @@ public class MemberDao {
 	}
 
 	public Member selectOneMember3(Member m) {
-		String query ="select * from member where member_id=? and member_name=? and member_phone=?";
-		Object[] params = {m.getMemberId(),m.getMemberName(),m.getMemberPhone()};
+		String query ="select * from member where member_id=? and member_name=? and member_email=?";
+		Object[] params = {m.getMemberId(),m.getMemberName(),m.getMemberEmail()};
 		List list=jdbc.query(query,memberRowMapper, params);
 		if(list.isEmpty()) {
 			return null;
