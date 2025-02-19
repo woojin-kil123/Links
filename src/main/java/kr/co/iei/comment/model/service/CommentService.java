@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.ui.Model;
+
 
 import kr.co.iei.comment.model.dao.CommentDao;
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.contents.model.vo.DbMovie;
 
 
-import kr.co.iei.comment.model.dao.CommentDao;
-import kr.co.iei.comment.model.vo.Comment;
+
 
 
 @Service

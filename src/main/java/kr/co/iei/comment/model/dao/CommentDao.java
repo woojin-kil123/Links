@@ -19,7 +19,8 @@ public class CommentDao {
 	
 	@Autowired
 	private CommentRowMapper commentRowMapper;
-
+	
+	@Autowired
 	private DbMovieRowMapper dbMovieRowMapper;
 
 	public int insertComment(Comment comment) {
