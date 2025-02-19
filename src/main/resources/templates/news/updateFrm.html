@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>News Update</title>
+<link rel="stylesheet" href="/css/default.css" />
 <style>
 	.news-update-wrap{
 		width: 1000px;
@@ -24,6 +25,12 @@
 		font-size: 10px;
 		cursor: pointer;
 		color: #ff3d00;
+	}
+	.section{
+		margin-top: 50px;
+	}
+	.insert{
+		margin-bottom: 20px;
 	}
 </style>
 </head>
@@ -67,6 +74,10 @@
 					</tr>
 					<tr>
 						<td colspan="2">
+							<div class="insert" style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+							      <input class="form-check-input" type="checkbox" id="newsNotice" name="newsNotice" value="1">
+							      <label class="form-check-label" for="newsNotice">상단에 고정하기</label>
+						    </div>
 							<button type="submit" class="btn-primary lg">수정하기</button>
 							<a class="btn-secondary lg" th:href="@{/news/view(newsNo=${n.newsNo},check)}">취소</a>
 						</td>
@@ -104,7 +115,7 @@
 					const input = $("<input>");
 					input.attr("name","delFileNo");
 					input.attr("type","hidden");
-					input.val(noticeFileNo);
+					input.val(newsFileNo);
 					$(".news-update-frm").append(input);
 					$(obj).parent().remove();
 				}

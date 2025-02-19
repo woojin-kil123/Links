@@ -11,10 +11,14 @@ public class Member {
  private int memberNo;
  private String memberName;
  private String memberId;
- private String memberPW;
+ private String memberPw;
  private String memberEmail;
  private String memberPhone;
  private String memberRole;
- private int memberLevel;
+
+ private int warningLevel;
+
+ private int waringLevel;
+
  private String del;
 }

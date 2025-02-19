@@ -14,4 +14,8 @@ public class Comment {
 	private String commentContent;
 	private int readCount;
 	private String regDate;
+	private String contentTitle;
+	private int likeCount;
+	private int isLike;
+	
 }
