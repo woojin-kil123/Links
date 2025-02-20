@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.contents.model.service.ContentsService;
+import kr.co.iei.contents.model.vo.ContentStar;
 import kr.co.iei.contents.model.vo.DbMovie;
 
 @Controller
@@ -16,7 +17,6 @@ import kr.co.iei.contents.model.vo.DbMovie;
 public class ContentsController {
 	@Autowired
 	private ContentsService contentsService;
-	
 	
 	@GetMapping("/movie")
 	public String movie() {
@@ -40,5 +40,17 @@ public class ContentsController {
 		int result = contentsService.insertMovie(movie);
 		return result;
 	}
+	
+	@ResponseBody
+	@GetMapping("/insertRating")
+	public int insertRating(ContentStar cs) {
+		System.out.println(cs.getContentNo());
+		System.out.println(cs.getMemberId());
+		System.out.println(cs.getStarpoint	());
+		
+		int result = contentsService.insertRating(cs);
+		return result;
+	}
+	
 }
 
