@@ -156,8 +156,8 @@
 							</div>	
 							<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
 							<div class="right-icon">								
-								<span class="material-icons btn btn-primary" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${c.commentNo}]]);">>create </span>								
-							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">
+								<span class="material-icons btn btn-primary" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${c.commentNo}]]);">create </span>							
+							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever</span>
 							</div>
 						</div>						
 					</div>
@@ -201,40 +201,28 @@
                                     <p class="item-intro text-muted">코멘트를 수정하세요</p>
                                     
                                     <div class="inputCommentBox">
-	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
-											<ul>
-												<li>
+												<div>
 													<span class="material-icons">account_box</span>									
-												</li>  
-												<li>
-													<!-- th:text="${c.commentNo}" , th:\text="${c.commentContent}"-->
+												</div>  
+												
+	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
 													<input type="hidden" name="commentNo" >
 													
 													<div class="input-item">
 														<textarea name="commentContent" ></textarea>
 													</div>
-												</li>
-												<li>
+												
 													<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
 	                                       			 <i class="fas fa-times me-1"></i>
 	                                       				 수정
 	                                   				</button>
+										</form>
 	                                   				<button class="btn btn-primary btn-l text-uppercase" data-bs-dismiss="modal" type="button">
 		                                        	<i class="fas fa-times me-1"></i>
 		                                       		 	 취소
 		                                    		</button>
-												</li>
+												
 												<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
-											</ul>
-											
-										</form>
-										
-																																												
-										
-														
-										
-														
-										
                                     </div>
                                 </div>
                             </div>
@@ -278,6 +266,15 @@
 				
 			});
 		}
+		
+		
+		
+		function commUpdate(commentNo){			
+			//사용자가 수정하는 코멘트가 뭔지 우리는 몰라요. 그래서 걔가 클릭한 시점의 commentNo 필요  				
+			$("[name=commentNo]").val(commentNo);
+			
+		}
+		
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>
