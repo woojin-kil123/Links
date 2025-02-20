@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<style>
+	.join-wrap{
+		width: 500px;
+		margin: 0 auto;
+		padding-top : 150px;
+		text-align: center
+	}
+	.join-wrap .input-wrap{
+		padding : 15px 30px;
+	}
+	.join-button-box{
+	padding : 20px 30px;
+	}
+	.join-button-box>button{
+		width: 100%
+	}
+	.valid{
+	color : blue;
+	}
+	.invalid{
+	color : red;
+	}
+	.email-wrap{
+	display: inline-block;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section join-wrap">
+			<div class="page-title">회원가입</div>
+			<form action="/member/checkId" name="checkIdFrm" method="get">
+				<input type="hidden" name="checkId">
+			</form>
+			<form action="/member/join" method="post" autocomplete="off">
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberId">아이디</label>
+						<button type="button" class="btn-primary id-check-btn">중복체크</button>
+					</div>
+					<div class="input-type">
+						<input type="text" name="memberId" id="memberId">
+					</div>
+					<p class="input-msg id-check-msg"></p>
+					</div>
+			
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberName">이름</label>
+					</div>
+					<div class="input-type">
+						<input type="text" name="memberName" id="memberName">
+					</div>
+				</div>
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberPw">비밀번호</label>
+					</div>
+					<div class="input-type">
+						<input type="password" name="memberPw" id="memberPw">
+					</div>
+				</div>
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberPwRe">비밀번호 확인</label>
+					</div>
+					<div class="input-type">
+						<input type="password" name="memberPwRe" id="memberPwRe">
+					</div>
+					<p class="input-msg pw-check-msg"></p>
+				</div>
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberPhone">전화번호</label>
+					</div>
+					<div class="input-type">
+						<input type="text" name="memberPhone" id="memberPhone">
+					</div>
+				</div>
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="memberEmail">이메일</label>
+						
+					</div>
+					<div class="input-type">
+					<div class="email-wrap" id="memberEmail">
+						<input type="text" name="memberEmail1" id="memberEmail1">
+						@
+						<input type="text" name="memberEmail2" id="memberEmail2" value="">
+						<select class="mail">
+							<option>직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="google.com">google.com</option>
+							<option value="daum.net">daum.net</option>
+						</select>
+					</div>
+						<button type="button"class="btn-primary" id="send-btn">인증번호 발송</button>
+					</div>
+					<div id="auth" class="input-item" style="display: none;" >
+					<input type="text" id="auth-code" placeholder="인증번호 입력">
+					<button  type="button" class="btn-primary" id="auth-btn">인증하기</button>
+					<span id="time-zone"></span>
+					<span id="authMsg"></span>
+				</div>
+				<div class=" join-button-box">
+					<button type="submit" class="btn-primary lg">회원가입</button>
+				</div>
+			</form>
+		</section>
+	</main>
+	<script>
+		$(".id-check-btn").on("click",function(){
+			$(".id-check-msg").removeClass("invalid").removeClass("valid");
+			const memberId =$("#memberId").val();
+			$.ajax({
+				url:"/member/ajaxCheckId",
+				type :"get",
+				data : {memberId : memberId},
+				success: function(result){
+					if(result){
+						$(".id-check-msg").text("사용 가능한 아이디 입니다");
+						$(".id-check-msg").addClass("valid");
+					}else{
+						$(".id-check-msg").text("이미 사용중인 아이디 입니다");
+						$(".id-check-msg").addClass("invalid");
+					}
+					
+				},
+				error: function(){
+					
+				}
+			});
+		});
+		$("#memberPwRe").on("focusout",function(){
+			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
+		    const pwValue = memberPw.value;
+		    const pwReValue = memberPwRe.value;
+		    if(pwValue!==pwReValue){
+				$(".pw-check-msg").text("비밀번호가 서로 다릅니다");
+				$(".pw-check-msg").addClass("invalid");
+			}else{
+				$(".pw-check-msg").text("비밀번호가 일치합니다");
+				$(".pw-check-msg").addClass("valid");
+			}
+		});
+		$(".mail").on("change",function(){
+			const mail=$(this).val();
+			$("#memberEmail2").val(mail);
+		});
+			let mailCode = null;
+		$("#send-btn").on("click",function(){
+			const memberEmail1 =$("#memberEmail1").val();
+			const memberEmail2 =$("#memberEmail2").val();
+			const memberEmail= memberEmail1+"@"+memberEmail2
+			$.ajax({
+				url :"/etc/sendCode",
+				type:"get",
+				data : {receiver : memberEmail},
+				success : function(data){
+					 mailCode = data;
+						$("#auth").show();
+						authTime();
+				},
+			error: function(){
+			}
+			});
+		});
+		$("#auth-btn").on("click",function(){
+			const inputCode = $("#auth-code").val();
+			if(inputCode === mailCode){
+				// 인증만료  >> 랜덤코드가 만료  
+				window.clearInterval(intervalId);
+				$("#authMsg").text("인증 완료");
+				$("#authMsg").css("color","green");
+				mailCode = null;
+				$("#email").prop("readonly",true);
+				$("#send-btn").prop("disabled",true);
+				$("#auth-code").prop("readonly",true);
+				$("#auth-btn").prop("disabled",true);
+				$("#time-zone").remove;
+			}else{
+				$("#authMsg").text("인증 번호를 확인해 주세요");
+				$("#authMsg").css("color","red");
+			}
+		});
+		let intervalId =null;
+		function authTime(){
+			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
+			
+			intervalId = window.setInterval(function(){
+				const min =$("#min").text();
+				const sec =$("#sec").text();
+				if(sec === "00"){
+					//읽어온 값이 00초면 분을 내리고
+					if(min === "0" ){
+						// 인증만료  >> 랜덤코드가 만료  
+						window.clearInterval(intervalId);
+						mailCode = null;
+						$("#authMsg").text("인증 만료");
+						$("#authMsg").css("color","red");
+					}else{
+						const newMin = Number(min) -1;
+						$("#min").text(newMin);
+						$("#sec").text(59);
+						
+					}
+						
+				}else{
+					//읽어온 값이 00초가 아니면 초만 내리면 됨
+					const newSec=Number(sec) - 1;
+					if(newSec<10){
+						$("#sec").text("0"+newSec);
+					}else{
+						$("#sec").text(newSec);
+					}
+				}
+			},1000);
+		}
+	</script>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

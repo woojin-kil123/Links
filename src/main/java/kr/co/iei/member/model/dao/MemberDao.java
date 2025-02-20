@@ -35,6 +35,7 @@ public class MemberDao {
 		return result;
 	}
 
+
 	public Member selectOneMember(String checkId) {
 		String query ="select * from member where member_id=?";
 		Object[] params = {checkId};
@@ -101,5 +102,6 @@ public class MemberDao {
 		int result= jdbc.update(query,params);;
 		return result;
 	}
+
 
 }

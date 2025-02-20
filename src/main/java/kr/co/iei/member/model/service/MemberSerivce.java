@@ -20,6 +20,7 @@ public class MemberSerivce {
 		int result =memberDao.insertMember(m);
 		return result;
 	}
+
 	public Member selectOneMember(String checkId) {
 		Member member =memberDao.selectOneMember(checkId);
 		return member;
