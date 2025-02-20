@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="movie-container">
 			<div class="poster">
 				<img class="poster-img" th:src="@{'https://image.tmdb.org/t/p/w342'+${movie.posterPath}}">
 			</div>
@@ -69,6 +69,8 @@
 						</div>
 					</td>
 				</tr>
+			</table>
+			<table class= "table detail-tbl">
 				<tr>
 					<td class="text-box table-bordered" colspan='3'>
 						<div class="fs-6" th:text="${movie.overview}"></div>
