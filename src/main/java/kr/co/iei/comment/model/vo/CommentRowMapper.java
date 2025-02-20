@@ -18,7 +18,8 @@ public class CommentRowMapper implements RowMapper<Comment>{
 		c.setCommentContent(rs.getString("comment_content"));
 		c.setReadCount(rs.getInt("read_count"));
 		c.setRegDate(rs.getString("reg_date"));
-		//c.setContentTitle(rs.getString("Content_title"));
+//		c.setContentTitle(rs.getString("Content_title"));
+//		c.setPosterPath(rs.getString("poster_path"));
 //		c.setLikeCount(rs.getInt("like_count"));
 //		c.setIsLike(rs.getInt("is_like"));
 		

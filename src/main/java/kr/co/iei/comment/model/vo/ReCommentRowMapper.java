@@ -1,10 +1,13 @@
 package kr.co.iei.comment.model.vo;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ReCommentRowMapper implements RowMapper<ReComment>{
 
 	@Override
@@ -18,5 +21,6 @@ public class ReCommentRowMapper implements RowMapper<ReComment>{
 		
 		return rc;
 	}
+	
 
 }
