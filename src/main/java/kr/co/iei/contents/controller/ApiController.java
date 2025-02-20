@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,6 +51,13 @@ public class ApiController {
 		model.addAttribute("movie",movie);
         return "contents/movieDetail";
 	}
+    
+    //검색어를 받아서 searchMovie.html로 이동
+    @GetMapping("/searchMovie")
+    public String searchMovie(@RequestParam(required = false) String query, Model model) {
+        model.addAttribute("query", query);
+        return "search/searchMovie";
+    }
 	/*
 	@ResponseBody
 	@GetMapping("/insertref")

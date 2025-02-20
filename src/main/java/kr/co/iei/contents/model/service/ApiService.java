@@ -102,7 +102,36 @@ public class ApiService {
 		return movie;
 	}
     
-    
+	public List<ApiMovie> searchMovies(String query) throws IOException {
+    	List<ApiMovie> movieList = new ArrayList<>();
+    	
+    	// 요청 URL 구성
+    	String requestUrl = url + "?api_key=" + apiKey + "&query=" + query + "&language=ko-KR&page=1";
+    	System.out.println("TMDB API 요청 URL: " + requestUrl);
+
+    	// TMDB API 요청 및 응답
+    	String result = Jsoup.connect(requestUrl)
+				.ignoreContentType(true)
+				.get()
+				.text();
+    	
+    	// 응답 JSON 파싱
+    	JsonObject object = (JsonObject)JsonParser.parseString(result);
+	 	JsonArray results = object.get("results").getAsJsonArray();
+	 	for (int i = 0; i < results.size(); i++) {
+	 		ApiMovie movie = new ApiMovie();
+	 		JsonObject movieInfo = results.get(i).getAsJsonObject();
+	 		movie.setMovieId(movieInfo.get("id").getAsString());
+	 		movie.setTitle(movieInfo.get("title").getAsString());
+	 		movie.setPosterPath(movieInfo.get("poster_path").getAsString());
+	 		movie.setReleaseDate(movieInfo.get("release_date").getAsString());
+	 		movieList.add(movie);
+	 	}
+
+	 	System.out.println("TMDB API 응답 영화 목록: " + movieList);
+        return movieList;
+    }
+	
     /*
     public String getMovieDetails(int movieId) {
         String url = UriComponentsBuilder.fromHttpUrl(url +movieId+"?language=ko-KR")

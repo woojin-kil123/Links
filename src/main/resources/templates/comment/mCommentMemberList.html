@@ -103,7 +103,6 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	
-	
 	<main class="content-wrap">
 		<section class="section movie-comment-list-wrap">
 			<div class="order-by">
@@ -119,8 +118,6 @@
 									
 				<div class="list-wrap">
 					<div th:each= "c: ${list}" class="comment-box">
-									
-				 
 					
 						<table class="line1">
 							<tr>
@@ -128,7 +125,7 @@
 								<th class="profile" style="width:3%;"></th>
 								<th style="width:2%;"></th>
 								<th th:text= "${c.memberId}" style="width:13%;"></th>
-								<th th:text= "${c.contentNo}" style="width:64%;"></th>								
+								<th th:text= "${c.movieTitle}" style="width:64%;"></th>								
 								<th class="star-wrap" style="width:17%;">
 									<span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
@@ -141,60 +138,83 @@
 						</table>
 						<div class="partner"></div>
 						
-						<div class="movie-content">
-							<!--<div> <a th:href="@{/comment/mCommentList(${c.contentNo})}" class="movie-summary"></a></div> -->
-							<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>							
-										
-							<div th:text="${c.commentContent}" class="movie-comment"></div>
-						</div>
+						<a th:href="@{/comment/mCommentList(contentNo=${c.contentNo})}"> 
+							<div class="movie-content">							
+								<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
+								<div th:text="${c.commentContent}" class="movie-comment"></div>
+							</div>
+						</a>
 						
 						<div class="partner"></div>
-						
 						<div class="btn-opt">
 							<div class="left-icon">
 								<span class="material-icons">thumb_up</span> 
 								<span class="count"> 0 </span>
-								<span class="material-icons">textsms </span>
+								
+								<span class="material-icons ">textsms </span>
 								<span class="count"> 0 </span>
 							</div>	
+							<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
 							<div class="right-icon">								
-								<span class="material-icons" th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span>								
-							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever </span>
+								<span class="material-icons btn btn-primary" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${c.commentNo}]]);">create </span>							
+							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever</span>
 							</div>
 						</div>						
-						
-					</div>
 					
-					<!-- 댓글 출력창 -->
-					<div class="inputCommentBox">
-						<form action="/comment/insertComment" method="post">
-							<ul>
-								<li>
-									<span class="material-icons">account_box</span>									
-								</li>  
-								<li>
-									<input type="hidden" name="memberId">
-									<div class="input-item">
-										<textarea name="reCommContent"></textarea>
-									</div>
-								</li>
-								<li>
-									<button type="submit" class="btn-primary">등록</button>
-								</li>
-							</ul>
-						</form>
-					</div>
-				
-				
-				
-				
-				
-			
-					   
+					
+						
+					</div>														
 							
 				</div>
 			</div>
 		</section>
+	<!-- 모달 -->
+	
+		<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h6 class="text-uppercase">댓글수정</h6>
+                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
+                                    
+                                    <div class="inputCommentBox">
+												<div>
+													<span class="material-icons">account_box</span>									
+												</div>  
+												
+	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
+													<input type="hidden" name="commentNo" >
+													
+													<div class="input-item">
+														<textarea name="commentContent" ></textarea>
+													</div>
+												
+													<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
+	                                       			 <i class="fas fa-times me-1"></i>
+	                                       				 수정
+	                                   				</button>
+										</form>
+	                                   				<button class="btn btn-primary btn-l text-uppercase" data-bs-dismiss="modal" type="button">
+		                                        	<i class="fas fa-times me-1"></i>
+		                                       		 	 취소
+		                                    		</button>
+												
+												<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
 	</main>
 		<script src="/js/sweetalert.min.js"></script>
 	<script>
@@ -228,6 +248,18 @@
 				
 			});
 		}
+		
+		
+		
+		function commUpdate(commentNo){			
+			//사용자가 수정하는 코멘트가 뭔지 우리는 몰라요. 그래서 걔가 클릭한 시점의 commentNo 필요  				
+			$("[name=commentNo]").val(commentNo);
+			
+		};
+		
+		
+		
+		
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>

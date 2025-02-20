@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.comment.model.dao.CommentDao;
 import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.comment.model.vo.ReComment;
 import kr.co.iei.contents.model.vo.DbMovie;
 
 
@@ -38,9 +39,7 @@ public class CommentService {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
 			String contentNo = c.getContentNo().substring(1);
 			DbMovie movie = commentDao.selectMovieInfo(contentNo);
-			movie.getMovieTitle();
-			movie.getPosterPath();
-			
+					
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
 			c.setPosterPath(movie.getPosterPath());		
@@ -67,9 +66,9 @@ public class CommentService {
 			String result = commentDao.movieCode(partTwo);
 			String result2 = commentDao.movieCode(partTwo);
 			
+			return result;
 		}		
-		
-		return partTwo;
+		return null;
 	}
 	
 	// 코멘트 개수 반환
@@ -89,6 +88,23 @@ public class CommentService {
 		Comment c = commentDao.selectOneComm(commentNo);
 		return c;
 	}
+//	n.getNoticeTitle(), n.getNoticeContent(), n.getNoticeNo()
+	@Transactional
+	public int updateComm(Comment c) {
+		int result = commentDao.updateComm(c);
+		
+		return result;
+	}
+
+	
+	@Transactional
+	public int reCommInsert(ReComment rc) {
+		int result = commentDao.reCommInsert(rc);
+		System.out.println(rc);
+		return result;
+	}
+
+	
 
 	
 }

@@ -16,6 +16,7 @@ public class Comment {
 	private String regDate;
 	private String contentTitle;
 	private String posterPath;
+	private String movieTitle;
 	private int likeCount;
 	private int isLike;
 }

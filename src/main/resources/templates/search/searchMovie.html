@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>검색 결과</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css">
+    <style>
+        body {
+            padding-top: 80px;
+        }
+        .container-fluid{
+        	height: 800px;
+        }
+        .result-wrap,
+        .result-keyword-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+        }
+        .result-keyword-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 30px;
+        }
+        /* ✅ 검색어 주황색 적용 */
+        .text-orange {
+            color: #FF8000;
+        }
+        .movie-slider {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        /* ✅ .slick-slide가 아닌 .movie-card에 여백 적용 */
+        .movie-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s;
+            padding: 10px;
+            height: 450px;
+            width: calc(100% - 30px);  /* ✅ 너비에서 좌우 여백 제외 */
+            margin: 0 15px;  /* ✅ 좌우 여백 30px 적용 */
+            box-sizing: border-box;
+        }
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+        .movie-card h6.card-title {
+            min-height: 48px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .text-muted {
+ 			margin-bottom: 0;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        .slick-prev,
+        .slick-next {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            color: #fff;
+            z-index: 1000;
+        }
+        .slick-prev:hover,
+        .slick-next:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+    <th:block th:include="common/header"></th:block>
+    <div class="container-fluid mt-3">
+        <!-- 검색 결과 제목 -->
+        <!-- 검색어 출력 -->
+        <div class="result-wrap text-start mt-4">
+            <span class="fw-bold" style="font-size: 30px; font-family: ns-r;">"</span>
+            <span id="searchKeyword" class="fw-bold text-orange" style="font-size: 30px; font-family: ns-r;"></span>
+         	<span class="fw-bold" style="font-size: 30px; font-family: ns-r;">" 의 검색 결과</span>
+        </div>
+        <!-- 검색어 저장소 -->
+        <div class="result-keyword-wrap mt-2">
+            <input type="hidden" id="queryValue" th:value="${query}">
+        </div>
+        
+        <!-- 슬라이드 형식의 영화 리스트 -->
+        <div class="mt-4">
+            <div class="movie-slider" id="movieSlider">
+                <!-- 동적으로 카드가 추가됨 -->
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="common/footer"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var query = $("#queryValue").val().trim();
+        //console.log("검색어:", query);
+
+        if (!query || query === "undefined") {
+            $("#searchKeyword").text("검색어가 없습니다.");
+            return;
+        }
+
+        $("#searchKeyword").text(query);
+
+        $.ajax({
+            url: window.location.origin + "/api/movie/search",
+            type: "GET",
+            data: { query: query },
+            success: function(response) {
+                //console.log("TMDB API 응답:", response);
+
+                var movies = response.results;
+                var slider = $("#movieSlider");
+                slider.empty();
+
+                if (!movies || movies.length === 0) {
+                    slider.append("<p class='text-danger'>검색 결과가 없습니다.</p>");
+                    return;
+                }
+
+                $.each(movies, function(index, movie) {
+                    var imageUrl = movie.poster_path 
+                        ? "https://image.tmdb.org/t/p/w500" + movie.poster_path 
+                        : window.location.origin + "/images/no-image.png";
+                    
+                    const moviecard = $("<div>");
+                    moviecard.addClass("movie-card");
+                    
+                    var card = `
+                            <img src="${imageUrl}" alt="${movie.title}">
+                            <div class="p-3">
+                                <h6 class="card-title">${movie.title}</h6>
+                                <p class="text-muted">개봉일: ${movie.release_date}</p>
+                            </div>
+                        `;
+                    moviecard.append(card);
+                    slider.append(moviecard);
+                    
+                    var movieId = movie.id
+                    moviecard.on('click',function(){
+                    	location.href = "/api/movieDetail?movieId="+movieId;
+                    });
+                });
+                                /*<p class="text-warning">★ ${movie.vote_average}</p>*/
+
+                // ✅ Slick.js 초기화
+                slider.slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                    arrows: true,
+                    dots: true,
+                    infinite: true,
+                    speed: 500,
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX 요청 오류:", error);
+                alert("영화 검색 중 오류 발생");
+            }
+        });
+    });
+    </script>
+</body>
+</html>

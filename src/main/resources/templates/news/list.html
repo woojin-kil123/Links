@@ -70,7 +70,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="list-footer" style="display: flex; justify-content: flex-end;">
+			<div class="list-footer" style="display: flex; justify-content: flex-end; margin-top: 30px;">
 				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
 			<div id="pageNavi" th:utext="${pageNavi}"></div>

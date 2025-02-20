@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class DbMovie {
 	private String movieId;
 	private String movieTitle;
-	private String  movieAvgPoint;
+	private String movieAvgPoint;
 	private String moviePlatform;
 	private int linkClick;
 	private String posterPath;
