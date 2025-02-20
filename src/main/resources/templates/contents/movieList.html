@@ -75,7 +75,7 @@
 						//a.attr("href","/api/movieDetail?movieId="+data[index].movieId);
 						const movieBox = $("<div>");
 						movieBox.addClass("movie-box").addClass("col-md-3")
-						movieBox.on("click",function(){
+						movieBox.on("click",function(){							
 							location.href= "/api/movieDetail?movieId="+data[index].movieId;
 						});
 						const posterDiv = $("<div>");

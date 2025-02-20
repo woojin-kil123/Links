@@ -24,6 +24,10 @@
 	    background-color: black;
 	    height: 80px;
 	}
+	.container{
+		display: flex;
+		justify-content: center;
+	}
 	.nav-item .material-icons {
 	    font-size: 30px;
 	    color: white; /* 아이콘 색상을 명확하게 */
@@ -44,6 +48,9 @@
 	.search-input {
 	    height: 40px; /* 버튼과 같은 높이 */
 	    font-size: 16px;
+	}
+	.container{
+		justify-content: center;
 	}
 	/* 버튼 스타일 */
 	.search-btn {
@@ -206,11 +213,6 @@
 	    font-size: 20px;
 	    font-weight: bold;
 	}
-	.rowft span:nth-child(2), 
-	.rowft span:nth-child(3), 
-	.rowft span:nth-child(4) {
-	    color: FF9D23; /* 글씨색을 빨간색으로 변경 */
-	}
 </style>  
 </head>
 <body>
@@ -255,10 +257,10 @@
 
                 <!-- 검색창 -->
                 <li class="nav-item d-flex">
-                    <form action="#" method="get" class="d-flex gap-2">
-				        <input type="text" class="form-control search-input" placeholder="영화, 책, #해시태그 검색">
+                    <form action="/search/searchMovie" method="get" class="d-flex gap-2" >
+				        <input type="text" name="query" class="form-control search-input searchQuery" placeholder="영화, 책, #해시태그 검색">
 				        <button type="submit" class="search-btn">
-				            <span class="material-icons">search</span>
+				            <span class="material-icons searchBtn">search</span>
 				        </button>
 				    </form>
                 </li>
@@ -312,12 +314,6 @@
            }
        });
    });
-	
-   window.setInterval(function(){
-		$.ajax({
-			url : "컨트롤러"
-			
-		})
-	},10000);
+   
 </script>
 </body>
