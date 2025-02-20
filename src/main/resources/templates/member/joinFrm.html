@@ -25,7 +25,9 @@
 	.invalid{
 	color : red;
 	}
-	
+	.email-wrap{
+	display: inline-block;
+	}
 </style>
 </head>
 <body>
@@ -87,9 +89,17 @@
 						
 					</div>
 					<div class="input-type">
-						<input type="text" name="memberEmail" id="memberEmail">
+					<div class="email-wrap">
+						<input type="text" name="memberEmail1" id="memberEmail1">
 						<span>@</span>
-						<input type="text" name="memberEmail" id="memberEmail">
+						<input type="text" name="memberEmail2" id="memberEmail2">
+						<select class="mail">
+							<option>직접입력</option>
+							<option value="naver">naver.com</option>
+							<option value="google">googl.com</option>
+							<option value="daum">daum.net</option>
+						</select>
+					</div>
 						<button type="button">인증번호 발송</button>
 					</div>
 					<div class="input-title">
@@ -139,6 +149,10 @@
 				$(".pw-check-msg").text("비밀번호가 일치합니다");
 				$(".pw-check-msg").addClass("valid");
 			}
+		})
+		$(".mail").on("change",function(){
+			const madil=mail.value();
+			$("#memberEmail2").text(mail);	
 		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
