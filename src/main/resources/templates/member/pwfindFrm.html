@@ -80,6 +80,22 @@
 		const mail=$(this).val();
 		$("#memberEmail2").val(mail);
 	})
+	$("#send-btn").on("click",function(){
+			const memberEmail1 =$("#memberEmail1").val();
+			const memberEmail2 =$("#memberEmail2").val();
+			const memberEmail= memberEmail1+"@"+memberEmail2
+			$.ajax({
+				url :"/etc/sendCode",
+				type:"get",
+				data : {memberEmail : memberEmail},
+				success : function(){
+					
+				},
+			error: function(){
+				
+			}
+			})
+		})
 	</script>
 <th:block th:include="common/footer"></th:block>
 </body>
