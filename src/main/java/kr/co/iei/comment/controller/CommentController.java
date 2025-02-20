@@ -52,7 +52,7 @@ public class CommentController {
 		
 		
 		model.addAttribute("list", list);
-		model.addAttribute("movieTitle",movieTitle);
+		
 		
 		return "comment/mCommentList";
 	}
