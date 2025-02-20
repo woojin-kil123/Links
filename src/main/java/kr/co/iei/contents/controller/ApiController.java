@@ -37,7 +37,6 @@ public class ApiController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(movieList.toString());
 			return movieList;
 	}
     @GetMapping(value="/movieDetail")
@@ -50,7 +49,6 @@ public class ApiController {
 			e.printStackTrace();
 		}
 		model.addAttribute("movie",movie);
-		System.out.println(movie);
         return "contents/movieDetail";
 	}
     

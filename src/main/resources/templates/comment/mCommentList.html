@@ -188,7 +188,7 @@
 						<div class="btn-opt">
 							<span class="material-icons">thumb_up</span>
 							<span class="count"> 0 </span>
-							<span class="material-icons">textsms </span>
+							<span class="material-icons ">textsms </span>
 							<span class="count"> 0 </span>	
 						</div>
 						
@@ -198,12 +198,35 @@
 		                        <span>좋아요</span>
 		                        <span>0</span>
 		                    </div>
-		                    <div class="choice-comment">
-		                    	<span class="material-icons">textsms </span>
+		                    <div class="choice-comment" >
+		                    	<span class="material-icons windowShow">textsms </span>
 		                        <span>댓글</span>
 		                        <span>0</span>
 		                    </div>
 	                	</div>
+	                	<!-- 댓글 출력창 -->
+						
+						<div th:each= "rc: ${list}" class="inputCommentBox inputBox">
+						
+							<form action="/comment/reComm" method="post">
+								<div>
+									<div>
+										<span class="material-icons">subdirectory_arrow_right</span>									
+									</div>  
+									<div>
+										<input type="hidden" name="memberId" th:text= "${rc.memberId}" >
+										<input type="hidden" name="commentNo" th:text= "${rc.commentNo}" >
+										
+										<div class="input-item">
+											<textarea name="reCommentContent"></textarea>
+										</div>
+									</div>
+									<div>
+										<button type="submit" class="btn-primary">등록</button>
+									</div>
+								</div>
+							</form>
+						</div>
 							
 					</div>
 				</div>
@@ -211,31 +234,26 @@
 		</section>
 	</main>
 	
+	
+	
+	<script>
+		$(".windowShow").on("click",function(){
+			const index = $(".windowShow").index(this); 
+			if($(this).text() === "▼"){
+				$(this).text("▲");	
+			}else{
+				$(this).text("▼");
+			}
+			
+			$(".inputBox").eq(index).slideToggle();
+		});
+	
+	</script>
+	
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
 
 
 
-<!-- 
-			<div class="list-tbl-wrap">
-				<table class="tbl tbl_hover">
-					<tr>
-						<th style="width:10%;">일단영화제목</th>
-						<th style="width:45%;">유저</th>
-						<th style="width:15%;">내용</th>
-						<th style="width:20%;">카운트</th>
-						<th style="width:10%;">작성일</th>
-					</tr>
-					<tr>
-					<tr th:each= "c: ${list}">
-						<td th:text= "${c.contentNo}"> </td>
-						<td th:text= "${c.memberId}"></td>
-						<td th:text= "${c.commentContent}"> </td>						
-						<td th:text= "${c.readCount}"> </td>
-						<td th:text= "${c.regDate}"> </td>
-					</tr>
-					
-				</table>			
-			</div>
--->
+

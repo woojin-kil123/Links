@@ -29,6 +29,7 @@ public class ApiService {
 	
     public List nowPlayingMovies() throws IOException {
     	List movieList = new ArrayList<ApiMovie>();
+    	
     	String query = "now_playing?language=ko-KR&page=1&region=KR";
     	String result = Jsoup.connect(url+query)
 				.data("api_key",apiKey)
@@ -64,6 +65,8 @@ public class ApiService {
 	 	}
         return movieList;
     }
+    
+    //"popular?language=ko-kr&page=1&region=kr"
 	public ApiMovie movieDetail(int movieId) throws IOException {
 		ApiMovie movie = new ApiMovie();
 		

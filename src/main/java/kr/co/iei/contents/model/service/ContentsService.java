@@ -26,6 +26,25 @@ public class ContentsService {
 	@Transactional
 	public int insertRating(ContentStar cs) {
 		int result = contentsDao.insertRating(cs);
+		int avgStar = contentsDao.selectAvgPoint(cs.getContentNo());
+		String movieId = cs.getContentNo().substring(1);
+		result += contentsDao.updateMovieStar(avgStar,movieId);
+		return result;
+	}
+	public int selectMemberStar(ContentStar cs) {
+		int result = contentsDao.selectMemberStar(cs);
+		return result;
+	}
+	public int insertContentLike(ContentStar cs) {
+		int result = contentsDao.insertContentLike(cs);
+		return result;
+	}
+	public int deleteContentLike(ContentStar cs) {
+		int result = contentsDao.deleteContentLike(cs);
+		return result;
+	}
+	public int selectMemberLike(ContentStar cs) {
+		int result = contentsDao.selectMemberLike(cs);
 		return result;
 	}
 
