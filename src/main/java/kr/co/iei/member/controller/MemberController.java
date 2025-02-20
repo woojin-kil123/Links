@@ -141,7 +141,7 @@ public class MemberController {
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/find");
 		 return "common/msg";
-	 }else if(member.getDel()=="Y"){
+	 }else if(member.getDel().equals("Y")){
 		 model.addAttribute("title","아이디 찾기 실패");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
