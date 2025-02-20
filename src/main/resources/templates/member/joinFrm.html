@@ -91,23 +91,25 @@
 					<div class="input-type">
 					<div class="email-wrap">
 						<input type="text" name="memberEmail1" id="memberEmail1">
-						<span>@</span>
-						<input type="text" name="memberEmail2" id="memberEmail2">
+						@
+						<input type="text" name="memberEmail2" id="memberEmail2" value="">
 						<select class="mail">
 							<option>직접입력</option>
-							<option value="naver">naver.com</option>
-							<option value="google">googl.com</option>
-							<option value="daum">daum.net</option>
+							<option value="naver.com">naver.com</option>
+							<option value="google.com">google.com</option>
+							<option value="daum.net">daum.net</option>
 						</select>
 					</div>
-						<button type="button">인증번호 발송</button>
+						<button type="button"class="btn-primary" id="send-btn">인증번호 발송</button>
 					</div>
 					<div class="input-title">
 						<label for="Number">인증번호</label>
+						
 				</div>
 				<div class="input-type">
 					<input type="text" name="Number" id="Number">
 				</div>
+				<button class="btn-primary" id="auth-btn">인증하기</button>
 				</div>
 				<div class=" join-button-box">
 					<button type="submit" class="btn-primary lg">회원가입</button>
@@ -151,8 +153,8 @@
 			}
 		})
 		$(".mail").on("change",function(){
-			const madil=mail.value();
-			$("#memberEmail2").text(mail);	
+			const mail=$(this).val();
+			$("#memberEmail2").val(mail);
 		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
