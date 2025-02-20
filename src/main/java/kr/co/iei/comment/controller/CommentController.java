@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.comment.model.vo.ReComment;
+import kr.co.iei.contents.model.vo.DbMovie;
 
 import org.springframework.stereotype.Controller;
 
@@ -46,12 +48,13 @@ public class CommentController {
 	
 	@GetMapping(value="/mCommentList")
 	public String mCommentList(String contentNo, Model model) {
-		
+		DbMovie m = new DbMovie();
 		List list = commentService.mCommentList(contentNo);
 		String movieTitle = commentService.selectMovieTitle(contentNo);
-		
+		 
 		
 		model.addAttribute("list", list);
+		model.addAttribute("movieTitle", movieTitle);
 		
 		
 		return "comment/mCommentList";
@@ -101,6 +104,12 @@ public class CommentController {
 	@PostMapping(value="/update")
 	public String updateComm(Comment c) {
 		int result = commentService.updateComm(c);
+		return "redirect:/comment/mCommentMemberList";
+	}
+	
+	@PostMapping(value="/reComm")
+	public String reCommInsert(ReComment rc) {
+		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/mCommentMemberList";
 	}
 }

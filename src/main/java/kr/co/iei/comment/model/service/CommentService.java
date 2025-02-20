@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.comment.model.dao.CommentDao;
 import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.comment.model.vo.ReComment;
 import kr.co.iei.contents.model.vo.DbMovie;
 
 
@@ -65,9 +66,9 @@ public class CommentService {
 			String result = commentDao.movieCode(partTwo);
 			String result2 = commentDao.movieCode(partTwo);
 			
+			return result;
 		}		
-		
-		return partTwo;
+		return null;
 	}
 	
 	// 코멘트 개수 반환
@@ -92,6 +93,14 @@ public class CommentService {
 	public int updateComm(Comment c) {
 		int result = commentDao.updateComm(c);
 		
+		return result;
+	}
+
+	
+	@Transactional
+	public int reCommInsert(ReComment rc) {
+		int result = commentDao.reCommInsert(rc);
+		System.out.println(rc);
 		return result;
 	}
 

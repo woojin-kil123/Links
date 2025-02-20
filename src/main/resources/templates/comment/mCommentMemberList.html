@@ -125,7 +125,7 @@
 								<th class="profile" style="width:3%;"></th>
 								<th style="width:2%;"></th>
 								<th th:text= "${c.memberId}" style="width:13%;"></th>
-								<th th:text= "${c.contentNo}" style="width:64%;"></th>								
+								<th th:text= "${c.movieTitle}" style="width:64%;"></th>								
 								<th class="star-wrap" style="width:17%;">
 									<span class="material-symbols-outlined"> star_rate</span>
 							        <span class="material-symbols-outlined"> star_rate</span>
@@ -146,12 +146,12 @@
 						</a>
 						
 						<div class="partner"></div>
-						
 						<div class="btn-opt">
 							<div class="left-icon">
 								<span class="material-icons">thumb_up</span> 
 								<span class="count"> 0 </span>
-								<span class="material-icons">textsms </span>
+								
+								<span class="material-icons ">textsms </span>
 								<span class="count"> 0 </span>
 							</div>	
 							<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
@@ -160,28 +160,10 @@
 							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever</span>
 							</div>
 						</div>						
-					</div>
 					
-					<!-- 댓글 출력창 -->
-					<div class="inputCommentBox">
-						<form action="/comment/insertComment" method="post">
-							<ul>
-								<li>
-									<span class="material-icons">account_box</span>									
-								</li>  
-								<li>
-									<input type="hidden" name="memberId">
-									<div class="input-item">
-										<textarea name="reCommContent"></textarea>
-									</div>
-								</li>
-								<li>
-									<button type="submit" class="btn-primary">등록</button>
-								</li>
-							</ul>
-						</form>
-					</div>
-																				
+					
+						
+					</div>														
 							
 				</div>
 			</div>
@@ -273,7 +255,10 @@
 			//사용자가 수정하는 코멘트가 뭔지 우리는 몰라요. 그래서 걔가 클릭한 시점의 commentNo 필요  				
 			$("[name=commentNo]").val(commentNo);
 			
-		}
+		};
+		
+		
+		
 		
 	</script>
 	
