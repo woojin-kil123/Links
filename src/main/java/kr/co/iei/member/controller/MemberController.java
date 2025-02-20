@@ -176,7 +176,23 @@ public class MemberController {
 		 model.addAttribute("loc","/member/find");
 		 return "common/msg";
 	 }else {
+		 model.addAttribute("memberId", member.getMemberId());
 		 return "/member/changepw";
+	 }
+	
+ }
+ @GetMapping(value="/pwchange")
+ public String pwChange(Member m,Model model) {
+	 int result=memberService.pwChange(m);
+	 if(result>0) {
+		 
+		 return "/member/login";
+	 }else {
+		 model.addAttribute("title","비밀번호 변경에 실패했습니다");
+		 model.addAttribute("text","오류");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/find");
+		 return "common/msg";
 	 }
  }
 }

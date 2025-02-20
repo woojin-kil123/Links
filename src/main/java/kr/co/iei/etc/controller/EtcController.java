@@ -64,6 +64,7 @@ public class EtcController {
 								+"</span>]"
 								+"입니다.</h3>";
 		emailSender.sendMail(emailTitle, receiver, emailContent);
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 }

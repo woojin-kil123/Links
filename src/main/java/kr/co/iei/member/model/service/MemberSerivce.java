@@ -46,6 +46,11 @@ public class MemberSerivce {
 		Member member= memberDao.selectOneMember3(m);
 		return member;
 	}
+	@Transactional
+	public int pwChange(Member m) {
+		int result= memberDao.pwChange(m);
+		return result;
+	}
 
 
 }

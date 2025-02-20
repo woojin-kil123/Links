@@ -26,7 +26,7 @@ private JavaMailSender sender;
 			//메일 전송시간
 			helper.setSentDate(new Date());
 			//보내는사람
-			helper.setFrom(new InternetAddress("morikawamiho97","숲속강가"));
+			helper.setFrom(new InternetAddress("2d2v2l22","links"));
 			//받는사람
 			helper.setTo(receiver);
 			//제목
