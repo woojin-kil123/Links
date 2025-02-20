@@ -4,45 +4,70 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	
 	.mypage-container{
-	display: flex;
+
 	justify-content: center;
 	align-items: center;
 	}
-.page-title{
+	.main{
 	 padding-bottom : 40px;
-	
+	}
+	.page-title{
+	width: 500px;
 	 text-align: center;
 	}
 	section{
-	width: 500px;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 400px;
+		
+	}
+	.chagne{
+	display: inline-block;
+	padding-left : 200px;
+	}
+	.member{
+	padding-left: 500px; 
+	}
+	.comment{
+	padding-left: 500px; 
+	}
+	.refer{
+	padding-left: 500px; 
 	}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="content mypage-container">
-		<section class="section">
-			<div class="page-title">마이페이지</div>
+		<section class="page-section">
 			<div class="main">
+			<div class="page-title">마이페이지</div>
+			</div>
+		</section>
+			<div class="member">
 			<div th:text="${session.member.memberName}"></div>
 			<div th:text="${session.member.memberId}"></div>
-			<button class="change">정보수정</button>
+			<div class="change"><span class="material-icons">settings</span></div>
 			</div>
-		<div>
-			<button class="comm">코멘트</button>
-			<button class="star">평가</button>
-		</div>
-		<div> 
+			<div class="comment">
+			<div class="comm">코멘트</div>
+			<div class="star">평가</div>
+			</div>
+				<div class="refer">
 				<div>찜하기</div>		
-				<div>
 				<div class="movie">영화</div>
 				<div class="book">책</div>
-				</div>
+				</div>`	
+		<div>
 		</div>
-		
-		</section>
-	</main>
+		</main>
+			
+	
+			
+	
 	<script>$(".change").on("click",function(){
 	location.href="/member/changeinfo";
 	});
@@ -56,7 +81,7 @@
 		location.href="/"
 		});
 	$(".movie").on("click",function(){
-		location.href="/"
+			location.href="/contents/movieList";
 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
