@@ -9,13 +9,22 @@
 	justify-content: center;
 	align-items: center;
 	}
+	
 .page-title{
 	 padding-bottom : 40px;
 	
 	 text-align: center;
 	}
 	section{
-	width: 500px;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 1500px;
+		height: 400px;
+		
+	}
+	.chagne{
+	padding-left : 200px;
 	}
 </style>
 </head>
@@ -27,13 +36,14 @@
 			<div class="page-title">마이페이지</div>
 			</div>
 		</section>
+		</main>
 			
 			<section class="section">
 			<div>
 			<div th:text="${session.member.memberName}"></div>
 			<div th:text="${session.member.memberId}"></div>
 			</div>
-			<button class="change">정보수정</button>
+			<div class="change"><span class="material-icons">settings</span></div>
 			<div class="">
 			<div class="comm">코멘트</div>
 			<div class="star">평가</div>
@@ -51,9 +61,7 @@
 		</section>
 		</div>
 			
-		
 	
-	</main>
 	<script>$(".change").on("click",function(){
 	location.href="/member/changeinfo";
 	});
@@ -64,7 +72,9 @@
 		location.href="/"
 		});
 	$(".book").on("click",function(){
-		location.href="/"
+		$.ajax{
+			
+		}
 		});
 	$(".movie").on("click",function(){
 		location.href="/"

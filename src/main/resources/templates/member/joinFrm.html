@@ -89,7 +89,7 @@
 						
 					</div>
 					<div class="input-type">
-					<div class="email-wrap">
+					<div class="email-wrap" id="memberEmail">
 						<input type="text" name="memberEmail1" id="memberEmail1">
 						@
 						<input type="text" name="memberEmail2" id="memberEmail2" value="">
@@ -110,6 +110,8 @@
 					<input type="text" name="Number" id="Number">
 				</div>
 				<button class="btn-primary" id="auth-btn">인증하기</button>
+				<span id="time-zone"></span>
+					<span id="authMsg"></span>
 				</div>
 				<div class=" join-button-box">
 					<button type="submit" class="btn-primary lg">회원가입</button>
@@ -156,6 +158,7 @@
 			const mail=$(this).val();
 			$("#memberEmail2").val(mail);
 		})
+	
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
