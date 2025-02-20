@@ -38,9 +38,7 @@ public class CommentService {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
 			String contentNo = c.getContentNo().substring(1);
 			DbMovie movie = commentDao.selectMovieInfo(contentNo);
-			movie.getMovieTitle();
-			movie.getPosterPath();
-			
+					
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
 			c.setPosterPath(movie.getPosterPath());		
@@ -89,6 +87,15 @@ public class CommentService {
 		Comment c = commentDao.selectOneComm(commentNo);
 		return c;
 	}
+//	n.getNoticeTitle(), n.getNoticeContent(), n.getNoticeNo()
+	@Transactional
+	public int updateComm(Comment c) {
+		int result = commentDao.updateComm(c);
+		
+		return result;
+	}
+
+	
 
 	
 }

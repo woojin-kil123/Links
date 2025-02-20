@@ -103,7 +103,6 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	
-	
 	<main class="content-wrap">
 		<section class="section movie-comment-list-wrap">
 			<div class="order-by">
@@ -119,8 +118,6 @@
 									
 				<div class="list-wrap">
 					<div th:each= "c: ${list}" class="comment-box">
-									
-				 
 					
 						<table class="line1">
 							<tr>
@@ -141,12 +138,12 @@
 						</table>
 						<div class="partner"></div>
 						
-						<div class="movie-content">
-							<!--<div> <a th:href="@{/comment/mCommentList(${c.contentNo})}" class="movie-summary"></a></div> -->
-							<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>							
-										
-							<div th:text="${c.commentContent}" class="movie-comment"></div>
-						</div>
+						<a th:href="@{/comment/mCommentList(contentNo=${c.contentNo})}"> 
+							<div class="movie-content">							
+								<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
+								<div th:text="${c.commentContent}" class="movie-comment"></div>
+							</div>
+						</a>
 						
 						<div class="partner"></div>
 						
@@ -157,12 +154,12 @@
 								<span class="material-icons">textsms </span>
 								<span class="count"> 0 </span>
 							</div>	
+							<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
 							<div class="right-icon">								
-								<span class="material-icons" th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span>								
-							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever </span>
+								<span class="material-icons btn btn-primary" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${c.commentNo}]]);">>create </span>								
+							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">
 							</div>
 						</div>						
-						
 					</div>
 					
 					<!-- 댓글 출력창 -->
@@ -184,17 +181,70 @@
 							</ul>
 						</form>
 					</div>
-				
-				
-				
-				
-				
-			
-					   
+																				
 							
 				</div>
 			</div>
 		</section>
+	<!-- 모달 -->
+	
+		<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h6 class="text-uppercase">댓글수정</h6>
+                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
+                                    
+                                    <div class="inputCommentBox">
+	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
+											<ul>
+												<li>
+													<span class="material-icons">account_box</span>									
+												</li>  
+												<li>
+													<!-- th:text="${c.commentNo}" , th:\text="${c.commentContent}"-->
+													<input type="hidden" name="commentNo" >
+													
+													<div class="input-item">
+														<textarea name="commentContent" ></textarea>
+													</div>
+												</li>
+												<li>
+													<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
+	                                       			 <i class="fas fa-times me-1"></i>
+	                                       				 수정
+	                                   				</button>
+	                                   				<button class="btn btn-primary btn-l text-uppercase" data-bs-dismiss="modal" type="button">
+		                                        	<i class="fas fa-times me-1"></i>
+		                                       		 	 취소
+		                                    		</button>
+												</li>
+												<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
+											</ul>
+											
+										</form>
+										
+																																												
+										
+														
+										
+														
+										
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
 	</main>
 		<script src="/js/sweetalert.min.js"></script>
 	<script>

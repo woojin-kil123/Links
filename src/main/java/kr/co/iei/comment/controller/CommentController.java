@@ -98,4 +98,9 @@ public class CommentController {
 		return "comment/updateFrm";
 	}
 	
+	@PostMapping(value="/update")
+	public String updateComm(Comment c) {
+		int result = commentService.updateComm(c);
+		return "redirect:/comment/mCommentMemberList";
+	}
 }

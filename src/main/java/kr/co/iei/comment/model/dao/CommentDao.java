@@ -94,6 +94,13 @@ public class CommentDao {
 		DbMovie movie = list.get(0);
 		return movie;
 	}
+
+	public int updateComm(Comment c) {
+		String query = " update comm set comment_content = ? where comment_no = ?";
+		Object[] params = {c.getCommentContent(),c.getCommentNo()};
+		int result = jdbc.update(query,params);
+		return result;
+	}
 	
 }
 
