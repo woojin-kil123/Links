@@ -20,6 +20,7 @@ public class MemberSerivce {
 		int result =memberDao.insertMember(m);
 		return result;
 	}
+
 	public Member selectOneMember(String checkId) {
 		Member member =memberDao.selectOneMember(checkId);
 		return member;
@@ -45,6 +46,11 @@ public class MemberSerivce {
 	public Member selectOneMember3(Member m) {
 		Member member= memberDao.selectOneMember3(m);
 		return member;
+	}
+	@Transactional
+	public int pwChange(Member m) {
+		int result= memberDao.pwChange(m);
+		return result;
 	}
 
 

@@ -35,6 +35,7 @@ public class MemberDao {
 		return result;
 	}
 
+
 	public Member selectOneMember(String checkId) {
 		String query ="select * from member where member_id=?";
 		Object[] params = {checkId};
@@ -83,8 +84,8 @@ public class MemberDao {
 	}
 
 	public Member selectOneMember3(Member m) {
-		String query ="select * from member where member_id=? and member_name=? and member_email=?";
-		Object[] params = {m.getMemberId(),m.getMemberName(),m.getMemberEmail()};
+		String query ="select * from member where member_id=? and member_name=? ";
+		Object[] params = {m.getMemberId(),m.getMemberName()};
 		List list=jdbc.query(query,memberRowMapper, params);
 		if(list.isEmpty()) {
 			return null;
@@ -94,5 +95,13 @@ public class MemberDao {
 		}
 	
 	}
+
+	public int pwChange(Member m) {
+		String query ="update member set member_pw =? where member_id=?";
+		Object[] params = {m.getMemberPw(),m.getMemberId()};
+		int result= jdbc.update(query,params);;
+		return result;
+	}
+
 
 }

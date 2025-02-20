@@ -31,7 +31,15 @@
 	.detail-tbl{
 		margin-left : 20px;
 	}
-	.modal-dialog>.modal-content{
+	
+	.modal>.modal-dialog>.rating-modal{
+		height : 400px;
+		width : 400px;
+		display : flex;
+		align-items: center;
+	}
+	
+	.modal>.modal-dialog>.write-modal{
 		height : 900px;
 		width : 900px;
 		display : flex;
@@ -69,46 +77,52 @@
 	.star-box{
 		height : 50%;
 	}
+		
 	.row-1>td{
 		width : calc(100%/3);
 		align-content: center;
+		
 	}
 	.row-1 div{
+		padding : 20px;
 		text-align: center;
 	}
 	.row-1 span{
 		font-size : 50px;
 		line-height : 50px;
 	}
-	.star-box{
-		overflow : hidden;
-	}
-	.star-off{
-		position : relative;
-	}
-	.row-1 .star-off> span{
-		float:left;
-    	color: lightgray;
-    	cursor: pointer;
-	}
-	.star-off{
-	    position: relative;
-	}
-	.star-on{
-	    position: absolute;
-	    /*넘치면 아래로 내려가지 않도록*/
-	    overflow: hidden;
-	    width: 0px;
-	}
-	.star-on-box{
-	    width: 150px;
+	.row-1 .star-rating{
+		font-size : 50px;
+		line-height : 50px;
 	}
 	
-	.star-on-box>span{
-	    color: var(--bs-yellow);
-	    display: inline-block;
+	.star-rating {
+	  display:flex;
+	  flex-direction: row-reverse;
+	  justify-content:space-around;
+	  text-align:center;
 	}
 	
+	.star-rating input {
+	  display:none;
+	}
 	
+	.star-rating label {
+	  color:#ccc;
+	  cursor:pointer;
+	}
 	
+	.star-rating :checked ~ label {
+	  color:#f90;
+	}
 	
+	.star-rating label:hover,
+	.star-rating label:hover ~ label {
+	  color:#fc0;
+	}
+
+	
+
+		
+		
+		

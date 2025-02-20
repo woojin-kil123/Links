@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.contents.model.vo.ContentStar;
 import kr.co.iei.contents.model.vo.DbMovie;
 import kr.co.iei.contents.model.vo.DbMovieRowMapper;
 
@@ -34,5 +35,11 @@ public class ContentsDao {
 		}
 		DbMovie movie = (DbMovie)list.get(0);
 		return movie;
+	}
+	public int insertRating(ContentStar cs) {
+		String query = "insert into content_star values(?,?,?)";
+		Object[] params = {cs.getContentNo(),cs.getMemberId(),cs.getStarpoint()};
+		int result = jdbc.update(query, params);
+		return result;
 	}
 }

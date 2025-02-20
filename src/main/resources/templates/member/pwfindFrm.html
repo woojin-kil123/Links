@@ -30,7 +30,7 @@
 <th:block th:include="common/header"></th:block>
 	<main class="content find-container">
 		<section class="section find-wrap">
-			<div class="page-title">아이디 찾기</div>
+			<div class="page-title">비밀번호 찾기</div>
 			<form action="/member/pwFind" method="get">
 			<div class="input-wrap">
 			<div class="input-title">
@@ -49,14 +49,24 @@
 						<label for="memberEmail">이메일</label>
 				</div>
 				<div class="input-type">
-					<input type="text" name="memberEmail" id="memberEmail">
-					<button type="button">인증번호 발송</button>
+				<div class="email-wrap"> 
+					<input type="text" name="memberEmail1" id="memberEmail1">
+					@
+					<input type="text" name="memberEmail2" id="memberEmail2">
+					<select class="mail">
+							<option>직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="google.com">google.com</option>
+							<option value="daum.net">daum.net</option>
+						</select>
 				</div>
-				<div class="input-title">
-						<label for="Number">인증번호</label>
+					<button  type="button"class="btn-primary" id="send-btn">인증번호 발송</button>
 				</div>
-				<div class="input-type">
-					<input type="text" name="Number" id="Number">
+				<div id="auth" class="input-item" style="display: none;">
+					<input type="text" id="auth-code" placeholder="인증번호 입력">
+					<button  type="button" class="btn-primary" id="auth-btn">인증하기</button>
+					<span id="time-zone"></span>
+					<span id="authMsg"></span>
 				</div>
 				<div class="pwfind-button-box">
 					<button type="submit" class="btn-primary lg">비밀번호찾기</button>
@@ -65,6 +75,91 @@
 			</form>
 		</section>
 	</main>
+	<script>
+	$(".mail").on("change",function(){
+		const mail=$(this).val();
+		$("#memberEmail2").val(mail);
+	})
+		let mailCode = null;
+		$("#send-btn").on("click",function(){
+			const memberEmail1 =$("#memberEmail1").val();
+			const memberEmail2 =$("#memberEmail2").val();
+			const memberEmail= memberEmail1+"@"+memberEmail2
+			$.ajax({
+				url :"/etc/sendCode",
+				type:"get",
+				data : {receiver : memberEmail},
+				success : function(data){
+					 mailCode = data;
+						$("#auth").show();
+						authTime();
+					
+				},
+			error: function(){
+			}
+			});
+		});
+		$("#auth-btn").on("click",function(){
+			const inputCode = $("#auth-code").val();
+			if(inputCode === mailCode){
+				// 인증만료  >> 랜덤코드가 만료  
+				window.clearInterval(intervalId);
+				$("#authMsg").text("인증 완료");
+				$("#authMsg").css("color","green");
+				mailCode = null;
+				
+				$("#email").prop("readonly",true);
+				$("#send-btn").prop("disabled",true);
+				$("#auth-code").prop("readonly",true);
+				$("#auth-btn").prop("disabled",true);
+				$("#time-zone").remove;
+			}else{
+				$("#authMsg").text("인증 번호를 확인해 주세요");
+				$("#authMsg").css("color","red");
+			}
+		});
+		let intervalId =null;
+		function authTime(){
+			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
+			
+			intervalId = window.setInterval(function(){
+				const min =$("#min").text();
+				const sec =$("#sec").text();
+				if(sec === "00"){
+					//읽어온 값이 00초면 분을 내리고
+					if(min === "0" ){
+						// 인증만료  >> 랜덤코드가 만료  
+						window.clearInterval(intervalId);
+						mailCode = null;
+						$("#authMsg").text("인증 만료");
+						$("#authMsg").css("color","red");
+					}else{
+						const newMin = Number(min) -1;
+						$("#min").text(newMin);
+						$("#sec").text(59);
+						
+					}
+						
+				}else{
+					//읽어온 값이 00초가 아니면 초만 내리면 됨
+					const newSec=Number(sec) - 1;
+					if(newSec<10){
+						$("#sec").text("0"+newSec);
+					}else{
+						$("#sec").text(newSec);
+					}
+				}
+			},1000);
+		}
+		$(".lg").on("click",function(){
+			const idval=$(".memberId").val()
+			if(idval==null){
+				alert("아이디를 입력하세요")
+			}
+		})
+			
+		
+	</script>
 <th:block th:include="common/footer"></th:block>
 </body>
 </html>
