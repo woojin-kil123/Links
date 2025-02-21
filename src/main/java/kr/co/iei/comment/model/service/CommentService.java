@@ -108,6 +108,21 @@ public class CommentService {
 		return list;
 	}
 
+	public String selectMovieTitle(String contentNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	@Transactional
+	int commReport(Comment c) {
+		int report = commentDao.updateComm(c);
+		
+		return report;
+	}
+	
+	
+
 	
 
 	
