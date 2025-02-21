@@ -13,8 +13,21 @@
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
-	
-	
+.id{
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}	
+.pw{
+	margin-top: 50px;
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}	
 </style>
 </head>
 <body>
@@ -23,10 +36,10 @@
 		<section class="section find-wrap">
 			<div class="page-title">아이디/비밀번호 찾기</div>
 			<form action="/member/idFindFrm" method="get">
-			<button type="submit">아이디 찾기</button>
+			<button type="submit" class="btn-primary id">아이디 찾기</button>
 			</form>
 				<form action="/member/pwFindFrm" method="get">
-			<button type="submit">비밀번호 찾기</button>
+			<button type="submit" class="btn-primary pw">비밀번호 찾기</button>
 			</form>
 		</section>
 	</main>

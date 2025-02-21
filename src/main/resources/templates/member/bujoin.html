@@ -26,7 +26,26 @@
 	color : red;
 	}
 	.email-wrap{
-	display: inline-block;
+	display: flex;
+	width:100%;
+	}
+	input{
+	border :none;
+	border-bottom: 1px solid black;
+	width : 100%
+	}
+	.input-title{
+	padding-top: 10px;
+	}
+	.email{
+	width:35%
+	}
+	.mail2{
+	margin-left: 20px;
+	width: 25%
+	}
+	.btn-primary{
+	margin-top: 20px;
 	}
 </style>
 </head>
@@ -34,7 +53,7 @@
 	<th:block th:include="common/header"></th:block>
 	<main class="content">
 		<section class="section join-wrap">
-			<div class="page-title">회원가입</div>
+			<div class="page-title">사업자회원가입</div>
 			<form action="/member/checkId" name="checkIdFrm" method="get">
 				<input type="hidden" name="checkId">
 			</form>
@@ -89,18 +108,20 @@
 						
 					</div>
 					<div class="input-type">
-					<div class="email-wrap" id="memberEmail">
-						<input type="text" name="memberEmail1" id="memberEmail1">
+					<div class="email-wrap">
+						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
 						@
-						<input type="text" name="memberEmail2" id="memberEmail2" value="">
-						<select class="mail">
-							<option>직접입력</option>
+						<input type="text" class="email" name="memberEmail2" id="memberEmail2">
+						<select class="mail2">
+							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
-							<option value="google.com">google.com</option>
+							<option value="gmail.com">google.com</option>
 							<option value="daum.net">daum.net</option>
 						</select>
+						<input type="hidden" name="memberEmail" id="memberEmail">
 					</div>
-						<button type="button"class="btn-primary" id="send-btn">인증번호 발송</button>
+					</div>
+						<button type="button"class="btn-primary" id="send-btn" >인증번호 발송</button>
 					</div>
 					<div id="auth" class="input-item" style="display: none;" >
 					<input type="text" id="auth-code" placeholder="인증번호 입력">
@@ -118,6 +139,7 @@
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
 			const memberId =$("#memberId").val();
+			$("#time-zone").removeId;
 			$.ajax({
 				url:"/member/ajaxCheckId",
 				type :"get",
@@ -130,10 +152,8 @@
 						$(".id-check-msg").text("이미 사용중인 아이디 입니다");
 						$(".id-check-msg").addClass("invalid");
 					}
-					
 				},
 				error: function(){
-					
 				}
 			});
 		});
@@ -149,7 +169,7 @@
 				$(".pw-check-msg").addClass("valid");
 			}
 		});
-		$(".mail").on("change",function(){
+		$(".mail2").on("change",function(){
 			const mail=$(this).val();
 			$("#memberEmail2").val(mail);
 		});
@@ -166,6 +186,7 @@
 					 mailCode = data;
 						$("#auth").show();
 						authTime();
+						alert("메일이 발송 되었습니다")	
 				},
 			error: function(){
 			}
@@ -183,7 +204,11 @@
 				$("#send-btn").prop("disabled",true);
 				$("#auth-code").prop("readonly",true);
 				$("#auth-btn").prop("disabled",true);
-				$("#time-zone").remove;
+				$("#time-zone").removeId;
+				const memberEmail1 =$("#memberEmail1").val();
+				const memberEmail2 =$("#memberEmail2").val();
+				const memberEmail= memberEmail1+"@"+memberEmail2
+				$("#memberEmail").val(memberEmail);
 			}else{
 				$("#authMsg").text("인증 번호를 확인해 주세요");
 				$("#authMsg").css("color","red");
@@ -192,7 +217,6 @@
 		let intervalId =null;
 		function authTime(){
 			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
-			
 			intervalId = window.setInterval(function(){
 				const min =$("#min").text();
 				const sec =$("#sec").text();
@@ -208,9 +232,7 @@
 						const newMin = Number(min) -1;
 						$("#min").text(newMin);
 						$("#sec").text(59);
-						
 					}
-						
 				}else{
 					//읽어온 값이 00초가 아니면 초만 내리면 됨
 					const newSec=Number(sec) - 1;

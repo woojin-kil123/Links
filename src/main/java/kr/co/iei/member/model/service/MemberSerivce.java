@@ -52,6 +52,4 @@ public class MemberSerivce {
 		int result= memberDao.pwChange(m);
 		return result;
 	}
-
-
 }

@@ -55,6 +55,16 @@ public class MemberController {
  public String joinFrm() {
 	 return "member/joinFrm";
  }
+ @RequestMapping(value="/cjoin")
+ public String cjoin() {
+	 
+	 return "member/join";
+ }
+ @RequestMapping(value="/bujoin")
+ public String bujoin() {
+	 
+	 return "member/bujoin";
+ }
  @PostMapping(value="/join")
  	public String join(Member m, Model model) {
 	 int result = memberService.insertMember(m);
