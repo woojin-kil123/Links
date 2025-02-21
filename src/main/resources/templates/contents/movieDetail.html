@@ -81,6 +81,9 @@
 			<div class="container mt-5">
 				    <h2>코멘트 <span style="color: red; font-size:20px;" id="comment-count"></span></h2>
 				    <span class="more-comments" style="display : none">더보기</span>
+				    <div class="nocomment-msg"style="display : none">
+				    	<p class="fs-4 mt-4">등록된 코멘트가 없어요.</p>
+				    </div>
 				<div class="comment-slider">
 				    <div id="commentCarousel" class="carousel slide" data-bs-ride="carousel">
 				        <div class="carousel-inner"></div>
@@ -227,10 +230,10 @@
 			data : {"contentNo" : "m"+movieId, "memberId":memberId,"commentContent" : commentContent},
 			success: function(data){
 				if(data>0){
-					//console.log("comment 입력 결과 : "+ data);
+					commentList(movieId);
 				}
 			}
-		});			
+		});
 	})
 	function selectMovie(){
 		 $.ajax({

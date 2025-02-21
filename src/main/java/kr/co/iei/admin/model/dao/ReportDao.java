@@ -1,4 +1,4 @@
-package kr.co.iei.report.model.dao;
+package kr.co.iei.admin.model.dao;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.admin.vo.ReportRowMapper;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberRowMapper;
-import kr.co.iei.report.vo.ReportRowMapper;
 
 @Repository
 public class ReportDao {

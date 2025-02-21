@@ -1,4 +1,4 @@
-package kr.co.iei.report.vo;
+package kr.co.iei.admin.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

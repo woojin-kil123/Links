@@ -1,4 +1,4 @@
-package kr.co.iei.report.controller;
+package kr.co.iei.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-
+import kr.co.iei.admin.service.ReportService;
 import kr.co.iei.member.model.vo.Member;
-import kr.co.iei.report.model.service.ReportService;
 
 @Controller
 @RequestMapping("/report")

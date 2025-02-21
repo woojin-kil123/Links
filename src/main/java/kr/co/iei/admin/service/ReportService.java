@@ -1,13 +1,13 @@
-package kr.co.iei.report.model.service;
+package kr.co.iei.admin.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.iei.admin.model.dao.ReportDao;
+import kr.co.iei.admin.vo.Report;
 import kr.co.iei.member.model.vo.Member;
-import kr.co.iei.report.model.dao.ReportDao;
-import kr.co.iei.report.vo.Report;
 
 @Service
 public class ReportService {
