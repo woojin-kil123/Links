@@ -16,7 +16,7 @@
 	text-align: center;
 	}
 	.login-wrap  .input-wrap{
-	padidng :15px 30px;
+	padding :15px 30px;
 	}
 	.login-button-box{
 		padding : 20px 30px;
@@ -47,7 +47,9 @@
 	width:15px;
 	height: 15px;
 	}
-	
+	#red{
+	color: red;	
+	}
 	.agree-button-box{
 	padding-top :20px;
     text-align: center;
@@ -64,18 +66,7 @@
     color: #fff;
     margin: 3px;
 }
-	#back{
-	    background-color: #fff;
-	    color: #000;
-	    border: 1px solid #eee;
-		}
-		#next{
-	    background-color: #f00;
-	    color: #fff;
-	}
-	#red{
-		color: red;
-	}
+	
 	.loc{
 	display: flex;
 	}
@@ -123,8 +114,8 @@
         </div>
     </div>
         <div class="agree-button-box">
-            <button type="button" id="back">이전단계</button>
-            <button type="button" id="next">다음단계</button>
+            <button type="button" class="btn-primary"id="back">이전단계</button>
+            <button type="button" class="btn-primary" id="next">다음단계</button>
         </div>
     </div>
     </div>
@@ -175,7 +166,7 @@ $("#back").on("click",function(){
 $("#next").on("click",function(){
 	if(check1.checked){
 		
-	location.href="/member/joinFrm";
+	location.href="/member/cjoin";
 	}else{
 		alert("동의가 되어있지 않습니다");
 	}

@@ -114,6 +114,7 @@ public class CommentDao {
 		int result = jdbc.update(query,params);
 		return result;
 	}
+	
 
 	public List commNo(int commentNo) {
 		String query = "select * from re_comm where comment_no= ?";
@@ -126,6 +127,14 @@ public class CommentDao {
 	
 
 	
+
+	public List oneMovieComment(String contentNo) {
+		String query = "select * from comm where content_no=?";
+		Object[] params = {contentNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		return list;
+	}
+
 	
 }
 
