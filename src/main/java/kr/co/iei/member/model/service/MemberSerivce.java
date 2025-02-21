@@ -33,13 +33,11 @@ public class MemberSerivce {
 	}
 	@Transactional
 	public int deleteMember(int memberNo) {
-		int result1=memberDao.deleteMember(memberNo);
-		return result1;
-	}
-	public int insertdeleteMember(int memberNo) {
+		int result=memberDao.deleteMember(memberNo);
 		int result2 =memberDao.insertdeleteMember(memberNo);
-		return result2;
-	}
+		return result;
+	}	
+	
 	public Member selectOneMember2(Member m) {
 		Member member= memberDao.selectOneMember2(m);
 		return member;
