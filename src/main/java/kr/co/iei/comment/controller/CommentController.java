@@ -52,12 +52,12 @@ public class CommentController {
 	public String mCommentList(String contentNo, Model model) {
 		DbMovie m = new DbMovie();
 		List list = commentService.mCommentList(contentNo );
-		String movieTitle = commentService.selectMovieTitle(contentNo);
+		
+		//영화제목 가져올때 영화제목만 가져오셨겠죠?
+		DbMovie movie = commentService.selectMovieInfo(contentNo);
 		 
-		
-		
 		model.addAttribute("list", list);
-		model.addAttribute("movieTitle", movieTitle);
+		model.addAttribute("movie", movie);
 		model.addAttribute("listNo", contentNo);
 		
 		

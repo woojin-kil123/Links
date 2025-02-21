@@ -193,7 +193,7 @@
 			<div class="content">
 				<div class="page-title">
 					<div th:text=${movieTitle} class="movie-title" >제목</div>
-					<div class="movie-summary"></div>					
+					<div class="movie-summary"><img th:src="${movie.posterPath}"></div>					
 				</div>		
 									
 				<div class="list-wrap">
@@ -278,8 +278,8 @@
 												<th style="width:67%;"></th>								
 												<th style="width:17%;"></th>
 											<tr>
-											<tr>
-												<th th:text= "${lno.reCommentContent}" class="movie-re-comment"></th>
+											<tr >
+												<th colspan="6" th:text= "${lno.reCommentContent}" class="movie-re-comment"></th>
 											</tr>			
 										</table>
 									</div>
