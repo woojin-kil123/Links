@@ -184,20 +184,30 @@
 	.line2{
 		margin: 0 auto;
 		margin-top: 30px;
+		margin-left: 50px;
 		width: 700px;
+		height:160px;
 		background-color: #FEECEC;
 	}	
-	.movie-re-comment{
-		width: 500px;
-		height:145px;
+	.line2>div{
 		padding-left: 50px;
-				
+	}
+	.line2 .movie-re-comment{	
+		width: 600px;
+		height:100px;
+		padding-left: 50px;
+		padding-bottom: 90px;
+		background-color:#D9D9D9;			
 	}
 	
 	.modal-box{
 		width: 300px;
 		height: 350px;
 	}
+	.right-icon{
+		float: right;
+	}
+	
 	.fxxx{
 		cursor: pointer;
 	}
@@ -206,158 +216,148 @@
 
 </head>
 <body>
-	<th:block th:include="common/header"></th:block>
+<th:block th:include="common/header"></th:block>
 	
 	
-	<main class="content-wrap">
-		<section class="section movie-comment-list-wrap">
-			<div class="order-by">
-				<span>최신 순</span>
-				<span class="material-icons down">keyboard_double_arrow_down</span>
-				<span>좋아요 순</span>
-				<span class="material-icons down">keyboard_double_arrow_down</span>
-				<span>별점 순</span>
-				<span class="material-icons down">keyboard_double_arrow_down</span>
-			</div>
-			<div class="content">
-				<div class="page-title">
-					<div th:text=${m.movieTitle} class="movie-title" >제목</div>
-					<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
-					<!-- <img th:src="${movie.posterPath}">-->				
-				</div>		
-									
-				<div class="list-wrap">
-					<div th:each= "comm: ${list}" class="comment-box" >
-						<table class="line1">
-							<tr>
-								<th style="width:1%;"></th>
-								<th class="profile" style="width:3%;"></th>
-								<th style="width:2%;"></th>
-								<th th:text= "${comm.memberId}" style="width:10%;"></th>
-								<th style="width:67%;"></th>								
-								<th class="star-wrap" style="width:17%;">
-									<span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-								</th>
-							<tr>			
-						</table>
-						<div class="partner"></div>					
-						
-						<div th:text= "${comm.commentContent}" class="movie-comment"></div>
-						
-						<div class="btn-opt">
-							<span class="material-icons">thumb_up</span>
-							<span class="count"> 0 </span>
-							<span class="material-icons ">textsms </span>
-							<span class="count"> 0 </span>	
-							<span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span>
-						</div>
-						<div class="partner"></div>
-						<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
-						<div class="re-comm">	
-							<div  class="btn-box">		
-								<th:block th:if="${session.member != null}">	
-									<th:block th:if="${session.member.memberId == comm.memberId}">			
-					                    <div class="choice-like">			                    	
-					                    	<span class="material-icons">thumb_up</span>
-					                        <span>좋아요</span>
-					                        <span>0</span>
-					                    </div>
-					                    <div class="choice-comment" >
-					                   	 	<a th:onclick="modifyComment(this,[[${comm.memberId}]],[[${comm.commentNo}]]);"><span class="material-icons windowShow">textsms </span></a>	                    	
-					                        <span>댓글</span>
-					                        <span>0</span>
-					                    </div>
-					                 </th:block>   
-		                        </th:block>
-	                		</div>
-	                		
-	                		<div class="partner2"></div>
-	                		
-	                	<!-- 댓글 창 -->
-						
-							<div class="inputCommentBox inputBox" th:if="${session.member != null}">				
-								<div>
-									<span class="material-icons">subdirectory_arrow_right</span>									
-								</div>  
+<main class="content-wrap">
+	<section class="section movie-comment-list-wrap">
+		<div class="order-by">
+			<span>최신 순</span>
+			<span class="material-icons down">keyboard_double_arrow_down</span>
+			<span>좋아요 순</span>
+			<span class="material-icons down">keyboard_double_arrow_down</span>
+			<span>별점 순</span>
+			<span class="material-icons down">keyboard_double_arrow_down</span>
+		</div>
+		<div class="content">
+			<div class="page-title">
+				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
+				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
+				<!-- <img th:src="${movie.posterPath}">-->				
+			</div>		
 								
-								<textarea class="re-comm" name="reCommentContent"></textarea>
-								
-								<div>
-									<a th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">
-										<button type="button" class="btn-primary ">등록</button>
-									</a>										
-								</div>
-							</div>	
-								<!-- 댓글 출력 -->
-								<div th:each= "lno : ${comm.listNo}" class="print-comm"> 
-									 
-									<div>									
-										<table class="line2">
-											<tr>
-												<th style="width:1%;"></th>
-												<th style="width:3%;"></th>
-												<th style="width:2%;"></th>
-												<th th:text= "${lno.memberId}" style="width:10%;"></th>
-												<th style="width:67%;"></th>								
-												<th style="width:17%;"></th>
-											<tr>
-											<tr >
-												<th colspan="6" th:text= "${lno.reCommentContent}" class="movie-re-comment"></th>
-											</tr>			
-										</table>
-									</div>
-								
-								</div>
-							
-							
-						</div>	
-						
-						
-						
+			<div class="list-wrap">
+				<div th:each= "comm: ${list}" class="comment-box" >
+					<table class="line1">
+						<tr>
+							<th style="width:1%;"></th>
+							<th class="profile" style="width:3%;"></th>
+							<th style="width:2%;"></th>
+							<th th:text= "${comm.memberId}" style="width:10%;"></th>
+							<th style="width:67%;"></th>								
+							<th class="star-wrap" style="width:17%;">
+								<span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+							</th>
+						<tr>			
+					</table>
+					<div class="partner"></div>					
+					
+					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
+					
+					<div class="btn-opt">
+						<span class="material-icons">thumb_up</span>
+						<span class="count"> 0 </span>
+						<span class="material-icons ">textsms </span>
+						<span class="count"> 0 </span>	
+						<span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span>
 					</div>
+					<div class="partner"></div>
+					<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
+					<div class="re-comm">	
+						<div  class="btn-box">		
+							<th:block th:if="${session.member != null}">	
+								<!--  <th:block th:if="${session.member.memberId == comm.memberId}">-->			
+				                    <div class="choice-like">			                    	
+				                    	<span class="material-icons">thumb_up</span>
+				                        <span>좋아요</span>
+				                        <span>0</span>
+				                    </div>
+				                    <div class="choice-comment" >
+				                   	 	<a th:onclick="modifyComment(this,[[${comm.memberId}]],[[${comm.commentNo}]]);"><span class="material-icons windowShow">textsms </span></a>	                    	
+				                        <span>댓글</span>
+				                        <span>0</span>
+				                    </div>
+				                <!--  </th:block> -->   
+	                        </th:block>
+                		</div>
+                		
+                		<div class="partner2"></div>
+                		
+                	<!-- 댓글 창 -->
+						<div class="inputCommentBox inputBox" th:if="${session.member != null}">				
+							<div>
+								<span class="material-icons">subdirectory_arrow_right</span>									
+							</div>  
+							
+							<textarea class="re-comm" name="reCommentContent"></textarea>
+							
+							<div>
+								<a th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">
+									<button type="button" class="btn-primary ">등록</button>
+								</a>										
+							</div>
+						</div>	
+						<!-- 댓글 출력 -->
+						<div th:each= "lno : ${comm.listNo}" class="print-comm"> 
+							 
+							<div class="line2">
+								<div th:text= "${lno.memberId}" style="width:15%;"></div>
+														
+								<div th:text= "${lno.reCommentContent}" class="movie-re-comment"></div>
+								<th:block th:if="${session.member != null}">	
+									<th:block th:if="${session.member.memberId == lno.memberId}">
+										<div class="right-icon">								
+											<span class="material-icons btn btn-primary" id="edit-content" >create </span>							
+										    <span class="material-icons" th:onclick="commDelete([[${lno.commentNo}]]);">delete_forever</span>
+											<span class="material-icons dots" > more_vert </span>
+										</div>
+									</th:block>	
+								</th:block>
+							</div>
+						
+						</div>
+						
+					</div>	
 				</div>
-				
-				
-				
-				
 			</div>
-		</section>
-		<!-- 모달 -->
-		<!-- Portfolio item 6 modal popup-->
-        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content modal-box">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-s-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->                                    
-                                    <div class="item-intro text-muted fxxx">욕설  : 공격적인 언어 사용</div>
-                                    <div class="item-intro text-muted hxxx">혐오 발언 : 각종 비하 및 차별 발언</div>
-                                    <div class="item-intro text-muted sxxx">스포일러 : 작품의 평가가 아닌 결과만 발언</div>
-                                    <div class="item-intro text-muted dxxx">도배 : 의미 없는 문자로 수십번 반복 사용</div>
-                                    
-                                    <button class="btn btn-primary btn-s text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-times me-1"></i>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-	</main>
+		</div>
+	</section>
+	<!-- 모달 -->
+	<!-- Portfolio item 6 modal popup-->
+       <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content modal-box">
+                   <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-s-8">
+                               <div class="modal-body">
+                                   <!-- Project details-->                                    
+                                   <div class="item-intro text-muted fxxx">욕설  : 공격적인 언어 사용</div>
+                                   <div class="item-intro text-muted hxxx">혐오 발언 : 각종 비하 및 차별 발언</div>
+                                   <div class="item-intro text-muted sxxx">스포일러 : 작품의 평가가 아닌 결과만 발언</div>
+                                   <div class="item-intro text-muted dxxx">도배 : 의미 없는 문자로 수십번 반복 사용</div>
+                                   
+                                   <button class="btn btn-primary btn-s text-uppercase" data-bs-dismiss="modal" type="button">
+                                       <i class="fas fa-times me-1"></i>
+                                       Close
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
 	
-	<th:block th:include="common/header"></th:block>
-	
+</main>
+
+<th:block th:include="common/header"></th:block>
+	<script src="/js/sweetalert.min.js"></script>
 	<script>
 	/*
 		$(".fxxx").on("click",function(){		
@@ -491,7 +491,7 @@
 			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
 			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
 			
-			//form.hide();
+			form.hide();
 			
 			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
 			const memberIdInput = $("<input>"); 
@@ -508,8 +508,9 @@
 			contentNoInput.attr("type","text"); 
 			contentNoInput.attr("name","contentNo");
 			contentNoInput.val(contentNo);
+			//const commentContent = $(obj).parent().prev().children().eq(2).clone();
+			const commentContent = $(obj).parent().prev().clone();
 			
-			const commentContent = $(obj).parent().prev().children().eq(2).clone(); 
 			//폼에 다 넣어주기
 			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
 			
@@ -517,11 +518,40 @@
 			$("body").append(form);
 			//6. form 태그 submit
 			
-			//form.submit();
+			form.submit();
 		};
 		
 		
-		
+		function commDelete(commentNo){
+			swal({
+				title : "댓글 삭제",
+				text : "댓글 삭제 할까요?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm : {
+						text:"삭제",
+						value: true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true									
+					}
+				}				
+			}).then(function(isConfirm){
+				console.log(isConfirm); 
+				
+				if(isConfirm){
+					location.href="/comment/commDelete?commentNo="+commentNo;
+				}
+				
+			});
+		}
 		
 		
 	</script>
