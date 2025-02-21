@@ -104,6 +104,11 @@ public class CommentService {
 		return result;
 	}
 
+	public List oneMovieComment(String contentNo) {
+		List list = commentDao.oneMovieComment(contentNo);
+		return list;
+	}
+
 	
 
 	
