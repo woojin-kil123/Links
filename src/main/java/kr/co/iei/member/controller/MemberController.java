@@ -69,7 +69,10 @@ public class MemberController {
  public String bujoin(BuMember bum, Model model) {
 	 int result = memberService.insertBuMember(bum);
 	 if(result>0) {
-		 
+		 model.addAttribute("title","회원 가입 완료");
+		 model.addAttribute("text","회원 가입을 환영합니다");
+		 model.addAttribute("icon","success");
+		 model.addAttribute("loc","/member/loginFrm");
 	 }else {
 		 model.addAttribute("title","회원 가입 실패");
 		 model.addAttribute("text","회원 가입을 실패하였습니다");

@@ -54,7 +54,10 @@ public class MemberSerivce {
 		return result;
 	}
 	public int insertBuMember(BuMember bum) {
-		int result= memberDao.insertBuMember(bum);
-		return result;
+		int memberNo= memberDao.newMemberNo();
+		bum.setMemberNo(memberNo);
+		int result1= memberDao.insertBuMember(bum);
+		int result2= memberDao.insertBusiness(bum);
+		return result1;
 	}
 }
