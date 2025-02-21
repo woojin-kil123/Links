@@ -121,7 +121,7 @@
 	}
 	.btn-box{
 		width:800px;
-		height: 50px;		
+				
 		border-top: 2px solid #C4C4C4;
 		background-color: #FFF9F9;	
 		overflow: hidden;
@@ -139,6 +139,9 @@
 		margin-left: 490px;
 		float: lift;
 		cursor: pointer;
+	}
+	.inputBox{
+		display: none;
 	}
 </style>
 
@@ -192,42 +195,47 @@
 							<span class="count"> 0 </span>	
 						</div>
 						
-						<div class="btn-box">						
-		                    <div class="choice-like">
-		                    	<span class="material-icons">thumb_up</span>
-		                        <span>좋아요</span>
-		                        <span>0</span>
-		                    </div>
-		                    <div class="choice-comment" >
-		                    	<span class="material-icons windowShow">textsms </span>
-		                        <span>댓글</span>
-		                        <span>0</span>
-		                    </div>
-	                	</div>
+						<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
+						<div th:each= "rc: ${list}" class="btn-box">		
+							<th:block th:if="${session.member != null}">	
+								<th:block th:if="${session.member.memberId == comm.memberId}">			
+				                    <div class="choice-like">			                    	
+				                    	<span class="material-icons">thumb_up</span>
+				                        <span>좋아요</span>
+				                        <span>0</span>
+				                    </div>
+				                    <div class="choice-comment" >
+				                   	 	<a th:onclick="modifyComment(this,[[${comm.commentNo}]];"><span class="material-icons windowShow">textsms </span></a>	                    	
+				                        <span>댓글</span>
+				                        <span>0</span>
+				                    </div>
+				                 </th:block>   
+	                        </th:block>
+	                	
 	                	<!-- 댓글 출력창 -->
 						
-						<div th:each= "rc: ${list}" class="inputCommentBox inputBox">
-						
-							<form action="/comment/reComm" method="post">
-								<div>
-									<div>
-										<span class="material-icons">subdirectory_arrow_right</span>									
-									</div>  
-									<div>
-										<input type="hidden" name="memberId" th:value= "${rc.memberId}" >
-										<input type="hidden" name="commentNo" th:value= "${rc.commentNo}" >
+									<div  class="inputCommentBox inputBox">
+									
 										
-										<div class="input-item">
-											<textarea name="reCommentContent"></textarea>
-										</div>
+											<div>
+												<div>
+													<span class="material-icons">subdirectory_arrow_right</span>									
+												</div>  
+												<div>
+													<input type="hidden" name="memberId" th:value= "${rc.memberId}" >
+													<input type="hidden" name="commentNo" th:value= "${rc.commentNo}" >
+													
+													<div class="input-item">
+														<textarea name="reCommentContent"></textarea>
+													</div>
+												</div>
+												<div>
+													<button type="submit" class="btn-primary windowComment">등록</button>
+												</div>
+											</div>
+										
 									</div>
-									<div>
-										<button type="submit" class="btn-primary">등록</button>
-									</div>
-								</div>
-							</form>
-						</div>
-							
+						</div>	
 					</div>
 				</div>
 			</div>
@@ -238,7 +246,9 @@
 	
 	<script>
 		$(".windowShow").on("click",function(){
+			
 			const index = $(".windowShow").index(this); 
+			
 			if($(this).text() === "▼"){
 				$(this).text("▲");	
 			}else{
@@ -247,7 +257,43 @@
 			
 			$(".inputBox").eq(index).slideToggle();
 		});
-	
+		
+		function modifyComment(obj,commentNo){
+			
+			
+			//화면에서 안보이게 처리
+			$(obj).parent().parent().parent().next().hide();
+		}
+		
+		$(".windowComment").on("click",function(obj,commentNo){			
+		
+		
+			console.log("ㅁㅁㅁㅁㅁㅁ댓글 수정 완료 함수")
+			//form태그를 생성해서 필요한 태그들을 모두 생성해서 넣은 후 submit
+			//1. form태그 생성
+			const form = $("<form>");
+			//1-1.form태그 속성 설정
+			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
+			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
+			form.hide();
+			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
+			const commentNoInput = $("<input>"); // <input>
+			commentNoInput.attr("type","text"); //<input type="text">
+			commentNoInput.attr("name","commentNo");   //<input type = "text"  name="noticeCommentNo">
+			commentNoInput.val(commentNo);    //<input type = "text"  name="noticeCommentNo" value="?">
+			
+						
+			
+			const commentContent = $(obj).parent().prev().children().clone();  //<textarea name="noticeCommentContent"></textarea>
+			//폼에 다 넣어주기
+			form.append(commentNoInput).append(commentContent);
+			
+			//5. body 에 새성한 from태그 추가
+			$("body").append(form);
+			//6. form 태그 submit
+			form.submit();
+		});
+		
 	</script>
 	
 	<th:block th:include="common/footer"></th:block>

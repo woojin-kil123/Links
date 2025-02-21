@@ -104,6 +104,6 @@ public class CommentController {
 	@PostMapping(value="/reComm")
 	public String reCommInsert(ReComment rc) {
 		int result = commentService.reCommInsert(rc);
-		return "redirect:/comment/mCommentMemberList?contentNo="+rc.getCommentNo();
+		return "redirect:/comment/mCommentList?contentNo="+rc.getCommentNo();
 	}
 }
