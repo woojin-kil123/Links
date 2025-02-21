@@ -211,8 +211,8 @@
 	    gap: 10px; /* span 요소 간격 조절 */
 	    height: 50px; /* 예시 높이 (필요 시 조정) */
 	    justify-content: center;
-	    background-color: #FDFD96;
-	    font-size: 20px;
+	    background-color: black;
+	    font-size: 18px;
 	    font-weight: bold;
 	}
 </style>  
@@ -235,6 +235,7 @@
         <!-- 네비게이션 메뉴 -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto d-flex align-items-center gap-3">
+                <th:block th:if="${session.member != null}">
                 <!-- ✅ 알림 아이콘 (클릭 시 창이 뜨도록 설정) -->
                 <li class="nav-item notifications">
                     <a class="nav-link d-flex align-items-center" href="#" id="notificationBtn">
@@ -242,19 +243,19 @@
                     </a>
 
                     <!-- ✅ 알림 창 -->
-                    <div class="notification-popup" id="notificationPopup">
-                        <h5>알림</h5>
-                        <ul class="notification-list">
-                            <li><a href="/news/view?newsNo=9">📢 메인 소식으로 이동하기</a></li>
-                            <li><a href="/comment/">💬 뜨는 코멘트로 이동하기</a></li>
-                            <li>🔔 경고 메세지 연동예정.</li>
-                        </ul>
-                    </div>
+	                    <div class="notification-popup" id="notificationPopup">
+	                        <h5>알림</h5>
+	                        <ul class="notification-list">
+	                            <!-- <li><a href="/news/view?newsNo=9">📢 메인 소식으로 이동하기</a></li>
+	                            <li><a href="/comment/mCommentMemberList">💬 뜨는 코멘트로 이동하기</a></li> -->
+	                            <li id="reportReason"></li>
+	                        </ul>
+	                    </div>
                 </li>
+                </th:block>
                 <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" href="/news/list?reqPage=1">소식</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contents/movieList">영화</a></li>
-                <li class="nav-item"><a class="nav-link" href="/">책</a></li>
                 <li class="nav-item"><a class="nav-link" href="/comment/mCommentMemberList">코멘트</a></li>
 
                 <!-- 검색창 -->
@@ -299,23 +300,44 @@
     </div>
 </nav>
 <script>
-   document.addEventListener("DOMContentLoaded", function() {
-       const notificationBtn = document.getElementById("notificationBtn");
-       const notificationPopup = document.getElementById("notificationPopup");
+	$(document).ready(function() {
+	    const notificationBtn = $("#notificationBtn");
+	    const notificationPopup = $("#notificationPopup");
+	    const reportReasonElement = $("#reportReason");
+	
+	    // ✅ 알림 버튼 클릭 시 알림 창 표시/숨김 토글 및 AJAX 요청
+	    notificationBtn.on("click", function(event) {
+	        event.preventDefault(); // 기본 링크 동작 방지
+	        notificationPopup.toggleClass("show");
+	
+	        // 알림 팝업이 열렸을 때만 AJAX 요청
+	        if (notificationPopup.hasClass("show")) {
+	            $.ajax({
+	                url: "/report/check",
+	                type: "GET",
+	                success: function(data) {
+	                    // ✅ 데이터가 성공적으로 로드되면 업데이트
+	                    //console.log("AJAX Success: " + data);
+	                    reportReasonElement.text(data + " 신고를 받았습니다.");
+	                    notificationPopup.toggle();
+	                },
+	                error: function(xhr, status, error) {
+	                    console.error("AJAX Error: " + error);
+	                    console.error("Response Status: " + status);
+	                    console.error("Response Text: " + xhr.responseText);
+	                }
+	            });
+	        }
+	    });
+	
+	    // ✅ 화면 클릭 시 알림 창 닫기 (버튼 제외)
+	    $(document).on("click", function(event) {
+	        // 클릭한 요소가 알림 버튼 또는 알림 팝업 내부가 아닐 때만 닫기
+	        if (!notificationBtn.is(event.target) && !notificationPopup.is(event.target) && notificationPopup.has(event.target).length === 0) {
+	            notificationPopup.removeClass("show");
+	        }
+	    });
+	});
 
-       // ✅ 알림 버튼 클릭 시 알림 창 표시/숨김 토글
-       notificationBtn.addEventListener("click", function(event) {
-           event.preventDefault(); // 기본 링크 동작 방지
-           notificationPopup.classList.toggle("show");
-       });
-
-       // ✅ 화면 클릭 시 알림 창 닫기 (버튼 제외)
-       document.addEventListener("click", function(event) {
-           if (!notificationBtn.contains(event.target) && !notificationPopup.contains(event.target)) {
-               notificationPopup.classList.remove("show");
-           }
-       });
-   });
-   
 </script>
 </body>
