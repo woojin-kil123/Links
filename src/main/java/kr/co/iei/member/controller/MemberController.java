@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
+import kr.co.iei.member.model.vo.BuMember;
 import kr.co.iei.member.model.vo.Member;
 
 @Controller
@@ -54,6 +55,32 @@ public class MemberController {
  @RequestMapping(value="/joinFrm")
  public String joinFrm() {
 	 return "member/joinFrm";
+ }
+ @RequestMapping(value="/cjoin")
+ public String cjoin() {
+	 
+	 return "member/join";
+ }
+ @RequestMapping(value="/bujoinFrm")
+ public String bujoinFrm() {
+	 return "member/bujoin";
+ }
+ @PostMapping(value="/bujoin")
+ public String bujoin(BuMember bum, Model model) {
+	 int result = memberService.insertBuMember(bum);
+	 if(result>0) {
+		 model.addAttribute("title","회원 가입 완료");
+		 model.addAttribute("text","회원 가입을 환영합니다");
+		 model.addAttribute("icon","success");
+		 model.addAttribute("loc","/member/loginFrm");
+	 }else {
+		 model.addAttribute("title","회원 가입 실패");
+		 model.addAttribute("text","회원 가입을 실패하였습니다");
+		 model.addAttribute("icon","error");
+		 model.addAttribute("loc","/member/joinFrm");
+	 }
+	 return "common/msg";
+	
  }
  @PostMapping(value="/join")
  	public String join(Member m, Model model) {

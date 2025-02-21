@@ -44,11 +44,32 @@ public class ContentsController {
 	@ResponseBody
 	@GetMapping("/insertRating")
 	public int insertRating(ContentStar cs) {
-		System.out.println(cs.getContentNo());
-		System.out.println(cs.getMemberId());
-		System.out.println(cs.getStarpoint	());
-		
 		int result = contentsService.insertRating(cs);
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("/selectMemberStar")
+	public int selectMemberStar(ContentStar cs) {
+		int result  = contentsService.selectMemberStar(cs);
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("/insertContentLike")
+	public int insertContentLike(ContentStar cs) {
+		int result = contentsService.insertContentLike(cs);
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("/deleteContentLike")
+	public int deleteContentLike(ContentStar cs) {
+		int result = contentsService.deleteContentLike(cs);
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/selectMemberLike")
+	public int selectMemberLike(ContentStar cs) {
+		int result = contentsService.selectMemberLike(cs);
 		return result;
 	}
 	

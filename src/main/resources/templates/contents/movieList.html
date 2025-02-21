@@ -4,123 +4,278 @@
 <meta charset="UTF-8">
 <title>LinkS 영화</title>
 <style>
-	.container>.swiper {
-	    width: 100%;
-	    height: 600px;
-	    margin: 0 auto;
-	}
-	.swiper-wrapper{
-		width : 100%;
-	}
-	.movie-wrap{
-		display : flex;
-		justify-content: center;
-	}
-	.movie-wrap>.movie-box{
-		margin : 20px;
-		width : 20%;
-	}
-	.poster{
-		height : 300px;
-	}
-	.flex{
-		display : flex;
-		flex-wrap : wrap;
-		gap : 10px;
-		justify-content: center;
-	}
+.carousel-item>.d-flex{
+	justify-content: space-between;
+	margin-left : 20px;
+	margin-right : 20px;
+}
+
+.carousel-inner{
+	height : 400px;
+	margin-top : 30px;
+	margin-bottom : 30px;
+	align-content: center;
+}
+
+.card {
+    height: 400px;
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* 호버 효과 */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.rank-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.img-div{
+    width: 100%;
+    height: 65%;
+}
+.card-img-top {
+	width : 100%;
+	height : 100%;
+    object-fit: fill;
+    background-color: #f0f0f0;
+}
+
+.card-body {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.card-title {
+	height: 30%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    word-wrap: break-word
+}
+
+.card-info {
+    font-size: 12px;
+    color: gray;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.rating .star {
+    color: gold;
+    margin-right: 5px;
+}
+
+.genre-info {
+	height :30%;
+	display : flex;
+	justify-content : center;
+	align-items : center;	
+    font-size: 12px;
+    color: black;
+    gap : 5px;
+    flex-wrap: wrap;
+}
+.genre-info>p {
+	margin : 0;
+}
+.carousel>.carousel-control-prev{
+	width : 40px;
+	top : 40%;
+	height : 10%;
+	background-color : black;
+}
+.carousel>.carousel-control-next{
+	width : 40px;
+	top : 40%;
+	height : 10%;
+	right : -35px;
+	background-color : black;
+}
+
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 		<section class="page-section" id="services">
-            <div class="container">
-                <div class="text-left">
-                    <h2 class="section-heading text-uppercase text-left">박스오피스 순위</h2>
-                </div>
-				<div class="swiper">
-			    	<div class="swiper-wrapper text-center">
-						<!-- <div class="swiper-slide"></div>
-						<div class="swiper-slide"></div>
-						<div class="swiper-slide"></div>
-						<div class="swiper-slide"></div> -->
-			    	</div>
-		    	</div>	
-		   		<!-- Add Arrows -->
-			    <div class="swiper-button-next">오른쪽</div>
-			    <div class="swiper-button-prev">왼쪽</div>
-            </div>
+	    <!-- 슬라이드 형식의 영화 리스트 -->
+	        <div class="container mt-5">
+			    <h2 class="text-left">상영중인 영화</h2>
+			    <div id="movieCarousel1" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+			        <div class="carousel-inner" id="carousel1"></div>
+			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel1" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon"></span>
+			        </button>
+			        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel1" data-bs-slide="next">
+			            <span class="carousel-control-next-icon"></span>
+			        </button>
+			    </div>
+			</div>
+			<div class="container mt-5">
+			    <h2 class="text-left">최신 트렌드</h2>
+			    <div id="movieCarousel2" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+			        <div class="carousel-inner" id="carousel2"></div>
+			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel2" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon"></span>
+			        </button>
+			        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel2" data-bs-slide="next">
+			            <span class="carousel-control-next-icon"></span>
+			        </button>
+			    </div>
+			</div>
+			<div class="container mt-5">
+			    <h2 class="text-left">인기 영화</h2>
+			    <div id="movieCarousel3" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+			        <div class="carousel-inner" id="carousel3"></div>
+			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel3" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon"></span>
+			        </button>
+			        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel3" data-bs-slide="next">
+			            <span class="carousel-control-next-icon"></span>
+			        </button>
+			    </div>
+			</div>
+			<div class="container mt-5">
+			    <h2 class="text-left">개봉 예정</h2>
+			    <div id="movieCarousel4" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+			        <div class="carousel-inner" id="carousel4"></div>
+			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel4" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon"></span>
+			        </button>
+			        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel4" data-bs-slide="next">
+			            <span class="carousel-control-next-icon"></span>
+			        </button>
+			    </div>
+			</div>
         </section>
-	<th:block th:include="common/footer"></th:block>
-</body>
-<script>
+    <script>
 	function nowPlaying(){
-		const numPerPage = 4;
 		$.ajax({
 			url : "/api/nowPlaying",
 			type : "get",
-			success : function(data){
-				//console.log(data);
-				let slideSize = data.length%numPerPage==0 ? data.length/numPerPage : (data.length/numPerPage)+1;
-				//console.log(slideSize);
-				for(let j=0; j<slideSize; j++){
-					const slide = $("<div>");
-					slide.addClass("swiper-slide");
-					const movieWrap= $("<div>");
-					movieWrap.addClass("movie-wrap");
-					slide.append(movieWrap);
-					for(let i=0; i<numPerPage;i++){
-						let index = i+j*numPerPage
-						//const a = $("<a>");
-						//a.attr("href","/api/movieDetail?movieId="+data[index].movieId);
-						const movieBox = $("<div>");
-						movieBox.addClass("movie-box").addClass("col-md-3")
-						movieBox.on("click",function(){							
-							location.href= "/api/movieDetail?movieId="+data[index].movieId;
-						});
-						const posterDiv = $("<div>");
-						const poster = $("<img>");
-						const posterPath = "https://image.tmdb.org/t/p/original" + data[index].posterPath;
-						poster.attr("src",posterPath).css("width",'100%').css("height","100%").css("object-fit","fill");
-						posterDiv.addClass("poster").append(poster);
-						
-						const titleDiv = $("<div>");
-						const title = $("<p>").text(data[index].title);
-						const release = $("<p>").text(data[index].releaseDate);
-						titleDiv.append(title).append(release);
-						//상단부 끝
-						const starpoint = $("<p>");
-						starpoint.text("3.5점");
-						const genre = $("<div>");
-						genre.addClass("flex");
-						data[i].genreIds.forEach(function(item,index){
-							const span = $("<span>");
-							span.text(item+" ");
-							genre.append(span);
-						});
-						//하단부 끝
-						movieBox.append(posterDiv).append(titleDiv).append(starpoint).append(genre);
-						movieWrap.append(movieBox);
-					}
-					slide.append(movieWrap);
-					$(".swiper-wrapper").append(slide);
-					const swiper = new Swiper('.swiper', {
-						slidesOffsetBefore : 0,
-						slidesOffsetAfter : 0,
-						centeredSlides: true,
-					    navigation: {
-					      nextEl: '.swiper-button-next',
-					      prevEl: '.swiper-button-prev',
-					    }
-					});			
-				}
-			}
+			success : function(movies){
+				const carouselContent = $("#carousel1");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	function trend(){
+		$.ajax({
+			url : "/api/trend",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel2");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	function popular(){
+		$.ajax({
+			url : "/api/popular",
+			type : "get",
+			success : function(movies){
+				
+				const carouselContent = $("#carousel3");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	function comming(){
+		$.ajax({
+			url : "/api/upcomming",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel4");
+				makeSlide(movies,carouselContent);
+			}    
 		});
 	}
 	
 	
-
-	nowPlaying();
 	
-</script>
+	function makeSlide(obj1,obj2){
+		const movies = obj1;
+		const carouselContent = obj2;
+        let slideIndex = 0;
+        let indexNo= 1;
+        for (let i = 0; i < movies.length; i += 5) {
+            let moviesSlice = movies.slice(i, i + 5);
+            let isActive = slideIndex === 0 ? "active" : "";
+            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
+            let row = $("<div>").addClass("row d-flex justify-content-center");
+
+            
+            $.each(moviesSlice, function (index, movie) {
+                let col = $("<div>").addClass("col-md-2 mx-1");
+
+                const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
+                let card = $("<div>").addClass("card");
+                const id = movie.movieId;
+                card.on('click',function(){
+                	location.href = "/api/movieDetail?movieId="+id;
+                });
+                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
+                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+                let imgDiv = $("<div>").addClass("img-div").append(img);
+
+                let cardBody = $("<div>").addClass("card-body");
+                let title = $("<div>").addClass("card-title").text(movie.title);
+                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
+                
+                let rating = $("<div>").addClass("rating");
+                //let ratingText = $("<span>").text(movie.rating);
+                //rating.append(star);
+                let genreInfo = $("<div>").addClass("genre-info");						
+                $.each(movie.genreIds, function(index, genre){
+                	const p = $("<p>").append(genre);
+                	genreInfo.append(p);
+                });
+                // 카드 조립
+                cardBody.append(title, info, rating, genreInfo);
+                card.append(rankBadge, imgDiv, cardBody);
+                col.append(card);
+                row.append(col);
+            });
+            slide.append(row);
+            carouselContent.append(slide);
+            slideIndex++;
+        }
+	}
+	
+	nowPlaying();
+	trend();
+	popular();
+	comming();
+	</script>
+<th:block th:include="common/footer"></th:block>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+</body>
 </html>

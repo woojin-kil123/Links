@@ -10,10 +10,18 @@
 		<section class="section find-wrap">
 			<div class="page-title">회원가입</div>
 			
-		<button>일반 회원가입</button>
-			<button>사업자 회원가입</button>
+		<button id="join">일반 회원가입</button>
+			<button id="bu-join">사업자 회원가입</button>
 		</section>
 	</main>
+	<script>
+		$("#join").on("click",function(){
+		location.href="/member/joinFrm";			
+		})
+		$("#bu-join").on("click",function(){
+		location.href="/member/bujoinFrm";		
+		})
+	</script>
 <th:block th:include="common/footer"></th:block>
 </body>
 </html>

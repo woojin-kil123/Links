@@ -8,6 +8,7 @@
 		position : relative;
 		justify-content: center;
 	}
+
 	.outline>.title{
 		font-size : 35px;
 		font-weight: bolder;
@@ -32,9 +33,16 @@
 		margin-left : 20px;
 	}
 	
+	#rating>.modal-dialog {
+		top : 30%;
+	}
+	#modal>.modal-dialog {
+		top : 10%;
+	}
+	
 	.modal>.modal-dialog>.rating-modal{
-		height : 400px;
-		width : 400px;
+		height : 500px;
+		width : 800px;
 		display : flex;
 		align-items: center;
 	}
@@ -50,33 +58,45 @@
 		justify-content: center;
 		align-items: center;		
 	}
+	
 	.modal-body>.text-left{
 		margin-top : 40px;
 		text-align : left;
 		height : 400px;
 	}
-	.btn-wrap{
+	.modal-body>div{
+		margin-bottom : 40px;
+	}
+	.modal .btn-wrap{
+		margin-top : 50px;	
 		display : flex;
 		justify-content: center;
 		gap : 50px;
 	}
+	.row-1 .btn-wrap{
+		display : flex;
+		justify-content: center;
+		gap : 50px;
+	}
+	
 	.btn-wrap>.btn{
 		display : flex;
 		align-items: center;
-
 	}
-	.container{
-		display:flex;
+	.movie-wrap{
+		display: flex;			
 	}
+	
 	tbody>tr>.text-box{
 		height : 50%;
-		background-color:rgba(255, 241, 0, 0.2);
+		background-color: #fcf8e3;
 		align-content: center;
 		line-height: 40px;
 	}
 	.star-box{
 		height : 50%;
 	}
+	
 		
 	.row-1>td{
 		width : calc(100%/3);
@@ -92,37 +112,253 @@
 		line-height : 50px;
 	}
 	.row-1 .star-rating{
+		display:flex;
+		flex-direction: row-reverse;
+	  	justify-content:space-around;
+	  	text-align:center;
 		font-size : 50px;
 		line-height : 50px;
-	}
-	
-	.star-rating {
-	  display:flex;
-	  flex-direction: row-reverse;
-	  justify-content:space-around;
-	  text-align:center;
+		padding-bottom : 0;
 	}
 	
 	.star-rating input {
 	  display:none;
 	}
 	
-	.star-rating label {
+	.star-hover label {
 	  color:#ccc;
 	  cursor:pointer;
 	}
-	
-	.star-rating :checked ~ label {
-	  color:#f90;
+	.star-rating>input:checked ~ label {
+	  color:#FFB200;
 	}
 	
-	.star-rating label:hover,
-	.star-rating label:hover ~ label {
+	.star-hover>input:checked ~ label {
+	  color:#FFB200;
+	}
+	
+	.star-hover label:hover,
+	.star-hover label:hover ~ label {
 	  color:#fc0;
 	}
-
 	
+	.star-rating>label {
+		font-size : 50px;
+		line-height : 50px;
+	 	color:#ccc;
+	}
+	.btn-wrap>.liking{
+		color: rgb(255, 77, 0);
+	}
 
+	.row{
+		display:flex;
+	}
+
+.comment-slider {
+    max-width: 900px;
+    margin : 50px auto;
+    
+}
+.container>.comment-slider{
+	max-width : 100%;
+}
+#commentCarousel{
+	width : 100%;
+}
+
+.comment-card {
+    background-color: #fcf8e3;
+    border: 1px solid #f2e3b6;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 160px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+}
+
+.comment-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.comment-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
+.comment-rating {
+    font-size: 14px;
+}
+
+.comment-rating .star {
+    color: gold;
+}
+
+.comment-body {
+    margin-top: 5px;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 38px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.comment-footer .icon {
+    margin-right: 4px;
+    color: #ff9800;
+}
+
+.more-comments {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+.comment-slider .carousel-item>.d-flex{
+	justify-content: flex-start;
+	margin-left : 20px;
+	margin-right : 20px;
+}
+
+#movieCarousel1 .carousel-inner{
+	height : 400px;
+	margin-top : 30px;
+	margin-bottom : 30px;
+	align-content: center;
+}
+
+.card {
+    height: 400px;
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* 호버 효과 */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.rank-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.img-div{
+    width: 100%;
+    height: 65%;
+}
+.card-img-top {
+	width : 100%;
+	height : 100%;
+    object-fit: fill;
+    background-color: #f0f0f0;
+}
+
+.card-body {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.card-title {
+	height: 30%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    word-wrap: break-word
+}
+
+.card-info {
+    font-size: 12px;
+    color: gray;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.rating .star {
+    color: gold;
+    margin-right: 5px;
+}
+
+.genre-info {
+	height :30%;
+	display : flex;
+	justify-content : center;
+	align-items : center;	
+    font-size: 12px;
+    color: black;
+    gap : 5px;
+    flex-wrap: wrap;
+}
+.genre-info>p {
+	margin : 0;
+}
+.carousel>.carousel-control-prev{
+	width : 40px;
+	top : 40%;
+	height : 10%;
+	background-color : black;
+}
+.carousel>.carousel-control-next{
+	width : 40px;
+	top : 40%;
+	height : 10%;
+	right : -35px;
+	background-color : black;
+}
+	
 		
 		
 		

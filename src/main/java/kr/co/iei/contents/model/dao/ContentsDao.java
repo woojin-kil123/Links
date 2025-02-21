@@ -42,4 +42,41 @@ public class ContentsDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
+	public int selectAvgPoint(String contentNo) {
+		String query = "select avg(starpoint) from content_star where content_no=?";
+		Object[] params = {contentNo};
+		int avgStar = jdbc.queryForObject(query, Integer.class, params);
+ 		return avgStar;
+	}
+	public int updateMovieStar(int avgStar, String movieId) {
+		String query = "update movie set movie_avgpoint = ? where movie_id= ?";
+		Object[] params = {avgStar, movieId};
+		int result = jdbc.update(query,params);
+		return result;
+	}
+	public int selectMemberStar(ContentStar cs) {
+		String query = "select starpoint from content_star where content_no=? and member_id=? ";
+		Object[] params = {cs.getContentNo(),cs.getMemberId()};
+		int result = jdbc.queryForObject(query, Integer.class, params);
+		return result;
+	}
+	public int insertContentLike(ContentStar cs) {
+		String query = "insert into content_like values(?,?)";
+		Object[] params = {cs.getContentNo(),cs.getMemberId()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+	public int deleteContentLike(ContentStar cs) {
+		String query = "delete from content_like where content_no=? and member_id=?";
+		Object[] params = {cs.getContentNo(),cs.getMemberId()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+	public int selectMemberLike(ContentStar cs) {
+		System.out.println(cs);
+		String query = "select count(*) from content_like where content_no=? and member_id=? ";
+		Object[] params = {cs.getContentNo(),cs.getMemberId()};
+		int result = jdbc.queryForObject(query, Integer.class, params);
+		return result;
+	}
 }

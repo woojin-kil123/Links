@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.comment.model.vo.ReComment;
+import kr.co.iei.contents.model.vo.DbMovie;
+import kr.co.iei.member.model.vo.Member;
 
-import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value="/comment")
@@ -24,6 +24,13 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@ResponseBody
+	@GetMapping("/oneMovieComment")
+	public List oneMovieComment(String contentNo) {
+		List list = commentService.oneMovieComment(contentNo);
+		return list;
+	}
 	
 	@ResponseBody
 	@PostMapping("/insertComment")
@@ -39,19 +46,19 @@ public class CommentController {
 		return "comment/mCommentMemberList";
 	}
 	
-	@GetMapping(value="/bCommentMemberList")
-	public String bCommentMemberList() {
-		return "comment/bCommentMemberList";
-	}
+	
 	
 	@GetMapping(value="/mCommentList")
 	public String mCommentList(String contentNo, Model model) {
+		DbMovie m = new DbMovie();
+		List list = commentService.mCommentList(contentNo );
 		
-		List list = commentService.mCommentList(contentNo);
-		String movieTitle = commentService.selectMovieTitle(contentNo);
-		
-		
+		//영화제목 가져올때 영화제목만 가져오셨겠죠?
+		DbMovie movie = commentService.selectMovieInfo(contentNo);
+		 
 		model.addAttribute("list", list);
+		model.addAttribute("movie", movie);
+		model.addAttribute("listNo", contentNo);
 		
 		
 		return "comment/mCommentList";
@@ -59,10 +66,7 @@ public class CommentController {
 	
 	
 	
-	@GetMapping(value="/bCommentList")
-	public String bCommentList() {
-		return "comment/bCommentList";
-	}
+	
 	
 	// 푸터에 코멘트 개수 전달
     @ResponseBody
@@ -72,7 +76,7 @@ public class CommentController {
     }
 	@GetMapping(value="/myCommentList")
 	public String myCommentList(String contentNo, Model model) {
-		List list = commentService.mCommentList(contentNo);		
+		List list = commentService.mCommentList(contentNo );		
 		model.addAttribute("list", list);		
 		return "comment/myCommentList";
 	}
@@ -98,4 +102,18 @@ public class CommentController {
 		return "comment/updateFrm";
 	}
 	
+	@PostMapping(value="/update")
+	public String updateComm(Comment c) {
+		int result = commentService.updateComm(c);
+		return "redirect:/comment/mCommentMemberList";
+	}
+	
+	@PostMapping(value="/reComm")
+	public String reCommInsert(ReComment rc, String contentNo) {
+		//commentNo 이걸로 contentNo 조회 할수 있어요?
+		System.out.println(rc);
+		Member member = new Member();
+		int result = commentService.reCommInsert(rc);
+		return "redirect:/comment/mCommentList?contentNo="+contentNo;
+	}
 }

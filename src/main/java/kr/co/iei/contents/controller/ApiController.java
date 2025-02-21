@@ -37,7 +37,6 @@ public class ApiController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(movieList.toString());
 			return movieList;
 	}
     @GetMapping(value="/movieDetail")
@@ -50,16 +49,76 @@ public class ApiController {
 			e.printStackTrace();
 		}
 		model.addAttribute("movie",movie);
-		System.out.println(movie);
         return "contents/movieDetail";
 	}
-    
-    //검색어를 받아서 searchMovie.html로 이동
     @GetMapping("/searchMovie")
     public String searchMovie(@RequestParam(required = false) String query, Model model) {
         model.addAttribute("query", query);
         return "search/searchMovie";
     }
+    @ResponseBody
+    @GetMapping("/searchResult")
+    public List searchResult(String query, Model model) {
+    	List movieList = null;
+    	System.out.println("컨트롤러 query = " +query);
+		try {
+			movieList = apiService.searchMovies(query);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return movieList;
+    }
+    @ResponseBody
+	@GetMapping("/trend")
+    public List trendMovies() {
+	 	List movieList = null;
+		try {
+			movieList = apiService.trendMovies();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return movieList;
+	}
+    @ResponseBody
+	@GetMapping("/popular")
+    public List popular() {
+	 	List movieList = null;
+		try {
+			movieList = apiService.popular();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return movieList;
+	}
+    @ResponseBody
+	@GetMapping("/upcomming")
+    public List upcomming() {
+	 	List movieList = null;
+		try {
+			movieList = apiService.upcomming();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return movieList;
+	}
+    @ResponseBody
+   	@GetMapping("/recommend")
+       public List recommend() {
+   	 	List movieList = null;
+   		try {
+   			movieList = apiService.recommend();
+   		} catch (IOException e) {
+   			// TODO Auto-generated catch block
+   			e.printStackTrace();
+   		}
+   		return movieList;
+   	}
+    
+    
 	/*
 	@ResponseBody
 	@GetMapping("/insertref")
