@@ -69,6 +69,8 @@
 		background-color: #F3EEEE;
 		border-bottom : 3px solid #D9D9D9;
 		
+		border-bottom: 300px;
+		
 	}
 	.line1{
 		width: 780px;
@@ -121,34 +123,46 @@
 	}
 	.btn-box{
 		width:800px;
-				
+		height: 200px;		
 		border-top: 2px solid #C4C4C4;
 		background-color: #FFF9F9;	
-		overflow: hidden;
+		display : flex;
+		
 	}
 	
 	.choice-like{
 		margin-top: 8px;
 		margin-left: 200px;
-		float: left;
+		
 		cursor: pointer; 
 		
 	}
 	.choice-comment{
 		margin-top: 8px;
 		margin-left: 490px;
-		float: lift;
+		
 		cursor: pointer;
 	}
+	
+	
+	
+	
 	.inputBox{
 		display: none;
+		background-color: transparent;
 	}
 	
+	
 	.line2{
-		width: 1000px;
+		margin: 0 auto;
+		width: 700px;
+		background-color: #FEECEC;
 	}	
 	.movie-re-comment{
-		width: 600px;
+		width: 500px;
+		height:145px;
+		
+		
 		
 	}
 
@@ -257,7 +271,7 @@
 												<th style="width:17%;"></th>
 											<tr>
 											<tr>
-												
+												<th th:text= "${lno.reCommentContent}" class="movie-re-comment"></th>
 											</tr>			
 										</table>
 									</div>
@@ -279,7 +293,7 @@
 		</section>
 	</main>
 	
-	
+	<th:block th:include="common/header"></th:block>
 	
 	<script>
 		$(".windowShow").on("click",function(){
@@ -343,7 +357,7 @@
 		
 	</script>
 	
-	<th:block th:include="common/footer"></th:block>
+	
 </body>
 </html>
 
