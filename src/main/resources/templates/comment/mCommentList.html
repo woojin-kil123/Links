@@ -214,8 +214,8 @@
 										<span class="material-icons">subdirectory_arrow_right</span>									
 									</div>  
 									<div>
-										<input type="hidden" name="memberId" th:text= "${rc.memberId}" >
-										<input type="hidden" name="commentNo" th:text= "${rc.commentNo}" >
+										<input type="hidden" name="memberId" th:value= "${rc.memberId}" >
+										<input type="hidden" name="commentNo" th:value= "${rc.commentNo}" >
 										
 										<div class="input-item">
 											<textarea name="reCommentContent"></textarea>

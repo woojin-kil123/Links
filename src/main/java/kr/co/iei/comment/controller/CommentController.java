@@ -15,10 +15,7 @@ import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.ReComment;
 import kr.co.iei.contents.model.vo.DbMovie;
 
-import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value="/comment")
@@ -62,10 +59,7 @@ public class CommentController {
 	
 	
 	
-	@GetMapping(value="/bCommentList")
-	public String bCommentList() {
-		return "comment/bCommentList";
-	}
+	
 	
 	// 푸터에 코멘트 개수 전달
     @ResponseBody
@@ -110,6 +104,6 @@ public class CommentController {
 	@PostMapping(value="/reComm")
 	public String reCommInsert(ReComment rc) {
 		int result = commentService.reCommInsert(rc);
-		return "redirect:/comment/mCommentMemberList";
+		return "redirect:/comment/mCommentMemberList?contentNo="+rc.getCommentNo();
 	}
 }
