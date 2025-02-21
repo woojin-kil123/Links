@@ -25,6 +25,13 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@ResponseBody
+	@GetMapping("/oneMovieComment")
+	public List oneMovieComment(String contentNo) {
+		List list = commentService.oneMovieComment(contentNo);
+		return list;
+	}
+	
+	@ResponseBody
 	@PostMapping("/insertComment")
 	public int insertComment(Comment comment) {
 		int result = commentService.insertComment(comment);

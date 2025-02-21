@@ -1,145 +1,113 @@
-const movieId = [[${movie.movieId}]];
-const memberId = [[${session.member?.memberId}]];
-//내가준 별점 불러오기
-$("[name=rating]").on("click",function(){
-	if(memberId==null){
-		location.href="/member/loginFrm";
-	}else{
-		const value = $(this).val();
-		$(".rating-input").text(value);
-		$(".rating").click();
-	}
-});
-//작업해
-$("#like").on("click",function(){
-	if($(this).hasClass("liking")){
-		//좋아요 누르는 작업해야함
-		deleteContentLike();
-		$(this).removeClass("liking");
-	}else{
-		insertContentLike();
-		$(this).addClass("liking");
-	}
-});		
-function insertContentLike(){
+function commentList(movieId) {
+	console.log(movieId);
 	$.ajax({
-		url : "/contents/insertContentLike",
-		data : {"contentNo":"m"+movieId, "memberId" : memberId},
-		success: function(data){
-		}
-	})			
-}
-function deleteContentLike(){
-	$.ajax({
-		url : "/contents/deleteContentLike",
-		data : {"contentNo":"m"+movieId, "memberId" : memberId},
-		success: function(data){
-		}
-	})			
-}
-$(".rating-submit").on("click",function(){
-	const value = $(".rating-input").text();
-	$.ajax({
-		url : "/contents/insertRating",
-		type : "get",
-		data : {"starpoint":value, "memberId":memberId, "contentNo": "m"+movieId},
-		success : function(data){
-			selectMemberStar();
-			selectMovie();
-		}
-	})
-});
-
-$(".comment-submit").on("click",function(){
-	const commentContent = $(this).parent().prev().find("#content").val();
-	console.log(commentContent);
-	 
-	$.ajax({
-		url : "/comment/insertComment",
-		type : "post",
-		data : {"contentNo" : "m"+movieId, "memberId":memberId,"commentContent" : commentContent},
-		success: function(data){
-			if(data>0){
-				//console.log("comment 입력 결과 : "+ data);
+		url : "/comment/oneMovieComment",
+		data : {"contentNo":"m"+movieId},
+		success : function(comments){
+			console.log(comments);
+			if(comments.length>0){
+			   let carouselInner = $("#commentCarousel .carousel-inner");
+		       let slideIndex = 0;
+	
+		       for (let i = 0; i < comments.length; i += 4) {
+		           let commentSlice = comments.slice(i, i + 4);
+		           let isActive = slideIndex === 0 ? "active" : "";
+		           let slide = $("<div>").addClass(`carousel-item ${isActive}`);
+		           let row = $("<div>").addClass("d-flex justify-content-between");
+	
+		           $.each(commentSlice, function (index, comment) {
+		               let card = $("<div>").addClass("comment-card");
+	
+		               let header = $("<div>").addClass("comment-header");
+		               let userInfo = $("<div>").addClass("comment-user");
+		               let userImg = $("<img>").attr("src", "/image/userimg.png");
+		               let memberId = $("<span>").text(comment.memberId);
+	
+		               userInfo.append(userImg, memberId);
+		               let title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+		               header.append(userInfo, title);
+	
+					   
+					   
+		               let rating = $("<div>").addClass("comment-rating");
+		               for (let j = 0; j < 5; j++) {
+		                   let star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+		                   rating.append(star);
+		               }
+	
+		               let body = $("<div>").addClass("comment-body").text(comment.commentContent);
+		               let footer = $("<div>").addClass("comment-footer");
+		               let like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
+		               let dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
+		               
+		               footer.append(like, dislike);
+		               card.append(header, rating, body, footer);
+		               row.append(card);
+		           });
+	
+		           slide.append(row);
+		           carouselInner.append(slide);
+		           slideIndex++;
+				}
+				$("#comment-count").text(comments.length);
+				if(comments.length>4){
+					$(".container>.more-comments").css("display","inline-block");
+					$(".more-comments").on("click", function () {
+				       window.location.href = "/comment/mCommentMemberList";
+					});
+				}
 			}
 		}
-	});			
-})
-function selectMovie(){
-	 $.ajax({
-			url : "/contents/selectMovie",
-			type : "get",
-			data : {"movieId":movieId},
-			success: function(data){
-				console.log("movie 조회결과 : "+ data);
-				if(data==""){
-					console.log("null결과 : "+ data);
-					const movieTitle = [[${movie.title}]];
-					const posterPath = [[${movie.posterPath}]];
-					$.ajax({
-						url : "/contents/insertMovie",
-						type : "post",
-						data : {"movieId":movieId, "movieTitle" : movieTitle, "posterPath" : posterPath},
-						success: function(data){
-							
-						},
-						error : function(){
-							console.log("insert error");						
-						}
-					})
-				}else{
-					/*
-					private String  movieAvgPoint;
-					private String moviePlatform;
-					private int linkClick;
-					*/
-					if(data.movieAvgPoint==null){
-						$("#avg-star-input").text("아직 평가가 없어요 ㅠㅠ");
-					}else{
-						$("#avg-star-input").text(data.movieAvgPoint).addClass("fs-2");
-					}
-					$("#link").attr("href",data.moviePlatform);
-				}
-			},
-			error : function(){
-				console.log("select error");						
-			}
-		});
- };
-	function selectMemberInfo(){
-		if(memberId!=null){
-			$.ajax({
-				url : "/contents/selectMemberStar",
-				data :{"memberId" : memberId, "contentNo" : "m"+movieId},
-				success : function(data){
-					console.log(data);
-					if(data>0){
-						$(".star-rating").removeClass("star-hover");
-						$(".star-rating>input+label").removeAttr("for");
-						for(let i=0; i<data; i++){
-							$("[name=rating]").eq(4-i).prop("checked",true);
-						}
-						$(".rating").removeClass("rating");
-						$("#mystar-check").css("display","block");
-					}
-				}
-			});
-			console.log(memberId);
-			$.ajax({
-				url : "/contents/selectMemberLike",
-				data :{"memberId" : memberId, "contentNo" : "m"+movieId},
-				success : function(data){
-					console.log(data);
-					if(data>0){
-						$("#like").addClass("liking");
-					}
-				}
-			})
-		}
-	}
-$(".toLogin").on("click",function(){
-		location.href= "/member/loginFrm";
-});
+	});
+}
 
-selectMovie();
-selectMemberInfo();
+function makeSlide(obj1,obj2){
+		const movies = obj1;
+		const carouselContent = obj2;
+        let slideIndex = 0;
+        let indexNo= 1;
+        for (let i = 0; i < movies.length; i += 5) {
+            let moviesSlice = movies.slice(i, i + 5);
+            let isActive = slideIndex === 0 ? "active" : "";
+            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
+            let row = $("<div>").addClass("row d-flex justify-content-center");
+
+            
+            $.each(moviesSlice, function (index, movie) {
+                let col = $("<div>").addClass("col-md-2 mx-1");
+
+                const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
+                let card = $("<div>").addClass("card");
+                const id = movie.movieId;
+                card.on('click',function(){
+                	location.href = "/api/movieDetail?movieId="+id;
+                });
+                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
+                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+                let imgDiv = $("<div>").addClass("img-div").append(img);
+
+                let cardBody = $("<div>").addClass("card-body");
+                let title = $("<div>").addClass("card-title").text(movie.title);
+                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
+                
+                let rating = $("<div>").addClass("rating");
+                //let ratingText = $("<span>").text(movie.rating);
+                //rating.append(star);
+                let genreInfo = $("<div>").addClass("genre-info");						
+                $.each(movie.genreIds, function(index, genre){
+                	const p = $("<p>").append(genre);
+                	genreInfo.append(p);
+                });
+                // 카드 조립
+                cardBody.append(title, info, rating, genreInfo);
+                card.append(rankBadge, imgDiv, cardBody);
+                col.append(card);
+                row.append(col);
+            });
+            slide.append(row);
+            carouselContent.append(slide);
+            slideIndex++;
+        }
+	}
+
+

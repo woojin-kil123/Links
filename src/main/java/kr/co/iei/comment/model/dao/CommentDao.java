@@ -110,6 +110,13 @@ public class CommentDao {
 		int result = jdbc.update(query,params);
 		return result;
 	}
+
+	public List oneMovieComment(String contentNo) {
+		String query = "select * from comm where content_no=?";
+		Object[] params = {contentNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		return list;
+	}
 	
 }
 
