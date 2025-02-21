@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class Check {
 	private String companyName;
-	private int companyNo;
+	private String companyNo;
 }

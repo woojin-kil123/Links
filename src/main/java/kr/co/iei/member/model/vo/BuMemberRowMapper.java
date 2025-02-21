@@ -24,7 +24,7 @@ public class BuMemberRowMapper implements RowMapper<BuMember>{
 		bm.setMemberRole(rs.getString("member_role"));
 		bm.setWarningLevel(rs.getInt("warning_level"));
 		bm.setBusinessName(rs.getString("company_name"));
-		bm.setBusinessNo(rs.getInt("company_no"));
+		bm.setBusinessNo(rs.getString("company_no"));
 		return bm;
 		
 	}

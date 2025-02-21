@@ -17,6 +17,6 @@ public class BuMember {
  private String memberRole;
  private int warningLevel;
  private String del;
- private int businessNo;
+ private String businessNo;
  private String businessName;
 }

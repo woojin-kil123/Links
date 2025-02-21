@@ -104,11 +104,11 @@
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
-						<label for="BusimessNo">사업자 번호</label>
+						<label for="busimessNo">사업자 번호</label>
 					</div>
 					<div class="input-type">
-						<input type="text" name="BusinessNo" id="BusinessNo">
-						<input type="hidden" name="BusinessName" id="BusinessName">
+						<input type="text" name="businessNo" id="businessNo">
+						<input type="hidden" name="businessName" id="businessName">
 					</div>
 					<button type="button" id="check">사업자번호  확인</button>
 				</div>
@@ -179,15 +179,18 @@
 				$(".pw-check-msg").addClass("valid");
 			}
 		});
+		let comapnyName= null;
 		$("#check").on("click",function(){
-			const businessNo =$(".BusinessNo").val();
+			const businessNo =$("#businessNo").val();
 			$.ajax({
 				url :"/company/check",
 				type: "get",
 				data : {businessNo : businessNo},
 				success: function(result){
+					console.log(result);
 					if(result){
-					
+					 companyName=result.companyName;
+					$("#businessName").val(companyName)
 					}else{
 						
 					}

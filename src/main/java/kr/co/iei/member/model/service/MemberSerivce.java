@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kr.co.iei.member.model.dao.MemberDao;
+import kr.co.iei.member.model.vo.BuMember;
 import kr.co.iei.member.model.vo.Member;
 
 @Service
@@ -50,6 +51,10 @@ public class MemberSerivce {
 	@Transactional
 	public int pwChange(Member m) {
 		int result= memberDao.pwChange(m);
+		return result;
+	}
+	public int insertBuMember(BuMember bum) {
+		int result= memberDao.insertBuMember(bum);
 		return result;
 	}
 }
