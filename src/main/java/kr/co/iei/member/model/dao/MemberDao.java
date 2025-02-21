@@ -105,11 +105,23 @@ public class MemberDao {
 	}
 
 	public int insertBuMember(BuMember bum) {
-		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,'business',1,'N')";
-		Object[] params= {bum.getMemberName(), bum.getMemberId(), bum.getMemberPw(),bum.getMemberEmail(),bum.getMemberPhone()};
-		int result= jdbc.update(query,params);
-		return result;
-		
+		String query= "insert into member values(?,?,?,?,?,?,'business',1,'N')";
+		Object[] params= {bum.getMemberNo(),bum.getMemberName(), bum.getMemberId(), bum.getMemberPw(),bum.getMemberEmail(),bum.getMemberPhone()};
+		int result1= jdbc.update(query,params);
+		return result1;
+	}
+
+	public int newMemberNo() {
+		String query="select member_seq.nextval from dual";
+		int memberNo =jdbc.queryForObject(query, Integer.class);
+		return memberNo;
+	}
+
+	public int insertBusiness(BuMember bum) {
+		String query= "insert into business values(?,?,?)";
+		Object[] params= {bum.getMemberNo(),bum.getBusinessName(),bum.getBusinessNo()};
+		int result2= jdbc.update(query,params);
+		return result2;
 	}
 
 
