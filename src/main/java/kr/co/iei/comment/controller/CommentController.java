@@ -14,6 +14,7 @@ import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.ReComment;
 import kr.co.iei.contents.model.vo.DbMovie;
+import kr.co.iei.member.model.vo.Member;
 
 
 
@@ -102,8 +103,11 @@ public class CommentController {
 	}
 	
 	@PostMapping(value="/reComm")
-	public String reCommInsert(ReComment rc) {
+	public String reCommInsert(ReComment rc, String contentNo) {
+		//commentNo 이걸로 contentNo 조회 할수 있어요?
+		System.out.println(rc);
+		Member member = new Member();
 		int result = commentService.reCommInsert(rc);
-		return "redirect:/comment/mCommentList?contentNo="+rc.getCommentNo();
+		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
 }
