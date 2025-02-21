@@ -99,9 +99,7 @@
 	.partner{
 		width: 750px;
 		margin: 0 auto;
-		padding: 0;
-		
-		
+		padding: 0;	
 		margin : 7px 7px;			
 	}
 	
@@ -119,14 +117,19 @@
 		height: 18px;
 		margin-top: 5px;
 		margin-left: 15px;
-		cursor: pointer;			
+		cursor: pointer;		
 	}
+	.dots{
+		float:right;
+		margin-right: 15px;
+	}
+	
 	.btn-box{
 		width:800px;
-		height: 200px;		
+		height: 70px;		
 		border-top: 2px solid #C4C4C4;
 		background-color: #FFF9F9;	
-		display : flex;
+		
 		
 	}
 	
@@ -155,17 +158,21 @@
 	
 	.line2{
 		margin: 0 auto;
+		margin-top: 30px;
 		width: 700px;
 		background-color: #FEECEC;
 	}	
 	.movie-re-comment{
 		width: 500px;
 		height:145px;
-		
-		
-		
+				
 	}
-
+	
+	.modal-box{
+		width: 300px;
+		height: 350px;
+	}
+	
 </style>
 
 </head>
@@ -216,6 +223,7 @@
 							<span class="count"> 0 </span>
 							<span class="material-icons ">textsms </span>
 							<span class="count"> 0 </span>	
+							<span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span>
 						</div>
 						
 						<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
@@ -291,6 +299,34 @@
 				
 			</div>
 		</section>
+		<!-- 모달 -->
+		<!-- Portfolio item 6 modal popup-->
+        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-box">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-s-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->                                    
+                                    <div class="item-intro text-muted">욕설  : 공격적인 언어 사용</div>
+                                    <div class="item-intro text-muted">혐오 발언 : 각종 비하 및 차별 발언</div>
+                                    <div class="item-intro text-muted">스포일러 : 작품의 평가가 아닌 결과만 발언</div>
+                                    <div class="item-intro text-muted">도배 : 의미 없는 문자로 수십번 반복 사용</div>
+                                    
+                                    <button class="btn btn-primary btn-s text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
 	</main>
 	
 	<th:block th:include="common/header"></th:block>
