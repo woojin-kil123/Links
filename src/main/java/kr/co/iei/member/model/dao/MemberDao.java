@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.member.model.vo.BuMember;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberRowMapper;
 
@@ -101,6 +102,14 @@ public class MemberDao {
 		Object[] params = {m.getMemberPw(),m.getMemberId()};
 		int result= jdbc.update(query,params);;
 		return result;
+	}
+
+	public int insertBuMember(BuMember bum) {
+		String query= "insert into member values(member_seq.nextval,?,?,?,?,?,'business',1,'N')";
+		Object[] params= {bum.getMemberName(), bum.getMemberId(), bum.getMemberPw(),bum.getMemberEmail(),bum.getMemberPhone()};
+		int result= jdbc.update(query,params);
+		return result;
+		
 	}
 
 

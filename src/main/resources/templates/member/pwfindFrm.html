@@ -13,7 +13,6 @@
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
-	
 	.find-wrap .input-wrap{
 		padding : 15px 30px;
 	}
@@ -23,7 +22,13 @@
 	.pwfind-button-box>button{
 		width: 100%
 	}
-	
+	input{
+	border :none;
+	border-bottom: 1px solid black;
+	width : 100%
+	}.input-title{
+	padding-top: 10px;
+	}
 </style>
 </head>
 <body>
@@ -93,7 +98,6 @@
 					 mailCode = data;
 						$("#auth").show();
 						authTime();
-					
 				},
 			error: function(){
 			}
@@ -107,12 +111,11 @@
 				$("#authMsg").text("인증 완료");
 				$("#authMsg").css("color","green");
 				mailCode = null;
-				
 				$("#email").prop("readonly",true);
 				$("#send-btn").prop("disabled",true);
 				$("#auth-code").prop("readonly",true);
 				$("#auth-btn").prop("disabled",true);
-				$("#time-zone").remove;
+				$("#time-zone").removeId;
 			}else{
 				$("#authMsg").text("인증 번호를 확인해 주세요");
 				$("#authMsg").css("color","red");
@@ -121,7 +124,6 @@
 		let intervalId =null;
 		function authTime(){
 			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
-			
 			intervalId = window.setInterval(function(){
 				const min =$("#min").text();
 				const sec =$("#sec").text();
@@ -137,9 +139,7 @@
 						const newMin = Number(min) -1;
 						$("#min").text(newMin);
 						$("#sec").text(59);
-						
 					}
-						
 				}else{
 					//읽어온 값이 00초가 아니면 초만 내리면 됨
 					const newSec=Number(sec) - 1;
@@ -151,14 +151,6 @@
 				}
 			},1000);
 		}
-		$(".lg").on("click",function(){
-			const idval=$(".memberId").val()
-			if(idval==null){
-				alert("아이디를 입력하세요")
-			}
-		})
-			
-		
 	</script>
 <th:block th:include="common/footer"></th:block>
 </body>
