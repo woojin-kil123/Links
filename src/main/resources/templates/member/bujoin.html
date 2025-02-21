@@ -38,15 +38,25 @@
 	padding-top: 10px;
 	}
 	.email{
-	width:35%
+	width:35%;
+	margin-right: 10px;
 	}
-	.mail2{
-	margin-left: 20px;
+	.email2{
+	width:35%;
+	margin-left: 10px;
+	}
+	.mail{
+	margin-left: 10px;
 	width: 25%
+	}
+	.email-wrap{
+	display: flex;
+	width:100%;
 	}
 	.btn-primary{
 	margin-top: 20px;
 	}
+	
 </style>
 </head>
 <body>
@@ -104,14 +114,14 @@
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
-						<label for="busimessNo">사업자 번호</label>
+						<label for="businessNo">사업자 번호</label>
 					</div>
 					<div class="input-type">
 						<input type="text" name="businessNo" id="businessNo">
 						<input type="hidden" name="businessName" id="businessName">
 					</div>
-					<p class="input-msg no-check-msg"></p>
-					<button type="button" id="check">사업자번호  확인</button>
+					<p class="input-msg  no-check-msg"></p>
+					<button type="button" class="btn-primary" id="check">사업자번호  확인</button>
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
@@ -122,8 +132,8 @@
 					<div class="email-wrap">
 						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
 						@
-						<input type="text" class="email" name="memberEmail2" id="memberEmail2">
-						<select class="mail2">
+						<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
+						<select class="mail">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -132,7 +142,7 @@
 						<input type="hidden" name="memberEmail" id="memberEmail">
 					</div>
 					</div>
-						<button type="button"class="btn-primary" id="send-btn" >인증번호 발송</button>
+						<button type="button" class="btn-primary" id="send-btn" >인증번호 발송</button>
 					</div>
 					<div id="auth" class="input-item" style="display: none;" >
 					<input type="text" id="auth-code" placeholder="인증번호 입력">
@@ -181,27 +191,28 @@
 			}
 		});
 		let comapnyName= null;
+		let comapnyNo= 0;
 		$("#check").on("click",function(){
+			$(".no-check-msg").removeClass("invalid").removeClass("valid");
 			const businessNo =$("#businessNo").val();
 			$.ajax({
 				url :"/company/check",
 				type: "get",
 				data : {businessNo : businessNo},
 				success: function(result){
-					if(result){
 					 companyName=result.companyName;
-					 companyNo=result.companyNo;
-					 $(".no-check-msg").text("존재하는 사업자 입니다");
-					 $(".no-check-msg").addClass("valid");
-					$("#businessName").val(companyName)
-					}else{
-						
-					}
+					 $("#businessName").val(companyName)
+					 $(".no-check-msg").text("존재하는 사업자입니다");
+					$(".no-check-msg").addClass("valid");
 				},
 				error: function(){
-				}
+					$(".no-check-msg").text("존재하지 않는 사업자입니다");
+					$(".no-check-msg").addClass("invalid");
+				},
+				
 			});
 		});
+	
 		$(".mail2").on("change",function(){
 			const mail=$(this).val();
 			$("#memberEmail2").val(mail);
