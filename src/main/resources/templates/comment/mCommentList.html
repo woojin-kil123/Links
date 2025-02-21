@@ -143,6 +143,15 @@
 	.inputBox{
 		display: none;
 	}
+	
+	.line2{
+		width: 1000px;
+	}	
+	.movie-re-comment{
+		width: 600px;
+		
+	}
+
 </style>
 
 </head>
@@ -212,17 +221,16 @@
 				                 </th:block>   
 	                        </th:block>
 	                	
-	                	<!-- 댓글 출력창 -->
+	                	<!-- 댓글 창 -->
 						
-							<div th:each= "rc: ${list}" class="inputCommentBox inputBox">								
+							<div class="inputCommentBox inputBox" th:if="${session.member != null}">								
 								
 								<div>
 									<div>
 										<span class="material-icons">subdirectory_arrow_right</span>									
 									</div>  
 									<div>
-										<input type="hidden" name="memberId" th:value= "${rc.memberId}" >
-										<input type="hidden" name="commentNo" th:value= "${rc.commentNo}" >
+										
 										
 										<div class="input-item">
 											<textarea name="reCommentContent"></textarea>
@@ -234,11 +242,39 @@
 										</a>										
 									</div>
 								</div>
+							</div>	
+								<!-- 댓글 출력 -->
+								<div th:each= "lno : ${comm.listNo}" class="print-comm"> 
+									 
+									<div>									
+										<table class="line2">
+											<tr>
+												<th style="width:1%;"></th>
+												<th style="width:3%;"></th>
+												<th style="width:2%;"></th>
+												<th th:text= "${lno.memberId}" style="width:10%;"></th>
+												<th style="width:67%;"></th>								
+												<th style="width:17%;"></th>
+											<tr>
+											<tr>
+												
+											</tr>			
+										</table>
+									</div>
 								
-							</div>
+								</div>
+							
+							
 						</div>	
+						
+						
+						
 					</div>
 				</div>
+				
+				
+				
+				
 			</div>
 		</section>
 	</main>

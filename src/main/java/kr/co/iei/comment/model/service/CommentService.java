@@ -49,9 +49,19 @@ public class CommentService {
 		return list;
 	}
 
-	
+	@Transactional
 	public List mCommentList(String contentNo) {		
 		List<Comment> list = commentDao.mCommentList(contentNo);
+		
+		for(int i = 0   ; i < list.size() ; i++) {
+			
+			Comment comment = list.get(i);
+			int commentNo = comment.getCommentNo();
+			List listNo = commentDao.commNo(commentNo);
+			comment.setListNo(listNo); 
+			
+		}
+		
 		return list;
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.CommentRowMapper;
 import kr.co.iei.comment.model.vo.ReComment;
+import kr.co.iei.comment.model.vo.ReCommentRowMapper;
 import kr.co.iei.contents.model.vo.DbMovie;
 import kr.co.iei.contents.model.vo.DbMovieRowMapper;
 
@@ -23,6 +24,9 @@ public class CommentDao {
 	
 	@Autowired
 	private DbMovieRowMapper dbMovieRowMapper;
+	
+	@Autowired
+	private ReCommentRowMapper reCommentRowMapper; 
 
 	public int insertComment(Comment comment) {
 		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi'))";
@@ -110,6 +114,16 @@ public class CommentDao {
 		int result = jdbc.update(query,params);
 		return result;
 	}
+
+	public List commNo(int commentNo) {
+		String query = "select * from re_comm where comment_no= ?";
+		Object[] params = {commentNo};
+		List listNo = jdbc.query(query, reCommentRowMapper, params);
+		
+		return listNo;
+	}
+
+	
 
 	
 	
