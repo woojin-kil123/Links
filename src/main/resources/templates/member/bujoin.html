@@ -110,6 +110,7 @@
 						<input type="text" name="businessNo" id="businessNo">
 						<input type="hidden" name="businessName" id="businessName">
 					</div>
+					<p class="input-msg no-check-msg"></p>
 					<button type="button" id="check">사업자번호  확인</button>
 				</div>
 				<div class="input-wrap">
@@ -125,7 +126,7 @@
 						<select class="mail2">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
-							<option value="gmail.com">google.com</option>
+							<option value="gmail.com">gmail.com</option>
 							<option value="daum.net">daum.net</option>
 						</select>
 						<input type="hidden" name="memberEmail" id="memberEmail">
@@ -187,9 +188,11 @@
 				type: "get",
 				data : {businessNo : businessNo},
 				success: function(result){
-					console.log(result);
 					if(result){
 					 companyName=result.companyName;
+					 companyNo=result.companyNo;
+					 $(".no-check-msg").text("존재하는 사업자 입니다");
+					 $(".no-check-msg").addClass("valid");
 					$("#businessName").val(companyName)
 					}else{
 						
