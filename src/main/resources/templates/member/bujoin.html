@@ -57,7 +57,7 @@
 			<form action="/member/checkId" name="checkIdFrm" method="get">
 				<input type="hidden" name="checkId">
 			</form>
-			<form action="/member/join" method="post" autocomplete="off">
+			<form action="/member/bujoin" method="post" autocomplete="off">
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberId">아이디</label>
@@ -101,6 +101,16 @@
 					<div class="input-type">
 						<input type="text" name="memberPhone" id="memberPhone">
 					</div>
+				</div>
+				<div class="input-wrap">
+					<div class="input-title">
+						<label for="BusimessNo">사업자 번호</label>
+					</div>
+					<div class="input-type">
+						<input type="text" name="BusinessNo" id="BusinessNo">
+						<input type="hidden" name="BusinessName" id="BusinessName">
+					</div>
+					<button type="button" id="check">사업자번호  확인</button>
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
@@ -168,6 +178,23 @@
 				$(".pw-check-msg").text("비밀번호가 일치합니다");
 				$(".pw-check-msg").addClass("valid");
 			}
+		});
+		$("#check").on("click",function(){
+			const businessNo =$(".BusinessNo").val();
+			$.ajax({
+				url :"/company/check",
+				type: "get",
+				data : {businessNo : businessNo},
+				success: function(result){
+					if(result){
+					
+					}else{
+						
+					}
+				},
+				error: function(){
+				}
+			});
 		});
 		$(".mail2").on("change",function(){
 			const mail=$(this).val();
