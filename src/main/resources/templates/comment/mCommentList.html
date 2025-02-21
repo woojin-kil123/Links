@@ -69,6 +69,8 @@
 		background-color: #F3EEEE;
 		border-bottom : 3px solid #D9D9D9;
 		
+		border-bottom: 300px;
+		
 	}
 	.line1{
 		width: 780px;
@@ -97,9 +99,7 @@
 	.partner{
 		width: 750px;
 		margin: 0 auto;
-		padding: 0;
-		
-		
+		padding: 0;	
 		margin : 7px 7px;			
 	}
 	
@@ -117,29 +117,62 @@
 		height: 18px;
 		margin-top: 5px;
 		margin-left: 15px;
-		cursor: pointer;			
+		cursor: pointer;		
 	}
+	.dots{
+		float:right;
+		margin-right: 15px;
+	}
+	
 	.btn-box{
 		width:800px;
-		height: 50px;		
+		height: 70px;		
 		border-top: 2px solid #C4C4C4;
 		background-color: #FFF9F9;	
-		overflow: hidden;
+		
+		
 	}
 	
 	.choice-like{
 		margin-top: 8px;
 		margin-left: 200px;
-		float: left;
+		
 		cursor: pointer; 
 		
 	}
 	.choice-comment{
 		margin-top: 8px;
 		margin-left: 490px;
-		float: lift;
+		
 		cursor: pointer;
 	}
+	
+	
+	
+	
+	.inputBox{
+		display: none;
+		background-color: transparent;
+	}
+	
+	
+	.line2{
+		margin: 0 auto;
+		margin-top: 30px;
+		width: 700px;
+		background-color: #FEECEC;
+	}	
+	.movie-re-comment{
+		width: 500px;
+		height:145px;
+				
+	}
+	
+	.modal-box{
+		width: 300px;
+		height: 350px;
+	}
+	
 </style>
 
 </head>
@@ -160,7 +193,7 @@
 			<div class="content">
 				<div class="page-title">
 					<div th:text=${movieTitle} class="movie-title" >제목</div>
-					<div class="movie-summary"></div>					
+					<div class="movie-summary"><img th:src="${movie.posterPath}"></div>					
 				</div>		
 									
 				<div class="list-wrap">
@@ -190,55 +223,119 @@
 							<span class="count"> 0 </span>
 							<span class="material-icons ">textsms </span>
 							<span class="count"> 0 </span>	
+							<span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span>
 						</div>
 						
-						<div class="btn-box">						
-		                    <div class="choice-like">
-		                    	<span class="material-icons">thumb_up</span>
-		                        <span>좋아요</span>
-		                        <span>0</span>
-		                    </div>
-		                    <div class="choice-comment" >
-		                    	<span class="material-icons windowShow">textsms </span>
-		                        <span>댓글</span>
-		                        <span>0</span>
-		                    </div>
-	                	</div>
-	                	<!-- 댓글 출력창 -->
+						<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
+						<div  class="btn-box">		
+							<th:block th:if="${session.member != null}">	
+								<th:block th:if="${session.member.memberId == comm.memberId}">			
+				                    <div class="choice-like">			                    	
+				                    	<span class="material-icons">thumb_up</span>
+				                        <span>좋아요</span>
+				                        <span>0</span>
+				                    </div>
+				                    <div class="choice-comment" >
+				                   	 	<a th:onclick="modifyComment(this,[[${comm.memberId}]],[[${comm.commentNo}]]);"><span class="material-icons windowShow">textsms </span></a>	                    	
+				                        <span>댓글</span>
+				                        <span>0</span>
+				                    </div>
+				                 </th:block>   
+	                        </th:block>
+	                	
+	                	<!-- 댓글 창 -->
 						
-						<div th:each= "rc: ${list}" class="inputCommentBox inputBox">
-						
-							<form action="/comment/reComm" method="post">
+							<div class="inputCommentBox inputBox" th:if="${session.member != null}">								
+								
 								<div>
 									<div>
 										<span class="material-icons">subdirectory_arrow_right</span>									
 									</div>  
 									<div>
-										<input type="hidden" name="memberId" th:text= "${rc.memberId}" >
-										<input type="hidden" name="commentNo" th:text= "${rc.commentNo}" >
+										
 										
 										<div class="input-item">
 											<textarea name="reCommentContent"></textarea>
 										</div>
 									</div>
 									<div>
-										<button type="submit" class="btn-primary">등록</button>
+										<a th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">
+											<button type="button" class="btn-primary ">등록</button>
+										</a>										
 									</div>
 								</div>
-							</form>
-						</div>
+							</div>	
+								<!-- 댓글 출력 -->
+								<div th:each= "lno : ${comm.listNo}" class="print-comm"> 
+									 
+									<div>									
+										<table class="line2">
+											<tr>
+												<th style="width:1%;"></th>
+												<th style="width:3%;"></th>
+												<th style="width:2%;"></th>
+												<th th:text= "${lno.memberId}" style="width:10%;"></th>
+												<th style="width:67%;"></th>								
+												<th style="width:17%;"></th>
+											<tr>
+											<tr >
+												<th colspan="6" th:text= "${lno.reCommentContent}" class="movie-re-comment"></th>
+											</tr>			
+										</table>
+									</div>
+								
+								</div>
 							
+							
+						</div>	
+						
+						
+						
 					</div>
 				</div>
+				
+				
+				
+				
 			</div>
 		</section>
+		<!-- 모달 -->
+		<!-- Portfolio item 6 modal popup-->
+        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-box">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-s-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->                                    
+                                    <div class="item-intro text-muted">욕설  : 공격적인 언어 사용</div>
+                                    <div class="item-intro text-muted">혐오 발언 : 각종 비하 및 차별 발언</div>
+                                    <div class="item-intro text-muted">스포일러 : 작품의 평가가 아닌 결과만 발언</div>
+                                    <div class="item-intro text-muted">도배 : 의미 없는 문자로 수십번 반복 사용</div>
+                                    
+                                    <button class="btn btn-primary btn-s text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
 	</main>
 	
-	
+	<th:block th:include="common/header"></th:block>
 	
 	<script>
 		$(".windowShow").on("click",function(){
+			
 			const index = $(".windowShow").index(this); 
+			
 			if($(this).text() === "▼"){
 				$(this).text("▲");	
 			}else{
@@ -247,10 +344,56 @@
 			
 			$(".inputBox").eq(index).slideToggle();
 		});
-	
+		
+				
+		
+		function windowComment(obj,memberId,commentNo,contentNo){		
+		
+		
+			console.log("ㅁㅁㅁㅁㅁㅁ 윈도우 코멘트 함수")
+			//form태그를 생성해서 필요한 태그들을 모두 생성해서 넣은 후 submit
+			//1. form태그 생성
+			const form = $("<form>");
+			//1-1.form태그 속성 설정
+			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
+			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
+			
+			//form.hide();
+			
+			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
+			const memberIdInput = $("<input>"); 
+			memberIdInput.attr("type","text"); //<input type="text">
+			memberIdInput.attr("name","memberId");   //<input type = "text"  name="noticeCommentNo">			
+			memberIdInput.val(memberId); 
+			
+			const commentNoInput = $("<input>");
+			commentNoInput.attr("type","text"); 
+			commentNoInput.attr("name","commentNo");
+			commentNoInput.val(commentNo);			
+			
+			const contentNoInput = $("<input>");
+			contentNoInput.attr("type","text"); 
+			contentNoInput.attr("name","contentNo");
+			contentNoInput.val(contentNo);
+			
+			const commentContent = $(obj).parent().prev().children().eq(2).clone(); 
+			//폼에 다 넣어주기
+			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
+			
+			//5. body 에 새성한 from태그 추가
+			$("body").append(form);
+			//6. form 태그 submit
+			
+			form.submit();
+		};
+		
+		
+		
+		
+		
 	</script>
 	
-	<th:block th:include="common/footer"></th:block>
+	
 </body>
 </html>
 

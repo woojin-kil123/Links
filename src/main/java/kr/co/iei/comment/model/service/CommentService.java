@@ -37,8 +37,8 @@ public class CommentService {
 		List<Comment> list = commentDao.mCommentMemberList();
 		for(Comment c : list ) {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
-			String contentNo = c.getContentNo().substring(1);
-			DbMovie movie = commentDao.selectMovieInfo(contentNo);
+			String movieId = c.getContentNo().substring(1);
+			DbMovie movie = commentDao.selectMovieInfo(movieId);
 					
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
@@ -49,26 +49,25 @@ public class CommentService {
 		return list;
 	}
 
-	
+	@Transactional
 	public List mCommentList(String contentNo) {		
 		List<Comment> list = commentDao.mCommentList(contentNo);
+		
+		for(int i = 0   ; i < list.size() ; i++) {
+			Comment comment = list.get(i);
+			int commentNo = comment.getCommentNo();
+			List listNo = commentDao.commNo(commentNo);
+			comment.setListNo(listNo); 
+		}
+		
 		return list;
 	}
 	
-	@Transactional
-	public String selectMovieTitle(String contentNo) {
-		
+	public DbMovie selectMovieInfo(String contentNo) {
 		String partOne = contentNo.substring(0,1);
-		String partTwo = contentNo.substring(1);
-		String partTwoPh = contentNo.substring(1);
-		
-		if(partOne.equals("m")) {		
-			String result = commentDao.movieCode(partTwo);
-			String result2 = commentDao.movieCode(partTwo);
-			
-			return result;
-		}		
-		return null;
+		String movieId = contentNo.substring(1);
+		DbMovie movie = commentDao.selectMovieInfo(movieId);
+		return movie;
 	}
 	
 	// 코멘트 개수 반환
@@ -102,6 +101,11 @@ public class CommentService {
 		int result = commentDao.reCommInsert(rc);
 		System.out.println(rc);
 		return result;
+	}
+
+	public List oneMovieComment(String contentNo) {
+		List list = commentDao.oneMovieComment(contentNo);
+		return list;
 	}
 
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.comment.model.vo.CommentRowMapper;
 import kr.co.iei.comment.model.vo.ReComment;
+import kr.co.iei.comment.model.vo.ReCommentRowMapper;
 import kr.co.iei.contents.model.vo.DbMovie;
 import kr.co.iei.contents.model.vo.DbMovieRowMapper;
 
@@ -23,6 +24,9 @@ public class CommentDao {
 	
 	@Autowired
 	private DbMovieRowMapper dbMovieRowMapper;
+	
+	@Autowired
+	private ReCommentRowMapper reCommentRowMapper; 
 
 	public int insertComment(Comment comment) {
 		String query = "insert into comm values(comm_seq.nextval, ?, ?, ?,0, to_char(sysdate, 'mm-dd hh:mi'))";
@@ -111,20 +115,29 @@ public class CommentDao {
 		return result;
 	}
 	
-}
 
-
-
-/*
-	public Member selectOneMember(Member m) {
-	String query = "select * from member_tbl where member_id=? and member_pw=?";
-	Object[] params= {m.getMemberId(),m.getMemberPw()};
-	List list = jdbc.query(query, memberRowMapper,params);
-	if(list.isEmpty()) {
-		return null;
-	}else {
-		Member member = (Member)list.get(0);
-		return member;
+	public List commNo(int commentNo) {
+		String query = "select * from re_comm where comment_no= ?";
+		Object[] params = {commentNo};
+		List listNo = jdbc.query(query, reCommentRowMapper, params);
+		
+		return listNo;
 	}
+
+	
+
+	
+
+	public List oneMovieComment(String contentNo) {
+		String query = "select * from comm where content_no=?";
+		Object[] params = {contentNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		return list;
+	}
+
+	
 }
-*/
+
+
+
+

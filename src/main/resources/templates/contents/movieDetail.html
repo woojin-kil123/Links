@@ -24,88 +24,93 @@
 				</div>
 			</div>
 		</div>
+		<section class="page-section" id="services">
 		<div class="container">
-			<div class="poster">
-				<img class="poster-img" th:src="@{'https://image.tmdb.org/t/p/w342'+${movie.posterPath}}">
+			<div class="movie-wrap">
+				<div class="poster">
+					<img class="poster-img" th:src="@{'https://image.tmdb.org/t/p/w342'+${movie.posterPath}}">
+				</div>
+				<table class="table detail-tbl">
+					<tr class="row-1">
+						<td>
+						<div class="star-rating star-hover">
+							<input type="radio" id="5-stars" name="rating" value="5" >
+							<label for="5-stars" class="star material-icons">star</label>
+							<input type="radio" id="4-stars" name="rating" value="4"  />
+							<label for="4-stars" class="star material-icons">star</label>
+							<input type="radio" id="3-stars" name="rating"  value="3"  />
+							<label for="3-stars" class="star material-icons">star</label>
+							<input type="radio" id="2-stars" name="rating" value="2" />
+							<label for="2-stars" class="star material-icons">star</label>
+							<input type="radio" id="1-star" name="rating" value="1">
+							<label for="1-star" class="star material-icons">star</label>
+						</div>
+						<div class="star-btn">
+							<p class="fs-6" id= "mystar-check" style="display : none; color:#FFB200">이미 별점을 주었어요!</p>
+							<button class="material-icons btn btn-primary rating" style="display : none;" data-bs-toggle="modal" data-bs-target="#rating"></button>
+						</div>
+						</td>
+						<td>
+							<div class="avg-star">
+								<p id= "avg-star-input">아직 평가가 없어요 ㅠㅠ</p>
+								<p class="fs-6 text-muted">평균 별점</p>
+							</div>
+						</td>
+						<td>
+						<!-- <span class="material-icons">favorite</span> -->
+							<div class="btn-wrap">
+								<th:block th:if="${session.member==null}">
+								<span class="material-icons btn btn-primary toLogin" >favorite</span>
+								<span class="material-icons btn btn-primary toLogin" >rate_review</span>
+								</th:block>
+								<th:block th:if="${session.member!=null}">
+								<span class="material-icons btn btn-primary" id="like">favorite</span>
+								<span class="material-icons btn btn-primary" id="comment" data-bs-toggle="modal" data-bs-target="#modal">rate_review</span>
+								</th:block>
+								<a id="link"><span class="material-icons btn btn-primary">link</span></a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-box table-bordered" colspan='3'>
+							<div class="fs-6" th:text="${movie.overview}"></div>
+						</td>
+					</tr>
+				</table>
 			</div>
-			<table class="table detail-tbl">
-				<tr class="row-1">
-					<td>
-					<div class="star-rating star-hover">
-						<input type="radio" id="5-stars" name="rating" value="5" >
-						<label for="5-stars" class="star material-icons">star</label>
-						<input type="radio" id="4-stars" name="rating" value="4"  />
-						<label for="4-stars" class="star material-icons">star</label>
-						<input type="radio" id="3-stars" name="rating"  value="3"  />
-						<label for="3-stars" class="star material-icons">star</label>
-						<input type="radio" id="2-stars" name="rating" value="2" />
-						<label for="2-stars" class="star material-icons">star</label>
-						<input type="radio" id="1-star" name="rating" value="1">
-						<label for="1-star" class="star material-icons">star</label>
-					</div>
-					<div class="star-btn">
-						<p class="fs-6" id= "mystar-check" style="display : none; color:#FFB200">이미 별점을 주었어요!</p>
-						<button class="material-icons btn btn-primary rating" style="display : none;" data-bs-toggle="modal" data-bs-target="#rating"></button>
-					</div>
-					</td>
-					<td>
-						<div class="avg-star">
-							<p id= "avg-star-input">아직 평가가 없어요 ㅠㅠ</p>
-							<p class="fs-6 text-muted">평균 별점</p>
-						</div>
-					</td>
-					<td>
-					<!-- <span class="material-icons">favorite</span> -->
-						<div class="btn-wrap">
-							<th:block th:if="${session.member==null}">
-							<span class="material-icons btn btn-primary toLogin" >favorite</span>
-							<span class="material-icons btn btn-primary toLogin" >rate_review</span>
-							</th:block>
-							<th:block th:if="${session.member!=null}">
-							<span class="material-icons btn btn-primary" id="like">favorite</span>
-							<span class="material-icons btn btn-primary" id="comment" data-bs-toggle="modal" data-bs-target="#modal">rate_review</span>
-							</th:block>
-							<a id="link"><span class="material-icons btn btn-primary">link</span></a>
-						</div>
-					</td>
-				</tr>
-			</table>
-			<!-- <table class= "table detail-tbl">
-				<tr>
-					<td class="text-box table-bordered" colspan='3'>
-						<div class="fs-6" th:text="${movie.overview}"></div>
-					</td>
-				</tr>
-				<tr >
-					<td colspan=3 class="row">
-						<div class="card border-info mb-3" style="max-width: 18rem;">
-			  				<div class="card-header">유저id</div>
-							<div class="card-body">
-								 <h5 class="card-title">Info card title</h5>
-								 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							</div>
-						</div>
-						<div class="card border-info mb-3" style="max-width: 18rem;">
-			  				<div class="card-header">유저id</div>
-							<div class="card-body">
-								 <h5 class="card-title">Info card title</h5>
-								 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table>			 -->
-		</div>
-		
+			<div class="container mt-5">
+				    <h2>코멘트 <span style="color: red; font-size:20px;" id="comment-count"></span></h2>
+				    <span class="more-comments" style="display : none">더보기</span>
+				<div class="comment-slider">
+				    <div id="commentCarousel" class="carousel slide" data-bs-ride="carousel">
+				        <div class="carousel-inner"></div>
+				    </div>
+				
+				</div>
+			</div>
+			<div class="container mt-5">
+			    <h2 class="text-left">Links 추천 영화</h2>
+			    <div id="movieCarousel1" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+			        <div class="carousel-inner" id="carousel1"></div>
+			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel1" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon"></span>
+			        </button>
+			        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel1" data-bs-slide="next">
+			            <span class="carousel-control-next-icon"></span>
+			        </button>
+			    </div>
+			</div>
+			</div>
+		</section>
 		
 		<!-- 코멘트 모달 -->
 		<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content write-modal">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
+                    <div class="container justify-content-center">
                         <div class="row justify-content-center">
-                            <div class="col-lg-8">
+                            <div class="col-lg-15">
                                 <div class="modal-body">
                                     <!-- Project details-->
                                     <span class="item-intro fs-1 fw-bolder" th:text="${movie.title}"></span>
@@ -133,14 +138,18 @@
             <div class="modal-dialog">
                 <div class="modal-content rating-modal">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
+                    <div class="container justify-content-center">
                         <div class="row justify-content-center">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">	
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <span class="item-intro fs-1 fw-bolder text-muted"> 당신의 별점은</span> 
-                                    <span class="item-intro fs-1 fw-bolder rating-input"></span>
-                                    <span class="item-intro fs-1 fw-bolder text-muted">점 입니다.</span>
+                                    <div>
+                                    	<span class="item-intro fs-1 fw-bolder" th:text="${movie.title}"></span>
+                                    </div>
+                                    <span class="item-intro fs-1 fw-bolder text-muted"> 당신의 별점은</span>
+	                                <span class="item-intro fs-1 fw-bolder rating-input"></span>
+	                                <span class="item-intro fs-1 fw-bolder text-muted">점 </span>
+                                    <span class="item-intro fs-1 fw-bolder text-muted">입니다.</span>
                                     <div class="btn-wrap">
 	                                    <button class="btn btn-primary btn-xl rating-submit" data-bs-dismiss="modal" type="submit">
 	                                    	<span class="material-icons" style="font-size : 25px;">radio_button_unchecked</span>확인</button>		
@@ -154,7 +163,7 @@
                 </div>
             </div>
         </div>
-	
+	<script src = "/js/movieDetail.js"></script>
 	<script th:inline="javascript">
 	const movieId = [[${movie.movieId}]];
 	const memberId = [[${session.member?.memberId}]];
@@ -202,7 +211,7 @@
 			type : "get",
 			data : {"starpoint":value, "memberId":memberId, "contentNo": "m"+movieId},
 			success : function(data){
-				selectMemberStar();
+				selectMemberInfo();
 				selectMovie();
 			}
 		})
@@ -298,12 +307,22 @@
 	$(".toLogin").on("click",function(){
 			location.href= "/member/loginFrm";
 	});
+	function recommend(){
+		$.ajax({
+			url : "/api/recommend",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel1");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	
 
 	selectMovie();
 	selectMemberInfo();
-
-	
-	
+	commentList(movieId);
+	recommend();
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
