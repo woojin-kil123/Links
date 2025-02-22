@@ -29,7 +29,61 @@ public class NewsService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		// 부트스트랩 페이지네이션 스타일 적용
+		String pageNavi = "<nav aria-label='Page navigation'>";
+		pageNavi += "<ul class='pagination justify-content-center'>";
 
+		// 이전 버튼
+		if (pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class='page-link' href='/news/list?reqPage=" + (pageNo - 1) + "' aria-label='Previous'>";
+			pageNavi += "<span aria-hidden='true'>&laquo;</span>";
+			pageNavi += "</a></li>";
+		} else {
+			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>";
+			pageNavi += "<span aria-hidden='true'>&laquo;</span>";
+			pageNavi += "</a></li>";
+		}
+
+		// 페이지 번호
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active' aria-current='page'>";
+				pageNavi += "<a class='page-link' href='#'>" + pageNo + "</a>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class='page-link' href='/news/list?reqPage="+pageNo+"'>" + pageNo + "</a>";
+			}
+			pageNavi += "</li>";
+			pageNo++;
+
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class='page-link' href='/news/list?reqPage=" + pageNo + "' aria-label='Next'>";
+			pageNavi += "<span aria-hidden='true'>&raquo;</span>";
+			pageNavi += "</a></li>";
+		} else {
+			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>";
+			pageNavi += "<span aria-hidden='true'>&raquo;</span>";
+			pageNavi += "</a></li>";
+		}
+
+		pageNavi += "</ul>";
+		pageNavi += "</nav>";
+		
+		NewsListData nld = new NewsListData(list, pageNavi);
+		return nld;
+	}
+		/*
 		String pageNavi = "<ul class='pagination circle-style'>";
 
 		if (pageNo != 1) {
@@ -65,7 +119,7 @@ public class NewsService {
 
 		NewsListData nld = new NewsListData(list, pageNavi);
 		return nld;
-	}
+		*/
 
 	@Transactional
 	public int insertNews(News n, List<NewsFile> fileList) {

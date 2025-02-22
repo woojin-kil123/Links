@@ -60,12 +60,12 @@ public class MemberDao {
 	public int deleteMember(int memberNo) {
 		String query ="update member set del_yn ='Y' where member_no=?";
 		Object[] params = {memberNo};
-		int result1= jdbc.update(query,params);
-		return result1;
+		int result= jdbc.update(query,params);
+		return result;
 	}
 
 	public int insertdeleteMember(int memberNo) {
-		String query= "insert into del_member values(del_member_seq_.nextval,?,to_char(sysdate,'yyyy-mm-dd'),'N')";
+		String query= "insert into del_member values(del_member_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),'N')";
 		Object[] params = {memberNo};
 		int result2= jdbc.update(query,params);
 		return result2;

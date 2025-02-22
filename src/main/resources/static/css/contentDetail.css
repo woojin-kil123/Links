@@ -349,13 +349,14 @@
 	width : 40px;
 	top : 40%;
 	height : 10%;
+	left : 0;
 	background-color : black;
 }
 .carousel>.carousel-control-next{
 	width : 40px;
 	top : 40%;
 	height : 10%;
-	right : -35px;
+	right : -32px;
 	background-color : black;
 }
 	

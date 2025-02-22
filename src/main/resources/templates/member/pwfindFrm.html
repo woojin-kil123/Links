@@ -22,12 +22,32 @@
 	.pwfind-button-box>button{
 		width: 100%
 	}
+	
+	.email-wrap{
+	display: flex;
+	width:100%;
+	}
 	input{
 	border :none;
 	border-bottom: 1px solid black;
 	width : 100%
 	}.input-title{
 	padding-top: 10px;
+	}
+	.email{
+	width:35%;
+	margin-right: 10px;
+	}
+	.email2{
+	width:35%;
+	margin-left: 10px;
+	}
+	.mail{
+	margin-left: 10px;
+	width: 25%
+	}
+	.btn-primary{
+	margin-top: 20px;
 	}
 </style>
 </head>
@@ -55,13 +75,13 @@
 				</div>
 				<div class="input-type">
 				<div class="email-wrap"> 
-					<input type="text" name="memberEmail1" id="memberEmail1">
+					<input type="text" class="email" name="memberEmail1" id="memberEmail1">
 					@
-					<input type="text" name="memberEmail2" id="memberEmail2">
+					<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
 					<select class="mail">
 							<option>직접입력</option>
 							<option value="naver.com">naver.com</option>
-							<option value="google.com">google.com</option>
+							<option value="google.com">gmail.com</option>
 							<option value="daum.net">daum.net</option>
 						</select>
 				</div>

@@ -137,12 +137,15 @@ public class MemberController {
  public String delete(@SessionAttribute Member member, Model model) {
 	 int memberNo = member.getMemberNo();
 	 int result =memberService.deleteMember(memberNo);
-	 int result2 =memberService.insertdeleteMember(memberNo);
-	 model.addAttribute("title","회원 탈퇴 완료");
-	 model.addAttribute("text","수고하셨습니다");
-	 model.addAttribute("icon","success");
-	 model.addAttribute("loc","/member/logout");
-	 return "common/msg";
+	 if(result>0) {
+		 model.addAttribute("title","회원 탈퇴 완료");
+		 model.addAttribute("text","수고하셨습니다");
+		 model.addAttribute("icon","success");
+		 model.addAttribute("loc","/member/logout");
+		 return "common/msg";
+	 }else {
+		 return"/";
+	 }
  }
  @ResponseBody
  @GetMapping(value="/ajaxCheckId")

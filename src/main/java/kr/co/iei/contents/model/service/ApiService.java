@@ -173,9 +173,9 @@ public class ApiService {
         return movieList;
 	}
 
-	public List recommend() throws IOException {
+	public List recommend(String movieId) throws IOException {
 		List movieList = new ArrayList<ApiMovie>();
-    	String result = Jsoup.connect(url +"516729/recommendations?language=ko-kr&page=1")
+    	String result = Jsoup.connect(url+movieId+"/recommendations?language=ko-kr&page=1")
 				.data("api_key",apiKey)
 				.data("resultType", "json")
 				.ignoreContentType(true)

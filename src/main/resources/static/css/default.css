@@ -467,13 +467,14 @@ section.section.bg-section {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
+/*
 .pagination {
   list-style-type: none;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+*/
 .posting-sub-info{
 	margin : 10px 0px;
 	display: flex;
@@ -483,7 +484,7 @@ section.section.bg-section {
 	font-size: 14px;
 	font-family: ns-b;
 }
-
+/*
 .pagination > li {
   width: 40px;
   height: 40px;
@@ -491,6 +492,7 @@ section.section.bg-section {
   line-height: 40px;
   overflow: hidden;
 }
+
 .pagination.circle-style > li {
   border-radius: 50%;
 }
@@ -510,6 +512,7 @@ section.section.bg-section {
   background-color: var(--main5);
   color: rgb(0, 0, 0);
 }
+*/
 
 .posting-comment {
   display: flex;
