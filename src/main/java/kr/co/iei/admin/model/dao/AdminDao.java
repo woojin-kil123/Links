@@ -16,7 +16,6 @@ public class AdminDao {
 	@Autowired
 	private StatsRowMapper statsRowMapper;
 	
-
 	public Stats stats() {
 		String query = "select * from stats";
 		List list = jdbc.query(query, statsRowMapper);

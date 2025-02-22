@@ -25,6 +25,20 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
+	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러, 건들지말것
+	@ResponseBody
+	@GetMapping("oneMovieComment")
+	public List oneMovieComment(String contentNo) {
+		List list = commentService.oneMovieComment(contentNo);
+		return list;
+	}
+	// 푸터에 코멘트 개수 전달
+    @ResponseBody
+    @GetMapping("/count")
+    public int getCommentCount() {
+    	return commentService.getTotalCommentCount();
+    }
+	
 	@ResponseBody
 	@PostMapping("/insertComment")
 	public int insertComment(Comment comment) {
@@ -54,15 +68,8 @@ public class CommentController {
 						
 		return "comment/mCommentList";
 	}
-		
-		
 	
-	// 푸터에 코멘트 개수 전달
-    @ResponseBody
-    @GetMapping("/count")
-    public int getCommentCount() {
-    	return commentService.getTotalCommentCount();
-    }
+	
 	@GetMapping(value="/myCommentList")
 	public String myCommentList(String contentNo, Model model) {
 		List list = commentService.mCommentList(contentNo );		
@@ -84,10 +91,8 @@ public class CommentController {
 	
 	@GetMapping(value="/updateFrm")
 	public String updateFrm(int commentNo,Model model) {
-		
 		Comment c = commentService.selectOneComm(commentNo);
 		model.addAttribute("c", c);
-		
 		return "comment/updateFrm";
 	}
 	
@@ -105,7 +110,6 @@ public class CommentController {
 		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
-	
 	
 	@GetMapping(value="/commReport")
 	public String commReport(Comment c) {
