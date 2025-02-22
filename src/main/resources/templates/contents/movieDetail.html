@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -222,7 +222,6 @@
 
 	$(".comment-submit").on("click",function(){
 		const commentContent = $(this).parent().prev().find("#content").val();
-		console.log(commentContent);
 		 
 		$.ajax({
 			url : "/comment/insertComment",
@@ -314,13 +313,13 @@
 		$.ajax({
 			url : "/api/recommend",
 			type : "get",
+			data :{"movieId": movieId},
 			success : function(movies){
 				const carouselContent = $("#carousel1");
 				makeSlide(movies,carouselContent);
 			}    
 		});
 	}
-	
 
 	selectMovie();
 	selectMemberInfo();

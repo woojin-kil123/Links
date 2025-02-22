@@ -20,7 +20,6 @@ import com.google.gson.JsonParser;
 import kr.co.iei.contents.model.service.ApiService;
 import kr.co.iei.contents.model.vo.ApiMovie;
 
-
 @Controller
 @RequestMapping("/api")
 public class ApiController {
@@ -107,10 +106,10 @@ public class ApiController {
 	}
     @ResponseBody
    	@GetMapping("/recommend")
-       public List recommend() {
+       public List recommend(String movieId) {
    	 	List movieList = null;
    		try {
-   			movieList = apiService.recommend();
+   			movieList = apiService.recommend(movieId);
    		} catch (IOException e) {
    			// TODO Auto-generated catch block
    			e.printStackTrace();

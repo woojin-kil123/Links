@@ -4,61 +4,63 @@ function commentList(movieId) {
 		url : "/comment/oneMovieComment",
 		data : {"contentNo":"m"+movieId},
 		success : function(comments){
-			if(comments.legth==0){
-				$(".nocomment-msg").css("display",block).css("margin","0 auto");	
+			if(comments.length==0){
+				$(".nocomment-msg").show();				
 			}
-			if(comments.legth>0){
-			   const carouselInner = $("#commentCarousel .carousel-inner");
-		       let slideIndex = 0;
-	
-		       for (let i = 0; i < comments.length; i += 4) {
-		           const commentSlice = comments.slice(i, i + 4);
-		           let isActive = slideIndex === 0 ? "active" : "";
-		           const slide = $("<div>").addClass(`carousel-item ${isActive}`);
-		           const row = $("<div>").addClass("d-flex justify-content-between");
-	
-		           $.each(commentSlice, function (index, comment) {
-		               const card = $("<div>").addClass("comment-card");
-	
-		               const header = $("<div>").addClass("comment-header");
-		               const userInfo = $("<div>").addClass("comment-user");
-		               const userImg = $("<img>").attr("src", "/image/userimg.png");
-		               const memberId = $("<span>").text(comment.memberId);
-	
-		               userInfo.append(userImg, memberId);
-		               const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
-		               header.append(userInfo, title);
-	
-					   
-		               const rating = $("<div>").addClass("comment-rating");
-		               for (let j = 0; j < 5; j++) {
-		                   let star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
-		                   rating.append(star);
-		               }
-	
-		               const body = $("<div>").addClass("comment-body").text(comment.commentContent);
-		               const footer = $("<div>").addClass("comment-footer");
-		               const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
-		               const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
-		               
-		               footer.append(like, dislike);
-		               card.append(header, rating, body, footer);
-		               row.append(card);
-		           });
-	
-		           slide.append(row);
-		           carouselInner.append(slide);
-		           slideIndex++;
-				}
-				$("#comment-count").text(comments.length);
-				if(comments.length>4){
-					$(".container>.more-comments").css("display","inline-block");
-					$(".more-comments").on("click", function () {
-				       window.location.href = "/comment/mCommentMemberList";
-					});
-				}
+			const carouselInner = $("#commentCarousel .carousel-inner");
+			let slideIndex = 0;
+	       for (let i = 0; i < comments.length; i += 4) {
+				$(".nocomment-msg").hide();	
+			
+	           const commentSlice = comments.slice(i, i + 4);
+	           let isActive = slideIndex === 0 ? "active" : "";
+	           const slide = $("<div>").addClass(`carousel-item ${isActive}`);
+	           const row = $("<div>").addClass("d-flex justify-content-between");
+
+	           $.each(commentSlice, function (index, comment) {
+	               const card = $("<div>").addClass("comment-card");
+
+	               const header = $("<div>").addClass("comment-header");
+	               const userInfo = $("<div>").addClass("comment-user");
+	               const userImg = $("<img>").attr("src", "/image/userimg.png");
+	               const memberId = $("<span>").text(comment.memberId);
+
+	               userInfo.append(userImg, memberId);
+	               const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+	               header.append(userInfo, title);
+
+				   
+	               const rating = $("<div>").addClass("comment-rating");
+	               for (let j = 0; j < 5; j++) {
+	                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+	                   rating.append(star);
+	               }
+
+	               const body = $("<div>").addClass("comment-body").text(comment.commentContent);
+	               const footer = $("<div>").addClass("comment-footer");
+	               const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
+	               const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
+	               
+	               footer.append(like, dislike);
+	               card.append(header, rating, body, footer);
+	               row.append(card);
+	           });
+
+	           slide.append(row);
+	           carouselInner.append(slide);
+	           slideIndex++;
 			}
-		}
+			$("#comment-count").text(comments.length);
+			if(comments.length>4){
+				$(".container>.more-comments").show();
+				$(".more-comments").on("click", function () {
+			       window.location.href = "/comment/mCommentMemberList";
+				});
+			}
+		},
+		error : function(){
+						console.log("error");
+		}				
 	});
 }
 
@@ -71,7 +73,7 @@ function makeSlide(obj1,obj2){
         const moviesSlice = movies.slice(i, i + 5);
         const isActive = slideIndex === 0 ? "active" : "";
         const slide = $("<div>").addClass(`carousel-item ${isActive}`);
-        const row = $("<div>").addClass("row d-flex justify-content-center");
+        const row = $("<div>").addClass("row d-flex justify-content-evenly");
 
         
         $.each(moviesSlice, function (index, movie) {
