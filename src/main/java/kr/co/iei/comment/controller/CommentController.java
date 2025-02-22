@@ -106,12 +106,15 @@ public class CommentController {
 		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
 	
-	/*
+	
 	@GetMapping(value="/commReport")
-	public String commReport() {
-		int report = commentService.commReport();
+	public String commReport(Comment c) {
+		int report = commentService.commReport(c);
+		
+		
+		
 		
 		return "redirect:/comment/mCommentList?reqpage=1";
 	}
-	*/
+	
 }

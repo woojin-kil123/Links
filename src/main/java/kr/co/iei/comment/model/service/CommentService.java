@@ -116,6 +116,7 @@ public class CommentService {
 	
 	@Transactional
 	int commReport(Comment c) {
+		System.out.println(c);
 		int report = commentDao.updateComm(c);
 		
 		return report;

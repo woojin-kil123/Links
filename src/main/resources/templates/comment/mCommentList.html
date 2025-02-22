@@ -211,6 +211,16 @@
 	.fxxx{
 		cursor: pointer;
 	}
+	.hxxx{
+		cursor: pointer;
+	}
+	.sxxx{
+		cursor: pointer;
+	}
+	.dxxx{
+		cursor: pointer;
+	}
+	
 	
 </style>
 
@@ -359,7 +369,7 @@
 <th:block th:include="common/header"></th:block>
 	<script src="/js/sweetalert.min.js"></script>
 	<script>
-	/*
+	
 		$(".fxxx").on("click",function(){		
 			swal({
 				title : "REPORT",
@@ -386,10 +396,10 @@
 						
 		});	
 		
-		$(".fxxx").on("click",function(){		
+		$(".hxxx").on("click",function(){		
 			swal({
 				title : "REPORT",
-				text : "욕설을 신고할까요?",
+				text : "혐오발언을 신고할까요?",
 				icon : "warning",
 				buttons : {
 					cancel : {
@@ -463,7 +473,7 @@
 			location.href="/comment/CommReport?commentNo="+commentNo;
 						
 		});	
-	*/
+	
 			
 		$(".windowShow").on("click",function(){
 			
@@ -509,7 +519,7 @@
 			contentNoInput.attr("name","contentNo");
 			contentNoInput.val(contentNo);
 			//const commentContent = $(obj).parent().prev().children().eq(2).clone();
-			const commentContent = $(obj).parent().prev().clone();
+			const commentContent = $(obj).parent().parent().prev().clone();
 			
 			//폼에 다 넣어주기
 			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
@@ -518,7 +528,7 @@
 			$("body").append(form);
 			//6. form 태그 submit
 			
-			form.submit();
+			//form.submit();
 		};
 		
 		
