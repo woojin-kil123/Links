@@ -53,22 +53,21 @@ public class CommentController {
 		return "comment/mCommentMemberList";
 	}
 	
+	// 기존에 /mCommentList 컨트롤러 필요하면 다시만드세요. service는 그대로 있을거에요.
 	
-	
-	@GetMapping(value="/mCommentList")
-	public String mCommentList(String contentNo, Model model) {
-		DbMovie m = new DbMovie();
-		m = commentService.selectMovieInfo(contentNo);
-		List list = commentService.mCommentList(contentNo );
-		String movieTitle = commentService.selectMovieTitle(contentNo);
-				
-		model.addAttribute("list", list);
-		model.addAttribute("movieTitle", movieTitle);
+	@GetMapping(value="/commentView")
+	public String mCommentList(int commentNo, Model model) {
+		Comment comment = commentService.selectOneComm(commentNo);
+		String contentNo = comment.getContentNo();
+		DbMovie m = commentService.selectMovieInfo(contentNo);
+		List recommList = commentService.selectRecomm(commentNo); 
+		
+		model.addAttribute("recommList",recommList);
+		model.addAttribute("comm", comment);
 		model.addAttribute("m", m);
 						
-		return "comment/mCommentList";
+		return "comment/commentView";
 	}
-	
 	
 	@GetMapping(value="/myCommentList")
 	public String myCommentList(String contentNo, Model model) {

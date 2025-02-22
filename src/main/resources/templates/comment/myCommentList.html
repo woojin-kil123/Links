@@ -148,7 +148,6 @@
 			</div>
 			<div class="content">			
 				<div class="list-wrap">
-				
 					<div th:each= "comm : ${list}" class="comment-box">									
 						<table class="line1">
 							<tr>
@@ -168,14 +167,10 @@
 																
 						</table>
 						<div class="partner"></div>
-						
 						<div class="movie-content">	
-										
 							<div  class="movie-summary"></div>																						
 							<div  class="movie-comment"></div>
-												
 						</div>
-						
 						<div class="partner"></div>
 						
 						<div class="btn-opt">
@@ -188,14 +183,9 @@
 							<div class="right-icon">
 								<span class="material-icons">create </span>								
 							    <span class="material-icons" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever </span>
-							     
 							</div>
 						</div>
-						
-						
 					</div>
-					
-							 
 				</div>  
 			</div>
 				

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 import kr.co.iei.admin.vo.StatsRowMapper;
 
@@ -25,5 +26,12 @@ public class AdminDao {
 			Stats s = (Stats)list.get(0);
 			return s;
 		}
+	}
+
+	public int insertReport(Report report) {
+		String query = "insert into report values(?,?,?,?,'n',to_char(sysdate, 'mm-dd hh:mi'))";
+		Object[] params = {report.getWriteNo(), report.getReporterMemberId(), report.getReportedMemberId(), report.getReportReason()};
+		int result = jdbc.update(query, params);
+		return result;
 	}
 }
