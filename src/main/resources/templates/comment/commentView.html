@@ -249,13 +249,12 @@
 						<tr>			
 					</table>
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
-					
 					<div class="btn-opt">
 						<span class="material-icons">thumb_up</span>
 						<span class="count"> 0 </span>
 						<span class="material-icons show-recomm">textsms </span>
 						<span class="count"> 0 </span>	
-						<span class="material-icons dots" id="dots"> more_vert </span>
+						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -362,8 +361,8 @@
 		});
 		//신고 클릭시 전송 이벤트
 		$("[name=report-reason]").on("click",function(){
-			const reportReason = $(this).val();
 			const reportedId = $(this).parent().children().eq(0).val();
+			const reportReason = $(this).val();
 			const writeNo = $(this).parent().children().eq(1).val();
 			$("#writeNo").text(writeNo);
 			$("#reported-id").text(reportedId);

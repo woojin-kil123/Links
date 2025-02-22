@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.admin.vo.BusinessViewRowMapper;
 import kr.co.iei.admin.vo.Report;
+import kr.co.iei.admin.vo.ReportRowMapper;
 import kr.co.iei.admin.vo.Stats;
 import kr.co.iei.admin.vo.StatsRowMapper;
 
@@ -16,8 +18,12 @@ public class AdminDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private StatsRowMapper statsRowMapper;
+	@Autowired
+	private BusinessViewRowMapper bvRowMapper;
+	@Autowired
+	private ReportRowMapper reportRowMapper;
 	
-	public Stats stats() {
+	public Stats loadStats() {
 		String query = "select * from stats";
 		List list = jdbc.query(query, statsRowMapper);
 		if(list.isEmpty()) {
@@ -29,9 +35,21 @@ public class AdminDao {
 	}
 
 	public int insertReport(Report report) {
-		String query = "insert into report values(?,?,?,?,'n',to_char(sysdate, 'mm-dd hh:mi'))";
+		String query = "insert into report values(?,?,?,?,null,to_char(sysdate, 'mm-dd hh:mi'))";
 		Object[] params = {report.getWriteNo(), report.getReporterMemberId(), report.getReportedMemberId(), report.getReportReason()};
 		int result = jdbc.update(query, params);
 		return result;
+	}
+
+	public List businessView() {
+		String query = "select * from business_view";
+		List list = jdbc.query(query, bvRowMapper);
+		return list;
+	}
+
+	public List newReport() {
+		String query = "SELECT * FROM REPORT WHERE REPORT_YN IS NULL";
+		List list = jdbc.query(query, reportRowMapper);
+		return list;
 	}
 }

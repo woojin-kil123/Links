@@ -17,7 +17,7 @@ public class ReportRowMapper implements RowMapper<Report>{
 		r.setReporterMemberId(rs.getString("reporter_member_id"));
 		r.setReportReason(rs.getString("report_reason"));
 		r.setReportYn(rs.getString("report_yn"));
-		r.setReg_date(rs.getString("reg_date"));
+		r.setRegDate(rs.getString("reg_date"));
 		return r;
 	}
 

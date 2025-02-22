@@ -1,5 +1,7 @@
 package kr.co.iei.admin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,9 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/stats")
-	public Stats stats() {
-		Stats stats  = adminService.stats();
+	@GetMapping("/loadStats")
+	public Stats loadStats() {
+		Stats stats  = adminService.loadStats();
 		return stats;
 	}
 	
@@ -35,4 +37,19 @@ public class AdminController {
 		int result = adminService.insertReport(report);
 		return result;
 	}
+	
+	@ResponseBody
+	@GetMapping("/businessView")
+	public List businessView() {
+		List list = adminService.businessView();
+		return list;
+	}
+	@ResponseBody
+	@GetMapping("/newReport")
+	public List newReport() {
+		List list = adminService.newReport();
+		System.out.println(list);
+		return list;
+	}
+	
 }

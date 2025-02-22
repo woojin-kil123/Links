@@ -12,6 +12,6 @@ public class Report {
 	private String reporterMemberId;
 	private String reportedMemberId;
 	private String reportReason;
+	private String regDate;
 	private String reportYn;
-	private String reg_date;
 }

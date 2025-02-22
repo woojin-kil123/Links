@@ -21,9 +21,6 @@ public class ReportController {
 	public String checkReportReason(@SessionAttribute Member member) {
 	    
 	    String reportReason = reportService.getReportReason(member.getMemberId());
-
-	    
-	    
 	    if (reportReason != null && !reportReason.isEmpty()) {
 	        return "🔔 " + reportReason;
 	    }
