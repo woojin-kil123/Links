@@ -273,7 +273,14 @@
 						<span class="count"> 0 </span>
 						<span class="material-icons ">textsms </span>
 						<span class="count"> 0 </span>	
-						<span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span>
+						<!-- <span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span> -->
+						<span class="material-icons dots report-choice" id="dots" > more_vert </span>
+						 <select class="choice-box">
+			         		 <option class="fxxx" value="욕설">욕설  : 공격적인 언어 사용</option>
+                             <option class="hxxx" value="혐오 발언">혐오 발언 : 각종 비하 및 차별 발언</option>
+                           	 <option class="sxxx" value="스포일러">스포일러 : 작품의 평가가 아닌 결과만 발언</option>
+                             <option class="dxxx" value="도배">도배 : 의미 없는 문자로 수십번 반복 사용</option>
+                         </select>        
 					</div>
 					<div class="partner"></div>
 					<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
@@ -336,8 +343,9 @@
 			</div>
 		</div>
 	</section>
-	<!-- 모달 -->
-	<!-- Portfolio item 6 modal popup-->
+	
+	<!-- 모달 
+	
        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
            <div class="modal-dialog">
                <div class="modal-content modal-box">
@@ -346,7 +354,7 @@
                        <div class="row justify-content-center">
                            <div class="col-s-8">
                                <div class="modal-body">
-                                   <!-- Project details-->                                    
+                                                                    
                                    <div class="item-intro text-muted fxxx">욕설  : 공격적인 언어 사용</div>
                                    <div class="item-intro text-muted hxxx">혐오 발언 : 각종 비하 및 차별 발언</div>
                                    <div class="item-intro text-muted sxxx">스포일러 : 작품의 평가가 아닌 결과만 발언</div>
@@ -363,13 +371,14 @@
                </div>
            </div>
        </div>
+       -->
 	
 </main>
 
 <th:block th:include="common/header"></th:block>
 	<script src="/js/sweetalert.min.js"></script>
 	<script>
-	
+	/*
 		$(".fxxx").on("click",function(){		
 			swal({
 				title : "REPORT",
@@ -474,7 +483,31 @@
 						
 		});	
 	
+		*/	
+		$(".report-choice").on("click",function(){
 			
+			
+			const select = $("<select>");
+			const option = $("<option>");
+			
+			option.attr("value"/reComm");//<form action="/notice/updateComment"></form>
+			form.attr("method","post"); 
+				<select class="choice-box">
+	        		<option class="fxxx" value="욕설">욕설  : 공격적인 언어 사용</option>
+	                <option class="hxxx" value="혐오 발언">혐오 발언 : 각종 비하 및 차별 발언</option>
+	              	<option class="sxxx" value="스포일러">스포일러 : 작품의 평가가 아닌 결과만 발언</option>
+	                <option class="dxxx" value="도배">도배 : 의미 없는 문자로 수십번 반복 사용</option>
+            	</select> 
+			
+            	
+			
+			
+			
+			
+			
+		});
+		
+		
 		$(".windowShow").on("click",function(){
 			
 			const index = $(".windowShow").index(this); 
