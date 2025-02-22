@@ -57,7 +57,6 @@
     color: #007bff;
 }
 
-
 .tab-menu {
     display: flex;
     justify-content: space-evenly;
@@ -65,6 +64,7 @@
 }
 
 .tab-btn {
+	width : 15%;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
@@ -83,6 +83,47 @@
     width: 100%;
 }
 
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* 헤더 스타일 */
+.table-container thead {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+.table-container tr{
+	display : flex;
+	justify-content : space-around;
+}
+.table-container th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+.add-btn {
+    display: flex;
+    justify-content : center;
+    align-items : center;
+    margin: 10px auto;
+    padding: 10px 10px;
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.add-btn:hover {
+    background-color: #ffdb4d;
+}
+
+/* 탭 스타일 */
 .tab-content {
     display: none;
 }
@@ -91,16 +132,17 @@
     display: block;
 }
 
-.table-header, .table-body div {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+/* 관리 메뉴 버튼 스타일 */
+.manage-btn {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
-button {
-    padding: 5px 10px;
-    cursor: pointer;
+.manage-btn:hover {
+    background-color: #e0e0e0;
 }
 
 </style>
@@ -110,7 +152,7 @@ button {
 	<section class="page-section" id="services">
 		<div class="container mt-5">
 	    	<h2>운영 통계</h2>
-		    <div class="stats-container">
+		    <div class="stats-container mt-3">
 	        <div class="stat-box">
 	            <div class="stat-icon "><span class="material-icons ">groups</span></div>
 	            <div class="stat-info ">
@@ -118,18 +160,18 @@ button {
 	                <p id="total-users">0명</p>
 	            </div>
 	        </div>
-	        <div class="stat-box ">
-	            <div class="stat-icon"><span class="material-icons ">add_link</span></div>
-	            <div class="stat-info ">
-	                <h3>플랫폼 연결</h3>
-	                <p id="total-ads">0건</p>
-	            </div>
-	        </div>
 	        <div class="stat-box">
 	            <div class="stat-icon"><span class="material-icons ">ads_click</span></div>
 	            <div class="stat-info ">
 	                <h3>광고 클릭</h3>
-	                <p id="total-inquiries">0건</p>
+	                <p id="total-adCliks">0건</p>
+	            </div>
+	        </div>
+	        <div class="stat-box ">
+	            <div class="stat-icon"><span class="material-icons ">add_link</span></div>
+	            <div class="stat-info ">
+	                <h3>플랫폼 연결</h3>
+	                <p id="total-links">0건</p>
 	            </div>
 	        </div>
 	        <div class="stat-box">
@@ -143,9 +185,9 @@ button {
 	    
 		<h2 class= "mt-5">관리 메뉴</h2>
 	    <!-- 메뉴 탭 -->
-	    <div class="tab-menu">
+	    <div class="tab-menu mt-3">
 	        <button class="tab-btn active" data-target="business">사업자 문의</button>
-	        <button class="tab-btn" data-target="ads">광고 현황</button>
+	        <button class="tab-btn" data-target="ads">광고 관리</button>
 	        <button class="tab-btn" data-target="user-inquiry">사용자 문의</button>
 	        <button class="tab-btn" data-target="report-comments">신고 코멘트</button>
 	        <button class="tab-btn" data-target="dangerous-users">위험 회원</button>
@@ -153,46 +195,100 @@ button {
 	
 	    <!-- 테이블 컨테이너 -->
 	    <div class="table-container">
-	        <div id="business" class="tab-content active">
-	            <div class="table-header">
-	                <span>사업자명</span><span>번호</span><span>카테고리</span><span>연락처</span><span>문의내용</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="business-table"></div>
-	            <button class="add-btn" data-type="business">추가</button>
-	        </div>
-	
-	        <div id="ads" class="tab-content">
-	            <div class="table-header">
-	                <span>광고명</span><span>카테고리</span><span>URL</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="ads-table"></div>
-	            <button class="add-btn" data-type="ads">추가</button>
-	        </div>
-	
-	        <div id="user-inquiry" class="tab-content">
-	            <div class="table-header">
-	                <span>사용자 ID</span><span>문의 카테고리</span><span>내용</span><span>날짜</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="user-inquiry-table"></div>
-	            <button class="add-btn" data-type="user-inquiry">추가</button>
-	        </div>
-	
-	        <div id="report-comments" class="tab-content">
-	            <div class="table-header">
-	                <span>코멘트 ID</span><span>유저명</span><span>신고 사유</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="report-comments-table"></div>
-	            <button class="add-btn" data-type="report-comments">추가</button>
-	        </div>
-	
-	        <div id="dangerous-users" class="tab-content">
-	            <div class="table-header">
-	                <span>사용자명</span><span>위험도</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="dangerous-users-table"></div>
-	            <button class="add-btn" data-type="dangerous-users">추가</button>
-	        </div>
-	    </div>
+		    <!-- 사업자 문의 -->
+		    <div id="business" class="tab-content active">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>사업자명</th>
+		                    <th>사업자 번호</th>
+		                    <th>연락처</th>
+		                    <th>문의내용</th>
+		                    <th>상태</th>
+		                    <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody id="business-table">
+		                <!-- 데이터 추가 영역 -->
+		            </tbody>
+		        </table>
+		        <button class="add-btn" data-type="business"><span class="material-icons">add</span></button>
+		    </div>
+		
+		    <!-- 광고 관리 -->
+		    <div id="ads" class="tab-content">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>광고명</th>
+		                    <th>카테고리</th>
+		                    <th>URL</th>
+		                    <th>상태</th>
+		                    <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody id="ads-table">
+		                <!-- 데이터 추가 영역 -->
+		            </tbody>
+		        </table>
+		        <button class="add-btn" data-type="ads"><span class="material-icons">add</span></button>
+		    </div>
+		
+		    <!-- 사용자 문의 -->
+		    <div id="user-inquiry" class="tab-content">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>사용자 ID</th>
+		                    <th>문의 카테고리</th>
+		                    <th>내용</th>
+		                    <th>날짜</th>
+		                    <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody id="user-inquiry-table">
+		                <!-- 데이터 추가 영역 -->
+		            </tbody>
+		        </table>
+		        <button class="add-btn" data-type="user-inquiry"><span class="material-icons">add</span></button>
+		    </div>
+		
+		    <!-- 신고 코멘트 -->
+		    <div id="report-comments" class="tab-content">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>코멘트 ID</th>
+		                    <th>유저명</th>
+		                    <th>신고 사유</th>
+		                    <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody id="report-comments-table">
+		                <!-- 데이터 추가 영역 -->
+		            </tbody>
+		        </table>
+		        <button class="add-btn" data-type="report-comments"><span class="material-icons">add</span></button>
+		    </div>
+		
+		    <!-- 위험 회원 -->
+		    <div id="dangerous-users" class="tab-content">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>사용자명</th>
+		                    <th>위험도</th>
+		                    <th>상태</th>
+		                    <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody id="dangerous-users-table">
+		                <!-- 데이터 추가 영역 -->
+		            </tbody>
+		        </table>
+		        <button class="add-btn" data-type="dangerous-users"><span class="material-icons">add</span></button>
+		    </div>
+		</div>
 	    <h2 class= "mt-5">검색</h2>
 	    
 	</div>
@@ -204,52 +300,15 @@ button {
             url: "/admin/stats",
             method: "GET",
             success: function (data) {
-                $("#total-users").text(data.totalUsers + "명");
-                $("#total-ads").text(data.totalAds + "개");
-                $("#total-inquiries").text(data.totalInquiries + "건");
-                $("#total-reports").text(data.totalReports + "건");
+            	console.log(data);
+                $("#total-users").text(data.memberCount + "명");
+                $("#total-adCliks").text(data.adClickCount + "건");
+                $("#total-links").text(data.linkCount + "건");
+                $("#total-reports").text(data.reportCount + "건");
             },
-        });
-    }
-	
-	
-	$(document).ready(function () {
-	    loadData("business");
-	    loadData("ads");
-	    loadData("user-inquiry");
-	    loadData("report-comments");
-	    loadData("dangerous-users");
-	    loadStats();
-	});
-	
-	function loadData(type) {
-        $.ajax({
-            url: `/api/${type}`,
-            method: "GET",
-            success: function (data) {
-                let tableBody = $("#" + type + "-table");
-                tableBody.empty();
-
-                data.forEach((item) => {
-                    let row = $("<div>").addClass("table-row");
-
-                    if (type === "business") {
-                        row.html(`<span>${item.name}</span><span>${item.id}</span><span>${item.category}</span><span>${item.phone}</span><span>${item.inquiry}</span><span>${item.status}</span>
-                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-                    } else if (type === "ads") {
-                        row.html(`<span>${item.adName}</span><span>${item.category}</span><span>${item.url}</span><span>${item.status}</span>
-                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-                    } else {
-                        row.html(`<span>${item.data1}</span><span>${item.data2}</span><span>${item.data3}</span>
-                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-                    }
-
-                    tableBody.append(row);
-                });
-            },
+            error : function(){
+            	console.log("error");
+            }
         });
     }
 
@@ -258,17 +317,16 @@ button {
         $(this).addClass("active");
 
         $(".tab-content").removeClass("active");
+        //data 사용하면 자료형 그대로 가져오기때문에 문자열로 더해짐
         $("#" + $(this).data("target")).addClass("active");
     });
 
     $(".add-btn").click(function () {
         let type = $(this).data("type");
-
         $.ajax({
-            url: `/api/${type}`,
+            url: "/admin/insertAd",
             method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ data: "새 데이터" }),
+            data: { data: "새 데이터" },
             success: function () {
                 loadData(type);
             },
@@ -306,7 +364,15 @@ button {
             });
         }
     });
-    
+
+	$(document).ready(function () {
+	    loadData("business");
+	    loadData("ads");
+	    loadData("user-inquiry");
+	    loadData("report-comments");
+	    loadData("dangerous-users");
+	    loadStats();
+	});
 	
 	</script>	
 	<th:block th:include="common/footer"></th:block>
