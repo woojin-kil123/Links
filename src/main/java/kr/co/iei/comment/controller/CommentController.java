@@ -26,13 +26,6 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@ResponseBody
-	@GetMapping("/oneMovieComment")
-	public List oneMovieComment(String contentNo) {
-		List list = commentService.oneMovieComment(contentNo);
-		return list;
-	}
-	
-	@ResponseBody
 	@PostMapping("/insertComment")
 	public int insertComment(Comment comment) {
 		int result = commentService.insertComment(comment);
@@ -51,22 +44,18 @@ public class CommentController {
 	@GetMapping(value="/mCommentList")
 	public String mCommentList(String contentNo, Model model) {
 		DbMovie m = new DbMovie();
+		m = commentService.selectMovieInfo(contentNo);
 		List list = commentService.mCommentList(contentNo );
-		
-		//영화제목 가져올때 영화제목만 가져오셨겠죠?
-		DbMovie movie = commentService.selectMovieInfo(contentNo);
-		 
+		String movieTitle = commentService.selectMovieTitle(contentNo);
+				
 		model.addAttribute("list", list);
-		model.addAttribute("movie", movie);
-		model.addAttribute("listNo", contentNo);
-		
-		
+		model.addAttribute("movieTitle", movieTitle);
+		model.addAttribute("m", m);
+						
 		return "comment/mCommentList";
 	}
-	
-	
-	
-	
+		
+		
 	
 	// 푸터에 코멘트 개수 전달
     @ResponseBody
@@ -116,4 +105,16 @@ public class CommentController {
 		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
+	
+	
+	@GetMapping(value="/commReport")
+	public String commReport(Comment c) {
+		int report = commentService.commReport(c);
+		
+		
+		
+		
+		return "redirect:/comment/mCommentList?reqpage=1";
+	}
+	
 }

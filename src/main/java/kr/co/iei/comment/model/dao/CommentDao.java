@@ -36,7 +36,7 @@ public class CommentDao {
 	}
 	
 	public List mCommentMemberList() {
-		String query = "select * from comm";
+		String query = "select * from comm order by COMMENT_NO DESC";
 		List list = jdbc.query(query,commentRowMapper);
 		if(list.isEmpty()) {
 			return null;
@@ -47,7 +47,7 @@ public class CommentDao {
 	}
 
 	public List mCommentList(String contentNo) {
-		String query = "select * from comm where content_no like '%'||?||'%' ";
+		String query = "select * from comm where content_no like '%'||?||'%' order by COMMENT_NO DESC";
 		Object[] params= {contentNo};
 		List list = jdbc.query(query,commentRowMapper,params);
 		
@@ -77,7 +77,7 @@ public class CommentDao {
 	}
 
 	public Comment selectOneComm(int commentNo) {
-		String query = "select * from comm where comment_no = ? ";
+		String query = "select * from comm where comment_no = ? order by COMMENT_NO DESC";
 		Object[] params = {commentNo};
 		List list = jdbc.query(query, commentRowMapper, params);
 		if(list.isEmpty()) {
@@ -101,7 +101,7 @@ public class CommentDao {
 	}
 
 	public int updateComm(Comment c) {
-		String query = " update comm set comment_content = ? where comment_no = ?";
+		String query = " update comm set comment_content = ? where comment_no = ? ";
 		Object[] params = {c.getCommentContent(),c.getCommentNo()};
 		int result = jdbc.update(query,params);
 		return result;
@@ -117,7 +117,7 @@ public class CommentDao {
 	
 
 	public List commNo(int commentNo) {
-		String query = "select * from re_comm where comment_no= ?";
+		String query = "select * from re_comm where comment_no= ? order by RE_COMMENT_NO DESC ";
 		Object[] params = {commentNo};
 		List listNo = jdbc.query(query, reCommentRowMapper, params);
 		
@@ -129,7 +129,7 @@ public class CommentDao {
 	
 
 	public List oneMovieComment(String contentNo) {
-		String query = "select * from comm where content_no=?";
+		String query = "select * from comm where content_no=? order by COMMENT_NO DESC";
 		Object[] params = {contentNo};
 		List list = jdbc.query(query, commentRowMapper, params);
 		return list;
