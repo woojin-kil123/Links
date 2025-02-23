@@ -30,8 +30,11 @@ public class webConfig implements WebMvcConfigurer{
 				.addPathPatterns("/member/logout",
 								"/member/mypage",
 								"/member/delete",
+								"/member/changeinfo",
 								"/notice/**"
-								,"/admin/**")
+								,"/admin/**"
+								,"/contents/**"
+								,"/comment/**")
 				.excludePathPatterns(	
 									);
 		//관리자 페이지 기능 경로 추가
