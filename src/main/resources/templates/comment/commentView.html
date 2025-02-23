@@ -296,7 +296,7 @@
 								<div class="right-icon">
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
 									<span class="material-icons btn btn-primary show-recomm2" >create </span>							
-								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.commentNo}]]);">delete_forever</span>
+								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
 									<span class="material-icons dots" > more_vert </span>
 								</div>
 				<!-- 대댓글 입력 -->
@@ -507,11 +507,13 @@
 						closeModal : true									
 					}
 				}				
-			})
-			location.href="/comment/reCommDelete?commentNo="+commentNo;
+			}).then(function(isConfirm){
+		
+				if(isConfirm){
+					location.href="/comment/reCommDelete?reCommentNo="+reCommentNo+"&commentNo"+commentNo;
+				}	
 				
-				
-			
+			});
 		}
 		
 		

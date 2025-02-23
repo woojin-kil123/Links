@@ -89,15 +89,15 @@ public class CommentController {
 	}
 	
 	@GetMapping(value="/reCommDelete")
-	public String reCommDelete(ReComment rc,Comment c, Model model) {
+	public String reCommDelete(ReComment rc, Model model) {
 		
 		int result = commentService.reDeleteComm(rc);
 		
 		model.addAttribute("title", "댓글 삭제 완료");
 		model.addAttribute("text", "삭제되었습니다.");
 		model.addAttribute("icon", "success");
-		model.addAttribute("loc", "redirect:/comment/commentView?commentNo="+c.getCommentNo());
-	
+		model.addAttribute("loc", "comment/commentView?commentNo="+rc.getCommentNo());
+		
 		return "common/msg";
 		//model.addAttribute("loc", "/comment/commentView?reqPage=1");
 	}
