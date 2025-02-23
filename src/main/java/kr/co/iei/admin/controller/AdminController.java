@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.iei.admin.service.AdminService;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
@@ -59,5 +61,19 @@ public class AdminController {
 		System.out.println(list);
 		return list;
 	}
+	
+	@ResponseBody
+	@GetMapping("/adUrl")
+    public String getAdUrl(String position) {
+        String adUrl = adminService.getAdUrlByPosition(position);
+        if (adUrl == null || adUrl.isEmpty()) {
+            adUrl = "";
+            return adUrl;
+        }else {
+        	return adUrl;	
+        }
+    }
+	
+	
 	
 }

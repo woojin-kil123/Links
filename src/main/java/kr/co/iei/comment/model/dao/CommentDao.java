@@ -135,6 +135,11 @@ public class CommentDao {
 		return list;
 	}
 
+	public List selectNewMovieCommList() {
+		String query = "select * from comm order by reg_date DESC";
+		List list = jdbc.query(query, commentRowMapper);
+		return list;
+	}
 	
 }
 
