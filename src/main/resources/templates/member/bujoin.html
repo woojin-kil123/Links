@@ -82,6 +82,9 @@ height: 60px;
 line-height: 60px;
 margin-bottom: 20px;	
 }
+#auth-btn{
+	margin-top: 20px;
+	}
 </style>
 </head>
 <body>
@@ -101,8 +104,8 @@ margin-bottom: 20px;
 						<input type="text" name="memberId" id="memberId">
 					</div>
 						<button type="button" class="btn-primary id-check-btn">중복체크</button>
-					<p class="input-msg id-check-msg"></p>
 					</div>
+					<p class="input-msg id-check-msg"></p>
 			
 				<div class="input-wrap">
 					<div class="input-title">
@@ -127,8 +130,8 @@ margin-bottom: 20px;
 					<div class="input-type">
 						<input type="password" name="memberPwRe" id="memberPwRe">
 					</div>
-					<p class="input-msg pw-check-msg"></p>
 				</div>
+					<p class="input-msg pw-check-msg"></p>
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberPhone">전화번호</label>
@@ -156,7 +159,7 @@ margin-bottom: 20px;
 					<div class="input-type">
 					<div class="email-wrap">
 						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
-						@
+						<span>@</span>
 						<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
 						<select class="mail">
 							<option value="">직접입력</option>
@@ -299,7 +302,7 @@ margin-bottom: 20px;
 			});
 		});
 	
-		$(".mail2").on("change",function(){
+		$(".mail").on("change",function(){
 			const mail=$(this).val();
 			$("#memberEmail2").val(mail);
 		});
@@ -308,6 +311,10 @@ margin-bottom: 20px;
 			const memberEmail1 =$("#memberEmail1").val();
 			const memberEmail2 =$("#memberEmail2").val();
 			const memberEmail= memberEmail1+"@"+memberEmail2
+			if(memberEmail1==""||memberEmail2==""){
+				alert("이메일을 입력하세요")
+			}else{
+				
 			$.ajax({
 				url :"/etc/sendCode",
 				type:"get",
@@ -321,6 +328,7 @@ margin-bottom: 20px;
 			error: function(){
 			}
 			});
+			}
 		});
 		$("#auth-btn").on("click",function(){
 			const inputCode = $("#auth-code").val();

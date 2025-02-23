@@ -82,7 +82,9 @@
 	margin-left: 10px;
 	width: 20%
 	}
-	
+	#auth-btn{
+	margin-top: 20px;
+	}
 </style>
 </head>
 <body>
@@ -115,7 +117,7 @@
 					<div class="email-wrap">
 						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
 						<span>@</span>
-						<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
+									<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
 						<select class="mail" >
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
@@ -141,7 +143,7 @@
 		</section>
 	</main>
 	<script>
-	document.querySelector("form[action='/member/bujoin']").addEventListener("submit", function (event) {
+	document.querySelector("form[action='/member/pwFind']").addEventListener("submit", function (event) {
 	    event.preventDefault(); // 기본 제출 막기
 	    let isValid = true;
 	 	const memberId=$("#memberId").val();
@@ -171,12 +173,16 @@
 	$(".mail").on("change",function(){
 		const mail=$(this).val();
 		$("#memberEmail2").val(mail);
-	})
+	});
 		let mailCode = null;
 		$("#send-btn").on("click",function(){
 			const memberEmail1 =$("#memberEmail1").val();
 			const memberEmail2 =$("#memberEmail2").val();
 			const memberEmail= memberEmail1+"@"+memberEmail2
+			if(memberEmail1==""||memberEmail2==""){
+				alert("이메일을 입력하세요")
+			}else{
+				
 			$.ajax({
 				url :"/etc/sendCode",
 				type:"get",
@@ -189,6 +195,7 @@
 			error: function(){
 			}
 			});
+			}
 		});
 		$("#auth-btn").on("click",function(){
 			const inputCode = $("#auth-code").val();
