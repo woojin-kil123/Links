@@ -143,10 +143,17 @@ public class CommentDao {
 		List list = jdbc.query(query, commentRowMapper, params);
 		return list;
 	}
+	
+	
+	public int reCommUpdate(ReComment rc) {
+		String query = " update re_comm set re_comment_content = ? where re_comment_no = ? " ;
+		Object[] params = {rc.getReCommentContent(),rc.getReCommentNo()};
+		int result = jdbc.update(query,params);
+		return result;
+	}
 
 	
 
-	
 }
 
 

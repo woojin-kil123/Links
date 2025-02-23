@@ -132,4 +132,16 @@ public class CommentService {
 		
 		return result;
 	}
+	
+	
+	@Transactional
+	public int reCommUpdate(ReComment rc) {
+		System.out.println(rc);
+		int result = commentDao.reCommUpdate(rc);
+		
+		return result;
+	}
+	
+
+	
 }

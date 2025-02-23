@@ -125,6 +125,15 @@ public class CommentController {
 		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
 	}
+	
+	@PostMapping(value="/reCommUpdate")
+	public String reCommUpdate(ReComment rc, String contentNo) {
+				
+		Member member = new Member();
+		int result = commentService.reCommUpdate(rc);
+		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
+	}
+	
 
 	
 	
