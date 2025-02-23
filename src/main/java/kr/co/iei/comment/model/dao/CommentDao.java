@@ -75,6 +75,15 @@ public class CommentDao {
  		
 		return result;
 	}
+	
+	public int reDeleteComm(ReComment rc) {
+		String query = "delete from re_comm where re_comment_no = ? ";
+		Object[] params = {rc.getReCommentNo()};
+		int result = jdbc.update(query,params);
+ 		
+		return result;
+		
+	}
 
 	public Comment selectOneComm(int commentNo) {
 		String query = "select * from comm where comment_no = ?";
@@ -134,6 +143,8 @@ public class CommentDao {
 		List list = jdbc.query(query, commentRowMapper, params);
 		return list;
 	}
+
+	
 
 	
 }

@@ -118,15 +118,18 @@ public class CommentService {
 		
 		return report;
 	}
-
+	
+	@Transactional
 	public List selectRecomm(int commentNo) {
 		List list = commentDao.commNo(commentNo);
 		return list;
 	}
-	
-	
 
-	
-
-	
+	@Transactional
+	public int reDeleteComm(ReComment rc) {	
+		System.out.println(rc.getCommentNo());
+		int result = commentDao.reDeleteComm(rc);
+		
+		return result;
+	}
 }

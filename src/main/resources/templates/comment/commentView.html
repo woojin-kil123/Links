@@ -275,45 +275,28 @@
 					</div>  
 					<textarea class="re-comm" name="reCommentContent"></textarea>
 					<div>
-						<a th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">
-							<button type="button" class="btn-primary ">등록</button>
-						</a>										
+						<button type="button" class="btn-primary " th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">등록</button>
 					</div>
 				</div>	
 				<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
-                <div class="recomment-wrap" style="display : none;">
-					<div  class="btn-box">		
+
+				<!-- 댓글 출력 -->
+				<th:block th:each="re : ${recommList}">
+					<div class="line2">
+						<div th:text= "${re.memberId}" style="width:15%;"></div>
+						<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
 						<th:block th:if="${session.member != null}">	
-		                    <div class="choice-like">			                    	
-		                    	<span class="material-icons">thumb_up</span>
-		                        <span>좋아요</span>
-		                        <span>0</span>
-		                    </div>
-		                    <div class="choice-comment" >
-		                   	 	<a th:onclick="modifyComment(this,[[${comm.memberId}]],[[${comm.commentNo}]]);"><span class="material-icons windowShow">textsms </span></a>	                    	
-		                        <span>댓글</span>
-		                        <span>0</span>
-		                    </div>
-                        </th:block>
-               		</div>
-					<!-- 댓글 출력 -->
-					<th:block th:each="re : ${recommList}">
-						<div class="line2">
-							<div th:text= "${re.memberId}" style="width:15%;"></div>
-							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
-							<th:block th:if="${session.member != null}">	
-								<th:block th:if="${session.member.memberId == re.memberId}">
-									<div class="right-icon">								
-										<span class="material-icons btn btn-primary" id="edit-content" >create </span>							
-									    <span class="material-icons" th:onclick="commDelete([[${re.commentNo}]]);">delete_forever</span>
-										<span class="material-icons dots" > more_vert </span>
-									</div>
-								</th:block>	
-							</th:block>
-						</div>
-					</th:block>
-				</div>	
-			</div>
+							<th:block th:if="${session.member.memberId == re.memberId}">
+								<div class="right-icon">								
+									<span class="material-icons btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="reCommUpdate([[${re.reCommentNo}]]);">create </span>							
+								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.commentNo}]]);">delete_forever</span>
+									<span class="material-icons dots" > more_vert </span>
+								</div>
+							</th:block>	
+						</th:block>
+					</div>
+				</th:block>
+			</div>	
 			<!-- 모달 -->
 			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
 	        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog">
@@ -343,6 +326,51 @@
 	            </div>
 	       </div>
 	</section>
+	
+	<!-- 모달 -->
+	<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h6 class="text-uppercase">댓글수정</h6>
+                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
+                                    
+                                    <div class="inputCommentBox">
+												<div>
+													<span class="material-icons">account_box</span>									
+												</div>  
+												
+	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
+													<input type="hidden" name="commentNo" >
+													
+													<div class="input-item">
+														<textarea name="commentContent" ></textarea>
+													</div>
+												
+													<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
+	                                       			 <i class="fas fa-times me-1"></i>
+	                                       				 수정
+	                                   				</button>
+										</form>
+	                                   				<button class="btn btn-primary btn-l text-uppercase" data-bs-dismiss="modal" type="button">
+		                                        	<i class="fas fa-times me-1"></i>
+		                                       		 	 취소
+		                                    		</button>
+												
+												<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>	
 	
 </main>
 
@@ -403,9 +431,7 @@
 				
 		
 		function windowComment(obj,memberId,commentNo,contentNo){		
-		
-		
-			console.log("ㅁㅁㅁㅁㅁㅁ 윈도우 코멘트 함수")
+			console.log(commentNo);
 			//form태그를 생성해서 필요한 태그들을 모두 생성해서 넣은 후 submit
 			//1. form태그 생성
 			const form = $("<form>");
@@ -413,7 +439,7 @@
 			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
 			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
 			
-			form.hide();
+			//form.hide();
 			
 			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
 			const memberIdInput = $("<input>"); 
@@ -431,7 +457,7 @@
 			contentNoInput.attr("name","contentNo");
 			contentNoInput.val(contentNo);
 			//const commentContent = $(obj).parent().prev().children().eq(2).clone();
-			const commentContent = $(obj).parent().parent().prev().clone();
+			const commentContent = $(obj).parent().prev().clone();
 			
 			//폼에 다 넣어주기
 			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
@@ -440,11 +466,11 @@
 			$("body").append(form);
 			//6. form 태그 submit
 			
-			//form.submit();
+			form.submit();
 		};
 		
 		
-		function commDelete(commentNo){
+		function reCommDelete(reCommentNo,commentNo){
 			swal({
 				title : "댓글 삭제",
 				text : "댓글 삭제 할까요?",
@@ -465,42 +491,13 @@
 						closeModal : true									
 					}
 				}				
-			}).then(function(isConfirm){
-				console.log(isConfirm); 
+			})
+			location.href="/comment/reCommDelete?commentNo="+commentNo;
 				
-				if(isConfirm){
-					location.href="/comment/commDelete?commentNo="+commentNo;
-				}
 				
-			});
+			
 		}
-		/*
-		$(".sxxx").on("click",function(){		
-			swal({
-				title : "REPORT",
-				text : "스포일러를 신고할까요?",
-				icon : "warning",
-				buttons : {
-					cancel : {
-						text : "취소",
-						value : false,
-						visible : true,
-						className: "btn-secondary",
-						closeModal : true
-					},
-					confirm : {
-						text:"신고",
-						value: true,
-						visible : true,
-						className: "btn-primary",
-						closeModal : true									
-					}
-				}				
-			});
-			location.href="/comment/CommReport?commentNo="+commentNo;
-						
-		});	
-		*/
+		
 		
 	</script>
 	
