@@ -26,91 +26,133 @@
 		color : white;
 		bottom: 0;
 	}
-	.space{
-		height: 500px;
-	}
-	#ranking1{
-		padding: 0px;
-	}
-	.section-heading {
-	    padding-left: 50px;
+	.carousel-item>.d-flex{
+		justify-content: space-between;
+		margin-left : 20px;
+		margin-right : 20px;
 	}
 	
-	.section-subheading {
-	    padding-left: 50px;
-	}
-	body {
-	    font-family: Arial, sans-serif;
-	    background-color: transparent;
-	    margin: 0;
+	.carousel-inner{
+		height : 400px;
+		margin-top : 30px;
+		margin-bottom : 30px;
+		align-content: center;
 	}
 	
-	/* 랭킹 섹션 스타일 */
-	.ranking-section {
-	    max-width: 1200px;
-	    margin: 0 auto;
-	    padding: 0;
-	    margin-bottom: 50px;
-	}
-	
-	.ranking-section h2 {
-	    font-size: 22px;
-	    font-weight: bold;
-	    margin-bottom: 15px;
-	}
-	
-	/* 카드 컨테이너 */
-	.ranking-container {
-	    display: flex;
-	    gap: 20px;
-	    overflow-x: auto; /* 좌우 스크롤 가능 */
-	    padding-bottom: 10px;
-	    justify-content: space-between;
-	}
-	
-	/* 개별 카드 스타일 */
-	.ranking-card {
-	    position: relative;
-	    background: white;
-	    border-radius: 10px;
+	.card {
+	    height: 400px;
+	    width: 220px;
+	    border: 1px solid #ddd;
+	    border-radius: 8px;
 	    overflow: hidden;
+	    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 	    text-align: center;
-	    width: 200px;
-	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	    flex-shrink: 0;
+	    position: relative;
+	    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	/* 호버 효과 */
+	.card:hover {
+	    transform: scale(1.05);
+	    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+	    cursor: pointer;
 	}
 	
-	.ranking-card img {
-	    width: 100%;
-	    height: 280px;
-	    object-fit: cover;
-	}
-	
-	.ranking-card h3 {
-	    font-size: 16px;
-	    margin: 10px 0;
-	}
-	
-	.ranking-card p {
-	    font-size: 14px;
-	    color: #666;
-	    margin-bottom: 10px;
-	}
-	
-	/* 랭킹 배지 스타일 */
 	.rank-badge {
 	    position: absolute;
 	    top: 10px;
 	    left: 10px;
-	    background: black;
+	    background-color: black;
 	    color: white;
-	    padding: 5px 8px;
 	    font-size: 14px;
-	    border-radius: 5px;
 	    font-weight: bold;
+	    width: 30px;
+	    height: 30px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    border-radius: 4px;
 	}
-	.rank-badge.new {
-	    background: red; /* NEW 표시 스타일 */
+	.img-div{
+	    width: 100%;
+	    height: 65%;
+	}
+	.card-img-top {
+		width : 100%;
+		height : 100%;
+	    object-fit: fill;
+	    background-color: #f0f0f0;
+	}
+	
+	.card-body {
+	    padding: 3px;
+	    font-size: 14px;
+	    display : flex;
+	    flex-direction: column;
+	    justify-content: space-between;
+	}
+	
+	.card-title {
+		height: 40%;
+	    font-size: 16px;
+	    font-weight: bold;
+	    margin-bottom: 4px;
+	    word-wrap: break-word;
+	    overflow : hidden;
+	}
+	
+	.card-info {
+	    font-size: 12px;
+	    color: gray;
+	}
+	
+	.rating {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    font-size: 12px;
+	    margin: 5px 0;
+	}
+	
+	.rating .star {
+	    color: gold;
+	    margin-right: 5px;
+	}
+	
+	.genre-info {
+		height :30%;
+		display : flex;
+		justify-content : center;
+		align-items : center;	
+	    font-size: 12px;
+	    color: black;
+	    gap : 5px;
+	    flex-wrap: wrap;
+	}
+	.genre-info>p {
+		margin : 0;
+	}
+	.carousel>.carousel-control-prev{
+		width : 40px;
+		top : 40%;
+		height : 10%;
+		background-color : black;
+	}
+	.carousel>.carousel-control-next{
+		width : 40px;
+		top : 40%;
+		height : 10%;
+		right : -35px;
+		background-color : black;
+	}
+	#mv-ctn{
+		width: 1200px;
+	}
+	.page-section{
+		width: 1200px;
+		margin: auto;
+	}
+	#services{
+		padding: 0;
 	}
 </style>
 </head>
@@ -124,86 +166,109 @@
 			<div class="ad-banner">
 				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
 			</div>
-			 <section class="ranking-section">
-		        <h2>링스 HOT 랭킹</h2>
-		        <div class="ranking-container">
-		            <div class="ranking-card">
-		                <span class="rank-badge">1</span>
-		                <img src="movie1.jpg" alt="멜로무비">
-		                <h3>멜로무비</h3>
-		                <p>평균 ★ 3.4</p>
-		            </div>
-
-		            <div class="ranking-card">
-		                <span class="rank-badge new">AD</span>
-		                <img src="movie2.jpg" alt="캡틴 아메리카">
-		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
-		                <p>평균 ★ 3.0</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">2</span>
-		                <img src="movie3.jpg" alt="굿데이">
-		                <h3>굿데이</h3>
-		                <p>평균 ★ 3.8</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">3</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">4</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		        </div>
-		    </section>    
-		    <section class="ranking-section">
-		        <h2>박스오피스 순위</h2>
-		        <div class="ranking-container">
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">1</span>
-		                <img src="movie1.jpg" alt="멜로무비">
-		                <h3>멜로무비</h3>
-		                <p>평균 ★ 3.4</p>
-		            </div>
-
-		            <div class="ranking-card">
-		                <span class="rank-badge new">AD</span>
-		                <img src="movie2.jpg" alt="캡틴 아메리카">
-		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
-		                <p>평균 ★ 3.0</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">2</span>
-		                <img src="movie3.jpg" alt="굿데이">
-		                <h3>굿데이</h3>
-		                <p>평균 ★ 3.8</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">3</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">4</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		        </div>
-		    </section>    
+			<section class="page-section" id="services">
+		        <div class="container mt-5" id="mv-ctn">
+				    <h2 class="text-left">상영중인 영화</h2>
+				    <div id="movieCarousel1" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+				        <div class="carousel-inner" id="carousel1"></div>
+				        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel1" data-bs-slide="prev">
+				            <span class="carousel-control-prev-icon"></span>
+				        </button>
+				        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel1" data-bs-slide="next">
+				            <span class="carousel-control-next-icon"></span>
+				        </button>
+				    </div>
+				</div>
+				<div class="container mt-5" id="mv-ctn">
+				    <h2 class="text-left">최신 트렌드</h2>
+				    <div id="movieCarousel2" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+				        <div class="carousel-inner" id="carousel2"></div>
+				        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel2" data-bs-slide="prev">
+				            <span class="carousel-control-prev-icon"></span>
+				        </button>
+				        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel2" data-bs-slide="next">
+				            <span class="carousel-control-next-icon"></span>
+				        </button>
+				    </div>
+				</div>
+        	</section>   
 	    </div>
    	<th:block th:include="common/footer"></th:block>
+<script>
+	function nowPlaying(){
+		$.ajax({
+			url : "/api/nowPlaying",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel1");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	function trend(){
+		$.ajax({
+			url : "/api/trend",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel2");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	
+	function makeSlide(obj1,obj2){
+		const movies = obj1;
+		const carouselContent = obj2;
+        let slideIndex = 0;
+        let indexNo= 1;
+        for (let i = 0; i < movies.length; i += 5) {
+            let moviesSlice = movies.slice(i, i + 5);
+            let isActive = slideIndex === 0 ? "active" : "";
+            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
+            let row = $("<div>").addClass("row d-flex justify-content-center");
+
+            
+            $.each(moviesSlice, function (index, movie) {
+                let col = $("<div>").addClass("col-md-2 mx-1");
+
+                const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
+                let card = $("<div>").addClass("card");
+                const id = movie.movieId;
+                card.on('click',function(){
+                	location.href = "/api/movieDetail?movieId="+id;
+                });
+                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
+                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+                let imgDiv = $("<div>").addClass("img-div").append(img);
+
+                let cardBody = $("<div>").addClass("card-body");
+                let title = $("<div>").addClass("card-title").text(movie.title);
+                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
+                
+                let rating = $("<div>").addClass("rating");
+                //let ratingText = $("<span>").text(movie.rating);
+                //rating.append(star);
+                let genreInfo = $("<div>").addClass("genre-info");			
+    			if((movie.genreIds).length==0){
+    				genreInfo.text("");
+    			}
+                $.each(movie.genreIds, function(index, genre){
+                	const p = $("<p>").append(genre);
+                	genreInfo.append(p);
+                });
+                // 카드 조립
+                cardBody.append(title, info, rating, genreInfo);
+                card.append(rankBadge, imgDiv, cardBody);
+                col.append(card);
+                row.append(col);
+            });
+            slide.append(row);
+            carouselContent.append(slide);
+            slideIndex++;
+        }
+	}
+	nowPlaying();
+	trend();
+	</script>
 </body>
 </html>
