@@ -58,4 +58,13 @@ public class MemberSerivce {
 		int result2= memberDao.insertBusiness(bum);
 		return result1;
 	}
+	public int ajaxcommNo(String MemberId) {
+		int result =memberDao.ajaxcommNo(MemberId);
+		return result;
+	}
+	public int ajaxscoreNo(String MemberId) {
+		int result =memberDao.ajaxscoreNo(MemberId);
+		return result;
+		
+	}
 }
