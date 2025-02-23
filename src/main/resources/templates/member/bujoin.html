@@ -7,8 +7,12 @@
 	*{
 	font-family: ns-r;
 	}
+	.input-wrap{
+	display:flex;
+	width: 100%;
+	}
 	.join-wrap{
-		width: 500px;
+		width: 1000px;
 		margin: 0 auto;
 		padding-top : 150px;
 		text-align: center
@@ -35,10 +39,16 @@
 	input{
 	border :none;
 	border-bottom: 1px solid black;
-	width : 100%
+	width : 100%;
+	align-content: left;
 	}
 	.input-title{
 	padding-top: 10px;
+	width: 20%;
+	}
+	.input-type{
+	width: 60%;
+	display: flex;
 	}
 	.email{
 	width:35%;
@@ -50,16 +60,28 @@
 	}
 	.mail{
 	margin-left: 10px;
-	width: 25%
+	width: 20%
 	}
-	.email-wrap{
-	display: flex;
-	width:100%;
-	}
-	.btn-primary{
+	.lg{
 	margin-top: 20px;
 	}
-	
+#send-btn{
+margin-left: 10px;	
+
+}
+.id-check-btn{
+margin-left: 10px;	
+width: 100px;
+}
+#check{
+margin-left: 10px;	
+}
+.page-title{
+font-size: 27px;
+height: 60px;
+line-height: 60px;
+margin-bottom: 20px;	
+}
 </style>
 </head>
 <body>
@@ -74,11 +96,11 @@
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberId">아이디</label>
-						<button type="button" class="btn-primary id-check-btn">중복체크</button>
 					</div>
 					<div class="input-type">
 						<input type="text" name="memberId" id="memberId">
 					</div>
+						<button type="button" class="btn-primary id-check-btn">중복체크</button>
 					<p class="input-msg id-check-msg"></p>
 					</div>
 			
@@ -154,7 +176,7 @@
 					<span id="authMsg"></span>
 				</div>
 				<div class=" join-button-box">
-					<button type="submit" class="btn-primary lg">회원가입</button>
+					<button type="submit" class="btn-primary lg" style="width: 40%">회원가입</button>
 				</div>
 			</form>
 		</section>

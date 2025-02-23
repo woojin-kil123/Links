@@ -30,6 +30,7 @@ public class webConfig implements WebMvcConfigurer{
 				.addPathPatterns("/member/logout",
 								"/member/mypage",
 								"/member/delete",
+								"/member/changeinfo",
 								"/notice/**"
 								)
 				.excludePathPatterns(	
