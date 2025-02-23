@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+*{
+	font-family: ns-r;
+	}
 	.login-container{
 	display: flex;
 	justify-content: center;
@@ -12,9 +15,7 @@
 	.login-wrap{
 		width: 500px;
 	}
-	h3{
-	text-align: center;
-	}
+	
 	.login-wrap  .input-wrap{
 	padding :15px 30px;
 	}
@@ -28,7 +29,9 @@
 	}
 	.page-title{
 	 padding-bottom : 40px;
-	 padding-left : 230px;
+	 text-align: center;
+	 font-family: ns-r;
+	 font-size: 20px;
 	}
 	.member-link-box{
 		display: flex;
@@ -66,9 +69,17 @@
     color: #fff;
     margin: 3px;
 }
-	
+	#back{
+	margin-right: 20px;
+	}
 	.loc{
 	display: flex;
+	margin-bottom: 10px;
+	}
+	.check{
+	margin-right: 10px;
+	width:  20px;
+	height: 20px;
 	}
 </style>
 </head>
@@ -85,7 +96,7 @@
 			 <div class="agree-all-wrap">
             <div class="agree-wrap">
             <div class="agree-title">
-        <h3>약관동의</h3>
+   
             </div>
         <div class="agree-content">
             <div class="agree">
@@ -98,7 +109,7 @@
             <div class="agree-name">
                 <div class="agree-check loc">
                     <input type="checkbox"  class="check" name="check2" id="check2">
-                    <label class="check-massage">
+                    <label class="check-massage" >
                     <span id="red">(필수)</span>이용 약관에 동의합니다.
                     </label>
                     </div>
@@ -114,8 +125,8 @@
         </div>
     </div>
         <div class="agree-button-box">
-            <button type="button" class="btn-primary"id="back">이전단계</button>
-            <button type="button" class="btn-primary" id="next">다음단계</button>
+            <button type="button" class="btn-primary"id="back" style=color:black>이전단계</button>
+            <button type="button" class="btn-primary" id="next" style=color:black>다음단계</button>
         </div>
     </div>
     </div>

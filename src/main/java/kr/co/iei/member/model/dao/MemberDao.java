@@ -124,5 +124,19 @@ public class MemberDao {
 		return result2;
 	}
 
+	public int ajaxcommNo(String MemberId) {
+		String query="select count(*) from comm where member_id = ?";
+		Object[] params= {MemberId};
+		int result= jdbc.queryForObject(query, Integer.class,params);
+		return result;
+	}
+
+	public int ajaxscoreNo(String MemberId) {
+		String query="select count(*) from content_star where member_id = ?";
+		Object[] params= {MemberId};
+		int result= jdbc.queryForObject(query, Integer.class,params);
+		return result;
+	}
+
 
 }
