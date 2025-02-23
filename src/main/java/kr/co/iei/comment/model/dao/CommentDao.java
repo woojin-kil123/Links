@@ -77,7 +77,7 @@ public class CommentDao {
 	}
 
 	public Comment selectOneComm(int commentNo) {
-		String query = "select * from comm where comment_no = ? order by COMMENT_NO DESC";
+		String query = "select * from comm where comment_no = ?";
 		Object[] params = {commentNo};
 		List list = jdbc.query(query, commentRowMapper, params);
 		if(list.isEmpty()) {

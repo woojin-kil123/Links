@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>LinkS 영화</title>
-<link rel ="stylesheet" href="/css/contentDetail.css">
+<link rel ="stylesheet" href="/css/movieDetail.css">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -257,11 +257,6 @@
 							}
 						})
 					}else{
-						/*
-						private String  movieAvgPoint;
-						private String moviePlatform;
-						private int linkClick;
-						*/
 						if(data.movieAvgPoint==null){
 							$("#avg-star-input").text("아직 평가가 없어요 ㅠㅠ");
 						}else{

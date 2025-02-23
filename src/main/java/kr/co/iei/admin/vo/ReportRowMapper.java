@@ -12,10 +12,12 @@ public class ReportRowMapper implements RowMapper<Report>{
 	@Override
 	public Report mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Report r = new Report();
-		r.setReportedMemberNo(rs.getInt("reported_member_no"));
-		r.setReporterMemberNo(rs.getInt("reporter_member_no"));
+		r.setWriteNo(rs.getString("write_no"));
+		r.setReportedMemberId(rs.getString("reported_member_id"));
+		r.setReporterMemberId(rs.getString("reporter_member_id"));
 		r.setReportReason(rs.getString("report_reason"));
 		r.setReportYn(rs.getString("report_yn"));
+		r.setRegDate(rs.getString("reg_date"));
 		return r;
 	}
 

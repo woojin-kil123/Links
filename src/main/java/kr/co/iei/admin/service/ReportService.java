@@ -15,8 +15,8 @@ public class ReportService {
     @Autowired
     private ReportDao reportDao;
 
-    public String getReportReason(int memberNo) {
-        List<Report> reportReason = reportDao.selectReportReason(memberNo);
+    public String getReportReason(String memberId) {
+        List<Report> reportReason = reportDao.selectReportReason(memberId);
         if(reportReason.isEmpty()) {
         	return null;
         }else {

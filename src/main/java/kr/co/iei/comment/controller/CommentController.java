@@ -25,6 +25,20 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
+	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러, 건들지말것
+	@ResponseBody
+	@GetMapping("oneMovieComment")
+	public List oneMovieComment(String contentNo) {
+		List list = commentService.oneMovieComment(contentNo);
+		return list;
+	}
+	// 푸터에 코멘트 개수 전달
+    @ResponseBody
+    @GetMapping("/count")
+    public int getCommentCount() {
+    	return commentService.getTotalCommentCount();
+    }
+	
 	@ResponseBody
 	@PostMapping("/insertComment")
 	public int insertComment(Comment comment) {
@@ -39,30 +53,22 @@ public class CommentController {
 		return "comment/mCommentMemberList";
 	}
 	
+	// 기존에 /mCommentList 컨트롤러 필요하면 다시만드세요. service는 그대로 있을거에요.
 	
-	
-	@GetMapping(value="/mCommentList")
-	public String mCommentList(String contentNo, Model model) {
-		DbMovie m = new DbMovie();
-		m = commentService.selectMovieInfo(contentNo);
-		List list = commentService.mCommentList(contentNo );
-		String movieTitle = commentService.selectMovieTitle(contentNo);
-				
-		model.addAttribute("list", list);
-		model.addAttribute("movieTitle", movieTitle);
+	@GetMapping(value="/commentView")
+	public String mCommentList(int commentNo, Model model) {
+		Comment comment = commentService.selectOneComm(commentNo);
+		String contentNo = comment.getContentNo();
+		DbMovie m = commentService.selectMovieInfo(contentNo);
+		List recommList = commentService.selectRecomm(commentNo); 
+		
+		model.addAttribute("recommList",recommList);
+		model.addAttribute("comm", comment);
 		model.addAttribute("m", m);
 						
-		return "comment/mCommentList";
+		return "comment/commentView";
 	}
-		
-		
 	
-	// 푸터에 코멘트 개수 전달
-    @ResponseBody
-    @GetMapping("/count")
-    public int getCommentCount() {
-    	return commentService.getTotalCommentCount();
-    }
 	@GetMapping(value="/myCommentList")
 	public String myCommentList(String contentNo, Model model) {
 		List list = commentService.mCommentList(contentNo );		
@@ -84,10 +90,8 @@ public class CommentController {
 	
 	@GetMapping(value="/updateFrm")
 	public String updateFrm(int commentNo,Model model) {
-		
 		Comment c = commentService.selectOneComm(commentNo);
 		model.addAttribute("c", c);
-		
 		return "comment/updateFrm";
 	}
 	
@@ -105,16 +109,6 @@ public class CommentController {
 		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
-	
-	
-	@GetMapping(value="/commReport")
-	public String commReport(Comment c) {
-		int report = commentService.commReport(c);
-		
-		
-		
-		
-		return "redirect:/comment/mCommentList?reqpage=1";
-	}
+
 	
 }

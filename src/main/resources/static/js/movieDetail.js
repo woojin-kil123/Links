@@ -18,32 +18,37 @@ function commentList(movieId) {
 	           const row = $("<div>").addClass("d-flex justify-content-between");
 
 	           $.each(commentSlice, function (index, comment) {
-	               const card = $("<div>").addClass("comment-card");
+	              const card = $("<div>").addClass("comment-card");
+				  /* 
+				  코멘트 눌럿을때 해당 코멘트 상세보기 이동
+				  card.on("click",function(){
+					location.herf="/comment/mCommentList?contentNo="+comment.commentNo;
+				   });
+				   */
+	              const header = $("<div>").addClass("comment-header");
+	              const userInfo = $("<div>").addClass("comment-user");
+	              const userImg = $("<img>").attr("src", "/image/userimg.png");
+	              const memberId = $("<span>").text(comment.memberId);
 
-	               const header = $("<div>").addClass("comment-header");
-	               const userInfo = $("<div>").addClass("comment-user");
-	               const userImg = $("<img>").attr("src", "/image/userimg.png");
-	               const memberId = $("<span>").text(comment.memberId);
-
-	               userInfo.append(userImg, memberId);
-	               const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
-	               header.append(userInfo, title);
+	              userInfo.append(userImg, memberId);
+	              const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+	              header.append(userInfo, title);
 
 				   
-	               const rating = $("<div>").addClass("comment-rating");
-	               for (let j = 0; j < 5; j++) {
+	              const rating = $("<div>").addClass("comment-rating");
+	              for (let j = 0; j < 5; j++) {
 	                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
 	                   rating.append(star);
-	               }
+	              }
 
-	               const body = $("<div>").addClass("comment-body").text(comment.commentContent);
-	               const footer = $("<div>").addClass("comment-footer");
-	               const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
-	               const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
+	              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
+	              const footer = $("<div>").addClass("comment-footer");
+	              const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
+	              const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
 	               
-	               footer.append(like, dislike);
-	               card.append(header, rating, body, footer);
-	               row.append(card);
+	              footer.append(like, dislike);
+	              card.append(header, rating, body, footer);
+	              row.append(card);
 	           });
 
 	           slide.append(row);

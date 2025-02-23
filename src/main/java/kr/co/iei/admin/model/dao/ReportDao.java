@@ -21,17 +21,17 @@ public class ReportDao {
     @Autowired
     private MemberRowMapper memberRowMapper;
 
-    public List selectReportReason(int memberNo) {
-        String query = "SELECT * FROM REPORT WHERE REPORTED_MEMBER_NO = ? ";
-        Object[] params = {memberNo};
+    public List selectReportReason(String memberId) {
+        String query = "SELECT * FROM REPORT WHERE REPORTED_MEMBER_ID = ? ";
+        Object[] params = {memberId};
         List list = jdbc.query(query, reportRowMapper,params );
         return list;
         
     }
     
-    public Member selectWarningLevel(int memberNo) {
-    	String checkWarningLevelQuery = "SELECT WANING_LEVEL FROM MEMBER WHERE MEMBER_NO = ?";
-        Object[] params = {memberNo};
+    public Member selectWarningLevel(String memberId) {
+    	String checkWarningLevelQuery = "SELECT WANING_LEVEL FROM MEMBER WHERE MEMBER_ID = ?";
+        Object[] params = {memberId};
         List warningLevel = jdbc.query(checkWarningLevelQuery, memberRowMapper, params);
         if(warningLevel.isEmpty()) {
         	return null;

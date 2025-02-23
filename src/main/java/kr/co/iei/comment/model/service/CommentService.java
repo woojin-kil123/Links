@@ -50,16 +50,14 @@ public class CommentService {
 	}
 
 	@Transactional
-	public List mCommentList(String contentNo) {		
-		List<Comment> list = commentDao.mCommentList(contentNo);
-		
+	public List mCommentList(String contenttNo) {		
+		List<Comment> list = commentDao.mCommentList(contenttNo);
 		for(int i = 0   ; i < list.size() ; i++) {
 			Comment comment = list.get(i);
 			int commentNo = comment.getCommentNo();
 			List listNo = commentDao.commNo(commentNo);
 			comment.setListNo(listNo); 
 		}
-		
 		return list;
 	}
 	
@@ -113,13 +111,17 @@ public class CommentService {
 		return null;
 	}
 	
-	
 	@Transactional
 	int commReport(Comment c) {
 		System.out.println(c);
 		int report = commentDao.updateComm(c);
 		
 		return report;
+	}
+
+	public List selectRecomm(int commentNo) {
+		List list = commentDao.commNo(commentNo);
+		return list;
 	}
 	
 	

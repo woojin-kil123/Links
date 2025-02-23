@@ -12,6 +12,7 @@
 
 .stat-box {
     display: flex;
+    justify-content : space-evenly;
     align-items: center;
     width: 22%;
     padding: 15px;
@@ -21,12 +22,30 @@
 }
 
 .stat-icon {
-    font-size: 30px;
+	display : flex;
+	align-items: center;
+	justify-content : center;
+	width : 60px;
+	height : 60px;
     margin-right: 10px;
+    border-radius: 8px;
+    background-color: #FFC800;
+}
+.stat-icon> span {
+   font-size: 50px;
+   color : #fff;
+}
+.stat-info{
+	display : flex;
+	justify-content: center;
+	flex-direction : column;
+	align-items : center;
+	flex-wrap: wrap;
 }
 
 .stat-info h3 {
     margin: 0;
+    text-align : center;
     font-size: 16px;
     color: #333;
 }
@@ -38,22 +57,14 @@
     color: #007bff;
 }
 
-.admin-container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .tab-menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-bottom: 20px;
 }
 
 .tab-btn {
+	width : 15%;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
@@ -63,14 +74,59 @@
 }
 
 .tab-btn.active {
-    background-color: #007bff;
+	font-weight: bolder;
+    background-color: #FFC800;
     color: white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .table-container {
     width: 100%;
+    
 }
 
+.table-container table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* 헤더 스타일 */
+.table-container th {
+    background-color: #ffcc00;
+    color: #fff;
+}
+.table-container tr {
+    border-bottom: 1px solid #ddd;
+}
+
+
+.table-container th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+.add-btn {
+    display: flex;
+    justify-content : center;
+    align-items : center;
+    margin: 10px auto;
+    padding: 10px 10px;
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    
+}
+
+.add-btn:hover {
+    background-color: #ffdb4d;
+}
+
+/* 탭 스타일 */
 .tab-content {
     display: none;
 }
@@ -79,16 +135,17 @@
     display: block;
 }
 
-.table-header, .table-body div {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+/* 관리 메뉴 버튼 스타일 */
+.manage-btn {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-button {
-    padding: 5px 10px;
-    cursor: pointer;
+.manage-btn:hover {
+    background-color: #e0e0e0;
 }
 
 </style>
@@ -96,44 +153,44 @@ button {
 <body>
 	<th:block th:include="common/header"></th:block>
 	<section class="page-section" id="services">
-		<div class="admin-container">
-	    	<h2>관리자 페이지</h2>
-		    <div class="stats-container">
+		<div class="container mt-5">
+	    	<h2>운영 통계</h2>
+		    <div class="stats-container mt-3">
 	        <div class="stat-box">
-	            <div class="stat-icon">📊</div>
-	            <div class="stat-info">
+	            <div class="stat-icon "><span class="material-icons ">groups</span></div>
+	            <div class="stat-info ">
 	                <h3>총 회원 수</h3>
 	                <p id="total-users">0명</p>
 	            </div>
 	        </div>
 	        <div class="stat-box">
-	            <div class="stat-icon">📈</div>
-	            <div class="stat-info">
-	                <h3>총 광고 등록 수</h3>
-	                <p id="total-ads">0개</p>
+	            <div class="stat-icon"><span class="material-icons ">ads_click</span></div>
+	            <div class="stat-info ">
+	                <h3>광고 클릭</h3>
+	                <p id="total-adCliks">0건</p>
+	            </div>
+	        </div>
+	        <div class="stat-box ">
+	            <div class="stat-icon"><span class="material-icons ">add_link</span></div>
+	            <div class="stat-info ">
+	                <h3>플랫폼 연결</h3>
+	                <p id="total-links">0건</p>
 	            </div>
 	        </div>
 	        <div class="stat-box">
-	            <div class="stat-icon">📝</div>
-	            <div class="stat-info">
-	                <h3>총 문의 수</h3>
-	                <p id="total-inquiries">0건</p>
-	            </div>
-	        </div>
-	        <div class="stat-box">
-	            <div class="stat-icon">🚨</div>
-	            <div class="stat-info">
-	                <h3>신고된 코멘트</h3>
+	            <div class="stat-icon"><span class="material-icons ">report</span></div>
+	            <div class="stat-info ">
+	                <h3>신고 코멘트</h3>
 	                <p id="total-reports">0건</p>
 	            </div>
 	        </div>
 	    </div>
 	    
-	
+		<h2 class= "mt-5">관리 메뉴</h2>
 	    <!-- 메뉴 탭 -->
-	    <div class="tab-menu">
+	    <div class="tab-menu mt-3">
 	        <button class="tab-btn active" data-target="business">사업자 문의</button>
-	        <button class="tab-btn" data-target="ads">광고 현황</button>
+	        <button class="tab-btn" data-target="ads">광고 관리</button>
 	        <button class="tab-btn" data-target="user-inquiry">사용자 문의</button>
 	        <button class="tab-btn" data-target="report-comments">신고 코멘트</button>
 	        <button class="tab-btn" data-target="dangerous-users">위험 회원</button>
@@ -141,159 +198,284 @@ button {
 	
 	    <!-- 테이블 컨테이너 -->
 	    <div class="table-container">
-	        <div id="business" class="tab-content active">
-	            <h3>사업자 문의</h3>
-	            <div class="table-header">
-	                <span>사업자명</span><span>번호</span><span>카테고리</span><span>연락처</span><span>문의내용</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="business-table"></div>
-	            <button class="add-btn" data-type="business">추가</button>
-	        </div>
-	
-	        <div id="ads" class="tab-content">
-	            <h3>광고 현황</h3>
-	            <div class="table-header">
-	                <span>광고명</span><span>카테고리</span><span>URL</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="ads-table"></div>
-	            <button class="add-btn" data-type="ads">추가</button>
-	        </div>
-	
-	        <div id="user-inquiry" class="tab-content">
-	            <h3>사용자 문의</h3>
-	            <div class="table-header">
-	                <span>사용자 ID</span><span>문의 카테고리</span><span>내용</span><span>날짜</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="user-inquiry-table"></div>
-	            <button class="add-btn" data-type="user-inquiry">추가</button>
-	        </div>
-	
-	        <div id="report-comments" class="tab-content">
-	            <h3>신고 코멘트</h3>
-	            <div class="table-header">
-	                <span>코멘트 ID</span><span>유저명</span><span>신고 사유</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="report-comments-table"></div>
-	            <button class="add-btn" data-type="report-comments">추가</button>
-	        </div>
-	
-	        <div id="dangerous-users" class="tab-content">
-	            <h3>위험 회원</h3>
-	            <div class="table-header">
-	                <span>사용자명</span><span>위험도</span><span>상태</span><span>관리</span>
-	            </div>
-	            <div class="table-body" id="dangerous-users-table"></div>
-	            <button class="add-btn" data-type="dangerous-users">추가</button>
-	        </div>
-	    </div>
+		    <!-- 사업자 문의 -->
+		    <div id="business-inquiry" class="tab-content active">
+		        <table id="business-table">
+	                <tr>
+	                    <th style="width : 20%;">사업자명</th>
+	                    <th style="width : 10%;">카테고리</th>
+	                    <th style="width : 20%;">연락처</th>
+	                    <th style="width : 20%;">등록일</th>
+	                    <th style="width : 10%;">진행 상태</th>
+	                    <th style="width : 10%;">관리</th>
+	                </tr>
+	                <!-- 데이터 추가 영역 -->
+		        </table>
+		    </div>
+		
+		    <!-- 사용자 문의 -->
+		    <div id="user-inquiry" class="tab-content">
+		        <table id="user-inquiry-table">
+	                <tr>
+	                    <th>사용자 ID</th>
+	                    <th>문의 카테고리</th>
+	                    <th>내용</th>
+	                    <th>날짜</th>
+	                    <th>관리</th>
+	                </tr>
+		                <!-- 데이터 추가 영역 -->
+		        </table>
+		    </div>
+		
+		    <!-- 신고 코멘트 -->
+		    <div id="report-comments" class="tab-content">
+		        <table id="report-comments-table">
+	                <tr>
+	                    <th>코멘트 번호</th>
+	                    <th>신고자</th>
+	                    <th>피신고자</th>
+	                    <th>신고 사유</th>
+	                    <th>등록일</th>
+	                    <th>관리</th>
+	                </tr>
+		                <!-- 데이터 추가 영역 -->
+		        </table>
+		    </div>
+		    
+		    <!-- 광고 관리 -->
+		    <div id="ads" class="tab-content">
+		        <table id="ads-table">
+	                <tr>
+	                    <th>광고명</th>
+	                    <th>카테고리</th>
+	                    <th>URL</th>
+	                    <th>상태</th>
+	                    <th>관리</th>
+	                </tr>
+		        </table>
+		        <button class="add-btn" data-type="ads"><span class="material-icons">add</span></button>
+		    </div>
+		
+		    <!-- 위험 회원 -->
+		    <div id="dangerous-users" class="tab-content">
+		        <table id="dangerous-users-table">
+	                <tr>
+	                    <th>사용자명</th>
+	                    <th>위험도</th>
+	                    <th>상태</th>
+	                    <th>관리</th>
+	                </tr>
+		                <!-- 데이터 추가 영역 -->
+		        </table>
+		    </div>
+		</div>
+	    <h2 class= "mt-5">검색</h2>
+	    
 	</div>
 	</section>	
 	<script>
+    $(".tab-btn").click(function () {
+        $(".tab-btn").removeClass("active");
+        $(this).addClass("active");
+
+        $(".tab-content").removeClass("active");
+        //data 사용하면 자료형 그대로 가져오기때문에 문자열로 더해짐
+        $("#" + $(this).data("target")).addClass("active");
+    });
+	
+	//통계불러오기
+    function loadStats() {
+        $.ajax({
+            url: "/admin/loadStats",
+            method: "GET",
+            success: function (data) {
+                $("#total-users").text(data.memberCount + "명");
+                $("#total-adCliks").text(data.adClickCount + "건");
+                $("#total-links").text(data.linkCount + "건");
+                $("#total-reports").text(data.reportCount + "건");
+            },
+            error : function(){
+            	console.log("error");
+            }
+        });
+    }
+    
+    // 사업자 문의
+    function BusinessView() {
+        $.ajax({
+            url: "/admin/businessView",
+            method: "GET",
+            success: function (data) {
+            	const table = $("#business-table");
+                $.each(data, function (index, item) {
+                	const row = $("<tr>");
+                    row.append($("<td>").text(item.companyName));
+                    row.append($("<td>").text(item.inquiryCategory));
+                    row.append($("<td>").text(item.memberPhone));
+                    row.append($("<td>").text(item.inquiryDate));
+                    row.append($("<td>").text(item.inquiryProgress));
+                    row.append($("<td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    table.append(row);
+                });
+            },
+            error: function () {
+                console.error("사업자 문의 데이터 로드 실패");
+            }
+        });
+    }
+
+    // 광고 관리
+    function loadAdsData() {
+        $.ajax({
+            url: "/get_ads_data",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+            	const tableBody = $("#ads-table");
+                tableBody.empty();
+
+                $.each(data, function (index, item) {
+                	const row = $("<tr></tr>");
+                    row.append($("<td></td>").text(item.ad_name));
+                    row.append($("<td></td>").text(item.category));
+                    row.append($("<td></td>").append($("<a></a>").attr("href", item.url).attr("target", "_blank").text(item.url)));
+                    row.append($("<td></td>").text(item.status));
+                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    tableBody.append(row);
+                });
+            },
+            error: function () {
+                console.error("광고 데이터 로드 실패");
+            }
+        });
+    }
+
+    // 사용자 문의
+    function loadUserInquiryData() {
+        $.ajax({
+            url: "/get_user_inquiry_data",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                const tableBody = $("#user-inquiry-table");
+
+                $.each(data, function (index, item) {
+                	const row = $("<tr></tr>");
+                    row.append($("<td></td>").text(item.user_id));
+                    row.append($("<td></td>").text(item.category));
+                    row.append($("<td></td>").text(item.content));
+                    row.append($("<td></td>").text(item.date));
+                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    tableBody.append(row);
+                });
+            },
+            error: function () {
+                console.error("사용자 문의 데이터 로드 실패");
+            }
+        });
+    }
+
+    // 신고 코멘트 
+    function newReport() {
+        $.ajax({
+            url: "/admin/newReport",
+            method: "GET",
+            success: function (data) {
+                const table = $("#report-comments-table");
+
+                $.each(data, function (index, item) {
+                	const row = $("<tr>");
+                	const writeNo = $("<td>").text(item.writeNo).css("cursor","pointer").on("click",function(){
+                    	location.href="/comment/commentView?commentNo="+item.writeNo;
+                    });
+                    row.append(writeNo);
+                    row.append($("<td>").text(item.reporterMemberId));
+                    row.append($("<td>").text(item.reportedMemberId));
+                    row.append($("<td>").text(item.reportReason));
+                    row.append($("<td>").text(item.regDate));
+                    row.append($("<td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    table.append(row);
+                });
+            },
+            error: function () {
+                console.error("신고 코멘트 데이터 로드 실패");
+            }
+        });
+    }
+
+    // 위험 회원 
+    function loadDangerousUsersData() {
+        $.ajax({
+            url: "/get_dangerous_users_data",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                var tableBody = $("#dangerous-users-table");
+                tableBody.empty();
+
+                $.each(data, function (index, item) {
+                    var row = $("<tr></tr>");
+                    row.append($("<td></td>").text(item.username));
+                    row.append($("<td></td>").text(item.risk_level));
+                    row.append($("<td></td>").text(item.status));
+                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    tableBody.append(row);
+                });
+            },
+            error: function () {
+                console.error("위험 회원 데이터 로드 실패");
+            }
+        });
+    }
+    
+    $(".add-btn").click(function () {
+        let type = $(this).data("type");
+        $.ajax({
+            url: "/admin/insertAd",
+            method: "POST",
+            data: { data: "새 데이터" },
+            success: function () {
+                loadData(type);
+            },
+        });
+    });
+
+    $(document).on("click", ".edit", function () {
+        let type = $(this).data("type");
+        let id = $(this).data("id");
+
+        let newData = prompt("수정할 내용을 입력하세요:");
+        if (newData) {
+            $.ajax({
+                url: `/api/${type}/${id}`,
+                method: "PUT",
+                data: JSON.stringify({ newData }),
+                success: function () {
+                    loadData(type);
+                },
+            });
+        }
+    });
+
+    $(document).on("click", ".delete", function () {
+        let type = $(this).data("type");
+        let id = $(this).data("id");
+
+        if (confirm("삭제하시겠습니까?")) {
+            $.ajax({
+                url: `/api/${type}/${id}`,
+                method: "DELETE",
+                success: function () {
+                    loadData(type);
+                },
+            });
+        }
+    });
+
 	$(document).ready(function () {
-	    function loadData(type) {
-	        $.ajax({
-	            url: `/api/${type}`,
-	            method: "GET",
-	            success: function (data) {
-	                let tableBody = $("#" + type + "-table");
-	                tableBody.empty();
-
-	                data.forEach((item) => {
-	                    let row = $("<div>").addClass("table-row");
-
-	                    if (type === "business") {
-	                        row.html(`<span>${item.name}</span><span>${item.id}</span><span>${item.category}</span><span>${item.phone}</span><span>${item.inquiry}</span><span>${item.status}</span>
-	                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-	                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-	                    } else if (type === "ads") {
-	                        row.html(`<span>${item.adName}</span><span>${item.category}</span><span>${item.url}</span><span>${item.status}</span>
-	                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-	                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-	                    } else {
-	                        row.html(`<span>${item.data1}</span><span>${item.data2}</span><span>${item.data3}</span>
-	                        <button class="edit" data-id="${item.id}" data-type="${type}">수정</button>
-	                        <button class="delete" data-id="${item.id}" data-type="${type}">삭제</button>`);
-	                    }
-
-	                    tableBody.append(row);
-	                });
-	            },
-	        });
-	    }
-
-	    $(".tab-btn").click(function () {
-	        $(".tab-btn").removeClass("active");
-	        $(this).addClass("active");
-
-	        $(".tab-content").removeClass("active");
-	        $("#" + $(this).data("target")).addClass("active");
-	    });
-
-	    $(".add-btn").click(function () {
-	        let type = $(this).data("type");
-
-	        $.ajax({
-	            url: `/api/${type}`,
-	            method: "POST",
-	            contentType: "application/json",
-	            data: JSON.stringify({ data: "새 데이터" }),
-	            success: function () {
-	                loadData(type);
-	            },
-	        });
-	    });
-
-	    $(document).on("click", ".edit", function () {
-	        let type = $(this).data("type");
-	        let id = $(this).data("id");
-
-	        let newData = prompt("수정할 내용을 입력하세요:");
-	        if (newData) {
-	            $.ajax({
-	                url: `/api/${type}/${id}`,
-	                method: "PUT",
-	                data: JSON.stringify({ newData }),
-	                success: function () {
-	                    loadData(type);
-	                },
-	            });
-	        }
-	    });
-
-	    $(document).on("click", ".delete", function () {
-	        let type = $(this).data("type");
-	        let id = $(this).data("id");
-
-	        if (confirm("삭제하시겠습니까?")) {
-	            $.ajax({
-	                url: `/api/${type}/${id}`,
-	                method: "DELETE",
-	                success: function () {
-	                    loadData(type);
-	                },
-	            });
-	        }
-	    });
-	    function loadStats() {
-	        $.ajax({
-	            url: "/api/stats",
-	            method: "GET",
-	            success: function (data) {
-	                $("#total-users").text(data.totalUsers + "명");
-	                $("#total-ads").text(data.totalAds + "개");
-	                $("#total-inquiries").text(data.totalInquiries + "건");
-	                $("#total-reports").text(data.totalReports + "건");
-	            },
-	        });
-	    }
-	    
-
-	    loadData("business");
-	    loadData("ads");
-	    loadData("user-inquiry");
-	    loadData("report-comments");
-	    loadData("dangerous-users");
-	    loadStats();
+		loadStats();
+		BusinessView();
+		newReport()
 	});
 	
 	</script>	

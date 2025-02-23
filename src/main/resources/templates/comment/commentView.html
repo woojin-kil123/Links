@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>영화 into the 코멘트 리스트</title>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=star_rate" />
+<style>
+	.content-wrap{
+		width: 1400px;
+		margin: 0 auto;
+	}
+	.content{
+		width: 1200px;
+		margin: 0 auto;
+	}
+	.page-title{		
+		width:800px;
+		height: 200px;		
+		overflow: hidden;
+	}
+	
+	.movie-title{
+		margin-left: 10px;
+		margin-top: 10px;
+		font-size: 27px;
+		font-weight: 600;
+		background-color: #D9D9D9;			
+		float: left;
+	
+	}
+	.movie-summary{		
+		width: 130px;
+		height: 195px;
+		margin-right: 20px;
+		
+		background-color: #D9D9D9;		
+		float: right;
+		
+	}
+		
+		
+	.list-wrap{
+		width: 1200px;
+		
+		margin-left: 0px;
+	}
+	.comment-box{
+		display : flex;
+		flex-direction: column;
+		justify-content : space-between;
+		width: 800px;
+		height: 235px;
+		padding-top: 10px;
+		margin-top: 20px;
+		margin-bottom: 90px;
+		border : 1px solid #ffc800;
+		background-color: #fcf8e3;
+		box-sizing: border-box;
+	}
+	.line1{
+		width: 780px;
+		height: 25px;
+		margin: 0 auto;
+	}
+	.profile{
+		width: 25px;
+		height: 25px;
+		border-radius: 25px;
+		background-color: #D9D9D9;
+	}
+	.star-wrap{
+		overflow: hidden;
+	}	
+	.star-wrap>span{
+	    float: left;
+	    font-size: 18px;
+	    color: #D9D9D9;
+	    cursor: pointer;
+	}
+	
+		
+	.movie-comment{
+		width: 625px;
+		height:145px;
+		background-color: #D9D9D9;
+		
+		margin-left:110px;
+		
+	}
+	.btn-opt{
+		background-color: #ffc800;
+	}
+	.btn-opt>span{
+		width: 18px;
+		height: 18px;
+		margin-top: 5px;
+		margin-left: 15px;
+		cursor: pointer;		
+	}
+	.dots{
+		float:right;
+		margin-right: 15px;
+	}
+	
+	.btn-box{
+		width:800px;
+		height: 50px;
+		border-top: 2px  solid #C4C4C4;
+		background-color: #FFF9F9;	
+		display: flex;
+		justify-content: space-around;
+		border-bottom: 3px solid #D9D9D9;
+	}
+	.choice-like{
+		margin-top: 8px;		
+		cursor: pointer; 
+		margin-left: 90px;
+	}
+	.choice-comment{
+		margin-top: 8px;
+		margin-right: 90px;		
+		cursor: pointer;
+	}
+	
+	.inputBox{
+		display: none;
+		background-color: #FFF9F9;
+		margin : 0 auto;
+		
+	}
+	.re-comm{		
+		width: 600px;
+		height: 100px;
+		border: 0px;
+		background-color: #FFF9F9;
+	}
+	.re-comm:checked{
+		border: 0px;
+	}
+		
+	.btn-primary{
+		display: flex;
+		flex-direction: reverse;
+	}
+	
+	.line2{
+		margin: 0 auto;
+		margin-top: 30px;
+		margin-left: 50px;
+		width: 700px;
+		height:160px;
+		background-color: #FEECEC;
+	}	
+	.line2>div{
+		padding-left: 50px;
+	}
+	.line2 .movie-re-comment{	
+		width: 600px;
+		height:100px;
+		padding-left: 50px;
+		padding-bottom: 90px;
+		background-color:#D9D9D9;			
+	}
+	
+	.modal-box{
+		width: 300px;
+		height: 350px;
+	}
+	.right-icon{
+		float: right;
+	}
+	 /* 신고 버튼 css 시작*/
+	.report-wrap{
+		position : absolute;
+		right: -10%;
+		bottom : -2%;
+		width : 10%;
+		display : flex;
+		flex-direction: column;
+		box-sizing: border-box;
+	}
+	.report-wrap input{
+		display:none;
+	}
+
+	.report-wrap .report{
+		width : 100%;
+		justify-content: center;
+	}
+	.btn-opt{
+		color : #fff;
+		position : relative;		
+	}
+	#modal>.modal-dialog {
+		top : 30%;
+	}
+	.modal>.modal-dialog>.rating-modal{
+		height : 500px;
+		width : 800px;
+		display : flex;
+		align-items: center;
+	}
+	.modal>.modal-dialog{
+		display : flex;
+		justify-content: center;
+		align-items: space-around;		
+	}
+	.modal .btn-wrap{
+		margin-top : 50px;	
+		display : flex;
+		justify-content: center;
+		gap : 50px;
+	}
+	.btn-wrap>.btn{
+		display : flex;
+		align-items: center;
+	}
+	/* 신고 css 끝 */
+	
+	
+</style>
+</head>
+<body>
+<th:block th:include="common/header"></th:block>
+	
+<main class="content-wrap">
+	<section class="section movie-comment-list-wrap">
+		<div class="content">
+			<div class="page-title">
+				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
+				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
+			</div>		
+				<div class="comment-box">
+					<table class="line1">
+						<tr>
+							<th style="width:1%;"></th>
+							<th class="profile" style="width:3%;"></th>
+							<th style="width:2%;"></th>
+							<th th:text= "${comm.memberId}" style="width:10%;"></th>
+							<th style="width:67%;"></th>								
+							<th class="star-wrap" style="width:17%;">
+								<span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+						        <span class="material-symbols-outlined"> star_rate</span>
+							</th>
+						<tr>			
+					</table>
+					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
+					<div class="btn-opt">
+						<span class="material-icons">thumb_up</span>
+						<span class="count"> 0 </span>
+						<span class="material-icons show-recomm">textsms </span>
+						<span class="count"> 0 </span>	
+						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+						<div class="report-wrap" style="display: none;" >
+							<input type="hidden" th:value="${comm.memberId}">
+							<input type="hidden" th:value="${comm.commentNo}">
+							<input type="radio" id="report-1" name="report-reason" value="욕설">
+							<label for="report-1" class="report btn-primary">욕설</label>
+							<input type="radio" id="report-2" name="report-reason" value="혐오발언">
+							<label for="report-2" class="report btn-primary">혐오발언</label>
+							<input type="radio" id="report-3" name="report-reason"  value="스포일러">
+							<label for="report-3" class="report btn-primary">스포일러</label>
+							<input type="radio" id="report-4" name="report-reason" value="도배">
+							<label for="report-4" class="report btn-primary">도배</label>
+						</div>
+					</div>
+				</div>
+				<div class="inputCommentBox inputBox" th:if="${session.member != null}">				
+					<div>
+						<span class="material-icons">subdirectory_arrow_right</span>									
+					</div>  
+					<textarea class="re-comm" name="reCommentContent"></textarea>
+					<div>
+						<a th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">
+							<button type="button" class="btn-primary ">등록</button>
+						</a>										
+					</div>
+				</div>	
+				<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
+                <div class="recomment-wrap" style="display : none;">
+					<div  class="btn-box">		
+						<th:block th:if="${session.member != null}">	
+		                    <div class="choice-like">			                    	
+		                    	<span class="material-icons">thumb_up</span>
+		                        <span>좋아요</span>
+		                        <span>0</span>
+		                    </div>
+		                    <div class="choice-comment" >
+		                   	 	<a th:onclick="modifyComment(this,[[${comm.memberId}]],[[${comm.commentNo}]]);"><span class="material-icons windowShow">textsms </span></a>	                    	
+		                        <span>댓글</span>
+		                        <span>0</span>
+		                    </div>
+                        </th:block>
+               		</div>
+					<!-- 댓글 출력 -->
+					<th:block th:each="re : ${recommList}">
+						<div class="line2">
+							<div th:text= "${re.memberId}" style="width:15%;"></div>
+							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
+							<th:block th:if="${session.member != null}">	
+								<th:block th:if="${session.member.memberId == re.memberId}">
+									<div class="right-icon">								
+										<span class="material-icons btn btn-primary" id="edit-content" >create </span>							
+									    <span class="material-icons" th:onclick="commDelete([[${re.commentNo}]]);">delete_forever</span>
+										<span class="material-icons dots" > more_vert </span>
+									</div>
+								</th:block>	
+							</th:block>
+						</div>
+					</th:block>
+				</div>	
+			</div>
+			<!-- 모달 -->
+			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
+	        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog">
+	           <div class="modal-dialog">
+	                <div class="modal-content rating-modal">
+	                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+	                    <div class="container justify-content-center">
+	                           <div class="col-lg-12">	
+	                               <div class="modal-body">
+	                                   <!-- Project details-->
+	                                   <span id="writeNo" style="display : none;"></span>
+	                                   <span class="item-intro fs-1 fw-bolder" id="reported-id"></span>
+	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 글을</span><br>
+	                                   <span class="item-intro fs-1 fw-bolder" id="reason-confirm"></span>	
+	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 이유로 신고 하시겠습니까?</span>
+	                                   <div class="btn-wrap mt-5">
+		                                   <button class="btn btn-primary btn-xl" data-bs-dismiss="modal"
+												th:onClick="insertReport(this);" >
+		                                   		<span class="material-icons" style="font-size : 25px;">radio_button_unchecked</span>확인</button>		
+		                                   <button class="btn btn-secondary btn-xl" data-bs-dismiss="modal" type="button">
+		                                   		<span class="material-icons" style="font-size : 25px;">close</span>취소</button>
+	                                   </div>
+	                               </div>
+	                           </div>
+	                    </div>
+	                </div>
+	            </div>
+	       </div>
+	</section>
+	
+</main>
+
+<th:block th:include="common/header"></th:block>
+	<script src="/js/sweetalert.min.js"></script>
+	<script th:inline="javascript">
+	const loginMemberId = [[${session.member?.memberId}]];
+	
+		// '...' 누르면 나오게 하는 이벤트
+		$("#dots").on("click",function(){
+			$(".report-wrap").toggle();
+		});
+		//댓글창 누르면 나오게 하는 이벤트
+		$(".show-recomm").on("click",function(){
+			$(this).parent().parent().next().toggle();
+		});
+		//신고 클릭시 전송 이벤트
+		$("[name=report-reason]").on("click",function(){
+			const reportedId = $(this).parent().children().eq(0).val();
+			const reportReason = $(this).val();
+			const writeNo = $(this).parent().children().eq(1).val();
+			$("#writeNo").text(writeNo);
+			$("#reported-id").text(reportedId);
+			$("#reason-confirm").text(reportReason);
+			$("#report-modal-btn").click();
+		});
+		//신고 접수 함수
+		function insertReport(obj,memberId,commentNo){
+			const reporterId = [[${session.member?.memberId}]];
+			const reportedId = $("#reported-id").text();
+			const reason = $("#reason-confirm").text();
+			const writeNo = $("#writeNo").text();
+			$.ajax({
+				url : "/admin/insertReport",
+				type : "post",
+				data : {"writeNo":writeNo, "reporterMemberId":reporterId,"reportedMemberId":reportedId,"reportReason":reason},
+				success : function(data){
+					console.log("success");
+				},
+				error : function(error){
+					console.log("Error");
+				}
+			});
+		}
+		
+		
+		$(".windowShow").on("click",function(){
+			const index = $(".windowShow").index(this); 
+			if($(this).text() === "▼"){
+				$(this).text("▲");	
+			}else{
+				$(this).text("▼");
+			}
+			
+			$(".inputBox").eq(index).slideToggle();
+		});
+		
+				
+		
+		function windowComment(obj,memberId,commentNo,contentNo){		
+		
+		
+			console.log("ㅁㅁㅁㅁㅁㅁ 윈도우 코멘트 함수")
+			//form태그를 생성해서 필요한 태그들을 모두 생성해서 넣은 후 submit
+			//1. form태그 생성
+			const form = $("<form>");
+			//1-1.form태그 속성 설정
+			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
+			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
+			
+			form.hide();
+			
+			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
+			const memberIdInput = $("<input>"); 
+			memberIdInput.attr("type","text"); //<input type="text">
+			memberIdInput.attr("name","memberId");   //<input type = "text"  name="noticeCommentNo">			
+			memberIdInput.val(memberId); 
+			
+			const commentNoInput = $("<input>");
+			commentNoInput.attr("type","text"); 
+			commentNoInput.attr("name","commentNo");
+			commentNoInput.val(commentNo);			
+			
+			const contentNoInput = $("<input>");
+			contentNoInput.attr("type","text"); 
+			contentNoInput.attr("name","contentNo");
+			contentNoInput.val(contentNo);
+			//const commentContent = $(obj).parent().prev().children().eq(2).clone();
+			const commentContent = $(obj).parent().parent().prev().clone();
+			
+			//폼에 다 넣어주기
+			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
+			
+			//5. body 에 새성한 form태그 추가
+			$("body").append(form);
+			//6. form 태그 submit
+			
+			//form.submit();
+		};
+		
+		
+		function commDelete(commentNo){
+			swal({
+				title : "댓글 삭제",
+				text : "댓글 삭제 할까요?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm : {
+						text:"삭제",
+						value: true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true									
+					}
+				}				
+			}).then(function(isConfirm){
+				console.log(isConfirm); 
+				
+				if(isConfirm){
+					location.href="/comment/commDelete?commentNo="+commentNo;
+				}
+				
+			});
+		}
+		/*
+		$(".sxxx").on("click",function(){		
+			swal({
+				title : "REPORT",
+				text : "스포일러를 신고할까요?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm : {
+						text:"신고",
+						value: true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true									
+					}
+				}				
+			});
+			location.href="/comment/CommReport?commentNo="+commentNo;
+						
+		});	
+		*/
+		
+	</script>
+	
+	
+</body>
+</html>
+
+
+
+

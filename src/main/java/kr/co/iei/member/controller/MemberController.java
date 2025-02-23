@@ -18,6 +18,26 @@ import kr.co.iei.member.model.vo.Member;
 public class MemberController {
  @Autowired
  private MemberSerivce memberService;
+
+//로그인 인터셉터 동작시 요청하는 컨트롤러
+@RequestMapping("/loginMsg")	
+	public String loginMsg(Model model) {
+		model.addAttribute("title","로그인 확인");
+		model.addAttribute("text","로그인 후 이용 가능합니다.");
+		model.addAttribute("icon","info");
+		model.addAttribute("loc","/member/loginFrm");
+		return "common/msg";
+	}
+//관리자 인터셉터 동작시 요청하는 컨트롤러
+@RequestMapping("/adminMsg")	
+public String adminMsg(Model model) {
+	model.addAttribute("title","접근 불가");
+	model.addAttribute("text","관리자만 이용 가능합니다.");
+	model.addAttribute("icon","warning");
+	model.addAttribute("loc","/");
+	return "common/msg";
+}
+ 
  @GetMapping(value="/loginFrm")
  public String  loginFrm() {
 	 return "member/login";
@@ -224,5 +244,19 @@ public class MemberController {
 		 model.addAttribute("loc","/member/find");
 		 return "common/msg";
 	 }
+ }
+ @ResponseBody
+ @GetMapping(value="/ajaxcommNo")
+ public int ajaxcommNo(@SessionAttribute Member member) {
+	 String MemberId= member.getMemberId();
+	 int result= memberService.ajaxcommNo(MemberId);
+	 return result;
+ }
+ @ResponseBody
+ @GetMapping(value="/ajaxscoreNo")
+ public int ajaxscoreNo(@SessionAttribute Member member) {
+	 String MemberId= member.getMemberId();
+	 int result= memberService.ajaxscoreNo(MemberId);
+	 return result;
  }
 }

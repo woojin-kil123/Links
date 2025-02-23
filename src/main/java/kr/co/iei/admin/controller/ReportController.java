@@ -20,10 +20,7 @@ public class ReportController {
 	@ResponseBody
 	public String checkReportReason(@SessionAttribute Member member) {
 	    
-	    String reportReason = reportService.getReportReason(member.getMemberNo());
-
-	    
-	    
+	    String reportReason = reportService.getReportReason(member.getMemberId());
 	    if (reportReason != null && !reportReason.isEmpty()) {
 	        return "🔔 " + reportReason;
 	    }

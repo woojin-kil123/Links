@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Report {
-	private int writeNo;
-	private int reporterMemberNo;
-	private int reportedMemberNo;
+	private String writeNo;
+	private String reporterMemberId;
+	private String reportedMemberId;
 	private String reportReason;
+	private String regDate;
 	private String reportYn;
 }
