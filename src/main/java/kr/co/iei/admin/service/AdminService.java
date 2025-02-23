@@ -35,4 +35,8 @@ public class AdminService {
 		List list = adminDao.newReport();
 		return list;
 	}
+	public List adView() {
+		List list = adminDao.adView();
+		return list;
+	}
 }

@@ -190,8 +190,8 @@
 	    <!-- 메뉴 탭 -->
 	    <div class="tab-menu mt-3">
 	        <button class="tab-btn active" data-target="business">사업자 문의</button>
-	        <button class="tab-btn" data-target="ads">광고 관리</button>
 	        <button class="tab-btn" data-target="user-inquiry">사용자 문의</button>
+	        <button class="tab-btn" data-target="ads">광고 관리</button>
 	        <button class="tab-btn" data-target="report-comments">신고 코멘트</button>
 	        <button class="tab-btn" data-target="dangerous-users">위험 회원</button>
 	    </div>
@@ -199,7 +199,7 @@
 	    <!-- 테이블 컨테이너 -->
 	    <div class="table-container">
 		    <!-- 사업자 문의 -->
-		    <div id="business-inquiry" class="tab-content active">
+		    <div id="business" class="tab-content active">
 		        <table id="business-table">
 	                <tr>
 	                    <th style="width : 20%;">사업자명</th>
@@ -246,10 +246,10 @@
 		    <div id="ads" class="tab-content">
 		        <table id="ads-table">
 	                <tr>
-	                    <th>광고명</th>
-	                    <th>카테고리</th>
+	                    <th>사업자명</th>
+	                    <th>광고 위치</th>
 	                    <th>URL</th>
-	                    <th>상태</th>
+	                    <th>만료일</th>
 	                    <th>관리</th>
 	                </tr>
 		        </table>
@@ -277,10 +277,11 @@
     $(".tab-btn").click(function () {
         $(".tab-btn").removeClass("active");
         $(this).addClass("active");
-
         $(".tab-content").removeClass("active");
         //data 사용하면 자료형 그대로 가져오기때문에 문자열로 더해짐
-        $("#" + $(this).data("target")).addClass("active");
+        const activeTab = $(this).data("target")
+        $("#"+activeTab).addClass("active");
+             
     });
 	
 	//통계불러오기
@@ -323,25 +324,22 @@
             }
         });
     }
-
     // 광고 관리
-    function loadAdsData() {
+    function adView() {
         $.ajax({
-            url: "/get_ads_data",
+            url: "/admin/adView",
             method: "GET",
-            dataType: "json",
             success: function (data) {
-            	const tableBody = $("#ads-table");
-                tableBody.empty();
-
+            	console.log(data);
+            	const table = $("#ads-table");
                 $.each(data, function (index, item) {
                 	const row = $("<tr></tr>");
-                    row.append($("<td></td>").text(item.ad_name));
-                    row.append($("<td></td>").text(item.category));
-                    row.append($("<td></td>").append($("<a></a>").attr("href", item.url).attr("target", "_blank").text(item.url)));
-                    row.append($("<td></td>").text(item.status));
+                    row.append($("<td></td>").text(item.companyName));
+                    row.append($("<td></td>").text(item.adPosition));
+                    row.append($("<td></td>").text(item.adUrl));
+                    row.append($("<td></td>").text(item.expireDate));
                     row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
-                    tableBody.append(row);
+                    table.append(row);
                 });
             },
             error: function () {
@@ -349,7 +347,7 @@
             }
         });
     }
-
+	
     // 사용자 문의
     function loadUserInquiryData() {
         $.ajax({
@@ -475,7 +473,8 @@
 	$(document).ready(function () {
 		loadStats();
 		BusinessView();
-		newReport()
+		newReport();
+		adView();
 	});
 	
 	</script>	

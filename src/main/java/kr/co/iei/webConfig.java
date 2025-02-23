@@ -1,7 +1,6 @@
 package kr.co.iei;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -30,12 +29,9 @@ public class webConfig implements WebMvcConfigurer{
 		registry.addInterceptor(new LoginInterceptor())
 				.addPathPatterns("/member/logout",
 								"/member/mypage",
-								"/member/update",
-								"/member/mypage2",
 								"/member/delete",
 								"/notice/**"
 								,"/admin/**")
-				//"/notice/list"
 				.excludePathPatterns(	
 									);
 		//관리자 페이지 기능 경로 추가
