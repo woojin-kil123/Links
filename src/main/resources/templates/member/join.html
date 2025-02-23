@@ -3,15 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	*{
+	font-family: ns-r;
+	}
+.find-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+.page-title{
+	 padding-bottom : 40px;
+	 text-align: center;
+	}
+#join{
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}	
+#bu-join{
+	margin-top: 20px;
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}	
+</style>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
 <main class="content find-container">
 		<section class="section find-wrap">
 			<div class="page-title">회원가입</div>
-			
-		<button id="join">일반 회원가입</button>
-			<button id="bu-join">사업자 회원가입</button>
+			<div>
+		<button class="btn-primary" id="join" style=color:black>일반 회원가입</button>
+			</div>
+			<div>
+			<button class="btn-primary" id="bu-join" style=color:black>사업자 회원가입</button>
+			</div>
 		</section>
 	</main>
 	<script>
