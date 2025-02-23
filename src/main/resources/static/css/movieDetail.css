@@ -302,16 +302,20 @@
 }
 
 .card-body {
-    padding: 5px;
+    padding: 3px;
     font-size: 14px;
+    display : flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-title {
-	height: 30%;
+	height: 40%;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 4px;
-    word-wrap: break-word
+    word-wrap: break-word;
+    overflow : hidden;
 }
 
 .card-info {

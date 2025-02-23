@@ -52,4 +52,12 @@ public class AdminController {
 		return list;
 	}
 	
+	@ResponseBody
+	@GetMapping("/adView")
+	public List adView() {
+		List list = adminService.adView();
+		System.out.println(list);
+		return list;
+	}
+	
 }

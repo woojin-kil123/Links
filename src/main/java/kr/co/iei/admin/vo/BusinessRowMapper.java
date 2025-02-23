@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BusinessViewRowMapper implements RowMapper<Business> {
+public class BusinessRowMapper implements RowMapper<Business> {
 
 	@Override
 	public Business mapRow(ResultSet rs, int rowNum) throws SQLException {

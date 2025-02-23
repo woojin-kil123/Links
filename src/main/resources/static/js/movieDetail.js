@@ -98,10 +98,10 @@ function makeSlide(obj1,obj2){
             const title = $("<div>").addClass("card-title").text(movie.title);
             const info = $("<div>").addClass("card-info").text(movie.releaseDate);
             
-            //let rating = $("<div>").addClass("rating");
-            //let ratingText = $("<span>").text(movie.rating);
-            //rating.append(star);
-            const genreInfo = $("<div>").addClass("genre-info");						
+            const genreInfo = $("<div>").addClass("genre-info");
+			if((movie.genreIds).length==0){
+				genreInfo.text("");
+			}						
             $.each(movie.genreIds, function(index, genre){
             	const p = $("<p>").append(genre);
             	genreInfo.append(p);

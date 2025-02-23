@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.iei.admin.vo.BusinessViewRowMapper;
+import kr.co.iei.admin.vo.AdViewRowMapper;
+import kr.co.iei.admin.vo.BusinessRowMapper;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.ReportRowMapper;
 import kr.co.iei.admin.vo.Stats;
@@ -19,9 +20,11 @@ public class AdminDao {
 	@Autowired
 	private StatsRowMapper statsRowMapper;
 	@Autowired
-	private BusinessViewRowMapper bvRowMapper;
+	private BusinessRowMapper businessRowMapper;
 	@Autowired
 	private ReportRowMapper reportRowMapper;
+	@Autowired
+	private AdViewRowMapper adViewRowMapper;
 	
 	public Stats loadStats() {
 		String query = "select * from stats";
@@ -43,13 +46,19 @@ public class AdminDao {
 
 	public List businessView() {
 		String query = "select * from business_view";
-		List list = jdbc.query(query, bvRowMapper);
+		List list = jdbc.query(query, businessRowMapper);
 		return list;
 	}
 
 	public List newReport() {
 		String query = "SELECT * FROM REPORT WHERE REPORT_YN IS NULL";
 		List list = jdbc.query(query, reportRowMapper);
+		return list;
+	}
+
+	public List adView() {
+		String query = "select * from ad_view";
+		List list = jdbc.query(query, adViewRowMapper);
 		return list;
 	}
 }

@@ -70,16 +70,20 @@
 	}
 	
 	.card-body {
-	    padding: 5px;
-	    font-size: 14px;
+    padding: 3px;
+    font-size: 14px;
+    display : flex;
+    flex-direction: column;
+    justify-content: space-between;
 	}
-	
+
 	.card-title {
-		height: 30%;
-	    font-size: 16px;
-	    font-weight: bold;
-	    margin-bottom: 4px;
-	    word-wrap: break-word
+	height: 40%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+    overflow : hidden;
 	}
 	
 	.card-info {
@@ -232,9 +236,10 @@
                 let info = $("<div>").addClass("card-info").text(movie.releaseDate);
                 
                 let rating = $("<div>").addClass("rating");
-                //let ratingText = $("<span>").text(movie.rating);
-                //rating.append(star);
-                let genreInfo = $("<div>").addClass("genre-info");						
+                let genreInfo = $("<div>").addClass("genre-info");
+    			if((movie.genreIds).length==0){
+    				genreInfo.text("");
+    			}
                 $.each(movie.genreIds, function(index, genre){
                 	const p = $("<p>").append(genre);
                 	genreInfo.append(p);
@@ -250,77 +255,7 @@
             slideIndex++;
         }
 	}
-    
-    
-    /* $(document).ready(function() {
-        var query = $("#queryValue").val().trim();
-        //console.log("검색어:", query);
-
-        if (!query || query === "undefined") {
-            $("#searchKeyword").text("검색어가 없습니다.");
-            return;
-        }
-
-        $("#searchKeyword").text(query);
-
-        $.ajax({
-            url: window.location.origin + "/api/movie/search",
-            type: "GET",
-            data: { query: query },
-            success: function(response) {
-                //console.log("TMDB API 응답:", response);
-
-                var movies = response.results;
-                var slider = $("#movieSlider");
-                slider.empty();
-
-                if (!movies || movies.length === 0) {
-                    slider.append("<p class='text-danger'>검색 결과가 없습니다.</p>");
-                    return;
-                }
-
-                $.each(movies, function(index, movie) {
-                    var imageUrl = movie.poster_path 
-                        ? "https://image.tmdb.org/t/p/w500" + movie.poster_path 
-                        : window.location.origin + "/images/no-image.png";
-                    
-                    const moviecard = $("<div>");
-                    moviecard.addClass("movie-card");
-                    
-                    var card = `
-                            <img src="${imageUrl}" alt="${movie.title}">
-                            <div class="p-3">
-                                <h6 class="card-title">${movie.title}</h6>
-                                <p class="text-muted">개봉일: ${movie.release_date}</p>
-                            </div>
-                        `;
-                    moviecard.append(card);
-                    slider.append(moviecard);
-                    
-                    var movieId = movie.id
-                    moviecard.on('click',function(){
-                    	location.href = "/api/movieDetail?movieId="+movieId;
-                    });
-                });
-                              
-
-                // ✅ Slick.js 초기화
-                slider.slick({
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                    arrows: true,
-                    dots: true,
-                    infinite: true,
-                    speed: 500,
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX 요청 오류:", error);
-                alert("영화 검색 중 오류 발생");
-            }
-        });
-    }); 
-    */
+  
     search();
     </script>
 </body>
