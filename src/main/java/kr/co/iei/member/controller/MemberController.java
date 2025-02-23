@@ -225,4 +225,18 @@ public class MemberController {
 		 return "common/msg";
 	 }
  }
+ @ResponseBody
+ @GetMapping(value="/ajaxcommNo")
+ public int ajaxcommNo(@SessionAttribute Member member) {
+	 String MemberId= member.getMemberId();
+	 int result= memberService.ajaxcommNo(MemberId);
+	 return result;
+ }
+ @ResponseBody
+ @GetMapping(value="/ajaxscoreNo")
+ public int ajaxscoreNo(@SessionAttribute Member member) {
+	 String MemberId= member.getMemberId();
+	 int result= memberService.ajaxscoreNo(MemberId);
+	 return result;
+ }
 }

@@ -4,64 +4,104 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+*{
+	font-family: ns-r;
+	}
 	.mypage-container{
+	dispaly: flex;
 	justify-content: center;
 	align-items: center;
 	}
-	.main{
-	 padding-bottom : 40px;
+.page-title{
+	text-align: center;
+}
+.member{
+width:80%;
+height: 150px;
+display: flex;
+margin-top: 50px;
+margin-left: 150px;
+
+}
+	.information{
+	width: 25%;
+	text-align: center;
+	padding-top: 50px;
 	}
-	.page-title{
-	width: 500px;
-	 text-align: center;
-	}
-	section{
-	display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 400px;
-	}
-	.chagne{
-	display: inline-block;
-	padding-left : 200px;
-	}
-	.member{
-	padding-left: 500px; 
-	}
-	.comment{
-	padding-left: 500px; 
-	}
-	.refer{
-	padding-left: 500px; 
-	}
+.change{
+width: 50%;
+padding-left: 200px;
+padding-top: 60px;
+}
+.comment-wrap{
+width:80%;
+height: 150px;
+display: flex;
+margin-top: 50px;
+margin-left: 150px;
+}
+.comment{
+width:40%;
+text-align: center;
+padding-top: 40px;
+}
+.score	{
+width:40%;
+text-align: center;
+padding-top: 40px;
+}
+.refer{
+width:80%;
+height: 150px;
+text-align: center;
+margin-top: 50px;
+margin-left: 150px;
+}
+.save{
+width:100%;
+height: 50px;
+line-height: 50px;
+}
+.movie{
+margin-top: 30px;
+}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="content mypage-container">
-		<section class="page-section">
+		<section class="page-section" >
 			<div class="main">
 			<div class="page-title">마이페이지</div>
 			</div>
-		</section>
 			<div class="member">
-			<div th:text="${session.member.memberName}"></div>
-			<div th:text="${session.member.memberId}"></div>
+			<div class="information">
+			<div  th:text="${session.member.memberName}"></div>
+			<div  class="id"th:text="${session.member.memberId}"></div>
+			</div>
 			<div class="change"><span class="material-icons">settings</span></div>
 			</div>
+			<div class="comment-wrap">
 			<div class="comment">
 			<div class="comm">코멘트</div>
+			<div class="commNo"></div>
+			</div>
+			<div class="score">
 			<div class="star">평가</div>
+			<div class="starNo"></div>
+			</div>
 			</div>
 				<div class="refer">
-				<div>찜하기</div>		
+				<div class="save">찜하기</div>		
 				<div class="movie">영화</div>
-				<div class="book">책</div>
-				</div>`	
+				</div>
 		<div>
 		</div>
+		</section>
 		</main>
-	<script>$(".change").on("click",function(){
+	<script>
+	
+	$(".change").on("click",function(){
 	location.href="/member/changeinfo";
 	});
 	$(".comm").on("click",function(){
@@ -70,12 +110,27 @@
 	$(".star").on("click",function(){
 		location.href="/"
 		});
-	$(".book").on("click",function(){
-		location.href="/"
-		});
 	$(".movie").on("click",function(){
 			location.href="/contents/movieList";
 		});
+	$.ajax({
+		url:"/member/ajaxcommNo",
+		type :"get",
+		success: function(result){
+				$(".commNo").text(result);	
+		},
+		error: function(){
+		}
+	});
+	$.ajax({
+		url:"/member/ajaxscoreNo",
+		type :"get",
+		success: function(result){
+				$(".starNo").text(result);	
+		},
+		error: function(){
+		}
+	});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
