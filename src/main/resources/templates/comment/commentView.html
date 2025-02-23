@@ -287,16 +287,29 @@
 						<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
 						<th:block th:if="${session.member != null}">	
 							<th:block th:if="${session.member.memberId == re.memberId}">
-								<div class="right-icon">								
-									<span class="material-icons btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="reCommUpdate([[${re.reCommentNo}]]);">create </span>							
-								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.commentNo}]]);">delete_forever</span>
+								<div class="right-icon">
+									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
+									<span class="material-icons btn btn-primary show-recomm2" >create </span>							
+								    <span class="material-icons" th:onclick="reCommDelete(this,[[${re.reCommentNo}]],[[${re.commentNo}]]);">delete_forever</span>
 									<span class="material-icons dots" > more_vert </span>
 								</div>
 							</th:block>	
 						</th:block>
 					</div>
 				</th:block>
+				<div class="inputCommentBox inputBox" th:if="${session.member != null}">				
+					<div>
+						<span class="material-icons">subdirectory_arrow_right</span>									
+					</div>  
+					<textarea class="re-comm" name="reCommentContent"></textarea>
+					<div>
+						<button type="button" class="btn-primary" >등록</button>
+					</div>
+				</div>
+				
 			</div>	
+			
+			
 			<!-- 모달 -->
 			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
 	        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog">
@@ -327,50 +340,7 @@
 	       </div>
 	</section>
 	
-	<!-- 모달 -->
-	<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h6 class="text-uppercase">댓글수정</h6>
-                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
-                                    
-                                    <div class="inputCommentBox">
-												<div>
-													<span class="material-icons">account_box</span>									
-												</div>  
-												
-	                                    <form action="/comment/update" class="comment-update-frm"   method="post">
-													<input type="hidden" name="commentNo" >
-													
-													<div class="input-item">
-														<textarea name="commentContent" ></textarea>
-													</div>
-												
-													<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
-	                                       			 <i class="fas fa-times me-1"></i>
-	                                       				 수정
-	                                   				</button>
-										</form>
-	                                   				<button class="btn btn-primary btn-l text-uppercase" data-bs-dismiss="modal" type="button">
-		                                        	<i class="fas fa-times me-1"></i>
-		                                       		 	 취소
-		                                    		</button>
-												
-												<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>	
+	
 	
 </main>
 
@@ -468,6 +438,44 @@
 			
 			form.submit();
 		};
+		
+		
+		$(".show-recomm2").on("click",function(){
+			$(this).parent().parent().next().toggle();
+		});
+		function windowComment2(obj,memberId,reCommentNo,contentNo){		
+			
+			const form = $("<form>");
+			//1-1.form태그 속성 설정
+			form.attr("action","/comment/reCommUpdate");//<form action="/notice/updateComment"></form>
+			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
+			
+			//form.hide();
+			
+			const memberIdInput = $("<input>"); 
+			memberIdInput.attr("type","text"); //<input type="text">
+			memberIdInput.attr("name","memberId");   //<input type = "text"  name="noticeCommentNo">			
+			memberIdInput.val(memberId); 
+			
+			const commentNoInput = $("<input>");
+			commentNoInput.attr("type","text"); 
+			commentNoInput.attr("name","reCommentNo");
+			commentNoInput.val(reCommentNo);			
+			
+			const contentNoInput = $("<input>");
+			contentNoInput.attr("type","text"); 
+			contentNoInput.attr("name","contentNo");			
+			
+			
+			const commentContent = $(obj).parent().prev().clone();
+			
+			//폼에 다 넣어주기
+			form.append(memberIdInput).append(commentNoInput).append(contentNoInput).append(commentContent);
+			
+			$("body").append(form);
+			
+		};
+		
 		
 		
 		function reCommDelete(reCommentNo,commentNo){
