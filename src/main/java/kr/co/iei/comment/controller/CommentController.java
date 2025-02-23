@@ -32,6 +32,15 @@ public class CommentController {
 		List list = commentService.oneMovieComment(contentNo);
 		return list;
 	}
+	
+	//최신 코멘트 조회
+	@ResponseBody
+	@GetMapping("newMovieComment")
+	public List newMovieComment() {
+		List list = commentService.newMovieComment();
+		return list;
+	}
+	
 	// 푸터에 코멘트 개수 전달
     @ResponseBody
     @GetMapping("/count")
@@ -109,6 +118,7 @@ public class CommentController {
 		int result = commentService.reCommInsert(rc);
 		return "redirect:/comment/mCommentList?contentNo="+contentNo;
 	}
+	
 
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.admin.vo.Ad;
 import kr.co.iei.admin.vo.AdViewRowMapper;
 import kr.co.iei.admin.vo.BusinessRowMapper;
 import kr.co.iei.admin.vo.Report;
@@ -60,5 +61,15 @@ public class AdminDao {
 		String query = "select * from ad_view";
 		List list = jdbc.query(query, adViewRowMapper);
 		return list;
+	}
+
+	public String getAdUrlByPosition(String position) {
+		String sql = "SELECT * FROM ad_view WHERE UPPER(TRIM(AD_POSITION)) = UPPER(TRIM(?))";
+		Object[] params = {position};
+		List<Ad> list = jdbc.query(sql, adViewRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list.get(0).getAdUrl();
 	}
 }

@@ -123,6 +123,11 @@ public class CommentService {
 		List list = commentDao.commNo(commentNo);
 		return list;
 	}
+
+	public List newMovieComment() {
+		List list = commentDao.selectNewMovieCommList();
+		return list;
+	}
 	
 	
 

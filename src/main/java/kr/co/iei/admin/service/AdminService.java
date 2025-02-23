@@ -39,4 +39,7 @@ public class AdminService {
 		List list = adminDao.adView();
 		return list;
 	}
+	public String getAdUrlByPosition(String position) {
+		return adminDao.getAdUrlByPosition(position);
+	}
 }
