@@ -100,8 +100,8 @@ width: 100px;
 						<input type="text" name="memberId" id="memberId">
 					</div>
 						<button type="button" class="btn-primary id-check-btn">중복체크</button>
-					<p class="input-msg id-check-msg"></p>
 					</div>
+					<p class="input-msg id-check-msg"></p>
 			
 				<div class="input-wrap">
 					<div class="input-title">
@@ -162,17 +162,66 @@ width: 100px;
 					<span id="time-zone"></span>
 					<span id="authMsg"></span>
 				</div>
+				<form>
 				<div class=" join-button-box">
 					<button type="submit" class="btn-primary lg" style="width: 40%">회원가입</button>
 				</div>
+				</form>
+				
 			</form>
 		</section>
 	</main>
 	<script>
+	document.querySelector("form[action='/member/join']").addEventListener("submit", function (event) {
+	    event.preventDefault(); // 기본 제출 막기
+
+	    let isValid = true;
+	    let memberId = document.getElementById("memberId").value.trim();
+	    let memberPw = document.getElementById("memberPw").value.trim();
+	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
+	    let memberName = document.getElementById("memberName").value.trim();
+	    let memberPhone = document.getElementById("memberPhone").value.trim();
+	    let memberEmail = document.getElementById("memberEmail").value.trim();
+
+	    if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+	        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
+	        isValid = false;
+	    }
+	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
+	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
+	        isValid = false;
+	    }
+	   
+	    if (!memberName || !/^[가-힣]{2,5}$|^[a-zA-Z]{2,20}$/.test(memberName)) {
+	        alert("이름을 올바르게 입력하세요 (한글 2~5자 또는 영문 2~20자)");
+	        isValid = false;
+	    }
+	    if (!memberPhone || !/^010-\d{4}-\d{4}$/.test(memberPhone)) {
+	        alert("올바른 전화번호 형식(010-XXXX-XXXX)으로 입력하세요");
+	        isValid = false;
+	    }
+	    if (!memberEmail || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(memberEmail)) {
+	        alert("올바른 이메일 형식으로 입력하세요");
+	        isValid = false;
+	    }
+	    if (!mailCode) {
+	        alert("이메일 인증을 완료해주세요.");
+	        isValid = false;
+	    }
+
+	    if (isValid) {
+	        this.submit();
+	    }
+	});
+
+
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
 			const memberId =$("#memberId").val();
-			$("#time-zone").removeId;
+			  if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+			        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
+			  }else{
+		
 			$.ajax({
 				url:"/member/ajaxCheckId",
 				type :"get",
@@ -189,7 +238,9 @@ width: 100px;
 				error: function(){
 				}
 			});
-		});
+			  }
+		})
+		;
 		$("#memberPwRe").on("focusout",function(){
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 		    const pwValue = memberPw.value;

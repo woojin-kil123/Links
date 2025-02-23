@@ -90,6 +90,29 @@
 			</form>
 		</section>
 	</main>
+	<script>
+	document.querySelector("form[action='/member/idFind']").addEventListener("submit", function (event) {
+	    event.preventDefault(); // 기본 제출 막기
+
+	    let isValid = true;
+	    let memberName = document.getElementById("memberName").value.trim();
+	    let memberPhone = document.getElementById("memberPhone").value.trim();
+	    if (!memberName || !/^[가-힣]{2,5}$|^[a-zA-Z]{2,20}$/.test(memberName)) {
+	        alert("이름을 올바르게 입력하세요 (한글 2~5자 또는 영문 2~20자)");
+	        isValid = false;
+	    }
+	    if (!memberPhone || !/^010-\d{4}-\d{4}$/.test(memberPhone)) {
+	        alert("올바른 전화번호 형식(010-XXXX-XXXX)으로 입력하세요");
+	        isValid = false;
+	    }
+
+	  
+	    if (isValid) {
+	        this.submit();
+	    }
+	});
+
+	</script>
 <th:block th:include="common/footer"></th:block>
 </body>
 </html>
