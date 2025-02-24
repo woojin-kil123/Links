@@ -83,7 +83,7 @@ line-height: 60px;
 margin-bottom: 20px;	
 }
 #auth-btn{
-	margin-top: 20px;
+	margin-left: 20px;
 	}
 </style>
 </head>
@@ -173,7 +173,8 @@ margin-bottom: 20px;
 						<button type="button" class="btn-primary" id="send-btn" >인증번호 발송</button>
 					</div>
 					<div id="auth" class="input-item" style="display: none;" >
-					<input type="text" id="auth-code" placeholder="인증번호 입력">
+					<input type="text" id="auth-code" placeholder="인증번호 입력" style="width:30%">
+					
 					<button  type="button" class="btn-primary" id="auth-btn">인증하기</button>
 					<span id="time-zone"></span>
 					<span id="authMsg"></span>
@@ -321,6 +322,9 @@ margin-bottom: 20px;
 				data : {receiver : memberEmail},
 				success : function(data){
 					 mailCode = data;
+					 if (intervalId) {
+		                    window.clearInterval(intervalId);
+		                }
 						$("#auth").show();
 						authTime();
 						alert("메일이 발송 되었습니다")	

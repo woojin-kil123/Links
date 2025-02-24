@@ -83,7 +83,7 @@
 	width: 30%
 	}
 	#auth-btn{
-	margin-top: 20px;
+	margin-left: 20px;
 	}
 #send-btn{
 margin-left: 10px;
@@ -134,7 +134,7 @@ margin-left: 10px;
 						<input type="hidden" name="memberEmail" id="memberEmail">
 					</div>
 					</div>
-						<button type="button"class="btn-primary" id="send-btn" >인증번호 발송</button>
+						<button type="button"class="btn-primary" id="send-btn" sytle="width:30%">인증번호 발송</button>
 					</div>
 				<div id="auth" class="input-item" style="display: none;">
 					<input type="text" id="auth-code" placeholder="인증번호 입력">
@@ -196,6 +196,9 @@ margin-left: 10px;
 				data : {receiver : memberEmail},
 				success : function(data){
 					 mailCode = data;
+					 if (intervalId) {
+		                    window.clearInterval(intervalId);
+		                }
 						$("#auth").show();
 						authTime();
 				},
