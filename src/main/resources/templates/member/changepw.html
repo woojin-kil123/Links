@@ -12,7 +12,6 @@
 	width: 100%;
 	}
 	.input-title{
-	padding-top: 10px;
 	width: 20%;
 	}
 	.change-container{
@@ -24,6 +23,8 @@
 	width:40%;
 	}
 	.page-title{
+	font-size: 32px;
+    font-weight: bold;
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
@@ -52,7 +53,7 @@ margin-left: 100px;
 <th:block th:include="common/header"></th:block>
 
 	<main class="content change-container">
-		<section class="section find-wrap">
+		<section class="section find-wrap" style="padding-top:100px; padding-bottom:80px;">
 			<div class="page-title">비밀번호 변경</div>
 			<form action="/member/pwchange"  class="form-control" method="get">
 			<div class="input-wrap">

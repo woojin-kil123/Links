@@ -7,17 +7,12 @@
 	*{
 	font-family: ns-r;
 	}
-	.find-container{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	}
-
 .page-title{
-	font-size: 27px;
+	font-size: 32px;
+    font-weight: bold;
 	height: 60px;
 	line-height: 60px;
-	margin-bottom: 20px;	
+	margin-bottom: 40px;	
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
@@ -27,29 +22,41 @@
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
-	align-content: center;
-	margin-left: 45px;
+	margin: 0 auto;
 }	
 .pw{
 	margin-top: 20px;
-	padding-bottom: 50px;
 	width: 150px;
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
-	margin-left: 45px;
+	padding-bottom: 50px;
+	margin: 0 auto;
+	margin-top: 40px;
 }	
+	body{
+	    display: flex;
+	    flex-direction: column;
+	    height: 100vh;
+	}
+	#section-wrap{
+		flex-grow: 1;
+		padding-top:150px;	
+	}
+	.btn-loc{
+	display: flex;
+	}
 </style>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
-	<main class="content find-container">
-		<section class="section find-wrap">
+	<main class="content find-container" id="section-wrap">
+		<section class="section find-wrap" style="padding: 0;">
 			<div class="page-title">아이디/비밀번호 찾기</div>
-			<form action="/member/idFindFrm" method="get">
+			<form action="/member/idFindFrm" class="btn-loc"method="get">
 			<button type="submit" class="btn-primary id">아이디 찾기</button>
 			</form>
-				<form action="/member/pwFindFrm" method="get">
+				<form action="/member/pwFindFrm" class="btn-loc"method="get">
 			<button type="submit" class="btn-primary pw">비밀번호 찾기</button>
 			</form>
 		</section>
