@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.admin.model.dao.AdminDao;
 import kr.co.iei.admin.vo.Ad;
+import kr.co.iei.admin.vo.Inquiry;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 
@@ -56,7 +57,6 @@ public class AdminService {
 		}
 		return result;
 	}
-	
 	public String getAdUrlByPosition(String position) {
 		return adminDao.getAdUrlByPosition(position);
 	}
@@ -64,5 +64,18 @@ public class AdminService {
 	public int updateInquiry(int inquiryProgress, int inquiryNo) {
 		int result = adminDao.updateInquiryProgress(inquiryProgress, inquiryNo);
 		return result;
+	}
+	@Transactional
+	public int insertInquiry(Inquiry i) {
+		int result = adminDao.insertInquiry(i);
+		return result;
+	}
+	public Inquiry selectInquiry(int inquiryNo) {
+		Inquiry i = adminDao.selectInquiry(inquiryNo);
+		return i;
+	}
+	public List normalView() {
+		List list = adminDao.normalView();
+		return list;
 	}
 }

@@ -12,7 +12,7 @@ public class BusinessMemberRowMapper implements RowMapper<BuMember> {
 	public BuMember mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BuMember b= new BuMember();
 		b.setCompanyNo(rs.getString("company_no"));
-		b.setBusinessName(rs.getString("company_name"));
+		b.setCompanyName(rs.getString("company_name"));
 		b.setMemberNo(rs.getInt("member_no"));
 		return b;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.iei.admin.service.AdminService;
 import kr.co.iei.admin.vo.Ad;
+import kr.co.iei.admin.vo.Inquiry;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 
@@ -91,5 +92,28 @@ public class AdminController {
         	return adUrl;	
         }
     }
+	@PostMapping("/insertInquiry")
+	public String insertInquiry(Inquiry i) {
+		if(i.getCompanyNo()==null) {
+			i.setInquiryCategory("normal");
+		}else {
+			i.setInquiryCategory("business");
+		}
+		int result = adminService.insertInquiry(i);
+		return "redirect:/";
+	}
+	@GetMapping("/inquiryView")
+	public String inquiryView(int inquiryNo, Model model) {
+		Inquiry i = adminService.selectInquiry(inquiryNo);
+		model.addAttribute("i",i);
+		return "admin/inquiryView";
+	}
+	@ResponseBody
+	@GetMapping("/noramlView")
+	public List noramlView() {
+		List list = adminService.normalView();
+		return list;
+	}
+	
 	
 }

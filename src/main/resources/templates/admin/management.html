@@ -197,7 +197,7 @@
 	    <!-- 메뉴 탭 -->
 	    <div class="tab-menu mt-3">
 	        <button class="tab-btn active" data-target="business">사업자 문의</button>
-	        <button class="tab-btn" data-target="user">사용자 문의</button>
+	        <button class="tab-btn" data-target="normal">사용자 문의</button>
 	        <button class="tab-btn" data-target="ads">광고 관리</button>
 	        <button class="tab-btn" data-target="report">신고 코멘트</button>
 	        <button class="tab-btn" data-target="dangerous-users">위험 회원</button>
@@ -212,11 +212,10 @@
 		                <tr>
 		                	<th style="width : 10%;">문의번호</th>	
 		                    <th style="width : 20%;">사업자명</th>
-		                    <th style="width : 10%;">카테고리</th>
 		                    <th style="width : 20%;">연락처</th>
-		                    <th style="width : 15%;">등록일</th>
+		                    <th style="width : 20%;">등록일</th>
 		                    <th style="width : 10%;">진행 상태</th>
-		                    <th style="width : 15%;">관리</th>
+		                    <th style="width : 20%;">관리</th>
 		                </tr>
 	                </thead>
 	                <tbody>
@@ -224,17 +223,17 @@
 	                </tbody>
 		        </table>
 		    </div>
-		
 		    <!-- 사용자 문의 -->
-		    <div id="user" class="tab-content">
-		        <table id="user-table">
+		    <div id="normal" class="tab-content">
+		        <table id="normal-table">
 		        	<thead>
 		                <tr>
-		                    <th>사용자 ID</th>
-		                    <th>문의 카테고리</th>
-		                    <th>내용</th>
-		                    <th>날짜</th>
-		                    <th>관리</th>
+		                    <th style="width : 10%;">문의번호</th>	
+		                    <th style="width : 20%;">문의 ID</th>
+		                    <th style="width : 20%;">연락처</th>
+		                    <th style="width : 20%;">등록일</th>
+		                    <th style="width : 10%;">진행 상태</th>
+		                    <th style="width : 20%;">관리</th>
 		                </tr>
 	                </thead>
 		            <tbody>
@@ -242,7 +241,6 @@
 		            </tbody>
 		        </table>
 		    </div>
-		
 		    <!-- 신고 코멘트 -->
 		    <div id="report" class="tab-content">
 		        <table id="report-table">
@@ -348,9 +346,11 @@
             	table.empty();
                 $.each(data, function (index, item) {
                 	const row = $("<tr>");
-                	row.append($("<td>").text(item.inquiryNo));
+                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
+						const inquiryNo = $(this).text();
+						location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
+                	}));
                     row.append($("<td>").text(item.companyName));
-                    row.append($("<td>").text(item.inquiryCategory));
                     row.append($("<td>").text(item.memberPhone));
                     row.append($("<td>").text(item.inquiryDate));
                     row.append($("<td>").text(item.inquiryProgress));
@@ -391,26 +391,57 @@
     }
 	
     // 사용자 문의
-    function loadUserInquiryData() {
-        $.ajax({
-            url: "/get_user_inquiry_data",
+    function normalView() {
+    	$.ajax({
+            url: "/admin/noramlView",
             method: "GET",
-            dataType: "json",
             success: function (data) {
-                const tableBody = $("#user-inquiry-table");
+            	console.log(data);
+            	const table = $("#normal-table>tbody");
             	table.empty();
                 $.each(data, function (index, item) {
-                	const row = $("<tr></tr>");
-                    row.append($("<td></td>").text(item.user_id));
-                    row.append($("<td></td>").text(item.category));
-                    row.append($("<td></td>").text(item.content));
-                    row.append($("<td></td>").text(item.date));
-                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").text("관리")));
-                    tableBody.append(row);
+                	const row = $("<tr>");
+                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
+						const inquiryNo = $(this).text();
+						location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
+                	}));
+                    row.append($("<td>").text(item.memberId));
+                    row.append($("<td>").text(item.memberPhone));
+                    row.append($("<td>").text(item.inquiryDate));
+                    row.append($("<td>").text(item.inquiryProgress));
+                    
+                    const btns = $("<td>");
+                    btns.append($("<button>").addClass("manage-btn btn-secondary").text("삭제").on("click",function(){
+                    	const btn = $(this);
+                    	const inquiryNo = btn.closest("tr").children().first().text();
+						$.ajax({
+							url : "/admin/updateInquiry",
+							data : {"inquiryProgress" : 0, "inquiryNo":inquiryNo},
+							success: function(data){
+								btn.closest("tbody").empty();
+								BusinessView();
+								//허위 문의 report?
+							}
+						});
+                    }));
+                    btns.append($("<button>").addClass("manage-btn btn-primary").text("처리완료").on("click",function(){
+                    	const btn = $(this);
+                    	const inquiryNo = btn.closest("tr").children().first().text();
+						$.ajax({
+							url : "/admin/updateInquiry",
+							data : {"inquiryProgress" : 4, "inquiryNo":inquiryNo},
+							success: function(data){
+								btn.closest("tbody").empty();
+								BusinessView();
+							}
+						});//ajax 종료                    		
+                    }));
+                    row.append(btns);
+                    table.append(row);
                 });
             },
             error: function () {
-                console.error("사용자 문의 데이터 로드 실패");
+                console.error("사업자 문의 데이터 로드 실패");
             }
         });
     }
@@ -534,8 +565,6 @@
         });
     }
 
-    
-
     // 신고 코멘트 
     function newReport() {
         $.ajax({
@@ -593,8 +622,8 @@
 	function loadTap(data){
 		if(data=="business"){
 			BusinessView();
-		}else if(data=="user"){
-			
+		}else if(data=="normal"){
+			normalView()
 		}else if(data=="report"){
 			newReport();
 		}else if(data="ads"){

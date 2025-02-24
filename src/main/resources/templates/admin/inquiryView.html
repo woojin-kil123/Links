@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>LinkS에게 문의하기</title>
+<title>문의 상세보기</title>
 <style>
 .inquiry-msg{
 	background-color : #ffc800;
@@ -61,16 +61,7 @@
 	margin-left : 40px;
 	display : flex;
 }
-.btn-primary{
-	border-radius: 0.25rem;
-	font-family: ns-b;
-	height: 50px;
-	position : absolute;
-	right: 60px;
-	bottom : 0;
-	float : right;
-	font-size : 20px;
-}
+
 .contact-wrap{
 	color : #fff;
     display: flex;
@@ -108,107 +99,76 @@
     background: #e0e0e0;
     border-radius: 5px;
 }
-
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<section class="page-section" id="services">
 		<div class="inquiry-msg">
-			<h1>제휴 및 업무상 문의를 남겨주세요.</h1>
-			<p style="font-size : 20px;">확인 후 연락드리겠습니다.</p>
+			<h1>문의 사항</h1>
 		</div>
 		<div class="container">
 			<div class="inquiry-container">
-			<th:block th:if="${member.memberRole=='business'}">
-			    <form action="/admin/insertInquiry" method= "post" id="business-inquiry" class="inquiry-form">
+			<th:block th:if="${i.inquiryCategory=='business'}">
+			    <div id="business-inquiry" class="inquiry-form">
 				    <h2>사업자 문의</h2>
-				    <input type="hidden" name="memberNo" th:value="${member.memberNo}">
 				    <div class = "row">
 				        <div class="form-group readonly">
 				            <label>사업자명</label>
-				            <input type="text" class="form-control" th:value="${companyName}" disabled>
+				            <input type="text" class="form-control" th:value="${i.companyName}" disabled>
 				        </div>
 				        <div class="form-group readonly">
 				            <label>사업자 번호</label>
-				            <input type="text" name="companyNo" class="form-control" th:value="${companyNo}" readonly>
+				            <input type="text" name="companyNo" class="form-control" th:value="${i.companyNo}" disabled>
 				        </div>
 				        </div>
 					    <div class = "row">
 					        <div class="form-group">
 					            <label>연락처</label>
-					            <input type="text" class="form-control" th:value="${member.memberPhone}" disabled>
+					            <input type="text" class="form-control" th:value="${i.memberPhone}" disabled>
 					        </div>
 					        <div class="form-group">
 					            <label>Email</label>
-					            <input type="email" class="form-control" th:value="${member.memberEmail}" disabled>
+					            <input type="email" class="form-control" th:value="${i.memberEmail}" disabled>
 					        </div>
 						 </div>
 						 <div class = "row">  
 					        <div class="form-group text-area">
 					            <label>문의 내용</label>
-					            <textarea name="inquiryContent" class="form-control" style="resize: none"></textarea>
+					            <textarea class="form-control" style="resize: none" disabled th:text="${i.inquiryContent}"></textarea>
 					        </div>
 					     </div>
-					     <button class="btn-primary">문의 접수</button>
-				        </form>
+				        </div>
 					</th:block>
-					<th:block th:if="${member.memberRole=='normal'}">
-				    <form action="/admin/insertInquiry" method= "post" id="normal-inquiry" class="inquiry-form">
+					<th:block th:if="${i.inquiryCategory=='normal'}">
+				    <div class="inquiry-form">
 					    <h2>사용자 문의</h2>
-					   	<input type="hidden" name="memberNo" th:value="${member.memberNo}">
 				    	<div class = "row">	
 					        <div class="form-group readonly">
 					            <label>ID</label>
-					            <input type="text" id="user-name" class="form-control" th:value="${member.memberId}" disabled >
+					            <input type="text" class="form-control" th:value="${i.memberId}" disabled >
 					        </div>
 					    </div>
 					    <div class = "row">	    
 					        <div class="form-group">
 					            <label>연락처</label>
-					            <input type="text" id="user-phone" class="form-control" th:value="${member.memberPhone}" disabled >
+					            <input type="text" class="form-control" th:value="${i.memberPhone}" disabled >
 					        </div>
 					        <div class="form-group">
 					            <label>Email</label>
-					            <input type="email" id="user-email" class="form-control" th:value="${member.memberEmail}" disabled>
+					            <input type="email" class="form-control" th:value="${i.memberEmail}" disabled>
 					        </div>
 					    </div>
 					    <div class = "row">
 					        <div class="form-group text-area">
 					            <label>문의 내용</label>
-					            <textarea name="inquiryContent" class="form-control" style="resize: none"></textarea>
+					            <textarea class="form-control" style="resize: none" disabled th:text="${i.inquiryContent}"></textarea>
 					        </div>
 					     </div>
-					     <button class="btn-primary">문의 접수</button>   
-				    </form>
+				    </div>
 			    	</th:block>
 			    </div>
 			</div>
 	</section>
-	<div class= "contact-wrap">
-		<div class="contact-title">
-	        <h1>CONTACT US</h1>
-		</div>
-	    <div class="contact-section">
-		        <div id="map" class="map-container"></div>
-		    <div class= "contact-text">
-		        <p>Tel : 070-8241-9234</p>
-		        <p>Email : links@service.com</p>
-		        <p>Address : 서울시 **구 **로 00빌딩 0층</p>
-	        </div>
-        </div>
-	</div>		
-	<script  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xwce1oonfu&submodules=geocoder"></script>
-	<script>
-	    function initMap() {
-	        var mapOptions = {
-	            center: new naver.maps.LatLng(37.5665, 126.9780), // 서울 시청 좌표 예제
-	            zoom: 15
-	        };
-	        var map = new naver.maps.Map('map', mapOptions);
-	    }
-	    window.onload = initMap;
-	</script>
-	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
