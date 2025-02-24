@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>문의 상세보기</title>
+<style>
+.inquiry-msg{
+	background-color : #ffc800;
+	height : 170px;
+	margin-top : 30px;
+	padding-left : 300px;
+	margin-bottom : 40px;
+	display: flex;
+	align-items : center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 20px;
+}
+.inquiry-msg> *{
+	color : #fff;
+	font-family: ns-b;
+	width : 80%;
+}
+
+.inquiry-container {
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.row>.readonly>.form-control:focus{
+	border-color : #ced4da;
+	box-shadow : none;
+}
+.inquiry-form {
+    padding: 40px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position : relative;
+}
+
+.row>.form-group{
+	width :30%;
+}
+.row>.text-area{
+	width :100%;
+	
+}
+.row>.text-area textarea{
+	padding : 50px;
+	height : 400px;
+}
+.form-group>label{
+	font-family: ns-b;
+	font-size : 20px;
+	padding : 10px;
+}
+.inquiry-form>.row{
+	padding : 20px;
+	margin-left : 40px;
+	display : flex;
+}
+
+.contact-wrap{
+	color : #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom : 40px;
+}
+.contact-section{
+	margin-top : 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	width : 50%;
+}
+
+.contact-wrap>.contact-text, .contact-title {
+	padding : 30px;
+	padding-top : 30px;
+	text-align : center;
+	width:100%;
+	background-color : #ffc800;
+}
+.contact-wrap .contact-text{
+	padding : 20px;
+}
+
+.contact-wrap p{
+	margin : 0;
+	font-size: 20px;
+	color : black;
+}
+
+.map-container {
+    width: 100%;
+    height: 500px;
+    background: #e0e0e0;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<section class="page-section" id="services">
+		<div class="inquiry-msg">
+			<h1>문의 사항</h1>
+		</div>
+		<div class="container">
+			<div class="inquiry-container">
+			<th:block th:if="${i.inquiryCategory=='business'}">
+			    <div id="business-inquiry" class="inquiry-form">
+				    <h2>사업자 문의</h2>
+				    <div class = "row">
+				        <div class="form-group readonly">
+				            <label>사업자명</label>
+				            <input type="text" class="form-control" th:value="${i.companyName}" disabled>
+				        </div>
+				        <div class="form-group readonly">
+				            <label>사업자 번호</label>
+				            <input type="text" name="companyNo" class="form-control" th:value="${i.companyNo}" disabled>
+				        </div>
+				        </div>
+					    <div class = "row">
+					        <div class="form-group">
+					            <label>연락처</label>
+					            <input type="text" class="form-control" th:value="${i.memberPhone}" disabled>
+					        </div>
+					        <div class="form-group">
+					            <label>Email</label>
+					            <input type="email" class="form-control" th:value="${i.memberEmail}" disabled>
+					        </div>
+						 </div>
+						 <div class = "row">  
+					        <div class="form-group text-area">
+					            <label>문의 내용</label>
+					            <textarea class="form-control" style="resize: none" disabled th:text="${i.inquiryContent}"></textarea>
+					        </div>
+					     </div>
+				        </div>
+					</th:block>
+					<th:block th:if="${i.inquiryCategory=='normal'}">
+				    <div class="inquiry-form">
+					    <h2>사용자 문의</h2>
+				    	<div class = "row">	
+					        <div class="form-group readonly">
+					            <label>ID</label>
+					            <input type="text" class="form-control" th:value="${i.memberId}" disabled >
+					        </div>
+					    </div>
+					    <div class = "row">	    
+					        <div class="form-group">
+					            <label>연락처</label>
+					            <input type="text" class="form-control" th:value="${i.memberPhone}" disabled >
+					        </div>
+					        <div class="form-group">
+					            <label>Email</label>
+					            <input type="email" class="form-control" th:value="${i.memberEmail}" disabled>
+					        </div>
+					    </div>
+					    <div class = "row">
+					        <div class="form-group text-area">
+					            <label>문의 내용</label>
+					            <textarea class="form-control" style="resize: none" disabled th:text="${i.inquiryContent}"></textarea>
+					        </div>
+					     </div>
+				    </div>
+			    	</th:block>
+			    </div>
+			</div>
+	</section>
+</body>
+</html>

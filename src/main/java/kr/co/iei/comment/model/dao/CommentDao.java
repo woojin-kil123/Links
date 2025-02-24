@@ -193,14 +193,14 @@ public class CommentDao {
 
 	
 
-	
-
-	
-	
-	
 		
 	
 	
+	public int selectRefCommentNo(int recommentNo) {
+		String query = "select comment_no from re_comm where re_comment_no=?";
+		int result = jdbc.queryForObject(query, Integer.class);
+		return result;
+	}
 	
 
 }

@@ -32,7 +32,7 @@
 			    </div>
 			</div>
 			<div class="container mt-5">
-			    <h2 class="text-left">최신 트렌드</h2>
+			    <h2 class="text-left">대중적인 PICK</h2>
 			    <div id="movieCarousel2" class="carousel slide" > <!-- data-bs-ride="carousel" -->
 			        <div class="carousel-inner" id="carousel2"></div>
 			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel2" data-bs-slide="prev">
@@ -44,7 +44,7 @@
 			    </div>
 			</div>
 			<div class="container mt-5">
-			    <h2 class="text-left">인기 영화</h2>
+			    <h2 class="text-left">명작 영화</h2>
 			    <div id="movieCarousel3" class="carousel slide" > <!-- data-bs-ride="carousel" -->
 			        <div class="carousel-inner" id="carousel3"></div>
 			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel3" data-bs-slide="prev">
@@ -81,7 +81,7 @@
 	}
 	function trend(){
 		$.ajax({
-			url : "/api/trend",
+			url : "/api/popular",
 			type : "get",
 			success : function(movies){
 				const carouselContent = $("#carousel2");
@@ -91,7 +91,7 @@
 	}
 	function popular(){
 		$.ajax({
-			url : "/api/popular",
+			url : "/api/topRated",
 			type : "get",
 			success : function(movies){
 				

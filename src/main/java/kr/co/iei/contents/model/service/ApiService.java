@@ -130,9 +130,9 @@ public class ApiService {
     	movieList = movieList(result);
         return movieList;
     }
-	public List trendMovies() throws IOException {
+	public List popular() throws IOException {
 		List movieList = new ArrayList<ApiMovie>();
-    	String result = Jsoup.connect("https://api.themoviedb.org/3/trending/movie/day?language=ko-kr")
+    	String result = Jsoup.connect(url+"popular?language=ko-kr&page=1&region=kr")
 				.data("api_key",apiKey)
 				.data("resultType", "json")
 				.ignoreContentType(true)
@@ -147,7 +147,7 @@ public class ApiService {
 	//개봉예정
 	//--url 'https://api.themoviedb.org/3/movie/upcoming?language=ko-kr&page=1&region=kr' \
 
-	public List popular() throws IOException {
+	public List topRated() throws IOException {
 		List movieList = new ArrayList<ApiMovie>();
     	String result = Jsoup.connect(url +"top_rated?language=ko-kr&page=1&region=kr")
 				.data("api_key",apiKey)

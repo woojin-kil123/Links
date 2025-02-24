@@ -1,5 +1,7 @@
 package kr.co.iei.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.BuMember;
@@ -183,7 +187,7 @@ public String adminMsg(Model model) {
  }
  @GetMapping(value="/idFind")
  public String idFind(Member m,Model model) {
-	 Member member = memberService.selectOneMember2(m);
+	 Member member = memberService.selectOneMemberId(m);
 	
 	 if(member== null) {
 		 model.addAttribute("title","아이디 찾기 실패");
@@ -212,7 +216,7 @@ public String adminMsg(Model model) {
  }
  @GetMapping(value="/pwFind")
  public String pwFind(Member m,Model model) {
-	 Member member = memberService.selectOneMember3(m);
+	 Member member = memberService.selectOneMemberPw(m);
 	 if(member== null) {
 		 model.addAttribute("title","비밀번호 찾기 실패");
 		 model.addAttribute("text","없는 회원입니다");
@@ -259,4 +263,20 @@ public String adminMsg(Model model) {
 	 int result= memberService.ajaxscoreNo(MemberId);
 	 return result;
  }
+ 	//문의 페이지 이동 컨트롤러 
+	@GetMapping("/inquiryFrm")
+	public String inquiyFrm(HttpServletRequest request, Model model) {
+		HttpSession session =  request.getSession();
+		Member m = (Member)session.getAttribute("member");
+		String memberRole = m.getMemberRole();
+		if(memberRole.equals("business")) {
+			int memberNo = m.getMemberNo();
+			BuMember bm = memberService.selectBusiness(memberNo);
+			model.addAttribute("companyName",bm.getCompanyName());
+			model.addAttribute("companyNo",bm.getCompanyNo());
+		}
+		model.addAttribute("member",m);		
+		
+		return "member/inquiryFrm";
+	}
 }

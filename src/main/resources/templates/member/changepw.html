@@ -12,7 +12,6 @@
 	width: 100%;
 	}
 	.input-title{
-	padding-top: 10px;
 	width: 20%;
 	}
 	.change-container{
@@ -24,6 +23,8 @@
 	width:40%;
 	}
 	.page-title{
+	font-size: 32px;
+    font-weight: bold;
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
@@ -43,14 +44,16 @@
 	width : 100%;
 	align-content: left;
 	}
-	
+	.input-wrap{
+margin-left: 100px;
+}
 </style>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
 
 	<main class="content change-container">
-		<section class="section find-wrap">
+		<section class="section find-wrap" style="padding-top:100px; padding-bottom:80px;">
 			<div class="page-title">비밀번호 변경</div>
 			<form action="/member/pwchange"  class="form-control" method="get">
 			<div class="input-wrap">
@@ -58,13 +61,13 @@
 				<label for="memberPw">새 비밀번호</label>
 			</div>
 				<div class="input-type">
-						<input type="password" name="memberPw" id="memberPw">
+						<input type="password" class="form-control" name="memberPw" id="memberPw">
 				</div>
 				<div class="input-title">
 						<label for="memberPwRe">새 비밀번호확인</label>
 				</div>
 				<div class="input-type">
-					<input type="password" name="memberPwRe" id="memberPwRe">
+					<input type="password" class="form-control" name="memberPwRe" id="memberPwRe">
 				</div>
 				<p class="input-msg pw-check-msg"></p>
 				<div>
@@ -97,6 +100,11 @@
 		$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 	    const pwValue = memberPw.value;
 	    const pwReValue = memberPwRe.value;
+	   
+	    if(pwValue==""||pwReValue==""){
+	    	$(".pw-check-msg").text("비밀번호를 입력하세요");
+			$(".pw-check-msg").addClass("invalid");
+	    }else{
 	    if(pwValue!==pwReValue){
 			$(".pw-check-msg").text("비밀번호가 서로 다릅니다");
 			$(".pw-check-msg").addClass("invalid");
@@ -104,6 +112,7 @@
 			$(".pw-check-msg").text("비밀번호가 일치합니다");
 			$(".pw-check-msg").addClass("valid");
 		}
+	    }
 	});
 	</script>
 <th:block th:include="common/footer"></th:block>

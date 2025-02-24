@@ -169,6 +169,7 @@ public class CommentService {
 		return result;
 	}
 
+	
 	@Transactional
 	public int likepush(Comment c, int memberNo) {
 		
@@ -184,6 +185,12 @@ public class CommentService {
 		
 		return likeCount;
 	}
+
+	public int selectRefCommentNo(int recommentNo) {
+		int result = commentDao.selectRefCommentNo(recommentNo);
+		return result;
+	}
+	
 
 	
 	

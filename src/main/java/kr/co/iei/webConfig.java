@@ -31,6 +31,7 @@ public class webConfig implements WebMvcConfigurer{
 								"/member/mypage",
 								"/member/delete",
 								"/member/changeinfo",
+								"/member/inquiryFrm",
 								"/notice/**"
 								)
 				.excludePathPatterns(	

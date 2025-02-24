@@ -18,13 +18,12 @@ function commentList(movieId) {
 	           const row = $("<div>").addClass("d-flex justify-content-between");
 
 	           $.each(commentSlice, function (index, comment) {
-	              const card = $("<div>").addClass("comment-card");
-				  /* 
-				  코멘트 눌럿을때 해당 코멘트 상세보기 이동
+	              const card = $("<div>").addClass("comment-card").css("cursor","pointer");
+				  //코멘트 눌럿을때 해당 코멘트 상세보기 이동
+				  
 				  card.on("click",function(){
-					location.herf="/comment/mCommentList?contentNo="+comment.commentNo;
+					location.href="/comment/commentView?commentNo="+comment.commentNo;
 				   });
-				   */
 	              const header = $("<div>").addClass("comment-header");
 	              const userInfo = $("<div>").addClass("comment-user");
 	              const userImg = $("<img>").attr("src", "/image/userimg.png");
@@ -59,12 +58,12 @@ function commentList(movieId) {
 			if(comments.length>4){
 				$(".container>.more-comments").show();
 				$(".more-comments").on("click", function () {
-			       window.location.href = "/comment/mCommentMemberList";
+			       location.href = "/comment/mCommentMemberList";
 				});
 			}
 		},
 		error : function(){
-						console.log("error");
+				console.log("error");
 		}				
 	});
 }
