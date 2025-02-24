@@ -52,7 +52,7 @@
 		height: 235px;
 		padding-top: 10px;
 		margin-top: 20px;
-		margin-bottom: 90px;
+		
 		border : 1px solid #ffc800;
 		background-color: #fcf8e3;
 		box-sizing: border-box;
@@ -62,12 +62,7 @@
 		height: 25px;
 		margin: 0 auto;
 	}
-	.profile{
-		width: 25px;
-		height: 25px;
-		border-radius: 25px;
-		background-color: #D9D9D9;
-	}
+	
 	.star-wrap{
 		overflow: hidden;
 	}	
@@ -137,18 +132,25 @@
 	
 	.inputBox{
 		display: none;
-		background-color: #FFF9F9;
-		margin : 0 auto;
+		width:650px;
+		height: 150px;
+		
+		margin-bottom: 50px;
+		
 		
 	}
 	.re-comm{		
 		width: 600px;
 		height: 100px;
 		border: 0px;
-		background-color: #FFF9F9;
+		background-color: #FCF8E3;
+		
+		text-decoration: none;
+		outline: none;
+		border: 1px solid white;
 	}
-	.re-comm:checked{
-		border: 0px;
+	.re-comm:focus{
+		border: 1px solid #FFC800;
 	}
 		
 	.btn-primary{
@@ -160,19 +162,29 @@
 		margin: 0 auto;
 		margin-top: 30px;
 		margin-left: 50px;
-		width: 700px;
-		height:160px;
-		background-color: #FEECEC;
+		
+		width: 700px;	
+	}
+	.line2-top{
+		background-color: #FCF8E3;
 	}	
+	
+	
 	.line2>div{
 		padding-left: 50px;
 	}
 	.line2 .movie-re-comment{	
+		background-color: #FCF8E3;
 		width: 600px;
-		height:100px;
-		padding-left: 50px;
+		
+				
+		padding-left: 10px;
 		padding-bottom: 90px;
-		background-color:#D9D9D9;			
+		padding-top : 8px;
+		margin-right: 10px;
+		
+		border-top: 1px solid #FFCD29;
+			
 	}
 	
 	.modal-box{
@@ -201,8 +213,10 @@
 		justify-content: center;
 	}
 	.btn-opt{
+		height: 33px;
 		color : #fff;
 		position : relative;		
+	
 	}
 	#modal>.modal-dialog {
 		top : 30%;
@@ -232,10 +246,50 @@
 	
 	.input-box2{
 		display: none;
-		background-color: #FFF9F9;
+		width: 600px;		
+		margin-top: 20px;
 		margin : 0 auto;
+		margin-bottom: 40px;
+	}
+	
+	.re-comm2{		
+		width: 550px;
+		height: 100px;
+		border: 0px;
+		margin-top: 3px;
+		
+		margin-right: 0px;
+		background-color: #FCF8E3;
+	}
+	
+	textarea[name=commentContent]{
+		width: 400px;
+		height: 100px;		
+		text-decoration: none;
+		background-color: #FCF8E3;
+		outline: none;
+		border: 1px solid white;
+	
+	}
+	textarea[name=commentContent]:focus{		
+		border: 1px solid #FFC800;
+	}
+	
+	.btn-form{
+		
+		float: right;
 		
 	}
+	.btn-form2{
+		margin-right: 50px;
+		float: right;
+	}
+	.pencil2{
+		
+		float: right;
+	}
+	
+	
 	
 </style>
 </head>
@@ -274,7 +328,7 @@
 						<span class="count"> 0 </span>
 						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
-						<span class="material-icons btn btn-primary pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
+						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -295,7 +349,7 @@
 					</div>  
 					<textarea class="re-comm" name="reCommentContent"></textarea>
 					<div>
-						<button type="button" class="btn-primary " th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">등록</button>
+						<button type="button" class="btn-primary btn-form2" th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">등록</button>
 					</div>
 				</div>	
 				<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
@@ -303,24 +357,24 @@
 				<!-- 댓글 출력 -->
 				<th:block th:each="re : ${recommList}">
 					<div class="line2">
-						<div th:text= "${re.memberId}" style="width:15%;"></div>
-						<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
+						<div class="line2-top">					
+							<div th:text= "${re.memberId}" style="width:15%;"></div>
+							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
+						</div>						
 						<th:block th:if="${session.member != null}">	
 							<th:block th:if="${session.member.memberId == re.memberId}">
-								<div class="right-icon">
+								<div class="btn-opt">
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons btn btn-primary show-recomm2" >create </span>							
-								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
 									<span class="material-icons dots" > more_vert </span>
+								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
+									<span class="material-icons  pencil2 show-recomm2"  >create </span>							
 								</div>
 				<!-- 대댓글 입력 -->
-								<div class="input-box2" th:if="${session.member != null}">				
+								<div class="input-box2" style="background-color: transparent;" th:if="${session.member != null}">				
+									 
+									<textarea class="re-comm2" name="reCommentContent"></textarea>
 									<div>
-										<span class="material-icons">subdirectory_arrow_right</span>									
-									</div>  
-									<textarea class="re-comm" name="reCommentContent"></textarea>
-									<div>
-										<button type="button" class="btn-primary"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );"> 등록</button>
+										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );">수정</button>
 									</div>
 								</div>
 							</th:block>	
@@ -420,7 +474,7 @@
 		});
 		//댓글창 누르면 나오게 하는 이벤트
 		$(".show-recomm").on("click",function(){
-			$(this).parent().parent().next().toggle();
+			$(this).parent().parent().next().slideToggle();
 		});
 		//신고 클릭시 전송 이벤트
 		$("[name=report-reason]").on("click",function(){
@@ -451,7 +505,7 @@
 			});
 		}
 		
-		
+		/*
 		$(".windowShow").on("click",function(){
 			const index = $(".windowShow").index(this); 
 			if($(this).text() === "▼"){
@@ -463,7 +517,7 @@
 			$(".inputBox").eq(index).slideToggle();
 		});
 		
-				
+		*/	
 		
 		function windowComment(obj,memberId,commentNo,contentNo){		
 			console.log(commentNo);
@@ -506,7 +560,9 @@
 		
 		
 		$(".show-recomm2").on("click",function(){
-			$(this).parent().next().toggle();
+			//const reCommContent = $(this).parent().prev().prev().text();
+			//$(this).parent().prev().children().text();
+			$(this).parent().next().slideToggle();
 		});
 		
 		function windowComment2(obj,reCommentNo,commentNo){		
