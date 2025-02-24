@@ -5,12 +5,20 @@
 <title>LinkS 영화</title>
 <link rel ="stylesheet" href="/css/slide.css">
 <style>
+	.ad-banner{
+		text-align: center;
+	}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 		<section class="page-section" id="services">
 	    <!-- 슬라이드 형식의 영화 리스트 -->
+		    <div class="container mt-5">
+		    	<div class="ad-banner">
+					<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
+				</div>
+			</div>
 	        <div class="container mt-5">
 			    <h2 class="text-left">상영중인 영화</h2>
 			    <div id="movieCarousel1" class="carousel slide" > <!-- data-bs-ride="carousel" -->
@@ -24,7 +32,7 @@
 			    </div>
 			</div>
 			<div class="container mt-5">
-			    <h2 class="text-left">최신 트렌드</h2>
+			    <h2 class="text-left">대중적인 PICK</h2>
 			    <div id="movieCarousel2" class="carousel slide" > <!-- data-bs-ride="carousel" -->
 			        <div class="carousel-inner" id="carousel2"></div>
 			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel2" data-bs-slide="prev">
@@ -36,7 +44,7 @@
 			    </div>
 			</div>
 			<div class="container mt-5">
-			    <h2 class="text-left">인기 영화</h2>
+			    <h2 class="text-left">명작 영화</h2>
 			    <div id="movieCarousel3" class="carousel slide" > <!-- data-bs-ride="carousel" -->
 			        <div class="carousel-inner" id="carousel3"></div>
 			        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel3" data-bs-slide="prev">
@@ -73,7 +81,7 @@
 	}
 	function trend(){
 		$.ajax({
-			url : "/api/trend",
+			url : "/api/popular",
 			type : "get",
 			success : function(movies){
 				const carouselContent = $("#carousel2");
@@ -83,7 +91,7 @@
 	}
 	function popular(){
 		$.ajax({
-			url : "/api/popular",
+			url : "/api/topRated",
 			type : "get",
 			success : function(movies){
 				

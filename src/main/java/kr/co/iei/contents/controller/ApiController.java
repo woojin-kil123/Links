@@ -59,7 +59,7 @@ public class ApiController {
     @GetMapping("/searchResult")
     public List searchResult(String query, Model model) {
     	List movieList = null;
-    	System.out.println("컨트롤러 query = " +query);
+    	
 		try {
 			movieList = apiService.searchMovies(query);
 		} catch (IOException e) {
@@ -69,11 +69,11 @@ public class ApiController {
         return movieList;
     }
     @ResponseBody
-	@GetMapping("/trend")
+	@GetMapping("/popular")
     public List trendMovies() {
 	 	List movieList = null;
 		try {
-			movieList = apiService.trendMovies();
+			movieList = apiService.popular();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,11 +81,11 @@ public class ApiController {
 		return movieList;
 	}
     @ResponseBody
-	@GetMapping("/popular")
-    public List popular() {
+	@GetMapping("/topRated")
+    public List topRated() {
 	 	List movieList = null;
 		try {
-			movieList = apiService.popular();
+			movieList = apiService.topRated();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

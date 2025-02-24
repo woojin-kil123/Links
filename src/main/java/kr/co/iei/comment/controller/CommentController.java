@@ -97,6 +97,22 @@ public class CommentController {
 		return "common/msg";
 	}
 	
+	@GetMapping(value="/reCommDelete")
+	public String reCommDelete(ReComment rc, Model model) {
+		
+		int result = commentService.reDeleteComm(rc);
+		
+		model.addAttribute("title", "댓글 삭제 완료");
+		model.addAttribute("text", "삭제되었습니다.");
+		model.addAttribute("icon", "success");
+		model.addAttribute("loc", "/comment/commentView?commentNo="+rc.getCommentNo());
+		
+		return "common/msg";
+		//model.addAttribute("loc", "/comment/commentView?reqPage=1");
+	}
+	
+	
+	
 	@GetMapping(value="/updateFrm")
 	public String updateFrm(int commentNo,Model model) {
 		Comment c = commentService.selectOneComm(commentNo);
@@ -116,9 +132,19 @@ public class CommentController {
 		System.out.println(rc);
 		Member member = new Member();
 		int result = commentService.reCommInsert(rc);
-		return "redirect:/comment/mCommentList?contentNo="+contentNo;
+		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
 	}
 	
 
+	@PostMapping(value="/reCommUpdate")
+	public String reCommUpdate(ReComment rc, String contentNo) {
+				
+		Member member = new Member();
+		int result = commentService.reCommUpdate(rc);
+		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
+	}
+	
+
+	
 	
 }
