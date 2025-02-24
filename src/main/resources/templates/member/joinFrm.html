@@ -250,9 +250,7 @@ margin-left: 50px;
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 		    const pwValue = memberPw.value;
 		    const pwReValue = memberPwRe.value;
-			let memberPw = document.getElementById("memberPw").value.trim();
-		    let memberPwRe = document.getElementById("memberPwRe").value.trim();
-		    if(memberPw==""||memberPw==""){
+		    if(pwValue==""||pwReValue==""){
 		    	$(".pw-check-msg").text("비밀번호를 입력하세요");
 				$(".pw-check-msg").addClass("invalid");
 		    }else{
