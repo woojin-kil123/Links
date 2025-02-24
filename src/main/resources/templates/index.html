@@ -117,7 +117,7 @@
 	}
 	function trend(){
 		$.ajax({
-			url : "/api/trend",
+			url : "/api/popular",
 			type : "get",
 			success : function(movies){
 				const carouselContent = $("#carousel2");
@@ -198,13 +198,11 @@
 		           const row = $("<div>").addClass("d-flex justify-content-between");
 
 		           $.each(commentSlice, function (index, comment) {
-		              const card = $("<div>").addClass("comment-card");
-					  /* 
-					  코멘트 눌럿을때 해당 코멘트 상세보기 이동
-					  card.on("click",function(){
-						location.herf="/comment/mCommentList?contentNo="+comment.commentNo;
-					   });
-					   */
+		              const card = $("<div>").addClass("comment-card").css("cursor","pointer");
+		              card.on("click",function(){
+							location.href="/comment/commentView?commentNo="+comment.commentNo;
+						});
+		              
 		              const header = $("<div>").addClass("comment-header");
 		              const userInfo = $("<div>").addClass("comment-user");
 		              const userImg = $("<img>").attr("src", "/image/userimg.png");
@@ -252,10 +250,10 @@
 	
 	$(document).ready(function() {
 	    // AD_POSITION 값을 매개변수로 전달
-	    let position = 'L';
+	    let position = 'H';
 	    let requestUrl = '/admin/adUrl';
 	    
-	    console.log("AJAX 요청 URL: " + requestUrl + "?position=" + position);
+	    //console.log("AJAX 요청 URL: " + requestUrl);
 
 	    $.ajax({
 	        url: requestUrl,              // URL에 매개변수 전달
@@ -263,8 +261,8 @@
 	        data: {"position" : position},  // Query Parameter로 전달
 	        dataType: 'text',
 	        success: function(adUrl) {
-	            console.log("응답 adUrl: " + adUrl);
-	            $(".ad-banner img").attr("src", adUrl);
+	            //console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", "/image/"+adUrl);
 	        },
 	        error: function(xhr, status, error) {
 	            console.log("AJAX 요청 실패:");

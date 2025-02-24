@@ -26,4 +26,9 @@ public class ReportService {
         }
         
     }
+
+	public Member getWarningLevel(String memberId) {
+		Member m = reportDao.selectWarningLevel(memberId);
+		return m;
+	}
 }
