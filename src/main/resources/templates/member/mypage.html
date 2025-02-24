@@ -109,15 +109,7 @@
 		gap:50px;
 		padding: 30px 0px;
 	}
-	#memberPw{
-	border-bottom: 1px solid black
-	}
-	#memberPhone{
-	border-bottom: 1px solid black
-	}
-	#memberEmail{
-	border-bottom: 1px solid black
-	}
+
 	.my-info-wrap{
 		margin-top: 50px;
 		margin-left: 50px;
@@ -263,7 +255,7 @@ input:focus {
 				<div class="movie">영화</div>
 				</div>
 		<div class="my-info-wrap">
-			<form action="/member/update" method="post">
+			<form action="/member/update"  class="form-control" method="post">
 				<table class="tbl">
 					<tr>
 						<th>
@@ -271,7 +263,7 @@ input:focus {
 						</th>
 						<td>
 							<div class="input-item">
-								<input type="password" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}">
+								<input type="password"  class="form-control" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}">
 							</div>
 						</td>
 					</tr>
@@ -281,7 +273,7 @@ input:focus {
 						</th>
 						<td>
 							<div class="input-item">
-								<input type="text" name="memberPhone" id="memberPhone"  th:value="${session.member.memberPhone}">
+								<input type="text"  class="form-control" name="memberPhone" id="memberPhone"  th:value="${session.member.memberPhone}">
 							</div>
 						</td>
 					</tr>
@@ -291,7 +283,7 @@ input:focus {
 						</th>
 						<td>
 							<div class="input-item">
-								<input type="text" name="memberEmail" id="memberEmail"  th:value="${session.member.memberEmail}">
+								<input type="text"  class="form-control" name="memberEmail" id="memberEmail"  th:value="${session.member.memberEmail}">
 							</div>
 						</td>
 					</tr>
