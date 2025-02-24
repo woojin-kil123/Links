@@ -33,20 +33,17 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    padding-left: 60px;
     background: #f4f4f7;
     border-radius: 8px;
 }
 .information {
-    text-align: left;
+    text-align: center;
     font-size: 18px;
     font-weight: bold;
+    padding-left: 100px;
 }
-.change {
-    cursor: pointer;
-    font-size: 20px;
-    color: #666;
-    transition: 0.3s;
-}
+
 .change:hover {
     color: #333;
 }
@@ -54,17 +51,7 @@
     display: flex;
     margin-top: 20px;
 }
-.comment, .score {
-    flex: 1;
-    text-align: center;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #f4f4f7;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+
 .comment {
     border-right: 2px solid white;
 }
@@ -82,10 +69,165 @@
     cursor: pointer;
     transition: 0.3s;
 }
+	.tbl{
+	width: 600px;
+	
+	box-sizing: border-box;
+	
+	}
+	.tbl th{
+	border:1px solid black;
+	box-sizing: border-box;
+	text-align: center;
+	height : 65px;
+	background-color: #ffc800;
+	color: #ffffff;
+	}
+	.tbl td{
+	border-bottom:1px solid black;
+	text-align: center;
+	border-top: none;
+	border-right: none;
+	}
+	input{
+	border:none;
+	text-align: center;
+	}
+	.btn-primary{
+		width: 100px;
+		height: 50px;
+		border-radius:10px;
+	}
+	.btn-secondary{
+		width: 100px;
+		height: 50px;
+		border-radius:10px;	
+	}
+	.change-btn{
+		display: flex;
+		justify-content: center;
+		gap:50px;
+		padding: 30px 0px;
+	}
+
+	.my-info-wrap{
+		margin-top: 50px;
+		margin-left: 50px;
+	}
+	.btn-primary {
+    background-color: #000; 
+    color: #ffc800;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #ffc800;
+    color: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #ffc800;
+    color: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.mypage-container {
+    width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 4px solid #ffc800;
+}
+.member {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+    border-radius: 12px;
+    color: #000;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+.member:hover {
+    transform: scale(1.02);
+     background: #ddd;
+}
+.comment-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.comment, .score, .refer {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #f4f4f7;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.comment:hover, .score:hover, .refer:hover {
+    background: #ddd;
+    transform: scale(1.05);
+}
+input {
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #ffc800;
+    box-shadow: 0 0 8px rgba(255, 200, 0, 0.5);
+    outline: none;
+}
+.btn-primary:hover {
+    background-color: #ffc800;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(255, 200, 0, 0.5);
+}
+.btn-secondary:hover {
+    background-color: #ffc800;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(255, 200, 0, 0.5);
+}
+
+.change-btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 0;
+}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
+	<script src="/js/sweetalert.min.js"></script>
 	<main class="content mypage-container">
 		<section class="page-section" >
 			<div class="main">
@@ -96,7 +238,7 @@
 			<div  th:text="${session.member.memberName}"></div>
 			<div  class="id"th:text="${session.member.memberId}"></div>
 			</div>
-			<div class="change"><span class="material-icons">settings</span></div>
+			
 			</div>
 			<div class="comment-wrap">
 			<div class="comment">
@@ -112,15 +254,77 @@
 				<div class="save">찜하기</div>		
 				<div class="movie">영화</div>
 				</div>
-		<div>
-		</div>
+		<div class="my-info-wrap">
+			<form action="/member/update"  class="form-control" method="post">
+				<table class="tbl">
+					<tr>
+						<th>
+							<label for="memberPw">비밀번호</label>
+						</th>
+						<td>
+							<div class="input-item">
+								<input type="password"  class="form-control" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="memberPhone">전화번호</label>
+						</th>
+						<td>
+							<div class="input-item">
+								<input type="text"  class="form-control" name="memberPhone" id="memberPhone"  th:value="${session.member.memberPhone}">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="memberPw">이메일</label>
+						</th>
+						<td>
+							<div class="input-item">
+								<input type="text"  class="form-control" name="memberEmail" id="memberEmail"  th:value="${session.member.memberEmail}">
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div class="change-btn">
+					<button type="submit" class="btn-primary">정보수정</button>
+					<button type="button" class="btn-secondary del-btn">회원탈퇴</button>
+				</div>
+				</form>
+			</div>
 		</section>
 		</main>
 	<script>
-	
-	$(".change").on("click",function(){
-	location.href="/member/changeinfo";
+	$(".del-btn").on("click", function(){
+		swal({
+			title: "회원탈퇴",
+			text:" 회원탈최 하시겠습니까",
+			icon: "warning",
+			buttons :{
+				cancel:{
+					text:"취소",
+					value:false,
+					visible : true,
+					className: "btn-primary",
+					closeModal : true
+				},
+				confirm:{
+					text:"탈퇴하기",
+					value:true,
+					visible : true,
+					className: "btn-secondary",
+					closeModal : true
+				}
+			}
+		}).then(function(isConfirm){
+			if(isConfirm){
+				location.href ="/member/delete";
+			}
+		});
 	});
+	
 	$(".comm").on("click",function(){
 	location.href="/comment/myCommentList"
 	});
@@ -148,6 +352,7 @@
 		error: function(){
 		}
 	});
+	
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
