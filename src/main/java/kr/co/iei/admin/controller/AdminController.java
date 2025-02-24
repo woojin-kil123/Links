@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.admin.service.AdminService;
+import kr.co.iei.admin.vo.Ad;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 
@@ -48,7 +49,6 @@ public class AdminController {
 	@GetMapping("/newReport")
 	public List newReport() {
 		List list = adminService.newReport();
-		System.out.println(list);
 		return list;
 	}
 	
@@ -59,5 +59,21 @@ public class AdminController {
 		System.out.println(list);
 		return list;
 	}
+	@ResponseBody
+	@PostMapping("/insertAd")
+	public int insertAd(Ad ad) {
+		int result = adminService.insertAd(ad);
+		return result;
+	}
+	@ResponseBody
+	@GetMapping("/deleteAd")
+	public int deleteAd(int inquiryNo) {
+		int result = adminService.deleteAd(inquiryNo);
+		return result;
+	}
+	
+	
+	
+	
 	
 }
