@@ -1,3 +1,6 @@
+
+<!--  
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -243,7 +246,7 @@
 			<div class="page-title">
 				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
 				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
-				<!-- <img th:src="${movie.posterPath}">-->				
+				<!-- <img th:src="${movie.posterPath}">			
 			</div>		
 								
 			<div class="list-wrap">
@@ -273,7 +276,7 @@
 						<span class="count"> 0 </span>
 						<span class="material-icons ">textsms </span>
 						<span class="count"> 0 </span>	
-						<!-- <span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span> -->
+						<!-- <span class="material-icons dots" id="dots" data-bs-toggle="modal" data-bs-target="#modal"> more_vert </span> 
 						<span class="material-icons dots report-choice" id="dots" > more_vert </span>
 						 <select class="choice-box">
 			         		 <option class="fxxx" value="욕설">욕설  : 공격적인 언어 사용</option>
@@ -287,7 +290,7 @@
 					<div class="re-comm">	
 						<div  class="btn-box">		
 							<th:block th:if="${session.member != null}">	
-								<!--  <th:block th:if="${session.member.memberId == comm.memberId}">-->			
+								<!--  <th:block th:if="${session.member.memberId == comm.memberId}">			
 				                    <div class="choice-like">			                    	
 				                    	<span class="material-icons">thumb_up</span>
 				                        <span>좋아요</span>
@@ -298,13 +301,13 @@
 				                        <span>댓글</span>
 				                        <span>0</span>
 				                    </div>
-				                <!--  </th:block> -->   
+				                <!--  </th:block>    
 	                        </th:block>
                 		</div>
                 		
                 		<div class="partner2"></div>
                 		
-                	<!-- 댓글 창 -->
+                	<!-- 댓글 창 
 						<div class="inputCommentBox inputBox" th:if="${session.member != null}">				
 							<div>
 								<span class="material-icons">subdirectory_arrow_right</span>									
@@ -318,7 +321,7 @@
 								</a>										
 							</div>
 						</div>	
-						<!-- 댓글 출력 -->
+						<!-- 댓글 출력 
 						<div th:each= "lno : ${comm.listNo}" class="print-comm"> 
 							 
 							<div class="line2">
@@ -371,7 +374,7 @@
                </div>
            </div>
        </div>
-       -->
+       
 	
 </main>
 
@@ -583,5 +586,5 @@
 </html>
 
 
-
+-->
 
