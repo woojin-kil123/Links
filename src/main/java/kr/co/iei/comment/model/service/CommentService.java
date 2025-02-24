@@ -147,7 +147,22 @@ public class CommentService {
 		
 		return result;
 	}
-	
+
+	@Transactional
+	public int likepush(Comment c, int memberNo) {
+		
+		if(c.getIsLike()==0) {
+			//현재값이 0 >> 좋아요를 누르겠다. >> insert
+			int result = commentDao.insertCommentLike(c.getCommentNo(),memberNo);
+		}else {
+			//현재값이 1 >> 좋아요를 취소하겠다. >> delete
+			int result = commentDao.deleteCommentLike(c.getCommentNo(),memberNo);
+		}
+		//좋아요, 좋아요취소 로직을 수행하고나면 현재 좋아요 갯수 조회해서 리턴
+		int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
+		
+		return likeCount;
+	}
 
 	
 }

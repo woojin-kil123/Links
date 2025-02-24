@@ -13,5 +13,6 @@ public class ReComment {
 	private int commentNo;
 	private String reCommentContent;
 	private String reRegDate;	
-	
+	private int likeCount;
+	private int isLike;
 }

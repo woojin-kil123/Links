@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.comment.model.vo.Comment;
@@ -144,7 +145,13 @@ public class CommentController {
 		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
 	}
 	
-
+	@ResponseBody
+	@PostMapping(value="/likepush")
+	public int likepush(Comment c, @SessionAttribute Member member) {
+		int result = commentService.likepush(c,member.getMemberNo());
+		return result;
+		
+	}
 	
 	
 }
