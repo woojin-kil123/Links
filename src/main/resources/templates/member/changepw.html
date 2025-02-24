@@ -24,6 +24,8 @@
 	width:40%;
 	}
 	.page-title{
+	font-size: 32px;
+    font-weight: bold;
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
@@ -60,13 +62,13 @@ margin-left: 100px;
 				<label for="memberPw">새 비밀번호</label>
 			</div>
 				<div class="input-type">
-						<input type="password" name="memberPw" id="memberPw">
+						<input type="password" class="form-control" name="memberPw" id="memberPw">
 				</div>
 				<div class="input-title">
 						<label for="memberPwRe">새 비밀번호확인</label>
 				</div>
 				<div class="input-type">
-					<input type="password" name="memberPwRe" id="memberPwRe">
+					<input type="password" class="form-control" name="memberPwRe" id="memberPwRe">
 				</div>
 				<p class="input-msg pw-check-msg"></p>
 				<div>
@@ -99,6 +101,11 @@ margin-left: 100px;
 		$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 	    const pwValue = memberPw.value;
 	    const pwReValue = memberPwRe.value;
+	   
+	    if(pwValue==""||pwReValue==""){
+	    	$(".pw-check-msg").text("비밀번호를 입력하세요");
+			$(".pw-check-msg").addClass("invalid");
+	    }else{
 	    if(pwValue!==pwReValue){
 			$(".pw-check-msg").text("비밀번호가 서로 다릅니다");
 			$(".pw-check-msg").addClass("invalid");
@@ -106,6 +113,7 @@ margin-left: 100px;
 			$(".pw-check-msg").text("비밀번호가 일치합니다");
 			$(".pw-check-msg").addClass("valid");
 		}
+	    }
 	});
 	</script>
 <th:block th:include="common/footer"></th:block>

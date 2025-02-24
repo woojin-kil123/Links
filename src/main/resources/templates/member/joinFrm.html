@@ -74,7 +74,8 @@ margin-left: 10px;
 width: 100px;
 }
 .page-title{
-	font-size: 27px;
+	font-size: 32px;
+    font-weight: bold;
 	height: 60px;
 	line-height: 60px;
 	margin-bottom: 20px;	
@@ -87,6 +88,12 @@ width: 100px;
 	.input-wrap{
 margin-left: 50px;
 }
+label{
+	font-size: 18px;
+}
+  .lg{
+    height: 35px;
+    }
 </style>
 </head>
 <body>
@@ -103,7 +110,7 @@ margin-left: 50px;
 						<label for="memberId">아이디</label>
 					</div>
 					<div class="input-type">
-						<input type="text" name="memberId" id="memberId">
+						<input type="text" class="form-control"name="memberId" id="memberId">
 					</div>
 						<button type="button" class="btn-primary id-check-btn">중복체크</button>
 					</div>
@@ -114,7 +121,7 @@ margin-left: 50px;
 						<label for="memberName">이름</label>
 					</div>
 					<div class="input-type">
-						<input type="text" name="memberName" id="memberName">
+						<input type="text" class="form-control" name="memberName" id="memberName">
 					</div>
 				</div>
 				<div class="input-wrap">
@@ -122,7 +129,7 @@ margin-left: 50px;
 						<label for="memberPw">비밀번호</label>
 					</div>
 					<div class="input-type">
-						<input type="password" name="memberPw" id="memberPw">
+						<input type="password"  class="form-control" name="memberPw" id="memberPw">
 					</div>
 				</div>
 				<div class="input-wrap">
@@ -130,7 +137,7 @@ margin-left: 50px;
 						<label for="memberPwRe">비밀번호 확인</label>
 					</div>
 					<div class="input-type">
-						<input type="password" name="memberPwRe" id="memberPwRe">
+						<input type="password" class="form-control" name="memberPwRe" id="memberPwRe">
 					</div>
 				</div>
 					<p class="input-msg pw-check-msg"></p>
@@ -139,7 +146,7 @@ margin-left: 50px;
 						<label for="memberPhone">전화번호</label>
 					</div>
 					<div class="input-type">
-						<input type="text" name="memberPhone" id="memberPhone">
+						<input type="text" class="form-control" name="memberPhone" id="memberPhone">
 					</div>
 				</div>
 				<div class="input-wrap">
@@ -148,10 +155,10 @@ margin-left: 50px;
 					</div>
 					<div class="input-type">
 					<div class="email-wrap">
-						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
+						<input type="text" class="email form-control" name="memberEmail1" id="memberEmail1">
 						<span>@</span>
-						<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
-						<select class="mail">
+						<input type="text" class="email2 form-control" name="memberEmail2" id="memberEmail2">
+						<select class="mail form-control">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -163,8 +170,8 @@ margin-left: 50px;
 						<button type="button"class="btn-primary" id="send-btn" >인증번호 발송</button>
 					</div>
 					<div id="auth" class="input-item" style="display: none;" >
-					<input type="text" id="auth-code" placeholder="인증번호 입력" style="width:30%">
-					<button  type="button" class="btn-primary" id="auth-btn">인증하기</button>
+					<input type="text" id="auth-code"class="form-control"  placeholder="인증번호 입력" style="width:30%">
+					<button  type="button" class="btn-primary " id="auth-btn">인증하기</button>
 					<span id="time-zone"></span>
 					<span id="authMsg"></span>
 				</div>
@@ -250,6 +257,10 @@ margin-left: 50px;
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 		    const pwValue = memberPw.value;
 		    const pwReValue = memberPwRe.value;
+		    if(pwValue==""||pwReValue==""){
+		    	$(".pw-check-msg").text("비밀번호를 입력하세요");
+				$(".pw-check-msg").addClass("invalid");
+		    }else{
 		    if(pwValue!==pwReValue){
 				$(".pw-check-msg").text("비밀번호가 서로 다릅니다");
 				$(".pw-check-msg").addClass("invalid");
@@ -257,6 +268,7 @@ margin-left: 50px;
 				$(".pw-check-msg").text("비밀번호가 일치합니다");
 				$(".pw-check-msg").addClass("valid");
 			}
+		    }
 		});
 		$(".mail").on("change",function(){
 			const mail=$(this).val();

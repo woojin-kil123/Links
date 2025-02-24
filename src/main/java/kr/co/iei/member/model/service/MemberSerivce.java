@@ -1,5 +1,7 @@
 package kr.co.iei.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +40,12 @@ public class MemberSerivce {
 		return result;
 	}	
 	
-	public Member selectOneMember2(Member m) {
-		Member member= memberDao.selectOneMember2(m);
+	public Member selectOneMemberId(Member m) {
+		Member member= memberDao.selectOneMemberId(m);
 		return member;
 	}
-	public Member selectOneMember3(Member m) {
-		Member member= memberDao.selectOneMember3(m);
+	public Member selectOneMemberPw(Member m) {
+		Member member= memberDao.selectOneMemberPw(m);
 		return member;
 	}
 	@Transactional
@@ -67,4 +69,5 @@ public class MemberSerivce {
 		return result;
 		
 	}
+	
 }
