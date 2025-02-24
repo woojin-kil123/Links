@@ -78,4 +78,8 @@ public class AdminService {
 		List list = adminDao.normalView();
 		return list;
 	}
+	public int updateReport(Report r) {
+		int result = adminDao.updateReport(r);
+		return result;
+	}
 }

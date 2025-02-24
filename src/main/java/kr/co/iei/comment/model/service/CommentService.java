@@ -147,6 +147,11 @@ public class CommentService {
 		
 		return result;
 	}
+
+	public int selectRefCommentNo(int recommentNo) {
+		int result = commentDao.selectRefCommentNo(recommentNo);
+		return result;
+	}
 	
 
 	

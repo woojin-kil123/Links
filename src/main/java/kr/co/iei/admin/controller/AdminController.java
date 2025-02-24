@@ -37,9 +37,8 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/insertReport")
-	public int insertReport(Report report) {
+	public void insertReport(Report report) {
 		int result = adminService.insertReport(report);
-		return result;
 	}
 	
 	@ResponseBody
@@ -63,21 +62,18 @@ public class AdminController {
 	}
 	@ResponseBody
 	@PostMapping("/insertAd")
-	public int insertAd(Ad ad) {
+	public void insertAd(Ad ad) {
 		int result = adminService.insertAd(ad);
-		return result;
 	}
 	@ResponseBody
 	@GetMapping("/deleteAd")
-	public int deleteAd(int inquiryNo) {
+	public void deleteAd(int inquiryNo) {
 		int result = adminService.deleteAd(inquiryNo);
-		return result;
 	}
 	@ResponseBody
 	@GetMapping("/updateInquiry")
-	public int updateInquiry(int inquiryProgress, int inquiryNo) {
+	public void updateInquiry(int inquiryProgress, int inquiryNo) {
 		int result = adminService.updateInquiry(inquiryProgress,inquiryNo);
-		return result;
 	}
 	
 	
@@ -115,5 +111,10 @@ public class AdminController {
 		return list;
 	}
 	
+	@ResponseBody
+	@GetMapping("/updateReport")
+	public void updateReport(Report r) {
+		int result = adminService.updateReport(r);
+	}
 	
 }

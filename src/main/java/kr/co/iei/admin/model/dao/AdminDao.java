@@ -121,4 +121,11 @@ public class AdminDao {
 		List list = jdbc.query(query, inquiryRowMapper);
 		return list;
 	}
+
+	public int updateReport(Report r) {
+		String query = "update report set report_yn=? where write_no = ?";
+		Object[] params = {r.getReportYn(), r.getWriteNo()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
 }

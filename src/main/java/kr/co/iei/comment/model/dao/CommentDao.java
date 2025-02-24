@@ -157,6 +157,12 @@ public class CommentDao {
 		List list = jdbc.query(query, commentRowMapper);
 		return list;
 	}
+
+	public int selectRefCommentNo(int recommentNo) {
+		String query = "select comment_no from re_comm where re_comment_no=?";
+		int result = jdbc.queryForObject(query, Integer.class);
+		return result;
+	}
 	
 
 }
