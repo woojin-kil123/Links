@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.admin.model.dao.AdminDao;
+import kr.co.iei.admin.vo.Ad;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 
@@ -39,6 +40,23 @@ public class AdminService {
 		List list = adminDao.adView();
 		return list;
 	}
+	@Transactional
+	public int insertAd(Ad ad) {
+		int result = adminDao.insertAd(ad);
+		if(result>0) {
+			result += adminDao.updateInquiryProgress(3, ad.getInquiryNo());
+		}
+		return result;
+	}
+	@Transactional
+	public int deleteAd(int inquiryNo) {
+		int result = adminDao.deleteAd(inquiryNo);
+		if(result>0) {
+			result += adminDao.updateInquiryProgress(4, inquiryNo);
+		}
+		return result;
+	}
+	
 	public String getAdUrlByPosition(String position) {
 		return adminDao.getAdUrlByPosition(position);
 	}

@@ -15,6 +15,7 @@ public class Ad {
 	private String companyName;
 	private String adPosition;
 	private String adUrl;
-	private Date expireDate;
+	private String expireDate;
+	private int inquiryProgress;
 	private int adClick;
 }

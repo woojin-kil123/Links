@@ -63,6 +63,27 @@ public class AdminDao {
 		return list;
 	}
 
+	public int insertAd(Ad ad) {
+		String query = "insert into ad values(ad_seq.nextval,?,?,?,?,0)";
+		Object[] params = {ad.getInquiryNo(), ad.getAdPosition(),ad.getAdUrl(),ad.getExpireDate()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public int updateInquiryProgress(int progress, int inquiryNo) {
+		String query = "update inquiry set inquiry_progress=? where inquiry_no = ?";
+		Object[] params = {progress, inquiryNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public int deleteAd(int inquiryNo) {
+		String query = "delete from ad where inquiry_no = ?";
+		Object[] params = {inquiryNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
 	public String getAdUrlByPosition(String position) {
 		String sql = "SELECT * FROM ad_view WHERE UPPER(TRIM(AD_POSITION)) = UPPER(TRIM(?))";
 		Object[] params = {position};

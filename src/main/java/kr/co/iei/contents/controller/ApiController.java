@@ -59,7 +59,7 @@ public class ApiController {
     @GetMapping("/searchResult")
     public List searchResult(String query, Model model) {
     	List movieList = null;
-    	System.out.println("컨트롤러 query = " +query);
+    	
 		try {
 			movieList = apiService.searchMovies(query);
 		} catch (IOException e) {
