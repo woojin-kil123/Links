@@ -7,12 +7,23 @@
 	*{
 	font-family: ns-r;
 	}
+	.input-wrap{
+	display:flex;
+	width: 100%;
+	}
+	.input-title{
+	padding-top: 10px;
+	width: 20%;
+	}
 	.change-container{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	}
-.page-title{
+	.input-type{
+	width:40%;
+	}
+	.page-title{
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
@@ -26,7 +37,15 @@
 	.pwchange-button-box>button{
 		width: 100%
 	}
-	
+	input{
+	border :none;
+	border-bottom: 1px solid black;
+	width : 100%;
+	align-content: left;
+	}
+	.input-wrap{
+margin-left: 100px;
+}
 </style>
 </head>
 <body>
@@ -35,7 +54,7 @@
 	<main class="content change-container">
 		<section class="section find-wrap">
 			<div class="page-title">비밀번호 변경</div>
-			<form action="/member/pwchange" method="get">
+			<form action="/member/pwchange"  class="form-control" method="get">
 			<div class="input-wrap">
 			<div class="input-title">
 				<label for="memberPw">새 비밀번호</label>
