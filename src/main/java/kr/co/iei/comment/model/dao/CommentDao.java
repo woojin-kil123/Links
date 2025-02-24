@@ -179,6 +179,23 @@ public class CommentDao {
 		return likeCount;
 		
 	}
+
+	
+
+	public int selectReCommCount(int commentNo) {
+		String query = "select count(*) from re_comm where comment_no = ?";
+		Object[] param = {commentNo};
+		int reCommCount = jdbc.queryForObject(query, Integer.class,param);
+		return reCommCount;
+	}
+
+	
+
+	
+
+	
+
+	
 	
 	
 		

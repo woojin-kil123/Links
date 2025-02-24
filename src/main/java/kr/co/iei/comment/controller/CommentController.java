@@ -59,7 +59,11 @@ public class CommentController {
 	@GetMapping(value="/mCommentMemberList")	
 	public String mCommentMemberList(Model model) {
 		List list = commentService.mCommentMemberList();
+		//코멘트리스트 모델에 담기
 		model.addAttribute("list", list);
+		
+		
+		
 		return "comment/mCommentMemberList";
 	}
 	
@@ -68,10 +72,13 @@ public class CommentController {
 	@GetMapping(value="/commentView")
 	public String mCommentList(int commentNo, Model model) {
 		Comment comment = commentService.selectOneComm(commentNo);
+		// 코멘트 객체에 영화 정보 가져옴
 		String contentNo = comment.getContentNo();
 		DbMovie m = commentService.selectMovieInfo(contentNo);
+		//코멘트 객체에 댓글 리스트 가져옴
 		List recommList = commentService.selectRecomm(commentNo); 
 		
+	
 		model.addAttribute("recommList",recommList);
 		model.addAttribute("comm", comment);
 		model.addAttribute("m", m);

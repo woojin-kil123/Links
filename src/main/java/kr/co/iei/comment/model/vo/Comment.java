@@ -21,5 +21,6 @@ public class Comment {
 	private String movieTitle;
 	private int likeCount;
 	private int isLike;
+	private int reCommCount;
 	private List<ReComment> listNo;
 }

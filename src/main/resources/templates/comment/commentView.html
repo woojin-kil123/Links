@@ -321,11 +321,17 @@
 						<tr>			
 					</table>
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
+					
 					<div class="btn-opt">
-						<span class="material-icons">thumb_up</span>
-						<span class="count"> 0 </span>
-						<span class="material-icons show-recomm">textsms </span>
-						<span class="count"> 0 </span>
+						
+						<span class="like-box">
+							<span th:if="${comm.isLike ==1}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up</span>
+							<span th:if="${session.member != null && comm.isLike ==0}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up_off_alt</span>
+							<span th:if="${session.member == null && comm.isLike ==0}" class="material-icons" >thumb_up_off_alt</span>
+							<span th:text="${comm.likeCount}"></span> 
+						</span>
+						<span class="material-icons" >textsms </span>
+						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
 						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
@@ -666,6 +672,27 @@
 		}
 		
 		
+		function likepush(obj,commentNo){
+			//thumb_up     //thumb_up_off_alt
+			//현재 상태를 구분
+			const currentText = $(obj).text();
+			const isLike = (currentText === "thumb_up_off_alt")?0:1;
+			$.ajax({
+				url: "/comment/likepush",
+				data : {commentNo : commentNo , isLike: isLike},
+				type : "post",
+				success : function(data){
+					//아이콘 변경
+					if(isLike === 0){
+						$(obj).text("thumb_up");
+					}else{
+						$(obj).text("thumb_up_off_alt");
+					}
+					//좋아요 갯수 변경
+					$(obj).next().text(data);
+				}
+			})
+		}
 	</script>
 	
 	
