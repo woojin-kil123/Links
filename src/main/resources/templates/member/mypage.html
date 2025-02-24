@@ -71,20 +71,16 @@
 }
 	.tbl{
 	width: 600px;
-	
 	box-sizing: border-box;
 	
 	}
 	.tbl th{
-	border:1px solid black;
 	box-sizing: border-box;
 	text-align: center;
-	height : 65px;
 	background-color: #ffc800;
 	color: #ffffff;
 	}
 	.tbl td{
-	border-bottom:1px solid black;
 	text-align: center;
 	border-top: none;
 	border-right: none;
@@ -223,6 +219,24 @@ input:focus {
     gap: 20px;
     padding: 30px 0;
 }
+.name-wrap{
+display: flex;
+}
+.id-wrap{
+display: flex;
+}
+.name{
+margin-left: 10px;
+}
+.id{
+margin-left: 10px;
+}
+label{
+	font-size: 18px;
+}
+  .lg{
+    height: 35px;
+    }
 </style>
 </head>
 <body>
@@ -235,8 +249,14 @@ input:focus {
 			</div>
 			<div class="member">
 			<div class="information">
-			<div  th:text="${session.member.memberName}"></div>
+			<div class="name-wrap">
+			<div >이름:</div>
+			<div class="name" th:text="${session.member.memberName}"></div>
+			</div>
+			<div class="id-wrap">
+			<div>아이디:</div>
 			<div  class="id"th:text="${session.member.memberId}"></div>
+			</div>
 			</div>
 			
 			</div>
