@@ -53,7 +53,7 @@
 	}
 	.mail{
 	margin-left: 10px;
-	width: 20%
+	width: 30%
 	}
 	
 	.page-title{
@@ -80,10 +80,17 @@
 	}
 	.mail{
 	margin-left: 10px;
-	width: 20%
+	width: 30%
 	}
 	#auth-btn{
 	margin-top: 20px;
+	}
+#send-btn{
+margin-left: 10px;
+}
+	.input-type{
+	width: 45%;
+	display: flex;
 	}
 </style>
 </head>
@@ -92,7 +99,7 @@
 	<main class="content find-container">
 		<section class="section find-wrap">
 			<div class="page-title">비밀번호 찾기</div>
-			<form action="/member/pwFind" method="get">
+			<form action="/member/pwFind" class="form-control" method="get">
 			<div class="input-wrap">
 			<div class="input-title">
 				<label for="memberName">이름</label>
@@ -136,7 +143,7 @@
 					<span id="authMsg"></span>
 				</div>
 				<div class="pwfind-button-box">
-					<button type="submit" class="btn-primary lg" style="width:40%">비밀번호찾기</button>
+					<button type="submit" class="btn-primary lg" style="width:20%; margin-right:100px;">비밀번호찾기</button>
 				</div>
 			
 			</form>
