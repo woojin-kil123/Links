@@ -67,4 +67,9 @@ public class MemberSerivce {
 		return result;
 		
 	}
+	//사업자 정보 읽어오는 서비스
+	public BuMember selectBusiness(int memberNo) {
+		BuMember bm = memberDao.selectBusiness(memberNo);
+		return bm;
+	}
 }

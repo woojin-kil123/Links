@@ -1,3 +1,5 @@
+
+
 package kr.co.iei.member.model.vo;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +19,6 @@ public class BuMember {
  private String memberRole;
  private int warningLevel;
  private String del;
- private String businessNo;
- private String businessName;
+ private String CompanyNo;
+ private String CompanyName;
 }

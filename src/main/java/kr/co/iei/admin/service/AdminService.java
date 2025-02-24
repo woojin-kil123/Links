@@ -60,4 +60,9 @@ public class AdminService {
 	public String getAdUrlByPosition(String position) {
 		return adminDao.getAdUrlByPosition(position);
 	}
+	@Transactional
+	public int updateInquiry(int inquiryProgress, int inquiryNo) {
+		int result = adminDao.updateInquiryProgress(inquiryProgress, inquiryNo);
+		return result;
+	}
 }

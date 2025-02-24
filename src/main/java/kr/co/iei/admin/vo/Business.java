@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Business {
+	private int inquiryNo;
 	private String companyName;
 	private String inquiryCategory;
 	private String memberPhone;

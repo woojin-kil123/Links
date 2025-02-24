@@ -58,7 +58,6 @@ public class AdminController {
 	@GetMapping("/adView")
 	public List adView() {
 		List list = adminService.adView();
-		System.out.println(list);
 		return list;
 	}
 	@ResponseBody
@@ -73,9 +72,12 @@ public class AdminController {
 		int result = adminService.deleteAd(inquiryNo);
 		return result;
 	}
-	
-	
-	
+	@ResponseBody
+	@GetMapping("/updateInquiry")
+	public int updateInquiry(int inquiryProgress, int inquiryNo) {
+		int result = adminService.updateInquiry(inquiryProgress,inquiryNo);
+		return result;
+	}
 	
 	
 	@ResponseBody
@@ -89,7 +91,5 @@ public class AdminController {
         	return adUrl;	
         }
     }
-	
-	
 	
 }

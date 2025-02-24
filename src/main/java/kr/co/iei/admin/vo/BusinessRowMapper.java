@@ -12,6 +12,7 @@ public class BusinessRowMapper implements RowMapper<Business> {
 	@Override
 	public Business mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Business b = new Business();
+		b.setInquiryNo(rs.getInt("inquiry_no"));
 		b.setCompanyName(rs.getString("company_name"));
 		b.setInquiryCategory(rs.getString("inquiry_category"));
 		b.setMemberPhone(rs.getString("member_phone"));
