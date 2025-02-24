@@ -98,9 +98,20 @@
 		margin-left: 15px;
 		cursor: pointer;		
 	}
+	
+	.bin{
+		margin-right:5px;		
+		float:right;
+	}	
+	.pencil{
+		margin-right:5px;
+		float:right;
+	}
+	
+	
 	.dots{
 		float:right;
-		margin-right: 15px;
+		margin-right: 3px;
 	}
 	
 	.btn-box{
@@ -259,8 +270,10 @@
 						<span class="material-icons">thumb_up</span>
 						<span class="count"> 0 </span>
 						<span class="material-icons show-recomm">textsms </span>
-						<span class="count"> 0 </span>	
+						<span class="count"> 0 </span>
 						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+						<span class="material-icons bin">delete_forever</span>
+						<span class="material-icons pencil">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
