@@ -96,7 +96,7 @@ public class CommentController {
 		model.addAttribute("title", "댓글 삭제 완료");
 		model.addAttribute("text", "삭제되었습니다.");
 		model.addAttribute("icon", "success");
-		model.addAttribute("loc", "comment/commentView?commentNo="+rc.getCommentNo());
+		model.addAttribute("loc", "/comment/commentView?commentNo="+rc.getCommentNo());
 		
 		return "common/msg";
 		//model.addAttribute("loc", "/comment/commentView?reqPage=1");
