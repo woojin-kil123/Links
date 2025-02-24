@@ -255,7 +255,7 @@
 	    let position = 'L';
 	    let requestUrl = '/admin/adUrl';
 	    
-	    console.log("AJAX 요청 URL: " + requestUrl + "?position=" + position);
+	    //console.log("AJAX 요청 URL: " + requestUrl);
 
 	    $.ajax({
 	        url: requestUrl,              // URL에 매개변수 전달
@@ -263,8 +263,8 @@
 	        data: {"position" : position},  // Query Parameter로 전달
 	        dataType: 'text',
 	        success: function(adUrl) {
-	            console.log("응답 adUrl: " + adUrl);
-	            $(".ad-banner img").attr("src", adUrl);
+	            //console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", "/image/"+adUrl);
 	        },
 	        error: function(xhr, status, error) {
 	            console.log("AJAX 요청 실패:");
