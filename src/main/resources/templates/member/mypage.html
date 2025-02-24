@@ -237,13 +237,24 @@ label{
   .lg{
     height: 35px;
     }
+  .input-item{
+  position: relative;
+  }
+  .show{
+  position: absolute ;
+  top: 8px;
+	right:10px;
+  }
+.tbl{
+margin-left: 20px;
+}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<script src="/js/sweetalert.min.js"></script>
 	<main class="content mypage-container">
-		<section class="page-section" >
+		<section class="page-section" style="padding-top:40px; padding-bottom:80px;">
 			<div class="main">
 			<div class="page-title">마이페이지</div>
 			</div>
@@ -275,7 +286,7 @@ label{
 				<div class="movie">영화</div>
 				</div>
 		<div class="my-info-wrap">
-			<form action="/member/update"  class="form-control" method="post">
+			<form action="/member/update"  method="post">
 				<table class="tbl">
 					<tr>
 						<th>
@@ -283,7 +294,8 @@ label{
 						</th>
 						<td>
 							<div class="input-item">
-								<input type="password"  class="form-control" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}">
+								<input type="password"  class="form-control pw" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}" >
+								<span class="material-icons show" id="togglePw">visibility_off</span>
 							</div>
 						</td>
 					</tr>
@@ -348,12 +360,19 @@ label{
 	$(".comm").on("click",function(){
 	location.href="/comment/myCommentList"
 	});
-	$(".star").on("click",function(){
-		location.href="/"
-		});
-	$(".movie").on("click",function(){
-			location.href="/contents/movieList";
-		});
+	$("#togglePw").on("click",function(){
+		let pwInput = document.getElementById("memberPw");
+        let icon = this;
+        if (pwInput.type === "password") {
+            pwInput.type = "text";
+            icon.textContent = "visibility"; // 아이콘 변경
+        } else {
+            pwInput.type = "password";
+            icon.textContent = "visibility_off"; // 아이콘 변경
+        }
+    });
+		
+	
 	$.ajax({
 		url:"/member/ajaxcommNo",
 		type :"get",
