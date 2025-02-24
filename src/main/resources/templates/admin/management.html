@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
+<link href="/css/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
+
 <style>
 .stats-container {
     display: flex;
@@ -82,13 +84,16 @@
 
 .table-container {
     width: 100%;
-    
 }
 
 .table-container table {
     width: 100%;
     margin-top: 10px;
     font-size: 16px;
+}
+
+.table-container table input,select{
+    text-align: center;
 }
 
 /* 헤더 스타일 */
@@ -137,18 +142,20 @@
 
 /* 관리 메뉴 버튼 스타일 */
 .manage-btn {
+	margin : auto 10px;
     padding: 5px 10px;
-    border: 1px solid #ddd;
+/*     border: 1px solid #ddd;
     background-color: #f0f0f0;
-    cursor: pointer;
+    cursor: pointer; */
     border-radius: 5px;
 }
-
-.manage-btn:hover {
-    background-color: #e0e0e0;
+.input-hidden{
+	display: none;
 }
 
+
 </style>
+
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -246,14 +253,15 @@
 		    <div id="ads" class="tab-content">
 		        <table id="ads-table">
 	                <tr>
-	                    <th>사업자명</th>
-	                    <th>광고 위치</th>
-	                    <th>URL</th>
-	                    <th>만료일</th>
-	                    <th>관리</th>
+	                	<th style="width : 10%;">문의번호</th>
+	                    <th style="width : 20%;">사업자명</th>
+	                    <th style="width : 10%;">광고 위치</th>
+	                    <th style="width : 30%;">URL</th>
+	                    <th style="width : 15%;">만료일</th>
+	                    <th style="width : 15%;">관리</th>
 	                </tr>
 		        </table>
-		        <button class="add-btn" data-type="ads"><span class="material-icons">add</span></button>
+		        <!-- <button class="add-btn"><span class="material-icons">add</span></button> -->
 		    </div>
 		
 		    <!-- 위험 회원 -->
@@ -273,7 +281,12 @@
 	    
 	</div>
 	</section>	
+	<script src="/js/datepicker.js"></script> 
+	<script src="/js/datepicker.ko.js"></script>
 	<script>
+
+	
+	
     $(".tab-btn").click(function () {
         $(".tab-btn").removeClass("active");
         $(this).addClass("active");
@@ -315,35 +328,12 @@
                     row.append($("<td>").text(item.memberPhone));
                     row.append($("<td>").text(item.inquiryDate));
                     row.append($("<td>").text(item.inquiryProgress));
-                    row.append($("<td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    row.append($("<td>").append($("<button></button>").addClass("manage-btn btn-primary").text("관리")));
                     table.append(row);
                 });
             },
             error: function () {
                 console.error("사업자 문의 데이터 로드 실패");
-            }
-        });
-    }
-    // 광고 관리
-    function adView() {
-        $.ajax({
-            url: "/admin/adView",
-            method: "GET",
-            success: function (data) {
-            	console.log(data);
-            	const table = $("#ads-table");
-                $.each(data, function (index, item) {
-                	const row = $("<tr></tr>");
-                    row.append($("<td></td>").text(item.companyName));
-                    row.append($("<td></td>").text(item.adPosition));
-                    row.append($("<td></td>").text(item.adUrl));
-                    row.append($("<td></td>").text(item.expireDate));
-                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
-                    table.append(row);
-                });
-            },
-            error: function () {
-                console.error("광고 데이터 로드 실패");
             }
         });
     }
@@ -363,7 +353,7 @@
                     row.append($("<td></td>").text(item.category));
                     row.append($("<td></td>").text(item.content));
                     row.append($("<td></td>").text(item.date));
-                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").text("관리")));
                     tableBody.append(row);
                 });
             },
@@ -372,6 +362,127 @@
             }
         });
     }
+ 	// 광고 관리
+    function adView() {
+        $.ajax({
+            url: "/admin/adView",
+            method: "GET",
+            success: function (data) {
+            	console.log(data);
+            	const table = $("#ads-table");
+            	let inputRow;
+            	let addBtn;
+                $.each(data, function (index, item) {
+                	if(item.inquiryProgress==3){
+	                	const row = $("<tr>").addClass("ad-data");
+	                	row.append($("<td>").text(item.inquiryNo));
+	                    row.append($("<td>").text(item.companyName));
+	                    row.append($("<td>").text(item.adPosition));
+	                    row.append($("<td>").text(item.adUrl));
+	                    row.append($("<td>").text(item.expireDate));
+	                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("삭제").on("click",function(){
+	                    	const inquiryNo = $(this).closest("tr").children().first().text();
+	                    	$.ajax({
+	                    		url:"/admin/deleteAd",
+	                    		data : {"inquiryNo":inquiryNo},
+	                    		success : function(data){
+	                    			$(".ad-data").remove();
+	                    			//$(this).closest("tr").remove();
+                                	$(".add-btn").remove();
+                                	adView();
+	                    		}
+	                    	})
+	                    })));
+	                    table.append(row);
+                	}
+                	if (item.inquiryProgress == 2) {
+                        // SELECT 박스 추가
+                        let select;
+                        //inputRow가 없는 경우 select태그 생성
+                        if (!inputRow) {
+                            select = $("<select>").addClass("form-control inquiry-select");
+                            select.append($("<option>").val("").text("선택"));
+                         	// 모든 inquiryNo 옵션 추가
+                            $.each(data, function (_, optionItem) {
+                                if (optionItem.inquiryProgress == 2) {
+                                    select.append($("<option>").val(optionItem.inquiryNo).text(optionItem.inquiryNo));
+                                }
+                            });
+                            const selectTd = $("<td>").append(select);
+                            // 입력 tr
+                            inputRow = $("<tr>").addClass("input-hidden ad-data")
+                            const companyNameInput = $("<input>").addClass("form-control companyName");
+                            const adPositionInput = $("<input>").addClass("form-control");
+                            const adUrlInput = $("<input>").addClass("form-control");
+                            const expireDateInput = $("<input>").addClass("form-control").attr("id", "datepicker"); 
+
+                            inputRow.append(selectTd);
+                            inputRow.append($("<td>").append(companyNameInput));
+                            inputRow.append($("<td>").append(adPositionInput));
+                            inputRow.append($("<td>").append(adUrlInput));
+                            inputRow.append($("<td>").append(expireDateInput));
+
+                            const btns = $("<td>");
+                            btns.append($("<button>").addClass("manage-btn btn-secondary").text("취소").on("click", function () {
+                                    	$(this).closest("tr").addClass("input-hidden");
+                                    	$(".add-btn").show();
+                                   	 })
+                            );
+                            btns.append($("<button>").addClass("manage-btn btn-primary").text("추가").on("click", function () {
+                                        const inquiryNo = $(".inquiry-select").val();
+                                        const input = $(this).closest("tr").find("input");
+                                        $.ajax({
+                                            url: "/admin/insertAd",
+                                            type: "post",
+                                            data: {
+                                            	"inquiryNo" : inquiryNo,
+                                                "companyName": input.eq(0).val(),
+                                                "adPosition": input.eq(1).val(),
+                                                "adUrl": input.eq(2).val(),
+                                                "expireDate": input.eq(3).val()
+                                            },
+                                            success: function (data) {
+                                            	$(".ad-data").remove();
+                                            	$(".add-btn").remove();
+                                                adView();
+                                            },
+                                        });
+                                    })
+                            );
+                            inputRow.append(btns);
+                            table.append(inputRow);
+
+                            // 날짜 선택 라이브러리 적용
+                            $("#datepicker").datepicker({
+                                language: "ko",
+                            });
+
+                            // SELECT 값 변경 시 해당 행만 표시하고 값 자동 채우기
+                            select.on("change", function () {
+                                const selectedNo = $(this).val();
+                                const selectedItem = data.find((d) => d.inquiryNo == selectedNo);
+                                $(".input-hidden").hide(); // 모든 행 숨김
+                                inputRow.show(); // 선택한 행만 보이게
+                                if (selectedItem) {
+                                    // 선택한 행에 데이터 채우기
+                                    companyNameInput.val(selectedItem.companyName);
+                                }
+                            });
+                        }
+                        if (!addBtn){
+                        	addBtn = $("<button>").on("click",function(){
+                        		$(".input-hidden").removeClass("input-hidden");
+        						$(this).css("display","none");
+                        	});	
+	                        $("#ads").append(addBtn.addClass("add-btn").append($("<span>").addClass("material-icons").text("add")));
+                        }
+                    }//PROFRESS ==2 인경우 끝
+                });
+            }
+        });
+    }
+
+    
 
     // 신고 코멘트 
     function newReport() {
@@ -391,7 +502,7 @@
                     row.append($("<td>").text(item.reportedMemberId));
                     row.append($("<td>").text(item.reportReason));
                     row.append($("<td>").text(item.regDate));
-                    row.append($("<td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
+                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("관리")));
                     table.append(row);
                 });
             },
@@ -426,17 +537,6 @@
         });
     }
     
-    $(".add-btn").click(function () {
-        let type = $(this).data("type");
-        $.ajax({
-            url: "/admin/insertAd",
-            method: "POST",
-            data: { data: "새 데이터" },
-            success: function () {
-                loadData(type);
-            },
-        });
-    });
 
     $(document).on("click", ".edit", function () {
         let type = $(this).data("type");
