@@ -24,8 +24,7 @@
 		margin-left: 10px;
 		margin-top: 10px;
 		font-size: 27px;
-		font-weight: 600;
-		background-color: #D9D9D9;			
+		font-weight: 600;				
 		float: left;
 	
 	}
@@ -81,11 +80,11 @@
 	
 		
 	.movie-comment{
-		width: 625px;
+		width: 685px;
 		height:145px;
-		background-color: #D9D9D9;
-		
-		margin-left:110px;
+		padding-top: 10px;
+		border-top: 1px solid #FFCD29;
+		margin-left:55px;
 		
 	}
 	.btn-opt{
@@ -104,7 +103,9 @@
 		float:right;
 	}	
 	.pencil{
+		
 		margin-right:5px;
+		
 		float:right;
 	}
 	
@@ -272,8 +273,8 @@
 						<span class="material-icons show-recomm">textsms </span>
 						<span class="count"> 0 </span>
 						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
-						<span class="material-icons bin">delete_forever</span>
-						<span class="material-icons pencil">create</span>
+						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
+						<span class="material-icons btn btn-primary pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -329,6 +330,49 @@
 				</th:block>
 				
 			</div>	
+			
+	<!-- 본문 수정 모달 -->
+			<button id="edit-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
+			<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+	            <div class="modal-dialog">
+	                <div class="modal-content">
+	                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+	                    <div class="container">
+	                        <div class="row justify-content-center">
+	                            <div class="col-lg-8">
+	                                <div class="modal-body">
+	                                    <!-- Project details-->
+	                                    <h6 class="text-uppercase">댓글수정</h6>
+	                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
+	                                    
+	                                    <div class="inputCommentBox">
+													<div>
+														<span class="material-icons">account_box</span>									
+													</div>  
+													
+		                                    <form action="/comment/update" class="comment-update-frm"   method="post">
+														<input type="hidden" name="commentNo" >
+														
+														<div class="input-item">
+															<textarea name="commentContent" ></textarea>
+														</div>
+													
+														<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
+		                                       			 <i class="fas fa-times me-1"></i>
+		                                       				 수정
+		                                   				</button>
+											</form>
+		                                   				
+													
+													<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
 			
 			
 			<!-- 모달 -->
@@ -525,6 +569,42 @@
 				if(isConfirm){
 					location.href="/comment/reCommDelete?reCommentNo="+reCommentNo+"&commentNo="+commentNo;
 				}	
+				
+			});
+		}
+		function commUpdate(commentNo){			
+			  				
+			$("[name=commentNo]").val(commentNo);
+			
+		};
+		
+		function commDelete(commentNo){
+			swal({
+				title : "댓글 삭제",
+				text : "댓글 삭제 할까요?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm : {
+						text:"삭제",
+						value: true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true									
+					}
+				}				
+			}).then(function(isConfirm){
+				console.log(isConfirm); 
+				
+				if(isConfirm){
+					location.href="/comment/commDelete?commentNo="+commentNo;
+				}
 				
 			});
 		}

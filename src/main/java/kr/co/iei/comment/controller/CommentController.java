@@ -123,7 +123,7 @@ public class CommentController {
 	@PostMapping(value="/update")
 	public String updateComm(Comment c) {
 		int result = commentService.updateComm(c);
-		return "redirect:/comment/mCommentMemberList";
+		return "redirect:/comment/commentView?commentNo="+c.getCommentNo();
 	}
 	
 	@PostMapping(value="/reComm")

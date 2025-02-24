@@ -153,8 +153,7 @@
 							</div>	
 							<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
 							<div class="right-icon">								
-								<span class="material-icons btn btn-primary" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${c.commentNo}]]);">create </span>							
-							    <span class="material-icons" th:onclick="commDelete([[${c.commentNo}]]);">delete_forever</span>
+								
 							</div>
 						</div>						
 					
@@ -253,6 +252,8 @@
 			$("[name=commentNo]").val(commentNo);
 			
 		};
+		
+		
 		
 		
 		
