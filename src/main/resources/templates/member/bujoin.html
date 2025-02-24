@@ -7,8 +7,12 @@
 	*{
 	font-family: ns-r;
 	}
+	.input-wrap{
+	display:flex;
+	width: 100%;
+	}
 	.join-wrap{
-		width: 500px;
+		width: 1000px;
 		margin: 0 auto;
 		padding-top : 150px;
 		text-align: center
@@ -35,10 +39,16 @@
 	input{
 	border :none;
 	border-bottom: 1px solid black;
-	width : 100%
+	width : 100%;
+	align-content: left;
 	}
 	.input-title{
 	padding-top: 10px;
+	width: 20%;
+	}
+	.input-type{
+	width: 45%;
+	display: flex;
 	}
 	.email{
 	width:35%;
@@ -50,16 +60,31 @@
 	}
 	.mail{
 	margin-left: 10px;
-	width: 25%
+	width: 30%
 	}
-	.email-wrap{
-	display: flex;
-	width:100%;
-	}
-	.btn-primary{
+	.lg{
 	margin-top: 20px;
 	}
-	
+#send-btn{
+margin-left: 10px;	
+
+}
+.id-check-btn{
+margin-left: 10px;	
+width: 100px;
+}
+#check{
+margin-left: 10px;	
+}
+.page-title{
+font-size: 27px;
+height: 60px;
+line-height: 60px;
+margin-bottom: 20px;	
+}
+#auth-btn{
+	margin-top: 20px;
+	}
 </style>
 </head>
 <body>
@@ -70,17 +95,17 @@
 			<form action="/member/checkId" name="checkIdFrm" method="get">
 				<input type="hidden" name="checkId">
 			</form>
-			<form action="/member/bujoin" method="post" autocomplete="off">
+			<form action="/member/bujoin" method="post" class="form-control" autocomplete="off">
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberId">아이디</label>
-						<button type="button" class="btn-primary id-check-btn">중복체크</button>
 					</div>
 					<div class="input-type">
 						<input type="text" name="memberId" id="memberId">
 					</div>
-					<p class="input-msg id-check-msg"></p>
+						<button type="button" class="btn-primary id-check-btn">중복체크</button>
 					</div>
+					<p class="input-msg id-check-msg"></p>
 			
 				<div class="input-wrap">
 					<div class="input-title">
@@ -105,8 +130,8 @@
 					<div class="input-type">
 						<input type="password" name="memberPwRe" id="memberPwRe">
 					</div>
-					<p class="input-msg pw-check-msg"></p>
 				</div>
+					<p class="input-msg pw-check-msg"></p>
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberPhone">전화번호</label>
@@ -134,7 +159,7 @@
 					<div class="input-type">
 					<div class="email-wrap">
 						<input type="text" class="email" name="memberEmail1" id="memberEmail1">
-						@
+						<span>@</span>
 						<input type="text" class="email2" name="memberEmail2" id="memberEmail2">
 						<select class="mail">
 							<option value="">직접입력</option>
@@ -154,15 +179,71 @@
 					<span id="authMsg"></span>
 				</div>
 				<div class=" join-button-box">
-					<button type="submit" class="btn-primary lg">회원가입</button>
+					<button type="submit" class="btn-primary lg" style="width: 20%; margin-right:100px;">회원가입</button>
 				</div>
 			</form>
 		</section>
 	</main>
 	<script>
+	document.querySelector("form[action='/member/bujoin']").addEventListener("submit", function (event) {
+	    event.preventDefault(); // 기본 제출 막기
+
+	    let isValid = true;
+	    let memberId = document.getElementById("memberId").value.trim();
+	    let memberPw = document.getElementById("memberPw").value.trim();
+	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
+	    let memberName = document.getElementById("memberName").value.trim();
+	    let memberPhone = document.getElementById("memberPhone").value.trim();
+	    let memberEmail = document.getElementById("memberEmail").value.trim();
+	    let businessNo = document.getElementById("businessNo").value.trim();
+	    let businessName = document.getElementById("businessName").value.trim();
+	    if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+	        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
+	        isValid = false;
+	    }
+	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
+	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
+	        isValid = false;
+	    }
+	   
+	    if (!memberName || !/^[가-힣]{2,5}$|^[a-zA-Z]{2,20}$/.test(memberName)) {
+	        alert("이름을 올바르게 입력하세요 (한글 2~5자 또는 영문 2~20자)");
+	        isValid = false;
+	    }
+	    if (!memberPhone || !/^010-\d{4}-\d{4}$/.test(memberPhone)) {
+	        alert("올바른 전화번호 형식(010-XXXX-XXXX)으로 입력하세요");
+	        isValid = false;
+	    }
+	    if (!memberEmail || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(memberEmail)) {
+	        alert("올바른 이메일 형식으로 입력하세요");
+	        isValid = false;
+	    }
+	    if (!mailCode) {
+	        alert("이메일 인증을 완료해주세요.");
+	        isValid = false;
+	    }
+	    if (!businessNo) {
+	        alert("사업자 번호를 입력해주세요.");
+	        isValid = false;
+	    }
+
+	    // 사업자 번호가 인증되지 않은 경우
+	    if (!businessName) {
+	        alert("사업자 번호 인증을 완료해주세요.");
+	        isValid = false;
+	    }
+	  
+	    if (isValid) {
+	        this.submit();
+	    }
+	});
+
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
 			const memberId =$("#memberId").val();
+			 if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+			        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
+			  }else{
 			$("#time-zone").removeId;
 			$.ajax({
 				url:"/member/ajaxCheckId",
@@ -180,6 +261,7 @@
 				error: function(){
 				}
 			});
+			  }
 		});
 		$("#memberPwRe").on("focusout",function(){
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
@@ -197,7 +279,11 @@
 		let comapnyNo= 0;
 		$("#check").on("click",function(){
 			$(".no-check-msg").removeClass("invalid").removeClass("valid");
-			const businessNo =$("#businessNo").val();
+			const businessNo =$("#businessNo").val().trim();
+			if(!businessNo){
+				$(".no-check-msg").text("사업자 번호를 입력해주세요.");
+		        $(".no-check-msg").addClass("invalid");
+			}
 			$.ajax({
 				url :"/company/check",
 				type: "get",
@@ -216,7 +302,7 @@
 			});
 		});
 	
-		$(".mail2").on("change",function(){
+		$(".mail").on("change",function(){
 			const mail=$(this).val();
 			$("#memberEmail2").val(mail);
 		});
@@ -225,6 +311,10 @@
 			const memberEmail1 =$("#memberEmail1").val();
 			const memberEmail2 =$("#memberEmail2").val();
 			const memberEmail= memberEmail1+"@"+memberEmail2
+			if(memberEmail1==""||memberEmail2==""){
+				alert("이메일을 입력하세요")
+			}else{
+				
 			$.ajax({
 				url :"/etc/sendCode",
 				type:"get",
@@ -238,6 +328,7 @@
 			error: function(){
 			}
 			});
+			}
 		});
 		$("#auth-btn").on("click",function(){
 			const inputCode = $("#auth-code").val();

@@ -6,64 +6,81 @@
 <style>
 *{
 	font-family: ns-r;
+	 margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 	}
-	.mypage-container{
-	dispaly: flex;
-	justify-content: center;
-	align-items: center;
-	}
-.page-title{
-	text-align: center;
+	body {
+    background-color: #f9f9f9;
 }
-.member{
-width:80%;
-height: 150px;
-display: flex;
-margin-top: 50px;
-margin-left: 150px;
-
+.mypage-container {
+    width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-	.information{
-	width: 25%;
-	text-align: center;
-	padding-top: 50px;
-	}
-.change{
-width: 50%;
-padding-left: 200px;
-padding-top: 60px;
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
 }
-.comment-wrap{
-width:80%;
-height: 150px;
-display: flex;
-margin-top: 50px;
-margin-left: 150px;
+.member {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #f4f4f7;
+    border-radius: 8px;
 }
-.comment{
-width:40%;
-text-align: center;
-padding-top: 40px;
+.information {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
 }
-.score	{
-width:40%;
-text-align: center;
-padding-top: 40px;
+.change {
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+    transition: 0.3s;
 }
-.refer{
-width:80%;
-height: 150px;
-text-align: center;
-margin-top: 50px;
-margin-left: 150px;
+.change:hover {
+    color: #333;
 }
-.save{
-width:100%;
-height: 50px;
-line-height: 50px;
+.comment-wrap {
+    display: flex;
+    margin-top: 20px;
 }
-.movie{
-margin-top: 30px;
+.comment, .score {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #f4f4f7;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.comment {
+    border-right: 2px solid white;
+}
+.comment:hover, .score:hover, .movie:hover {
+    background: #ddd;
+}
+.refer {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f4f4f7;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 </style>
 </head>
@@ -83,12 +100,12 @@ margin-top: 30px;
 			</div>
 			<div class="comment-wrap">
 			<div class="comment">
-			<div class="comm">코멘트</div>
 			<div class="commNo"></div>
+			<div class="comm">코멘트</div>
 			</div>
 			<div class="score">
-			<div class="star">평가</div>
 			<div class="starNo"></div>
+			<div class="star">평가</div>
 			</div>
 			</div>
 				<div class="refer">

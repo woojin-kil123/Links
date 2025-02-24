@@ -125,12 +125,18 @@ public class CommentService {
 		return list;
 	}
 
+
 	@Transactional
 	public int reDeleteComm(ReComment rc) {	
 		System.out.println(rc.getCommentNo());
 		int result = commentDao.reDeleteComm(rc);
 		
 		return result;
+	}
+	public List newMovieComment() {
+		List list = commentDao.selectNewMovieCommList();
+		return list;
+
 	}
 	
 	
