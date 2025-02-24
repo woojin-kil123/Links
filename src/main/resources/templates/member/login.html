@@ -6,6 +6,7 @@
 <style>
 	*{
 	font-family: ns-r;
+	 box-sizing: border-box;
 	}
 	.login-container{
 	display: flex;
@@ -13,10 +14,10 @@
 	align-items: center;
 	}
 	.login-wrap{
-		width: 500px;
+		width: 1000px;
 	}
 	.login-wrap  .input-wrap{
-	padidng :15px 30px;
+	pading :15px 30px;
 	}
 	.login-button-box{
 		padding : 20px 30px;
@@ -26,10 +27,15 @@
 	.login-button-box>button{
 	width:100%;
 	}
-	.page-title{
-	 padding-bottom : 40px;
-	 padding-left : 230px;
+	.input-wrap{
+	display:flex;
+	width: 100%;
+	padding : 25px 30px;
 	}
+.id-check-btn{
+margin-left: 10px;	
+width: 100px;
+}
 	.member-link-box{
 		display: flex;
 		justify-content: center;
@@ -42,12 +48,40 @@
 	border :none;
 	border-bottom: 1px solid black;
 	width : 100%
-	}.input-title{
-	padding-top: 10px;
 	}
 	button{
 	border:none;
 	}
+	.page-title{
+	font-size: 27px;
+	height: 60px;
+	line-height: 60px;
+	margin-bottom: 20px;	
+	 padding-bottom : 40px;
+	 text-align: center;
+	}
+	.input-item{
+	width: 60%;
+	display: flex;
+	margin-left: 10px;
+	}
+	.input-title{
+	padding-top: 10px;
+	width: 20%;	
+	text-align: center;
+	}
+	 .member-link-box a {
+        color: #007bff;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+    .member-link-box {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+	.member-link-box a:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>
@@ -77,20 +111,19 @@
 					 </div>
 				</div>
 				<div class="login-button-box">
-				<button type="submit" class="btn-primary lg" style="color: black">로그인</button>
+				<button type="submit" class="btn-primary lg" style=" width: 40%">로그인</button>
 				</div>
 				<div class="member-link-box">
 
 				<a href="/member/agree">회원가입</a>
 										
 				<a href="/member/find">아이디 / 비밀번호 찾기</a>
-
+	
 				</div>
 			</form>
 		</section>
 	</main>
-
-
+	
 <th:block th:include="common/footer"></th:block>
 
 

@@ -79,8 +79,10 @@
 	</main>
 	<script>
 		let mailCode = null;
+		let intervalId =null;
 		$("#send-btn").on("click",function(){
 			const receiver = $("#email").val();
+			intervlaId= null;
 			$.ajax({
 				url : "/api/sendCode",
 				data : {receiver : receiver},
@@ -111,7 +113,7 @@
 				$("#authMsg").css("color","red");
 			}
 		});
-		let intervalId =null;
+	
 		function authTime(){
 			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>")
 			

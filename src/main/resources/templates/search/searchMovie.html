@@ -12,7 +12,10 @@
     .result-wrap{
     	margin-left : 100px;
     }
-
+	.ad-banner{
+		text-align: center;
+		margin-top: 50px;
+	}
 	
    </style>
 </head>
@@ -20,9 +23,9 @@
     <th:block th:include="common/header"></th:block>
     <section class="page-section" id="services">
     <div class="container-fluid mt-3">
-        <div class="result-wrap text-start mt-4">
+        <div class="result-wrap text-start mt-4" style="width: 1200px; margin: 0 auto;">
             <span class="fw-bold" style="font-size: 30px; font-family: ns-r;">"</span>
-            <span id="searchKeyword" class="fw-bold text-orange" style="font-size: 30px; font-family: ns-r;" th:text="${query}"></span>
+            <span id="searchKeyword" class="fw-bold text-orange" style="font-size: 30px; font-family: ns-r; color: orange;" th:text="${query}"></span>
          	<span class="fw-bold" style="font-size: 30px; font-family: ns-r;">" 의 검색 결과</span>
         </div>
         <div class="result-keyword-wrap mt-2">
@@ -38,6 +41,9 @@
 		            <span class="carousel-control-next-icon"></span>
 		        </button>
 		    </div>
+		</div>
+		<div class="ad-banner">
+				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; height: 150px;">
 		</div>
     </div>
     
@@ -141,6 +147,31 @@
 	}
   
     search();
+    
+    $(document).ready(function() {
+	    // AD_POSITION 값을 매개변수로 전달
+	    let position = 'L';
+	    let requestUrl = '/admin/adUrl';
+	    
+	    console.log("AJAX 요청 URL: " + requestUrl + "?position=" + position);
+
+	    $.ajax({
+	        url: requestUrl,              // URL에 매개변수 전달
+	        type: 'GET',
+	        data: {"position" : position},  // Query Parameter로 전달
+	        dataType: 'text',
+	        success: function(adUrl) {
+	            console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", adUrl);
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("AJAX 요청 실패:");
+	            console.log("Status: " + status);
+	            console.log("Error: " + error);
+	            console.log(xhr);
+	        }
+	    });
+	});
     </script>
 </body>
 </html>

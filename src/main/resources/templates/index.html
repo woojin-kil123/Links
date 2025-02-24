@@ -2,6 +2,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Links-Home</title>
+<link rel ="stylesheet" href="/css/slide.css">
+<link rel ="stylesheet" href="/css/movieDetail.css">
 <style>
 	.home-ad1{
 		width: 100%;
@@ -26,91 +28,30 @@
 		color : white;
 		bottom: 0;
 	}
-	.space{
-		height: 500px;
-	}
-	#ranking1{
-		padding: 0px;
-	}
-	.section-heading {
-	    padding-left: 50px;
+
+	.text-left{
+		margin: 0 auto;
+		width: 1200px;
 	}
 	
-	.section-subheading {
-	    padding-left: 50px;
-	}
-	body {
-	    font-family: Arial, sans-serif;
-	    background-color: transparent;
-	    margin: 0;
+	#services{
+		padding: 0;
+		margin-top: 0px;
 	}
 	
-	/* 랭킹 섹션 스타일 */
-	.ranking-section {
-	    max-width: 1200px;
-	    margin: 0 auto;
-	    padding: 0;
-	    margin-bottom: 50px;
+	#newComment-section{
+		width: 1200px;
 	}
-	
-	.ranking-section h2 {
-	    font-size: 22px;
-	    font-weight: bold;
-	    margin-bottom: 15px;
+
+	#commentCarousel{
+		width: 1200px;
+		margin: 0 auto;
 	}
-	
-	/* 카드 컨테이너 */
-	.ranking-container {
-	    display: flex;
-	    gap: 20px;
-	    overflow-x: auto; /* 좌우 스크롤 가능 */
-	    padding-bottom: 10px;
-	    justify-content: space-between;
+	.comment-slider{
+		max-width: 1200px;
 	}
-	
-	/* 개별 카드 스타일 */
-	.ranking-card {
-	    position: relative;
-	    background: white;
-	    border-radius: 10px;
-	    overflow: hidden;
-	    text-align: center;
-	    width: 200px;
-	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	    flex-shrink: 0;
-	}
-	
-	.ranking-card img {
-	    width: 100%;
-	    height: 280px;
-	    object-fit: cover;
-	}
-	
-	.ranking-card h3 {
-	    font-size: 16px;
-	    margin: 10px 0;
-	}
-	
-	.ranking-card p {
-	    font-size: 14px;
-	    color: #666;
-	    margin-bottom: 10px;
-	}
-	
-	/* 랭킹 배지 스타일 */
-	.rank-badge {
-	    position: absolute;
-	    top: 10px;
-	    left: 10px;
-	    background: black;
-	    color: white;
-	    padding: 5px 8px;
-	    font-size: 14px;
-	    border-radius: 5px;
-	    font-weight: bold;
-	}
-	.rank-badge.new {
-	    background: red; /* NEW 표시 스타일 */
+	.comment-slider .carousel-item>.d-flex{
+		gap: 20px;
 	}
 </style>
 </head>
@@ -122,88 +63,217 @@
 				<div class="intro"></div>
 			</div>
 			<div class="ad-banner">
-				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
+				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; height: 150px;">
 			</div>
-			 <section class="ranking-section">
-		        <h2>링스 HOT 랭킹</h2>
-		        <div class="ranking-container">
-		            <div class="ranking-card">
-		                <span class="rank-badge">1</span>
-		                <img src="movie1.jpg" alt="멜로무비">
-		                <h3>멜로무비</h3>
-		                <p>평균 ★ 3.4</p>
-		            </div>
-
-		            <div class="ranking-card">
-		                <span class="rank-badge new">AD</span>
-		                <img src="movie2.jpg" alt="캡틴 아메리카">
-		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
-		                <p>평균 ★ 3.0</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">2</span>
-		                <img src="movie3.jpg" alt="굿데이">
-		                <h3>굿데이</h3>
-		                <p>평균 ★ 3.8</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">3</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">4</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		        </div>
-		    </section>    
-		    <section class="ranking-section">
-		        <h2>박스오피스 순위</h2>
-		        <div class="ranking-container">
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">1</span>
-		                <img src="movie1.jpg" alt="멜로무비">
-		                <h3>멜로무비</h3>
-		                <p>평균 ★ 3.4</p>
-		            </div>
-
-		            <div class="ranking-card">
-		                <span class="rank-badge new">AD</span>
-		                <img src="movie2.jpg" alt="캡틴 아메리카">
-		                <h3>캡틴 아메리카: 브레이브 뉴 월드</h3>
-		                <p>평균 ★ 3.0</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">2</span>
-		                <img src="movie3.jpg" alt="굿데이">
-		                <h3>굿데이</h3>
-		                <p>평균 ★ 3.8</p>
-		            </div>
-		
-		            <div class="ranking-card">
-		                <span class="rank-badge">3</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		            
-		            <div class="ranking-card">
-		                <span class="rank-badge">4</span>
-		                <img src="movie4.jpg" alt="그놈은 흑염룡">
-		                <h3>그놈은 흑염룡</h3>
-		                <p>평균 ★ 2.9</p>
-		            </div>
-		        </div>
-		    </section>    
+			
+			    <h2 class="text-left" style="width: 1200px; margin: auto; margin-top: 50px; font-family: ns-r; font-size: 28px;">최신 코멘트</h2>
+			    <div class="more-btn-wrap" style="width:1200px; margin: 0 auto;">
+			    	<span class="more-comments" style="font-family: ns-r; font-size: 15px; color:gray;">더보기</span>
+			    </div>
+				<div class="comment-slider">
+				    <div id="commentCarousel" class="carousel slide" data-bs-ride="carousel">
+				        <div class="carousel-inner" style="width: 1200px;"></div>
+				    </div>
+				</div>
+			
+			<section class="page-section" id="services">
+				<div class="container mt-5">
+				    <h2 class="text-left" style="font-family: ns-r; margin-bottom: 30px; font-size: 28px;">링스 트렌드</h2>
+				    <div id="movieCarousel2" class="carousel slide"> <!-- data-bs-ride="carousel" -->
+				        <div class="carousel-inner" id="carousel2"></div>
+				        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel2" data-bs-slide="prev">
+				            <span class="carousel-control-prev-icon"></span>
+				        </button>
+				        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel2" data-bs-slide="next">
+				            <span class="carousel-control-next-icon"></span>
+				        </button>
+				    </div>
+				</div>
+		        <div class="container mt-5" style="margin-bottom: 50px;">
+				    <h2 class="text-left" style="font-family: ns-r; font-size: 28px;">실시간 상영작</h2>
+				    <div id="movieCarousel1" class="carousel slide" > <!-- data-bs-ride="carousel" -->
+				        <div class="carousel-inner" id="carousel1"></div>
+				        <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel1" data-bs-slide="prev">
+				            <span class="carousel-control-prev-icon"></span>
+				        </button>
+				        <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel1" data-bs-slide="next">
+				            <span class="carousel-control-next-icon"></span>
+				        </button>
+				    </div>
+				</div>
+        	</section>   
 	    </div>
    	<th:block th:include="common/footer"></th:block>
+<script>
+	function nowPlaying(){
+		$.ajax({
+			url : "/api/nowPlaying",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel1");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	function trend(){
+		$.ajax({
+			url : "/api/trend",
+			type : "get",
+			success : function(movies){
+				const carouselContent = $("#carousel2");
+				makeSlide(movies,carouselContent);
+			}    
+		});
+	}
+	
+	function makeSlide(obj1,obj2){
+		const movies = obj1;
+		const carouselContent = obj2;
+        let slideIndex = 0;
+        let indexNo= 1;
+        for (let i = 0; i < movies.length; i += 5) {
+            let moviesSlice = movies.slice(i, i + 5);
+            let isActive = slideIndex === 0 ? "active" : "";
+            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
+            let row = $("<div>").addClass("row d-flex justify-content-center");
+
+            
+            $.each(moviesSlice, function (index, movie) {
+                let col = $("<div>").addClass("col-md-2 mx-1");
+
+                const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
+                let card = $("<div>").addClass("card");
+                const id = movie.movieId;
+                card.on('click',function(){
+                	location.href = "/api/movieDetail?movieId="+id;
+                });
+                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
+                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+                let imgDiv = $("<div>").addClass("img-div").append(img);
+
+                let cardBody = $("<div>").addClass("card-body");
+                let title = $("<div>").addClass("card-title").text(movie.title);
+                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
+                
+                let rating = $("<div>").addClass("rating");
+                //let ratingText = $("<span>").text(movie.rating);
+                //rating.append(star);
+                let genreInfo = $("<div>").addClass("genre-info");			
+    			if((movie.genreIds).length==0){
+    				genreInfo.text("");
+    			}
+                $.each(movie.genreIds, function(index, genre){
+                	const p = $("<p>").append(genre);
+                	genreInfo.append(p);
+                });
+                // 카드 조립
+                cardBody.append(title, info, rating, genreInfo);
+                card.append(rankBadge, imgDiv, cardBody);
+                col.append(card);
+                row.append(col);
+            });
+            slide.append(row);
+            carouselContent.append(slide);
+            slideIndex++;
+        }
+	}
+	nowPlaying();
+	trend();
+	
+	function commentList() {
+		$.ajax({
+			url : "/comment/newMovieComment",
+			success : function(comments){
+				if(comments.length==0){
+					$(".nocomment-msg").show();				
+				}
+				const carouselInner = $("#commentCarousel .carousel-inner");
+				let slideIndex = 0;
+		       for (let i = 0; i < comments.length; i += 4) {
+					$(".nocomment-msg").hide();	
+				
+		           const commentSlice = comments.slice(i, i + 4);
+		           let isActive = slideIndex === 0 ? "active" : "";
+		           const slide = $("<div>").addClass(`carousel-item ${isActive}`);
+		           const row = $("<div>").addClass("d-flex justify-content-between");
+
+		           $.each(commentSlice, function (index, comment) {
+		              const card = $("<div>").addClass("comment-card");
+					  /* 
+					  코멘트 눌럿을때 해당 코멘트 상세보기 이동
+					  card.on("click",function(){
+						location.herf="/comment/mCommentList?contentNo="+comment.commentNo;
+					   });
+					   */
+		              const header = $("<div>").addClass("comment-header");
+		              const userInfo = $("<div>").addClass("comment-user");
+		              const userImg = $("<img>").attr("src", "/image/userimg.png");
+		              const memberId = $("<span>").text(comment.memberId);
+
+		              userInfo.append(userImg, memberId);
+		              const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+		              header.append(userInfo, title);
+
+					   
+		              const rating = $("<div>").addClass("comment-rating");
+		              for (let j = 0; j < 5; j++) {
+		                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+		                   rating.append(star);
+		              }
+
+		              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
+		              const footer = $("<div>").addClass("comment-footer");
+		              const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
+		              const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
+		               
+		              footer.append(like, dislike);
+		              card.append(header, rating, body, footer);
+		              row.append(card);
+		           });
+
+		           slide.append(row);
+		           carouselInner.append(slide);
+		           slideIndex++;
+				}
+		       $("#comment-count").text(comments.length);
+				if(comments.length>4){
+					$(".container>.more-comments").show();
+					$(".more-comments").on("click", function () {
+				       window.location.href = "/comment/mCommentMemberList";
+					});
+				}
+			},
+			error : function(){
+							console.log("error");
+			}				
+		});
+	}
+	commentList();
+	
+	$(document).ready(function() {
+	    // AD_POSITION 값을 매개변수로 전달
+	    let position = 'L';
+	    let requestUrl = '/admin/adUrl';
+	    
+	    console.log("AJAX 요청 URL: " + requestUrl + "?position=" + position);
+
+	    $.ajax({
+	        url: requestUrl,              // URL에 매개변수 전달
+	        type: 'GET',
+	        data: {"position" : position},  // Query Parameter로 전달
+	        dataType: 'text',
+	        success: function(adUrl) {
+	            console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", adUrl);
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("AJAX 요청 실패:");
+	            console.log("Status: " + status);
+	            console.log("Error: " + error);
+	            console.log(xhr);
+	        }
+	    });
+	});
+	</script>
 </body>
 </html>

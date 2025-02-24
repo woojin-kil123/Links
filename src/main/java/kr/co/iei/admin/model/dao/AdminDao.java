@@ -84,4 +84,13 @@ public class AdminDao {
 		return result;
 	}
 
+	public String getAdUrlByPosition(String position) {
+		String sql = "SELECT * FROM ad_view WHERE UPPER(TRIM(AD_POSITION)) = UPPER(TRIM(?))";
+		Object[] params = {position};
+		List<Ad> list = jdbc.query(sql, adViewRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list.get(0).getAdUrl();
+	}
 }

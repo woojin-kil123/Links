@@ -48,11 +48,16 @@ public class AdminService {
 		}
 		return result;
 	}
+	@Transactional
 	public int deleteAd(int inquiryNo) {
 		int result = adminDao.deleteAd(inquiryNo);
 		if(result>0) {
 			result += adminDao.updateInquiryProgress(4, inquiryNo);
 		}
 		return result;
+	}
+	
+	public String getAdUrlByPosition(String position) {
+		return adminDao.getAdUrlByPosition(position);
 	}
 }

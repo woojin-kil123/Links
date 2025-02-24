@@ -61,6 +61,21 @@
 		</section>
 	</main>
 	<script>
+	document.querySelector("form[action='/member/bujoin']").addEventListener("submit", function (event) {
+	    event.preventDefault(); // 기본 제출 막기
+
+	    let isValid = true;
+	    let memberPw = document.getElementById("memberPw").value.trim();
+	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
+	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
+	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
+	        isValid = false;
+	    }
+	   
+	    if (isValid) {
+	        this.submit();
+	    }
+	});
 	$("#memberPwRe").on("focusout",function(){
 		$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 	    const pwValue = memberPw.value;
