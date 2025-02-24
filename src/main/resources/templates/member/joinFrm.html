@@ -9,17 +9,18 @@
 	}
 	.input-wrap{
 	display:flex;
-	width: 100%;
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 20px;
 	}
 	.join-wrap{
 		width: 1000px;
 		margin: 0 auto;
 		padding-top : 150px;
-		text-align: center
+		text-align: center;
+	
 	}
-	.join-wrap .input-wrap{
-		padding : 15px 30px;
-	}
+	
 		.join-button-box{
 		padding : 20px 30px;
 		}
@@ -84,14 +85,18 @@ width: 100px;
 	#auth-btn{
 	margin-left: 20px;
 	}
-	.input-wrap{
-margin-left: 50px;
-}
+
 label{
 	font-size: 18px;
 }
   .lg{
     height: 35px;
+    }
+    #join-loc{
+    margin: 0 auto;
+    }
+    .id-loc{
+    margin-top: 20px;
     }
 </style>
 </head>
@@ -100,11 +105,11 @@ label{
 	<main class="content">
 		<section class="section join-wrap" style="padding-top:100px; padding-bottom:80px;">
 			<div class="page-title">회원가입</div>
-			<form action="/member/checkId" name="checkIdFrm" method="get">
+			<form action="/member/checkId" name="checkIdFrm" id="join-loc" method="get">
 				<input type="hidden" name="checkId">
 			</form>
 			<form action="/member/join" method="post" class="form-control" autocomplete="off">
-				<div class="input-wrap">
+				<div class="input-wrap id-loc">
 					<div class="input-title">
 						<label for="memberId">아이디</label>
 					</div>
