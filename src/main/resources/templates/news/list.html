@@ -43,7 +43,7 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="content-list">
-		<section class="section">
+		<section class="section" style="width: 1440px; margin: 0 auto;">
 			<div class="page-title">소식</div>
 			<div class="list-tbl-wrap">
 				<table class="tbl tbl-hover">
@@ -73,7 +73,7 @@
 			<div class="list-footer" style="display: flex; justify-content: flex-end; margin-top: 30px;">
 				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
-			<div id="pageNavi" th:utext="${pageNavi}"></div>
+			<div id="pageNavi" th:utext="${pageNavi}" style="margin-bottom: 50px;"></div>
 		</section>	
 	</main>
 	<th:block th:include="common/footer"></th:block>
