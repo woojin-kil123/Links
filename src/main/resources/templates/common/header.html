@@ -212,6 +212,10 @@
 	    font-size: 18px;
 	    font-weight: bold;
 	}
+	input::placeholder {
+	    font-style: italic;
+	    color: gray;
+	}
 </style>  
 </head>
     <!-- Navigation-->
@@ -352,21 +356,33 @@
 	});
 	
 	$(document).ready(function() {
-		console.log(111);
 		$.ajax({
-			 url: "/report/checkWarningLv",
-             type: "GET",
-             success: function(data) {
-            	 console.log(data);
-            	 if(data == 2){
-            		 $("#notificationsIcon").css("color", "#FFC800");
-            	 }
-             },
-             error: function(xhr, status, error) {
-            	 console.log(xhr);
-             }
-		});
+            url: "/report/checkWarningLv",
+            type: "GET",
+            success: function(data) {
+                if(data == 2){
+                    $("#notificationsIcon").css("color", "#FFC800");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX 요청 오류:", error);
+            }
+        });
 		
+		setInterval(function() {
+	        $.ajax({
+	            url: "/report/checkWarningLv",
+	            type: "GET",
+	            success: function(data) {
+	                if(data == 2){
+	                    $("#notificationsIcon").css("color", "#FFC800");
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("AJAX 요청 오류:", error);
+	            }
+	        });
+	    }, 60000);
 	});
-
+	
 </script>
