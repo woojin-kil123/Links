@@ -30,7 +30,7 @@ public class ReportDao {
     }
     
     public Member selectWarningLevel(String memberId) {
-    	String checkWarningLevelQuery = "SELECT WANING_LEVEL FROM MEMBER WHERE MEMBER_ID = ?";
+    	String checkWarningLevelQuery = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
         Object[] params = {memberId};
         List warningLevel = jdbc.query(checkWarningLevelQuery, memberRowMapper, params);
         if(warningLevel.isEmpty()) {

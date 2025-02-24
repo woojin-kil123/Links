@@ -12,7 +12,7 @@
 	width: 100%;
 	}
 	.join-wrap{
-		width: 1000px;
+		width: 800px;
 		margin: 0 auto;
 		padding-top : 150px;
 		text-align: center
@@ -43,7 +43,6 @@
 	align-content: left;
 	}
 	.input-title{
-	padding-top: 10px;
 	width: 20%;
 	}
 	.input-type{
@@ -77,7 +76,8 @@ width: 100px;
 margin-left: 10px;	
 }
 .page-title{
-font-size: 27px;
+font-size: 32px;
+    font-weight: bold;
 height: 60px;
 line-height: 60px;
 margin-bottom: 20px;	
@@ -85,15 +85,19 @@ margin-bottom: 20px;
 #auth-btn{
 	margin-left: 20px;
 	}
-.input-wrap{
-margin-left: 50px;
+
+label{
+	font-size: 18px;
 }
+  .lg{
+    height: 35px;
+    }
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="content">
-		<section class="section join-wrap">
+		<section class="section join-wrap" style="padding-top:100px; padding-bottom:80px;">
 			<div class="page-title">사업자회원가입</div>
 			<form action="/member/checkId" name="checkIdFrm" method="get">
 				<input type="hidden" name="checkId">
@@ -151,9 +155,9 @@ margin-left: 50px;
 						<input type="text" class="form-control" name="businessNo" id="businessNo">
 						<input type="hidden" name="businessName" id="businessName">
 					</div>
-					<p class="input-msg  no-check-msg"></p>
 					<button type="button" class="btn-primary" id="check">사업자번호  확인</button>
 				</div>
+					<p class="input-msg  no-check-msg"></p>
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberEmail">이메일</label>

@@ -22,10 +22,17 @@ public class ReportController {
 	    
 	    String reportReason = reportService.getReportReason(member.getMemberId());
 	    if (reportReason != null && !reportReason.isEmpty()) {
-	        return "🔔 " + reportReason;
+	        return "🔔 " + reportReason + " 신고를 받았습니다.";
 	    }
 	    
 	    return "😊 좋은 하루 되세요.";
+	}
+	
+	@GetMapping(value="/checkWarningLv")
+	@ResponseBody
+	public int checkWarningLv(@SessionAttribute Member member) {
+		Member m = reportService.getWarningLevel(member.getMemberId());
+		return m.getWarningLevel();
 	}
 }
 

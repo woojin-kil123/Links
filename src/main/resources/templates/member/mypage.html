@@ -71,20 +71,16 @@
 }
 	.tbl{
 	width: 600px;
-	
 	box-sizing: border-box;
 	
 	}
 	.tbl th{
-	border:1px solid black;
 	box-sizing: border-box;
 	text-align: center;
-	height : 65px;
 	background-color: #ffc800;
 	color: #ffffff;
 	}
 	.tbl td{
-	border-bottom:1px solid black;
 	text-align: center;
 	border-top: none;
 	border-right: none;
@@ -112,7 +108,6 @@
 
 	.my-info-wrap{
 		margin-top: 50px;
-		margin-left: 50px;
 	}
 	.btn-primary {
     background-color: #000; 
@@ -223,20 +218,61 @@ input:focus {
     gap: 20px;
     padding: 30px 0;
 }
+.name-wrap{
+display: flex;
+}
+.id-wrap{
+display: flex;
+}
+.name{
+margin-left: 10px;
+}
+.id{
+margin-left: 10px;
+}
+label{
+	font-size: 18px;
+}
+  .lg{
+    height: 35px;
+    }
+  .input-item{
+  position: relative;
+  }
+  .show{
+  position: absolute ;
+  top: 8px;
+	right:10px;
+  }
+.mem-loc{
+	margin: 0 auto;
+	padding:  0 auto;
+}
+.tbl{
+	margin: 0 auto;
+	margin-top:20px;
+	padding:  0 auto;
+}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<script src="/js/sweetalert.min.js"></script>
 	<main class="content mypage-container">
-		<section class="page-section" >
+		<section class="page-section" style="padding-top:40px; padding-bottom:80px;">
 			<div class="main">
 			<div class="page-title">마이페이지</div>
 			</div>
 			<div class="member">
 			<div class="information">
-			<div  th:text="${session.member.memberName}"></div>
+			<div class="name-wrap">
+			<div >이름:</div>
+			<div class="name" th:text="${session.member.memberName}"></div>
+			</div>
+			<div class="id-wrap">
+			<div>아이디:</div>
 			<div  class="id"th:text="${session.member.memberId}"></div>
+			</div>
 			</div>
 			
 			</div>
@@ -255,7 +291,7 @@ input:focus {
 				<div class="movie">영화</div>
 				</div>
 		<div class="my-info-wrap">
-			<form action="/member/update"  class="form-control" method="post">
+			<form action="/member/update"  class="form-control mem-loc" method="post">
 				<table class="tbl">
 					<tr>
 						<th>
@@ -263,7 +299,8 @@ input:focus {
 						</th>
 						<td>
 							<div class="input-item">
-								<input type="password"  class="form-control" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}">
+								<input type="password"  class="form-control pw" name="memberPw" id="memberPw"  th:value="${session.member.memberPw}" >
+								<span class="material-icons show" id="togglePw">visibility_off</span>
 							</div>
 						</td>
 					</tr>
@@ -328,12 +365,19 @@ input:focus {
 	$(".comm").on("click",function(){
 	location.href="/comment/myCommentList"
 	});
-	$(".star").on("click",function(){
-		location.href="/"
-		});
-	$(".movie").on("click",function(){
-			location.href="/contents/movieList";
-		});
+	$("#togglePw").on("click",function(){
+		let pwInput = document.getElementById("memberPw");
+        let icon = this;
+        if (pwInput.type === "password") {
+            pwInput.type = "text";
+            icon.textContent = "visibility"; // 아이콘 변경
+        } else {
+            pwInput.type = "password";
+            icon.textContent = "visibility_off"; // 아이콘 변경
+        }
+    });
+		
+	
 	$.ajax({
 		url:"/member/ajaxcommNo",
 		type :"get",

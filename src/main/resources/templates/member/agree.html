@@ -12,7 +12,8 @@ body {
 	font-family: ns-r;
 	}	
 .page-title{
-	font-size: 27px;
+	font-size: 32px;
+    font-weight: bold;
 	height: 60px;
 	line-height: 60px;
 	margin-bottom: 20px;	
@@ -25,9 +26,11 @@ body {
 	align-items: center;
 	}
 	.login-wrap{
-		width: 800px;
+		width: 100%;
 	}
-	
+	.agree-wrap{
+	margin-left: 250px;
+	}
 	.login-wrap  .input-wrap{
 	padding :15px 30px;
 	}
@@ -63,7 +66,7 @@ body {
 	.agree-button-box{
 	padding-top :20px;
     text-align: center;
-   margin-right: 100px;
+   margin-right: 300px;
 }
 .agree-button-box>*{
     width: 148px;
@@ -81,25 +84,28 @@ body {
 	}
 	.loc{
 	display: flex;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	}
 	.check{
 	margin-right: 10px;
 	width:  20px;
 	height: 20px;
 	}
+	label{
+	font-size: 18px;
+	}
 	.agree-explain{
      width: 80%;
     height: 200px;
     overflow-y: auto;
     border: 1px solid black;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.8; /* 문장 간격 조절 */
     padding: 15px; /* 내부 여백 추가 */
     background-color: #fff;
     border-radius: 8px;
     white-space: pre-line;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 </style>
 </head>
@@ -111,7 +117,7 @@ body {
 
 
 <main class="content login-container">
-		<section class="section login-wrap">
+		<section class="section login-wrap" style="padding-top:100px; padding-bottom:80px;">
 			<div class="page-title">약관동의</div>
 			 <div class="agree-all-wrap">
             <div class="agree-wrap">
