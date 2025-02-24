@@ -151,7 +151,7 @@ margin-left: 50px;
 						<input type="text" class="email form-control" name="memberEmail1" id="memberEmail1">
 						<span>@</span>
 						<input type="text" class="email2 form-control" name="memberEmail2" id="memberEmail2">
-						<select class="mail">
+						<select class="mail form-control">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -248,10 +248,10 @@ margin-left: 50px;
 		;
 		$("#memberPwRe").on("focusout",function(){
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
-			let memberPw = document.getElementById("memberPw").value.trim();
-		    let memberPwRe = document.getElementById("memberPwRe").value.trim();
 		    const pwValue = memberPw.value;
 		    const pwReValue = memberPwRe.value;
+			let memberPw = document.getElementById("memberPw").value.trim();
+		    let memberPwRe = document.getElementById("memberPwRe").value.trim();
 		    if(memberPw==""||memberPw==""){
 		    	$(".pw-check-msg").text("비밀번호를 입력하세요");
 				$(".pw-check-msg").addClass("invalid");

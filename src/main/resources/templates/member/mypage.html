@@ -38,9 +38,10 @@
     border-radius: 8px;
 }
 .information {
-    text-align: left;
+    text-align: center;
     font-size: 18px;
     font-weight: bold;
+    padding-left: 100px;
 }
 
 .change:hover {
@@ -50,17 +51,7 @@
     display: flex;
     margin-top: 20px;
 }
-.comment, .score {
-    flex: 1;
-    text-align: center;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #f4f4f7;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+
 .comment {
     border-right: 2px solid white;
 }
@@ -346,7 +337,7 @@ input:focus {
 	location.href="/comment/myCommentList"
 	});
 	$(".star").on("click",function(){
-		location.href="/"
+		location.href="/member/mystarlist"
 		});
 	$(".movie").on("click",function(){
 			location.href="/contents/movieList";
