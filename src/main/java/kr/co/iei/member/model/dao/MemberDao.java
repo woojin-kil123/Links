@@ -74,7 +74,7 @@ public class MemberDao {
 		return result2;
 	}
 
-	public Member selectOneMember2(Member m) {
+	public Member selectOneMemberId(Member m) {
 		String query = "select * from member where member_name=? and member_phone=?";
 		Object[] params = { m.getMemberName(), m.getMemberPhone() };
 		List list = jdbc.query(query, memberRowMapper, params);
@@ -87,7 +87,7 @@ public class MemberDao {
 
 	}
 
-	public Member selectOneMember3(Member m) {
+	public Member selectOneMemberPw(Member m) {
 		String query = "select * from member where member_id=? and member_name=? ";
 		Object[] params = { m.getMemberId(), m.getMemberName() };
 		List list = jdbc.query(query, memberRowMapper, params);

@@ -185,7 +185,7 @@ public String adminMsg(Model model) {
  }
  @GetMapping(value="/idFind")
  public String idFind(Member m,Model model) {
-	 Member member = memberService.selectOneMember2(m);
+	 Member member = memberService.selectOneMemberId(m);
 	
 	 if(member== null) {
 		 model.addAttribute("title","아이디 찾기 실패");
@@ -214,7 +214,7 @@ public String adminMsg(Model model) {
  }
  @GetMapping(value="/pwFind")
  public String pwFind(Member m,Model model) {
-	 Member member = memberService.selectOneMember3(m);
+	 Member member = memberService.selectOneMemberPw(m);
 	 if(member== null) {
 		 model.addAttribute("title","비밀번호 찾기 실패");
 		 model.addAttribute("text","없는 회원입니다");
