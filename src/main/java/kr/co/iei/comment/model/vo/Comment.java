@@ -22,5 +22,6 @@ public class Comment {
 	private int likeCount;
 	private int isLike;
 	private int reCommCount;
+	private int stariPoint;
 	private List<ReComment> listNo;
 }
