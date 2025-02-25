@@ -201,6 +201,16 @@ public class CommentDao {
 		int result = jdbc.queryForObject(query, Integer.class);
 		return result;
 	}
+
+	
+
+	public int starP(String memberId, String contentNo) {
+		String query = " select starpoint from content_star where member_id = ? and content_no = ? " ;
+		Object[] param = {memberId,contentNo};
+		int starP = jdbc.queryForObject(query, Integer.class, param);
+		
+		return starP;
+	}
 	
 
 }

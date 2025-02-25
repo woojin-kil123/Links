@@ -42,6 +42,9 @@ public class CommentService {
 			int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
 			//댓글 갯수만 조회해서 INT 로 리턴받은것
 			int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
+			//별점 받기
+			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
 			c.setPosterPath(movie.getPosterPath());		
