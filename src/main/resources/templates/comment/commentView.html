@@ -219,21 +219,20 @@
 		position : relative;		
 	
 	}
-	#modal>.modal-dialog {
-		top : 30%;
+	#report-modal >.modal-dialog {
+		top : 10%;
 	}
-	.modal>.modal-dialog>.rating-modal{
-		height : 500px;
+	#report-modal .modal-dialog>.rating-modal{
 		width : 800px;
 		display : flex;
 		align-items: center;
 	}
-	.modal>.modal-dialog{
+	#report-modal .modal-dialog{
 		display : flex;
 		justify-content: center;
 		align-items: space-around;		
 	}
-	.modal .btn-wrap{
+	#report-modal .btn-wrap{
 		margin-top : 50px;	
 		display : flex;
 		justify-content: center;
@@ -323,16 +322,20 @@
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
 					
 					<div class="btn-opt">
-						
 						<span class="like-box">
 							<span th:if="${comm.isLike ==1}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up</span>
 							<span th:if="${session.member != null && comm.isLike ==0}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up_off_alt</span>
 							<span th:if="${session.member == null && comm.isLike ==0}" class="material-icons" >thumb_up_off_alt</span>
 							<span th:text="${comm.likeCount}"></span> 
 						</span>
+
 						<span class="material-icons show-recomm">textsms </span>
+
+						
+
 						<span class="count" th:text="${comm.reCommCount}">  </span>
-						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
 						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
 						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
@@ -371,9 +374,22 @@
 							<th:block th:if="${session.member.memberId == re.memberId}">
 								<div class="btn-opt">
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons dots" > more_vert </span>
+									<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
 								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
-									<span class="material-icons  pencil2 show-recomm2"  >create </span>							
+									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
+									<div class="report-wrap" style="display: none;" >
+										<input type="hidden" th:value="${re.memberId}">
+										<input type="hidden" th:value="re+${re.reCommentNo}">
+										<input type="radio" id="Rereport-1" name="report-reason" value="욕설">
+										<label for="Rereport-1" class="report btn-primary">욕설</label>
+										<input type="radio" id="Rereport-2" name="report-reason" value="혐오발언">
+										<label for="Rereport-2" class="report btn-primary">혐오발언</label>
+										<input type="radio" id="Rereport-3" name="report-reason"  value="스포일러">
+										<label for="Rereport-3" class="report btn-primary">스포일러</label>
+										<input type="radio" id="Rereport-4" name="report-reason" value="도배">
+										<label for="Rereport-4" class="report btn-primary">도배</label>
+									</div>						
 								</div>
 				<!-- 대댓글 입력 -->
 								<div class="input-box2" style="background-color: transparent;" th:if="${session.member != null}">				
@@ -435,9 +451,9 @@
 	        </div>
 			
 			
-			<!-- 모달 -->
-			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
-	        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog">
+			<!-- 신고 모달 -->
+			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#report-modal"></button>
+	        <div class="portfolio-modal modal fade" id="report-modal" tabindex="-1" role="dialog">
 	           <div class="modal-dialog">
 	                <div class="modal-content rating-modal">
 	                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -450,9 +466,10 @@
 	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 글을</span><br>
 	                                   <span class="item-intro fs-1 fw-bolder" id="reason-confirm"></span>	
 	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 이유로 신고 하시겠습니까?</span>
+	                                   <p class="item-intro fw-bolder mt-5" style="color: #dc3545">허위 신고시 불이익이 있을 수 있습니다.</p>
 	                                   <div class="btn-wrap mt-5">
 		                                   <button class="btn btn-primary btn-xl" data-bs-dismiss="modal"
-												th:onClick="insertReport(this);" >
+												th:onClick="insertReport();" >
 		                                   		<span class="material-icons" style="font-size : 25px;">radio_button_unchecked</span>확인</button>		
 		                                   <button class="btn btn-secondary btn-xl" data-bs-dismiss="modal" type="button">
 		                                   		<span class="material-icons" style="font-size : 25px;">close</span>취소</button>
@@ -473,10 +490,11 @@
 	<script src="/js/sweetalert.min.js"></script>
 	<script th:inline="javascript">
 	const loginMemberId = [[${session.member?.memberId}]];
+	let reportBtn;
 	
 		// '...' 누르면 나오게 하는 이벤트
-		$("#dots").on("click",function(){
-			$(".report-wrap").toggle();
+		$(".dots").on("click",function(){
+			$(this).parent().find(".report-wrap").toggle();
 		});
 		//댓글창 누르면 나오게 하는 이벤트
 		$(".show-recomm").on("click",function(){
@@ -484,6 +502,8 @@
 		});
 		//신고 클릭시 전송 이벤트
 		$("[name=report-reason]").on("click",function(){
+			reportBtn = $(this).parent().parent().find(".dots");
+			$(this).parent().hide();
 			const reportedId = $(this).parent().children().eq(0).val();
 			const reportReason = $(this).val();
 			const writeNo = $(this).parent().children().eq(1).val();
@@ -493,7 +513,7 @@
 			$("#report-modal-btn").click();
 		});
 		//신고 접수 함수
-		function insertReport(obj,memberId,commentNo){
+		function insertReport(){
 			const reporterId = [[${session.member?.memberId}]];
 			const reportedId = $("#reported-id").text();
 			const reason = $("#reason-confirm").text();
@@ -506,7 +526,8 @@
 					console.log("success");
 				},
 				error : function(error){
-					console.log("Error");
+					reportBtn.next().show();
+					reportBtn.hide();
 				}
 			});
 		}

@@ -193,15 +193,12 @@ public class CommentDao {
 	}
 
 	
-
 	
-
-		
-	
-	
+	//댓글의 comment번호 조회해오는 dao
 	public int selectRefCommentNo(int recommentNo) {
 		String query = "select comment_no from re_comm where re_comment_no=?";
-		int result = jdbc.queryForObject(query, Integer.class);
+		Object[] param = {recommentNo};
+		int result = jdbc.queryForObject(query, Integer.class,param);
 		return result;
 	}
 

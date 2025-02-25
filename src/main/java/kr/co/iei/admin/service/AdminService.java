@@ -82,4 +82,23 @@ public class AdminService {
 		int result = adminDao.updateReport(r);
 		return result;
 	}
+	public List dangerUserList() {
+		List list = adminDao.dangerUserList();
+		return list;
+	}
+	@Transactional
+	public void updateWarningLevel(String memberId) {
+		adminDao.updateWarningLevel(memberId);
+	}
+	@Transactional
+	public void kickMember(String memberId) {
+		int result = adminDao.kickMember(memberId);
+		if(result>0){
+			adminDao.insertKickedMember(memberId);
+		}
+	}
+	public List kickedMember() {
+		List list = adminDao.kickedMember();
+		return list;
+	}
 }

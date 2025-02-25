@@ -56,7 +56,7 @@ public String adminMsg(Model model) {
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
-	 }else if(member.getDel()=="Y"){
+	 }else if(member.getDel().equals("Y")){
 		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
@@ -159,8 +159,8 @@ public String adminMsg(Model model) {
  @GetMapping(value="/delete")
  
  public String delete(@SessionAttribute Member member, Model model) {
-	 int memberNo = member.getMemberNo();
-	 int result =memberService.deleteMember(memberNo);
+	 String memberId = member.getMemberId();
+	 int result =memberService.deleteMember(memberId);
 	 if(result>0) {
 		 model.addAttribute("title","회원 탈퇴 완료");
 		 model.addAttribute("text","수고하셨습니다");

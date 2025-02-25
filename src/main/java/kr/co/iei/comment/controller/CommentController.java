@@ -167,6 +167,7 @@ public class CommentController {
 	//댓글 번호를 받으면 해당 코멘트로 연결해주는 컨트롤러
 	@GetMapping("/recommentView")
 	public String recommentView(int recommentNo) {
+		System.out.println(recommentNo);
 		int commentNo = commentService.selectRefCommentNo(recommentNo);
 		return "redirect:/comment/commentView?commentNo="+commentNo;
 

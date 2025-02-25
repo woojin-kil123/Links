@@ -12,7 +12,7 @@
 	width: 100%;
 	}
 	.join-wrap{
-		width: 800px;
+		width: 1000px;
 		margin: 0 auto;
 		padding-top : 150px;
 		text-align: center
@@ -42,6 +42,13 @@
 	width : 100%;
 	align-content: left;
 	}
+	#auth-code{
+margin: 0 auto;
+margin-top: 5px;
+}
+#auth-btn{
+margin-top: 10px;
+}
 	.input-title{
 	width: 20%;
 	}
@@ -126,6 +133,7 @@ label{
 					<div class="input-title">
 						<label for="memberPw">비밀번호</label>
 					</div>
+					<p class="input-msg pw-regex-msg"></p>
 					<div class="input-type">
 						<input type="password" class="form-control"  name="memberPw" id="memberPw">
 					</div>
@@ -197,23 +205,11 @@ label{
 	    event.preventDefault(); // 기본 제출 막기
 
 	    let isValid = true;
-	    let memberId = document.getElementById("memberId").value.trim();
-	    let memberPw = document.getElementById("memberPw").value.trim();
-	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
 	    let memberName = document.getElementById("memberName").value.trim();
 	    let memberPhone = document.getElementById("memberPhone").value.trim();
 	    let memberEmail = document.getElementById("memberEmail").value.trim();
 	    let businessNo = document.getElementById("businessNo").value.trim();
 	    let businessName = document.getElementById("businessName").value.trim();
-	    if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
-	        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
-	        isValid = false;
-	    }
-	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
-	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
-	        isValid = false;
-	    }
-	   
 	    if (!memberName || !/^[가-힣]{2,5}$|^[a-zA-Z]{2,20}$/.test(memberName)) {
 	        alert("이름을 올바르게 입력하세요 (한글 2~5자 또는 영문 2~20자)");
 	        isValid = false;
@@ -226,10 +222,7 @@ label{
 	        alert("올바른 이메일 형식으로 입력하세요");
 	        isValid = false;
 	    }
-	    if (!mailCode) {
-	        alert("이메일 인증을 완료해주세요.");
-	        isValid = false;
-	    }
+	 
 	    if (!businessNo) {
 	        alert("사업자 번호를 입력해주세요.");
 	        isValid = false;
@@ -245,11 +238,23 @@ label{
 	        this.submit();
 	    }
 	});
+	$("#memberPw").on("focusout",function(){
+		$(".pw-regex-msg").removeClass("invalid").removeClass("valid");
+		let memberPw = document.getElementById("memberPw").value.trim();
+	    if (!memberPw || !/^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9]{8,}$/.test(memberPw)) {
+	    	$(".pw-regex-msg").text("비밀번호 형식: 8자 이상, 영문, 숫자를 포함해야됩니다");
+	    	$(".pw-regex-msg").addClass("invalid");
+	    }else{
+	    	$(".pw-regex-msg").text("사용가능한 비밀번호입니다");
+	    	$(".pw-regex-msg").addClass("valid");
+	    }
+		
+	});
 
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
 			const memberId =$("#memberId").val();
-			 if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+			 if (!memberId || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/.test(memberId)) {
 			        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
 			  }else{
 			$("#time-zone").removeId;
