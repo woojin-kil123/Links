@@ -72,6 +72,13 @@ margin-left: 10px;
 margin-left: 10px;	
 width: 100px;
 }
+#auth-code{
+margin: 0 auto;
+margin-top: 5px;
+}
+#auth-btn{
+margin-top: 10px;
+}
 .page-title{
 	font-size: 32px;
     font-weight: bold;
@@ -189,6 +196,7 @@ label{
 		</section>
 	</main>
 	<script>
+	
 	document.querySelector("form[action='/member/join']").addEventListener("submit", function (event) {
 	    event.preventDefault(); // 기본 제출 막기
 	    let isValid = true;
@@ -199,11 +207,11 @@ label{
 	    let memberPhone = document.getElementById("memberPhone").value.trim();
 	    let memberEmail = document.getElementById("memberEmail").value.trim();
 
-	    if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+	    if (!memberId || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/.test(memberId)) {
 	        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
 	        isValid = false;
 	    }
-	    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
+	    if (!memberPw || !/^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9]{8,}$/.test(memberPw)) {
 	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
 	        isValid = false;
 	    }
@@ -220,11 +228,8 @@ label{
 	        alert("올바른 이메일 형식으로 입력하세요");
 	        isValid = false;
 	    }
-	    if (!mailCode) {
-	        alert("이메일 인증을 완료해주세요.");
-	        isValid = false;
-	    }
-
+	  
+	  
 	    if (isValid) {
 	        this.submit();
 	    }
@@ -234,7 +239,7 @@ label{
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
 			const memberId =$("#memberId").val();
-			  if (!memberId || !/^[a-zA-Z0-9]{5,15}$/.test(memberId)) {
+			  if (!memberId || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/.test(memberId)) {
 			        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
 			  }else{
 		
@@ -258,8 +263,9 @@ label{
 		})
 		;
 		$("#memberPw").on("focusout",function(){
+			$(".pw-regex-msg").removeClass("invalid").removeClass("valid");
 			let memberPw = document.getElementById("memberPw").value.trim();
-		    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
+		    if (!memberPw || !/^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9]{8,}$/.test(memberPw)) {
 		    	$(".pw-regex-msg").text("비밀번호 형식: 8자 이상, 영문, 숫자를 포함해야됩니다");
 		    	$(".pw-regex-msg").addClass("invalid");
 		    }else{
