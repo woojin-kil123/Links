@@ -84,4 +84,11 @@ public class ContentsDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
+
+	public List<String> selectContentLike(String memberId) {
+		String query = "select content_no from content_like where member_id=?";
+		Object[] params = {memberId};
+		List<String> list = jdbc.queryForList(query,String.class ,params);
+		return list;
+	}
 }

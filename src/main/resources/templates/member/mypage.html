@@ -269,14 +269,17 @@ label{
 			</div>
 			<div class="comment-wrap">
 				<div class="comment">
-			<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
-					<div class="commNo" style="color:black"></div>
-					<div class="comm" style="color:black">코멘트</div>
-			</a>	
+					<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
+						<div class="commNo" style="color:black"></div>
+						<div class="comm" style="color:black">코멘트</div>
+					</a>	
 				</div>
-			<div class="score">
-			<div class="starNo"></div>
-			<div class="star">평가</div>
+				<div class="score">
+					<a style="text-decoration: none;" th:href="@{/contents/myContents(memberId=${session.member.memberId})}">
+						<div class="starNo"></div>
+						<div class="star">찜 목록</div>
+					</a>	
+			
 			</div>
 			</div>
 		<div class="my-info-wrap">

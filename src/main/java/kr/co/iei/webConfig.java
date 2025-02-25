@@ -32,12 +32,12 @@ public class webConfig implements WebMvcConfigurer{
 								"/member/delete",
 								"/member/changeinfo",
 								"/member/inquiryFrm",
-								"/notice/**"
+								"/admin/**"
 								)
 				.excludePathPatterns(	
 									);
 		//관리자 페이지 기능 경로 추가
 		registry.addInterceptor(new AdminInterceptor())
-				.addPathPatterns("");
+				.addPathPatterns("/admin/**");
 	}
 }
