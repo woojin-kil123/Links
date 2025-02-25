@@ -159,8 +159,8 @@ public String adminMsg(Model model) {
  @GetMapping(value="/delete")
  
  public String delete(@SessionAttribute Member member, Model model) {
-	 int memberNo = member.getMemberNo();
-	 int result =memberService.deleteMember(memberNo);
+	 String memberId = member.getMemberId();
+	 int result =memberService.deleteMember(memberId);
 	 if(result>0) {
 		 model.addAttribute("title","회원 탈퇴 완료");
 		 model.addAttribute("text","수고하셨습니다");
