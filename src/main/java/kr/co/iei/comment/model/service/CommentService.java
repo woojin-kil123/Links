@@ -50,6 +50,7 @@ public class CommentService {
 			c.setPosterPath(movie.getPosterPath());		
 			c.setLikeCount(likeCount);
 			c.setReCommCount(reCommCount);
+			c.setStarPoint(starP);
 		}
 		//코멘트 테이블에서 데이터 읽어온 Comment 객체마다 movieTitle 변수와 posterPath 변수에 데이터 저장
 		return list;

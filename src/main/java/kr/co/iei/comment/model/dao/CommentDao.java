@@ -1,8 +1,11 @@
 package kr.co.iei.comment.model.dao;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.beans.factory.parsing.EmptyReaderEventListener;
+import org.springframework.core.NestedRuntimeException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -205,9 +208,14 @@ public class CommentDao {
 	
 
 	public int starP(String memberId, String contentNo) {
+		int starP = 0;
 		String query = " select starpoint from content_star where member_id = ? and content_no = ? " ;
 		Object[] param = {memberId,contentNo};
-		int starP = jdbc.queryForObject(query, Integer.class, param);
+		try {
+			starP = jdbc.queryForObject(query, Integer.class, param);
+		}
+		catch(EmptyResultDataAccessException e) {
+		}
 		
 		return starP;
 	}

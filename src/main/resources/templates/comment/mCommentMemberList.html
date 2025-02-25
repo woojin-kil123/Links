@@ -49,13 +49,10 @@
 		border-radius: 25px;
 		background-color: transparent;
 	}
-	.star-wrap{
-		
-	}	
+	
 	.star-wrap>span{
 	    font-size: 18px;
-	    color: #D9D9D9;
-	    cursor: pointer;
+	    color: #FFC800;
 	    
 	}
 	.partner{
@@ -147,11 +144,10 @@
 								<th th:text= "${c.memberId}" style="width:13%;"></th>
 								<th th:text= "${c.contentTitle}" style="width:64%;"></th>								
 								<th class="star-wrap" style="width:17%;" >
-									<span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
-							        <span class="material-symbols-outlined"> star_rate</span>
+									
+									<span th:each="num : ${#numbers.sequence(1,c.starPoint)}" class="material-symbols-outlined"> star_rate</span>
+							        <span th:each="num : ${#numbers.sequence(1,c.starPoint)}" class="material-symbols-outlined"> star_rate</span>
+							        
 								</th>
 							</tr>						
 																

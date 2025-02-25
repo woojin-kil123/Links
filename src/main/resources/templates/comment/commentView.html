@@ -330,7 +330,7 @@
 							<span th:if="${session.member == null && comm.isLike ==0}" class="material-icons" >thumb_up_off_alt</span>
 							<span th:text="${comm.likeCount}"></span> 
 						</span>
-						<span class="material-icons" >textsms </span>
+						<span class="material-icons show-recomm">textsms </span>
 						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
@@ -522,8 +522,8 @@
 			
 			$(".inputBox").eq(index).slideToggle();
 		});
-		
-		*/	
+		*/
+			
 		
 		function windowComment(obj,memberId,commentNo,contentNo){		
 			console.log(commentNo);
@@ -561,8 +561,10 @@
 			$("body").append(form);
 			//6. form 태그 submit
 			
-			form.submit();
+			//form.submit();
 		};
+		
+		
 		
 		
 		$(".show-recomm2").on("click",function(){
