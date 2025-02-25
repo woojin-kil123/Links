@@ -278,15 +278,15 @@
                 <th:block th:if="${session.member != null}">
                     <th:block th:if="${session.member.memberRole == 'normal'}">
 
-                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage"><span class="material-icons">account_circle</span></a></li>
                     </th:block>
                     <th:block th:if="${session.member.memberRole == 'business'}">
-                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage"><span class="material-icons">account_circle</span></a></li>
                     </th:block>
                     <th:block th:if="${session.member.memberRole == 'admin'}">
                         <li class="nav-item"><a class="nav-link" href="/admin/management">관리자페이지</a></li>
                     </th:block>
-                    <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/member/logout"><span class="material-icons">logout</span></a></li>
                 </th:block>
 
                 <!-- 문의 아이콘 -->
