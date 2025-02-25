@@ -56,7 +56,7 @@ public String adminMsg(Model model) {
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
-	 }else if(member.getDel()=="Y"){
+	 }else if(member.getDel().equals("Y")){
 		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
