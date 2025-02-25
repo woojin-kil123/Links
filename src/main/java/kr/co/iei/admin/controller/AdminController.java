@@ -117,4 +117,27 @@ public class AdminController {
 		int result = adminService.updateReport(r);
 	}
 	
+	@ResponseBody
+	@GetMapping("/dangerUserList")
+	public List dangerUserList() {
+		List list = adminService.dangerUserList();
+		return list;
+	}
+	@ResponseBody
+	@GetMapping("/updateWarningLevel")
+	public void updateWarningLevel(String memberId) {
+		adminService.updateWarningLevel(memberId);
+	}
+	@ResponseBody
+	@GetMapping("/kickMember")
+	public void kickMember(String memberId) {
+		adminService.kickMember(memberId);
+	}	
+	@ResponseBody
+	@GetMapping("/kickedMember")
+	public List kickedMember() {
+		List list = adminService.kickedMember();
+		return list;
+	}
+	
 }

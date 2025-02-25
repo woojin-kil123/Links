@@ -17,4 +17,5 @@ public class Member {
  private String memberRole;
  private int warningLevel;
  private String del;
+ private String delDate;
 }

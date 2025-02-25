@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.admin.vo.Ad;
 import kr.co.iei.admin.vo.AdViewRowMapper;
 import kr.co.iei.admin.vo.BusinessRowMapper;
+import kr.co.iei.admin.vo.DangerMemberRowmapper;
 import kr.co.iei.admin.vo.Inquiry;
 import kr.co.iei.admin.vo.InquiryRowMapper;
+import kr.co.iei.admin.vo.KickedRowMapper;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.ReportRowMapper;
 import kr.co.iei.admin.vo.Stats;
@@ -30,6 +32,11 @@ public class AdminDao {
 	private AdViewRowMapper adViewRowMapper;
 	@Autowired
 	private InquiryRowMapper inquiryRowMapper;
+	@Autowired
+	private DangerMemberRowmapper dangerMemberRowmapper;
+	@Autowired
+	private KickedRowMapper kickedRowMapper;
+	
 	
 	public Stats loadStats() {
 		String query = "select * from stats";
@@ -127,5 +134,36 @@ public class AdminDao {
 		Object[] params = {r.getReportYn(), r.getWriteNo()};
 		int result = jdbc.update(query, params);
 		return result;
+	}
+
+	public List dangerUserList() {
+		String query = "select * from danger_user_view";
+		List list = jdbc.query(query, dangerMemberRowmapper);
+		return list;
+	}
+
+	public void updateWarningLevel(String memberId) {
+		String query = "update member set warningLevel=2 where member_id=?";
+		Object[] params = {memberId};
+		jdbc.update(query, memberId);
+	}
+
+	public int kickMember(String memberId) {
+		String query = "update member set del_yn='Y' where member_id=?";
+		Object[] params = {memberId};
+		int result = jdbc.update(query, memberId);
+		return result;
+	}
+
+	public void insertKickedMember(String memberId) {
+		String query = "insert into del_member values(del_member_seq.nextval, ?, to_char(sysdate,'yyyy-mm-dd'),'Y')";
+		Object[] params = {memberId};
+		jdbc.update(query, params);
+	}
+
+	public List kickedMember() {
+		String query = "select * from kicked_user_view";
+		List list = jdbc.query(query, kickedRowMapper);
+		return list;
 	}
 }
