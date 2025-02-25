@@ -54,6 +54,7 @@
 
 .comment {
     border-right: 2px solid white;
+    
 }
 .comment:hover, .score:hover, .movie:hover {
     background: #ddd;
@@ -267,12 +268,12 @@ label{
 			
 			</div>
 			<div class="comment-wrap">
-			<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
 				<div class="comment">
-					<div class="commNo"></div>
-					<div class="comm">코멘트</div>
-				</div>
+			<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
+					<div class="commNo" style="color:black"></div>
+					<div class="comm" style="color:black">코멘트</div>
 			</a>	
+				</div>
 			<div class="score">
 			<div class="starNo"></div>
 			<div class="star">평가</div>
