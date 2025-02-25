@@ -582,7 +582,7 @@
                 $.each(data, function (index, item) {
                 	const row = $("<tr>");
                 	const writeNo = $("<td>").text(item.writeNo).addClass("btn-link").css("cursor","pointer").on("click",function(){
-                		if(item.writeNo.substring(0,2)=="re"){
+                		if(item.writeNo.substring(0,2)==="re"){
                 			location.href="/comment/recommentView?recommentNo="+item.writeNo.substring(2);
                 		}else{
 	                    	location.href="/comment/commentView?commentNo="+item.writeNo;
