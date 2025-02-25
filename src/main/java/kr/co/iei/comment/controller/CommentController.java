@@ -91,8 +91,7 @@ public class CommentController {
 	public String myCommentList(Model model) {
 		List list = commentService.mCommentMemberList();
 		//코멘트리스트 모델에 담기
-		model.addAttribute("list", list);
-		
+		model.addAttribute("list", list);	
 		
 		
 		return "comment/myCommentList";
