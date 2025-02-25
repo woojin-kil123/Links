@@ -144,9 +144,8 @@
 				<div class="page-title">코멘트 히스토리</div>		
 						
 						<div class="list-wrap">
-							
 							<div th:each= "c: ${list}" class="comment-box">
-								<th:block th:if="${session.member.memberId == c.memberId}">					
+												
 								<table class="line1">
 									<tr>
 										<th style="width:1%;"></th>
@@ -312,6 +311,11 @@
 		
 		
 		
+		
+		if($("#memberIdTh").text() === ""){
+			
+			$("#memberIdTh").hide();
+		}
 		
 		
 		

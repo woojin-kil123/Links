@@ -88,12 +88,12 @@ public class CommentController {
 	
 	//코멘트 히스토리
 	@GetMapping(value="/myCommentList")
-	public String myCommentList(Model model) {
-		List list = commentService.mCommentMemberList();
+	public String myCommentList(String memberId, Model model) {
+		List list = commentService.myCommentList(memberId);
+		
 		//코멘트리스트 모델에 담기
+		 
 		model.addAttribute("list", list);	
-		
-		
 		return "comment/myCommentList";
 	}
 	
