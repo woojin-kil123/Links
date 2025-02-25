@@ -163,11 +163,12 @@
 																		
 								</table>
 								<div class="partner"></div>
-								
-								<div class="movie-content">							
-									<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
-									<div th:text="${c.commentContent}" class="movie-comment"></div>
-								</div>
+								<a style="text-decoration: none;" th:href="@{/comment/commentView(commentNo=${c.commentNo})}">
+									<div class="movie-content">							
+										<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
+										<div th:text="${c.commentContent}" class="movie-comment"></div>
+									</div>
+								</a>	
 								<div class="partner"></div>
 								<div class="btn-opt"> 
 								
