@@ -277,10 +277,12 @@ label{
 			
 			</div>
 			<div class="comment-wrap">
-			<div class="comment">
-			<div class="commNo"></div>
-			<div class="comm">코멘트</div>
-			</div>
+			<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
+				<div class="comment">
+					<div class="commNo"></div>
+					<div class="comm">코멘트</div>
+				</div>
+			</a>	
 			<div class="score">
 			<div class="starNo"></div>
 			<div class="star">평가</div>
@@ -362,9 +364,10 @@ label{
 		});
 	});
 	
-	$(".comm").on("click",function(){
-	location.href="/comment/myCommentList"
-	});
+	//$(".comm").on("click",function(){
+		//location.href="/comment/myCommentList?memberId="+session.member.memberId;
+	//}); 
+	
 	$("#togglePw").on("click",function(){
 		let pwInput = document.getElementById("memberPw");
         let icon = this;

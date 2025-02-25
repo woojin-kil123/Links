@@ -63,16 +63,17 @@
 		margin: 0 auto;
 	}
 	
-	.star-wrap{
-		overflow: hidden;
-	}	
-	.star-wrap>span{
-	    float: left;
-	    font-size: 18px;
-	    color: #D9D9D9;
-	    cursor: pointer;
-	}
 	
+	.star-wrap>.star-gold{
+		float:left;
+	    font-size: 18px;
+	    color: #FFC800;
+	}
+	.star-wrap>.star-gray{
+		float:left;
+		font-size: 18px;
+		color: #c4c4c4;
+	}
 		
 	.movie-comment{
 		width: 685px;
@@ -312,11 +313,10 @@
 							<th th:text= "${comm.memberId}" style="width:10%;"></th>
 							<th style="width:67%;"></th>								
 							<th class="star-wrap" style="width:17%;" >
-								<span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
+							
+								<span th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
+							    <span th:if="${comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-comm.starPoint)}" class="material-icons star-gray"> star</span>
+						        
 							</th>
 						<tr>			
 					</table>
@@ -534,7 +534,7 @@
 			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
 			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
 			
-			//form.hide();
+			form.hide();
 			
 			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
 			const memberIdInput = $("<input>"); 
@@ -561,7 +561,7 @@
 			$("body").append(form);
 			//6. form 태그 submit
 			
-			//form.submit();
+			form.submit();
 		};
 		
 		
