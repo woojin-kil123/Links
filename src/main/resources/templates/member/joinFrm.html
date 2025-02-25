@@ -135,6 +135,7 @@ label{
 						<input type="password"  class="form-control" name="memberPw" id="memberPw">
 					</div>
 				</div>
+				<p class="input-msg pw-regex-msg"></p>
 				<div class="input-wrap">
 					<div class="input-title">
 						<label for="memberPwRe">비밀번호 확인</label>
@@ -202,7 +203,7 @@ label{
 	        alert("아이디를 올바르게 입력하세요 (5~15자, 영문 대소문자 및 숫자)");
 	        isValid = false;
 	    }
-	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
+	    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
 	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
 	        isValid = false;
 	    }
@@ -228,7 +229,7 @@ label{
 	        this.submit();
 	    }
 	});
-
+	
 
 		$(".id-check-btn").on("click",function(){
 			$(".id-check-msg").removeClass("invalid").removeClass("valid");
@@ -256,6 +257,18 @@ label{
 			  }
 		})
 		;
+		$("#memberPw").on("focusout",function(){
+			let memberPw = document.getElementById("memberPw").value.trim();
+		    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
+		    	$(".pw-regex-msg").text("비밀번호 형식: 8자 이상, 영문, 숫자를 포함해야됩니다");
+		    	$(".pw-regex-msg").addClass("invalid");
+		    }else{
+		    	$(".pw-regex-msg").text("사용가능한 비밀번호입니다");
+		    	$(".pw-regex-msg").addClass("valid");
+		    }
+			
+		});
+		
 		$("#memberPwRe").on("focusout",function(){
 			$(".pw-check-msg").removeClass("invalid").removeClass("valid");
 		    const pwValue = memberPw.value;
