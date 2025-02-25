@@ -30,7 +30,7 @@ function commentList(movieId) {
 	              const memberId = $("<span>").text(comment.memberId);
 
 	              userInfo.append(userImg, memberId);
-	              const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+	              const title = $("<span>").addClass("comment-title").text(comment.movieTitle);
 	              header.append(userInfo, title);
 
 				   

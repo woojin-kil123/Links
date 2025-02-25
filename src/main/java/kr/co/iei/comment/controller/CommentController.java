@@ -26,7 +26,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러, 건들지말것
+	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러
 	@ResponseBody
 	@GetMapping("oneMovieComments")
 	public List oneMovieComment(String contentNo) {

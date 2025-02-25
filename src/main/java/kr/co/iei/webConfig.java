@@ -27,17 +27,33 @@ public class webConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		//로그인 인터셉터 경로 추가
 		registry.addInterceptor(new LoginInterceptor())
-				.addPathPatterns("/member/logout",
+				.addPathPatterns(
 								"/member/mypage",
 								"/member/delete",
 								"/member/changeinfo",
 								"/member/inquiryFrm",
-								"/admin/**"
+								"/admin/**",
+								"/report/**",
+								"/comment/**",
+								"/contents/insertRating",
+								"/contents/insertContentLike",
+								"/contents/deleteContentLike",
+								"/contents/myContents",
+								"/contents/selectMyContents"
 								)
-				.excludePathPatterns(	
+				.excludePathPatterns(
+								"/admin/plusAdClick",
+								"/admin/adUrl",
+								"/admin/insertInquiry",
+								"/admin/insertReport",
+								"/comment/mCommentMemberList"
 									);
 		//관리자 페이지 기능 경로 추가
 		registry.addInterceptor(new AdminInterceptor())
-				.addPathPatterns("/admin/**");
+				.addPathPatterns(
+								)
+				.excludePathPatterns(
+						
+						);
 	}
 }
