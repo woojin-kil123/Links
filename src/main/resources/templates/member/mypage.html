@@ -54,6 +54,7 @@
 
 .comment {
     border-right: 2px solid white;
+    
 }
 .comment:hover, .score:hover, .movie:hover {
     background: #ddd;
@@ -267,10 +268,12 @@ label{
 			
 			</div>
 			<div class="comment-wrap">
-			<div class="comment">
-			<div class="commNo"></div>
-			<div class="comm">코멘트</div>
-			</div>
+				<div class="comment">
+			<a style="text-decoration: none;" th:href="@{/comment/myCommentList(memberId=${session.member.memberId})}">
+					<div class="commNo" style="color:black"></div>
+					<div class="comm" style="color:black">코멘트</div>
+			</a>	
+				</div>
 			<div class="score">
 			<div class="starNo"></div>
 			<div class="star">평가</div>
@@ -348,9 +351,10 @@ label{
 		});
 	});
 	
-	$(".comm").on("click",function(){
-	location.href="/comment/myCommentList"
-	});
+	//$(".comm").on("click",function(){
+		//location.href="/comment/myCommentList?memberId="+session.member.memberId;
+	//}); 
+	
 	$("#togglePw").on("click",function(){
 		let pwInput = document.getElementById("memberPw");
         let icon = this;

@@ -63,16 +63,17 @@
 		margin: 0 auto;
 	}
 	
-	.star-wrap{
-		overflow: hidden;
-	}	
-	.star-wrap>span{
-	    float: left;
-	    font-size: 18px;
-	    color: #D9D9D9;
-	    cursor: pointer;
-	}
 	
+	.star-wrap>.star-gold{
+		float:left;
+	    font-size: 18px;
+	    color: #FFC800;
+	}
+	.star-wrap>.star-gray{
+		float:left;
+		font-size: 18px;
+		color: #c4c4c4;
+	}
 		
 	.movie-comment{
 		width: 685px;
@@ -310,12 +311,11 @@
 							<th style="width:2%;"></th>
 							<th th:text= "${comm.memberId}" style="width:10%;"></th>
 							<th style="width:67%;"></th>								
-							<th class="star-wrap" style="width:17%;">
-								<span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
+							<th class="star-wrap" style="width:17%;" >
+							
+								<span th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
+							    <span th:if="${comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-comm.starPoint)}" class="material-icons star-gray"> star</span>
+						        
 							</th>
 						<tr>			
 					</table>
@@ -328,7 +328,11 @@
 							<span th:if="${session.member == null && comm.isLike ==0}" class="material-icons" >thumb_up_off_alt</span>
 							<span th:text="${comm.likeCount}"></span> 
 						</span>
-						<span class="material-icons show-recomm" >textsms </span>
+
+						<span class="material-icons show-recomm">textsms </span>
+
+						
+
 						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
@@ -539,8 +543,8 @@
 			
 			$(".inputBox").eq(index).slideToggle();
 		});
-		
-		*/	
+		*/
+			
 		
 		function windowComment(obj,memberId,commentNo,contentNo){		
 			console.log(commentNo);
@@ -551,7 +555,7 @@
 			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
 			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
 			
-			//form.hide();
+			form.hide();
 			
 			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
 			const memberIdInput = $("<input>"); 
@@ -580,6 +584,8 @@
 			
 			form.submit();
 		};
+		
+		
 		
 		
 		$(".show-recomm2").on("click",function(){
