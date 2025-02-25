@@ -204,8 +204,8 @@ public class CommentService {
 		
 	
 	//memberId 개인 코멘트 페이지
-	public List myCommentList() {
-		List<Comment> list = commentDao.mCommentMemberList();
+	public List myCommentList(String memberId) {
+		List<Comment> list = commentDao.mCommentList(memberId);
 		for(Comment c : list ) {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
 			String movieId = c.getContentNo().substring(1);

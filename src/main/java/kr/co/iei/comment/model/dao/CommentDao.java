@@ -49,15 +49,15 @@ public class CommentDao {
 		return list;
 	}
 
-	public List mCommentList(String contentNo) {
-		String query = "select * from comm where content_no like '%'||?||'%' order by COMMENT_NO DESC";
-		Object[] params= {contentNo};
+	public List mCommentList(String memberId) {
+		String query = "select * from comm where member_id= ? order by comment_no desc" ; 
+		Object[] params= {memberId};
 		List list = jdbc.query(query,commentRowMapper,params);
-		
 			
 		return list;
 	}
-
+	
+	
 	public String movieCode(String partTwo) {
 		String query = "select movie_title from movie where movie_id = ?";
 		Object[] params= {partTwo};
@@ -223,15 +223,7 @@ public class CommentDao {
 
 	
 
-	public List<Comment> myCommentList(String memberId) {
-		String query = "select * from comm where member_id= ? order by comment_no desc" ; 
-		Object[] params= {memberId};
-		List list = jdbc.query(query,reCommentRowMapper,params);
-		
-			
-		return list;
-	}
-
+	
 		
 	
 

@@ -138,19 +138,20 @@
 			</div>
 			 -->
 			<th:block th:if="${session.member != null}"></th:block>			
+				
+			
 			<div class="content">
-				<div class="page-title">무비 매니아들의 코멘트</div>		
+				<div class="page-title">코멘트 히스토리</div>		
 						
 						<div class="list-wrap">
-							
 							<div th:each= "c: ${list}" class="comment-box">
-								
+												
 								<table class="line1">
 									<tr>
 										<th style="width:1%;"></th>
 										<th class="profile" style="width:3%;"></th>
 										<th style="width:2%;"></th>
-										<th th:text= "${c.memberId}" style="width:13%;"></th>
+										<th id="memberIdTh" th:text= "${c.memberId}" style="width:13%;"></th>
 										<th th:text= "${c.contentTitle}" style="width:64%;"></th>								
 										<th class="star-wrap" style="width:17%;" >
 		
@@ -162,11 +163,12 @@
 																		
 								</table>
 								<div class="partner"></div>
-								
-								<div class="movie-content">							
-									<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
-									<div th:text="${c.commentContent}" class="movie-comment"></div>
-								</div>
+								<a style="text-decoration: none;" th:href="@{/comment/commentView(commentNo=${c.commentNo})}">
+									<div class="movie-content">							
+										<div class="movie-summary"><img th:src="${c.posterPath}" style="width: 100%; height:100%"></div>										
+										<div th:text="${c.commentContent}" class="movie-comment"></div>
+									</div>
+								</a>	
 								<div class="partner"></div>
 								<div class="btn-opt"> 
 								
@@ -183,7 +185,7 @@
 										<span class="count" th:text="${c.reCommCount}"> </span>
 									</div>	
 									<!-- //th:onclick="modifyComm(this,[[${c.commentNo}]]);">create </span> -->
-								</th:block>	
+									</th:block>	
 								</div>						
 								
 							</div>														
@@ -311,11 +313,16 @@
 		
 		
 		
+		if($("#memberIdTh").text() === ""){
+			
+			$("#memberIdTh").hide();
+		}
+		
 		
 		
 	</script>
 	
-	<th:block th:include="common/footer"></th:block>
+	<!-- <th:block th:include="common/footer"></th:block> -->
 </body>
 </html>
 

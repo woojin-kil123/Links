@@ -18,6 +18,7 @@
 		width:800px;
 		height: 200px;		
 		overflow: hidden;
+		
 	}
 	
 	.movie-title{
@@ -298,7 +299,7 @@
 	
 <main class="content-wrap">
 	<section class="section movie-comment-list-wrap">
-		<div class="content">
+		<div class="content" >
 			<div class="page-title">
 				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
 				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	

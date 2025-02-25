@@ -19,9 +19,10 @@
 	}
 	.content{
 		width: 1200px;
-		margin: 0 auto;
+		
 	}
 	.page-title{		
+		text-align:center;
 		font-size: 27px;
 		font-weight: 600;
 		margin-left: 30px;
@@ -29,6 +30,7 @@
 	}
 	.list-wrap{
 		width: 1200px;
+		
 	}
 	.comment-box{
 		width: 770px;
@@ -140,8 +142,8 @@
 			<div class="content">
 				<div class="page-title">무비 매니아들의 코멘트</div>		
 									
-				<div class="list-wrap">
-					<div th:each= "c: ${list}" class="comment-box">
+				<div class="list-wrap" >
+					<div th:each= "c: ${list}" class="comment-box" style="margin: 30px auto;">
 					
 						<table class="line1">
 							<tr>
