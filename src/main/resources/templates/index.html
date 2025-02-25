@@ -216,16 +216,13 @@
 					   
 		              const rating = $("<div>").addClass("comment-rating");
 		              for (let j = 0; j < 5; j++) {
-		                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+		                   const star = $("<span>").addClass("star").text(j < comment.starPoint ? "★" : " ");
 		                   rating.append(star);
 		              }
 
 		              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
 		              const footer = $("<div>").addClass("comment-footer");
-		              const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
-		              const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
 		               
-		              footer.append(like, dislike);
 		              card.append(header, rating, body, footer);
 		              row.append(card);
 		           });

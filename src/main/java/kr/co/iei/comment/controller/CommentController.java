@@ -28,7 +28,7 @@ public class CommentController {
 	
 	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러, 건들지말것
 	@ResponseBody
-	@GetMapping("oneMovieComment")
+	@GetMapping("oneMovieComments")
 	public List oneMovieComment(String contentNo) {
 		List list = commentService.oneMovieComment(contentNo);
 		return list;
@@ -61,8 +61,6 @@ public class CommentController {
 		List list = commentService.mCommentMemberList();
 		//코멘트리스트 모델에 담기
 		model.addAttribute("list", list);
-		
-		
 		
 		return "comment/mCommentMemberList";
 	}

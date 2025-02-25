@@ -1,7 +1,7 @@
 function commentList(movieId) {
 	console.log(movieId);
 	$.ajax({
-		url : "/comment/oneMovieComment",
+		url : "/comment/oneMovieComments",
 		data : {"contentNo":"m"+movieId},
 		success : function(comments){
 			if(comments.length==0){
@@ -36,16 +36,13 @@ function commentList(movieId) {
 				   
 	              const rating = $("<div>").addClass("comment-rating");
 	              for (let j = 0; j < 5; j++) {
-	                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+	                   const star = $("<span>").addClass("star").text(j < comment.starPoint ? "★" : " ");
 	                   rating.append(star);
 	              }
 
 	              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
 	              const footer = $("<div>").addClass("comment-footer");
-	              const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
-	              const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
 	               
-	              footer.append(like, dislike);
 	              card.append(header, rating, body, footer);
 	              row.append(card);
 	           });
@@ -127,7 +124,7 @@ function loadAd(position){
 	        dataType: 'text',
 	        success: function(adUrl) {
 	            //console.log("응답 adUrl: " + adUrl);
-	            $(".ad-banner img").attr("src", "/image/"+adUrl).on("click",function(){
+	            $(".ad-banner img").attr("src", "/image/"+adUrl).css("cursor","pointer").on("click",function(){
 					$.ajax({
 						url : "/admin/plusAdClick",
 						data : {"adPosition":position},
