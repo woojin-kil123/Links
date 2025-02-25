@@ -87,7 +87,7 @@ margin-left: 100px;
 	    let isValid = true;
 	    let memberPw = document.getElementById("memberPw").value.trim();
 	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
-	    if (!memberPw || !/^[A-Za-z]{8,}$/.test(memberPw)) {
+	    if (!memberPw || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z]{8,}$/.test(memberPw)) {
 	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
 	        isValid = false;
 	    }
@@ -97,6 +97,7 @@ margin-left: 100px;
 	    }
 	});
 	$("#memberPw").on("focusout",function(){
+		$(".pw-regex-msg").removeClass("invalid").removeClass("valid");
 		let memberPw = document.getElementById("memberPw").value.trim();
 	    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
 	    	$(".pw-regex-msg").text("비밀번호 형식: 8자 이상, 영문, 숫자를 포함해야됩니다");
