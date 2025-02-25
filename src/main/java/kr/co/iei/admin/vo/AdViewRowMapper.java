@@ -18,6 +18,7 @@ public class AdViewRowMapper implements RowMapper<Ad>{
 		ad.setAdUrl(rs.getString("ad_url"));
 		ad.setExpireDate(rs.getString("expire_date"));
 		ad.setInquiryProgress(rs.getInt("inquiry_progress"));
+		ad.setAdClick(rs.getInt("ad_click"));
 		ad.setAdUrl(rs.getString("AD_URL"));
 		ad.setExpireDate(rs.getString("expire_date"));
 		return ad;

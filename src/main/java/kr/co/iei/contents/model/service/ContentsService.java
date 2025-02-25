@@ -47,5 +47,9 @@ public class ContentsService {
 		int result = contentsDao.selectMemberLike(cs);
 		return result;
 	}
+	public int plusLinkClick(int movieId) {
+		int result = contentsDao.plusLinkClick(movieId);
+		return result;
+	}
 
 }

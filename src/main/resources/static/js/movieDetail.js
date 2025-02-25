@@ -116,5 +116,35 @@ function makeSlide(obj1,obj2){
         slideIndex++;
     }
 }
+function loadAd(position){
+	let requestUrl = '/admin/adUrl';
+	    
+	    //console.log("AJAX 요청 URL: " + requestUrl);
+	    $.ajax({
+	        url: requestUrl,              // URL에 매개변수 전달
+	        type: 'GET',
+	        data: {"position" : position},  // Query Parameter로 전달
+	        dataType: 'text',
+	        success: function(adUrl) {
+	            //console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", "/image/"+adUrl).on("click",function(){
+					$.ajax({
+						url : "/admin/plusAdClick",
+						data : {"adPosition":position},
+						success : function(){
+							location.href = "https://kh-academy.co.kr/main/main.kh";
+						}
+					})
+				});
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("AJAX 요청 실패:");
+	            console.log("Status: " + status);
+	            console.log("Error: " + error);
+	            console.log(xhr);
+	        }
+	    });
 
-
+}
+	    
+	    

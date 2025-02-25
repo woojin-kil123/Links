@@ -277,9 +277,10 @@
 		        	<thead>
 		                <tr>
 		                	<th style="width : 10%;">문의번호</th>
-		                    <th style="width : 20%;">사업자명</th>
+		                    <th style="width : 15%;">사업자명</th>
 		                    <th style="width : 10%;">광고 위치</th>
 		                    <th style="width : 30%;">URL</th>
+		                    <th style="width : 10%;">클릭 수</th>
 		                    <th style="width : 15%;">만료일</th>
 		                    <th style="width : 15%;">관리</th>
 		                </tr>
@@ -528,6 +529,7 @@
 		                    row.append($("<td>").text(item.companyName));
 		                    row.append($("<td>").text(item.adPosition));
 		                    row.append($("<td>").text(item.adUrl));
+		                    row.append($("<td>").text(item.adClick));
 		                    row.append($("<td>").text(item.expireDate));
 		                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("삭제").on("click",function(){
 		                    	const btn = $(this);

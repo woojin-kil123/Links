@@ -72,6 +72,14 @@ public class ContentsController {
 		int result = contentsService.selectMemberLike(cs);
 		return result;
 	}
+	@ResponseBody
+	@GetMapping("/plusLinkClick")
+	public int plusLinkClick(int movieId) {
+		int result = contentsService.plusLinkClick(movieId);
+		return result;
+	}
+	
+	
 	
 }
 

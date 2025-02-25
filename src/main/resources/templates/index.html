@@ -63,7 +63,7 @@
 				<div class="intro"></div>
 			</div>
 			<div class="ad-banner">
-				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; height: 150px;">
+				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
 			</div>
 			
 			    <h2 class="text-left" style="width: 1200px; margin: auto; margin-top: 50px; font-family: ns-r; font-size: 28px;">최신 코멘트</h2>
@@ -103,6 +103,7 @@
 				</div>
         	</section>   
 	    </div>
+	 <script src = "/js/movieDetail.js"></script>
    	<th:block th:include="common/footer"></th:block>
 <script>
 	function nowPlaying(){
@@ -126,7 +127,7 @@
 		});
 	}
 	
-	function makeSlide(obj1,obj2){
+	/* function makeSlide(obj1,obj2){
 		const movies = obj1;
 		const carouselContent = obj2;
         let slideIndex = 0;
@@ -176,11 +177,11 @@
             carouselContent.append(slide);
             slideIndex++;
         }
-	}
+	} */
 	nowPlaying();
 	trend();
 	
-	function commentList() {
+	 function commentList() {
 		$.ajax({
 			url : "/comment/newMovieComment",
 			success : function(comments){
@@ -245,33 +246,9 @@
 							console.log("error");
 			}				
 		});
-	}
+	} 
 	commentList();
-	
-	$(document).ready(function() {
-	    // AD_POSITION 값을 매개변수로 전달
-	    let position = 'H';
-	    let requestUrl = '/admin/adUrl';
-	    
-	    //console.log("AJAX 요청 URL: " + requestUrl);
-
-	    $.ajax({
-	        url: requestUrl,              // URL에 매개변수 전달
-	        type: 'GET',
-	        data: {"position" : position},  // Query Parameter로 전달
-	        dataType: 'text',
-	        success: function(adUrl) {
-	            //console.log("응답 adUrl: " + adUrl);
-	            $(".ad-banner img").attr("src", "/image/"+adUrl);
-	        },
-	        error: function(xhr, status, error) {
-	            console.log("AJAX 요청 실패:");
-	            console.log("Status: " + status);
-	            console.log("Error: " + error);
-	            console.log(xhr);
-	        }
-	    });
-	});
+	loadAd('A');
 	</script>
 </body>
 </html>

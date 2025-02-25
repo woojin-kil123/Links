@@ -73,10 +73,15 @@ public class ContentsDao {
 		return result;
 	}
 	public int selectMemberLike(ContentStar cs) {
-		System.out.println(cs);
 		String query = "select count(*) from content_like where content_no=? and member_id=? ";
 		Object[] params = {cs.getContentNo(),cs.getMemberId()};
 		int result = jdbc.queryForObject(query, Integer.class, params);
+		return result;
+	}
+	public int plusLinkClick(int movieId) {
+		String query = "update movie set link_click=link_click+1 where movie_id=?";
+		Object[] params = {movieId};
+		int result = jdbc.update(query, params);
 		return result;
 	}
 }

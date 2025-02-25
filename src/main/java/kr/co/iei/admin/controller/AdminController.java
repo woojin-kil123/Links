@@ -75,7 +75,12 @@ public class AdminController {
 	public void updateInquiry(int inquiryProgress, int inquiryNo) {
 		int result = adminService.updateInquiry(inquiryProgress,inquiryNo);
 	}
-	
+
+	@ResponseBody
+	@GetMapping("/plusAdClick")
+	public void plusAdClick(String adPosition) {
+		adminService.plusAdClick(adPosition);
+	}
 	
 	@ResponseBody
 	@GetMapping("/adUrl")

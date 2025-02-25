@@ -68,6 +68,7 @@
 			    </div>
 			</div>
         </section>
+    <script src= "/js/movieDetail.js"></script>
     <script>
 	function nowPlaying(){
 		$.ajax({
@@ -111,64 +112,12 @@
 		});
 	}
 	
-	
-	
-	function makeSlide(obj1,obj2){
-		const movies = obj1;
-		const carouselContent = obj2;
-        let slideIndex = 0;
-        let indexNo= 1;
-        for (let i = 0; i < movies.length; i += 5) {
-            let moviesSlice = movies.slice(i, i + 5);
-            let isActive = slideIndex === 0 ? "active" : "";
-            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
-            let row = $("<div>").addClass("row d-flex justify-content-center");
 
-            
-            $.each(moviesSlice, function (index, movie) {
-                let col = $("<div>").addClass("col-md-2 mx-1");
-
-                const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
-                let card = $("<div>").addClass("card");
-                const id = movie.movieId;
-                card.on('click',function(){
-                	location.href = "/api/movieDetail?movieId="+id;
-                });
-                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
-                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
-                let imgDiv = $("<div>").addClass("img-div").append(img);
-
-                let cardBody = $("<div>").addClass("card-body");
-                let title = $("<div>").addClass("card-title").text(movie.title);
-                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
-                
-                let rating = $("<div>").addClass("rating");
-                //let ratingText = $("<span>").text(movie.rating);
-                //rating.append(star);
-                let genreInfo = $("<div>").addClass("genre-info");			
-    			if((movie.genreIds).length==0){
-    				genreInfo.text("");
-    			}
-                $.each(movie.genreIds, function(index, genre){
-                	const p = $("<p>").append(genre);
-                	genreInfo.append(p);
-                });
-                // 카드 조립
-                cardBody.append(title, info, rating, genreInfo);
-                card.append(rankBadge, imgDiv, cardBody);
-                col.append(card);
-                row.append(col);
-            });
-            slide.append(row);
-            carouselContent.append(slide);
-            slideIndex++;
-        }
-	}
-	
 	nowPlaying();
 	trend();
 	popular();
 	comming();
+	loadAd(B);
 	</script>
 <th:block th:include="common/footer"></th:block>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

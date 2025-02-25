@@ -101,4 +101,8 @@ public class AdminService {
 		List list = adminDao.kickedMember();
 		return list;
 	}
+	@Transactional
+	public void plusAdClick(String adPosition) {
+		adminDao.plusAdClick(adPosition);
+	}
 }
