@@ -39,11 +39,14 @@ public class CommentService {
 			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
 			String movieId = c.getContentNo().substring(1);
 			DbMovie movie = commentDao.selectMovieInfo(movieId);
-					
+			int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
+			//댓글 갯수만 조회해서 INT 로 리턴받은것
+			int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
 			c.setPosterPath(movie.getPosterPath());		
-		
+			c.setLikeCount(likeCount);
+			c.setReCommCount(reCommCount);
 		}
 		//코멘트 테이블에서 데이터 읽어온 Comment 객체마다 movieTitle 변수와 posterPath 변수에 데이터 저장
 		return list;
@@ -79,10 +82,16 @@ public class CommentService {
 		return result;
 	}
 
-
+	//  //	//	//	//	//	//	//	//	//	//	//
 	@Transactional
 	public Comment selectOneComm(int commentNo) {
 		Comment c = commentDao.selectOneComm(commentNo);
+		//댓글수, 좋아요수를 구해야함
+		int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());		
+		int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
+		c.setLikeCount(likeCount);
+		c.setReCommCount(reCommCount);
+		
 		return c;
 	}
 //	n.getNoticeTitle(), n.getNoticeContent(), n.getNoticeNo()
@@ -119,9 +128,21 @@ public class CommentService {
 		return report;
 	}
 	
-	@Transactional
 	public List selectRecomm(int commentNo) {
-		List list = commentDao.commNo(commentNo);
+		List<ReComment> list = commentDao.commNo(commentNo);		
+
+		for(ReComment comm : list ) {
+			int likeCount = commentDao.selectCommentLikeCount(comm.getCommentNo());
+			int reCommCount = commentDao.selectReCommCount(comm.getCommentNo());
+			//2. 조회 결과를 c에 저장
+			comm.setLikeCount(likeCount);
+			comm.setReCommCount(reCommCount);
+		}
+		
+		
+		
+		
+		
 		return list;
 	}
 
@@ -147,7 +168,30 @@ public class CommentService {
 		
 		return result;
 	}
+
+	
+	@Transactional
+	public int likepush(Comment c, int memberNo) {
+		
+		if(c.getIsLike()==0) {
+			//현재값이 0 >> 좋아요를 누르겠다. >> insert
+			int result = commentDao.insertCommentLike(c.getCommentNo(),memberNo);
+		}else {
+			//현재값이 1 >> 좋아요를 취소하겠다. >> delete
+			int result = commentDao.deleteCommentLike(c.getCommentNo(),memberNo);
+		}
+		//좋아요, 좋아요취소 로직을 수행하고나면 현재 좋아요 갯수 조회해서 리턴
+		int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
+		
+		return likeCount;
+	}
+
+	public int selectRefCommentNo(int recommentNo) {
+		int result = commentDao.selectRefCommentNo(recommentNo);
+		return result;
+	}
 	
 
+	
 	
 }

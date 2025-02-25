@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.comment.model.vo.Comment;
@@ -58,7 +59,11 @@ public class CommentController {
 	@GetMapping(value="/mCommentMemberList")	
 	public String mCommentMemberList(Model model) {
 		List list = commentService.mCommentMemberList();
+		//코멘트리스트 모델에 담기
 		model.addAttribute("list", list);
+		
+		
+		
 		return "comment/mCommentMemberList";
 	}
 	
@@ -67,10 +72,13 @@ public class CommentController {
 	@GetMapping(value="/commentView")
 	public String mCommentList(int commentNo, Model model) {
 		Comment comment = commentService.selectOneComm(commentNo);
+		// 코멘트 객체에 영화 정보 가져옴
 		String contentNo = comment.getContentNo();
 		DbMovie m = commentService.selectMovieInfo(contentNo);
+		//코멘트 객체에 댓글 리스트 가져옴
 		List recommList = commentService.selectRecomm(commentNo); 
 		
+	
 		model.addAttribute("recommList",recommList);
 		model.addAttribute("comm", comment);
 		model.addAttribute("m", m);
@@ -123,7 +131,7 @@ public class CommentController {
 	@PostMapping(value="/update")
 	public String updateComm(Comment c) {
 		int result = commentService.updateComm(c);
-		return "redirect:/comment/mCommentMemberList";
+		return "redirect:/comment/commentView?commentNo="+c.getCommentNo();
 	}
 	
 	@PostMapping(value="/reComm")
@@ -144,7 +152,20 @@ public class CommentController {
 		return "redirect:/comment/commentView?commentNo="+rc.getCommentNo();
 	}
 	
+	@ResponseBody
+	@PostMapping(value="/likepush")
+	public int likepush(Comment c, @SessionAttribute Member member) {
+		int result = commentService.likepush(c,member.getMemberNo());
+		return result;
+		
+	}
+	//댓글 번호를 받으면 해당 코멘트로 연결해주는 컨트롤러
+	@GetMapping("/recommentView")
+	public String recommentView(int recommentNo) {
+		int commentNo = commentService.selectRefCommentNo(recommentNo);
+		return "redirect:/comment/commentView?commentNo="+commentNo;
 
+	}
 	
 	
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.BuMember;
@@ -261,5 +263,20 @@ public String adminMsg(Model model) {
 	 int result= memberService.ajaxscoreNo(MemberId);
 	 return result;
  }
- 
+ 	//문의 페이지 이동 컨트롤러 
+	@GetMapping("/inquiryFrm")
+	public String inquiyFrm(HttpServletRequest request, Model model) {
+		HttpSession session =  request.getSession();
+		Member m = (Member)session.getAttribute("member");
+		String memberRole = m.getMemberRole();
+		if(memberRole.equals("business")) {
+			int memberNo = m.getMemberNo();
+			BuMember bm = memberService.selectBusiness(memberNo);
+			model.addAttribute("companyName",bm.getCompanyName());
+			model.addAttribute("companyNo",bm.getCompanyNo());
+		}
+		model.addAttribute("member",m);		
+		
+		return "member/inquiryFrm";
+	}
 }

@@ -7,10 +7,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Business {
+public class Inquiry {
+	private int inquiryNo;
+	private int memberNo;
+	private String memberId;
 	private String companyName;
-	private String inquiryCategory;
 	private String memberPhone;
+	private String memberEmail;
+	private String CompanyNo;
+	private String inquiryCategory;
+	private String inquiryContent;
 	private String inquiryDate;
-	private String inquiryProgress;
+	private int inquiryProgress;
 }

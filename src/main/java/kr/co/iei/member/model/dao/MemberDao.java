@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.contents.model.vo.ContentStarRowMapper;
 import kr.co.iei.member.model.vo.BuMember;
+import kr.co.iei.member.model.vo.BusinessMemberRowMapper;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberRowMapper;
 
@@ -17,6 +18,8 @@ public class MemberDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private MemberRowMapper memberRowMapper;
+	@Autowired
+	private BusinessMemberRowMapper bmRowMapper;
 	@Autowired
 	private ContentStarRowMapper contentStarRowMapper;
 
@@ -123,9 +126,9 @@ public class MemberDao {
 	}
 
 	public int insertBusiness(BuMember bum) {
-		String query = "insert into business values(?,?,?)";
-		Object[] params = { bum.getMemberNo(), bum.getBusinessName(), bum.getBusinessNo() };
-		int result2 = jdbc.update(query, params);
+		String query= "insert into business values(?,?,?)";
+		Object[] params= {bum.getMemberNo(),bum.getCompanyName(),bum.getCompanyNo()};
+		int result2= jdbc.update(query,params);
 		return result2;
 	}
 
@@ -141,5 +144,17 @@ public class MemberDao {
 		Object[] params = { MemberId };
 		int result = jdbc.queryForObject(query, Integer.class, params);
 		return result;
+	}
+	//사업자 정보 읽어오는 dao
+	public BuMember selectBusiness(int memberNo) {
+		String query = "select * from business where member_no=?";
+		Object[] params = {memberNo};
+		List list = jdbc.query(query,bmRowMapper , params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			BuMember bm = (BuMember)list.get(0);
+			return bm;
+		}
 	}
 }

@@ -126,7 +126,7 @@ public class CommentDao {
 	
 
 	public List commNo(int commentNo) {
-		String query = "select * from re_comm where comment_no= ? order by RE_COMMENT_NO DESC ";
+		String query = "select * from re_comm where comment_no= ?  ";
 		Object[] params = {commentNo};
 		List listNo = jdbc.query(query, reCommentRowMapper, params);
 		
@@ -156,6 +156,50 @@ public class CommentDao {
 		String query = "select * from comm order by reg_date DESC";
 		List list = jdbc.query(query, commentRowMapper);
 		return list;
+	}
+
+	public int insertCommentLike(int commentNo, int memberNo) {
+		String query = "insert into comment_like values(? , ? )";
+		Object[] params = {commentNo, memberNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public int deleteCommentLike(int commentNo, int memberNo) {
+		String query = "delete from comment_like where comment_no = ? and member_no = ? ";
+		Object[] params = {commentNo, memberNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public int selectCommentLikeCount(int commentNo) {
+		String query = "select count(*) from comment_like where comment_no = ? ";
+		Object[] params = {commentNo};
+		int likeCount = jdbc.queryForObject(query, Integer.class,params);
+		return likeCount;
+		
+	}
+
+	
+
+	public int selectReCommCount(int commentNo) {
+		String query = "select count(*) from re_comm where comment_no = ?";
+		Object[] param = {commentNo};
+		int reCommCount = jdbc.queryForObject(query, Integer.class,param);
+		return reCommCount;
+	}
+
+	
+
+	
+
+		
+	
+	
+	public int selectRefCommentNo(int recommentNo) {
+		String query = "select comment_no from re_comm where re_comment_no=?";
+		int result = jdbc.queryForObject(query, Integer.class);
+		return result;
 	}
 	
 

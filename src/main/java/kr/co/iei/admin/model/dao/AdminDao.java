@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.admin.vo.Ad;
 import kr.co.iei.admin.vo.AdViewRowMapper;
 import kr.co.iei.admin.vo.BusinessRowMapper;
+import kr.co.iei.admin.vo.Inquiry;
+import kr.co.iei.admin.vo.InquiryRowMapper;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.ReportRowMapper;
 import kr.co.iei.admin.vo.Stats;
@@ -26,6 +28,8 @@ public class AdminDao {
 	private ReportRowMapper reportRowMapper;
 	@Autowired
 	private AdViewRowMapper adViewRowMapper;
+	@Autowired
+	private InquiryRowMapper inquiryRowMapper;
 	
 	public Stats loadStats() {
 		String query = "select * from stats";
@@ -47,7 +51,7 @@ public class AdminDao {
 
 	public List businessView() {
 		String query = "select * from business_view";
-		List list = jdbc.query(query, businessRowMapper);
+		List list = jdbc.query(query, inquiryRowMapper);
 		return list;
 	}
 
@@ -93,5 +97,35 @@ public class AdminDao {
 			return null;
 		}
 		return list.get(0).getAdUrl();
+	}
+
+	public int insertInquiry(Inquiry i) {
+		String query = "insert into inquiry values(inquiry_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),1)";
+		Object[] params = {i.getMemberNo(),i.getInquiryCategory(),i.getInquiryContent()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public Inquiry selectInquiry(int inquiryNo) {
+		String query = "SELECT * FROM inquiry_view WHERE inquiry_no=?";
+		Object[] params = {inquiryNo};
+		List<Inquiry> list = jdbc.query(query, inquiryRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	public List normalView() {
+		String query = "select * from normal_view";
+		List list = jdbc.query(query, inquiryRowMapper);
+		return list;
+	}
+
+	public int updateReport(Report r) {
+		String query = "update report set report_yn=? where write_no = ?";
+		Object[] params = {r.getReportYn(), r.getWriteNo()};
+		int result = jdbc.update(query, params);
+		return result;
 	}
 }
