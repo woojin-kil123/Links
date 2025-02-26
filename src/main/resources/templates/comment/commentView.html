@@ -11,6 +11,7 @@
 		margin: 0 auto;
 	}
 	.content{
+		
 		width: 1200px;
 		margin: 0 auto;
 	}
@@ -18,14 +19,14 @@
 		width:800px;
 		height: 200px;		
 		overflow: hidden;
+		
 	}
 	
 	.movie-title{
 		margin-left: 10px;
 		margin-top: 10px;
 		font-size: 27px;
-		font-weight: 600;
-		background-color: #D9D9D9;			
+		font-weight: 600;				
 		float: left;
 	
 	}
@@ -53,7 +54,7 @@
 		height: 235px;
 		padding-top: 10px;
 		margin-top: 20px;
-		margin-bottom: 90px;
+		
 		border : 1px solid #ffc800;
 		background-color: #fcf8e3;
 		box-sizing: border-box;
@@ -63,29 +64,25 @@
 		height: 25px;
 		margin: 0 auto;
 	}
-	.profile{
-		width: 25px;
-		height: 25px;
-		border-radius: 25px;
-		background-color: #D9D9D9;
-	}
-	.star-wrap{
-		overflow: hidden;
-	}	
-	.star-wrap>span{
-	    float: left;
-	    font-size: 18px;
-	    color: #D9D9D9;
-	    cursor: pointer;
-	}
 	
+	
+	.star-wrap>.star-gold{
+		float:left;
+	    font-size: 18px;
+	    color: #FFC800;
+	}
+	.star-wrap>.star-gray{
+		float:left;
+		font-size: 18px;
+		color: #c4c4c4;
+	}
 		
 	.movie-comment{
-		width: 625px;
+		width: 685px;
 		height:145px;
-		background-color: #D9D9D9;
-		
-		margin-left:110px;
+		padding-top: 10px;
+		border-top: 1px solid #FFCD29;
+		margin-left:55px;
 		
 	}
 	.btn-opt{
@@ -98,9 +95,22 @@
 		margin-left: 15px;
 		cursor: pointer;		
 	}
+	
+	.bin{
+		margin-right:5px;		
+		float:right;
+	}	
+	.pencil{
+		
+		margin-right:5px;
+		
+		float:right;
+	}
+	
+	
 	.dots{
 		float:right;
-		margin-right: 15px;
+		margin-right: 3px;
 	}
 	
 	.btn-box{
@@ -125,18 +135,25 @@
 	
 	.inputBox{
 		display: none;
-		background-color: #FFF9F9;
-		margin : 0 auto;
+		width:650px;
+		height: 150px;
+		
+		margin-bottom: 50px;
+		
 		
 	}
 	.re-comm{		
 		width: 600px;
 		height: 100px;
 		border: 0px;
-		background-color: #FFF9F9;
+		background-color: #FCF8E3;
+		
+		text-decoration: none;
+		outline: none;
+		border: 1px solid white;
 	}
-	.re-comm:checked{
-		border: 0px;
+	.re-comm:focus{
+		border: 1px solid #FFC800;
 	}
 		
 	.btn-primary{
@@ -148,19 +165,29 @@
 		margin: 0 auto;
 		margin-top: 30px;
 		margin-left: 50px;
-		width: 700px;
-		height:160px;
-		background-color: #FEECEC;
+		
+		width: 700px;	
+	}
+	.line2-top{
+		background-color: #FCF8E3;
 	}	
+	
+	
 	.line2>div{
 		padding-left: 50px;
 	}
 	.line2 .movie-re-comment{	
+		background-color: #FCF8E3;
 		width: 600px;
-		height:100px;
-		padding-left: 50px;
+		
+				
+		padding-left: 10px;
 		padding-bottom: 90px;
-		background-color:#D9D9D9;			
+		padding-top : 8px;
+		margin-right: 10px;
+		
+		border-top: 1px solid #FFCD29;
+			
 	}
 	
 	.modal-box{
@@ -189,24 +216,25 @@
 		justify-content: center;
 	}
 	.btn-opt{
+		height: 33px;
 		color : #fff;
 		position : relative;		
+	
 	}
-	#modal>.modal-dialog {
-		top : 30%;
+	#report-modal >.modal-dialog {
+		top : 10%;
 	}
-	.modal>.modal-dialog>.rating-modal{
-		height : 500px;
+	#report-modal .modal-dialog>.rating-modal{
 		width : 800px;
 		display : flex;
 		align-items: center;
 	}
-	.modal>.modal-dialog{
+	#report-modal .modal-dialog{
 		display : flex;
 		justify-content: center;
 		align-items: space-around;		
 	}
-	.modal .btn-wrap{
+	#report-modal .btn-wrap{
 		margin-top : 50px;	
 		display : flex;
 		justify-content: center;
@@ -220,10 +248,50 @@
 	
 	.input-box2{
 		display: none;
-		background-color: #FFF9F9;
+		width: 600px;		
+		margin-top: 20px;
 		margin : 0 auto;
+		margin-bottom: 40px;
+	}
+	
+	.re-comm2{		
+		width: 550px;
+		height: 100px;
+		border: 0px;
+		margin-top: 3px;
+		
+		margin-right: 0px;
+		background-color: #FCF8E3;
+	}
+	
+	textarea[name=commentContent]{
+		width: 400px;
+		height: 100px;		
+		text-decoration: none;
+		background-color: #FCF8E3;
+		outline: none;
+		border: 1px solid white;
+	
+	}
+	textarea[name=commentContent]:focus{		
+		border: 1px solid #FFC800;
+	}
+	
+	.btn-form{
+		
+		float: right;
 		
 	}
+	.btn-form2{
+		margin-right: 50px;
+		float: right;
+	}
+	.pencil2{
+		
+		float: right;
+	}
+	
+	
 	
 </style>
 </head>
@@ -232,7 +300,7 @@
 	
 <main class="content-wrap">
 	<section class="section movie-comment-list-wrap">
-		<div class="content">
+		<div class="content" style="margin: 20px auto;">
 			<div class="page-title">
 				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
 				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
@@ -245,22 +313,33 @@
 							<th style="width:2%;"></th>
 							<th th:text= "${comm.memberId}" style="width:10%;"></th>
 							<th style="width:67%;"></th>								
-							<th class="star-wrap" style="width:17%;">
-								<span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
-						        <span class="material-symbols-outlined"> star_rate</span>
+							<th class="star-wrap" style="width:17%;" >
+							
+								<span th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
+							    <span th:if="${comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-comm.starPoint)}" class="material-icons star-gray"> star</span>
+						        
 							</th>
 						<tr>			
 					</table>
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
+					
 					<div class="btn-opt">
-						<span class="material-icons">thumb_up</span>
-						<span class="count"> 0 </span>
+						<span class="like-box">
+							<span th:if="${comm.isLike ==1}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up</span>
+							<span th:if="${session.member != null && comm.isLike ==0}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up_off_alt</span>
+							<span th:if="${session.member == null && comm.isLike ==0}" class="material-icons" >thumb_up_off_alt</span>
+							<span th:text="${comm.likeCount}"></span> 
+						</span>
+
 						<span class="material-icons show-recomm">textsms </span>
-						<span class="count"> 0 </span>	
-						<span class="material-icons dots" id="dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+
+						
+
+						<span class="count" th:text="${comm.reCommCount}">  </span>
+						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
+						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
+						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -281,7 +360,7 @@
 					</div>  
 					<textarea class="re-comm" name="reCommentContent"></textarea>
 					<div>
-						<button type="button" class="btn-primary " th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">등록</button>
+						<button type="button" class="btn-primary btn-form2" th:onclick="windowComment(this,[[${session.member.memberId}]],[[${comm.commentNo}]],[[${comm.contentNo}]] );">등록</button>
 					</div>
 				</div>	
 				<!-- 회원 제약조건 <tr th:if="${session.member !=null && session.member.memberId == n.memberId}">-->
@@ -289,24 +368,37 @@
 				<!-- 댓글 출력 -->
 				<th:block th:each="re : ${recommList}">
 					<div class="line2">
-						<div th:text= "${re.memberId}" style="width:15%;"></div>
-						<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
+						<div class="line2-top">					
+							<div th:text= "${re.memberId}" style="width:15%;"></div>
+							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
+						</div>						
 						<th:block th:if="${session.member != null}">	
 							<th:block th:if="${session.member.memberId == re.memberId}">
-								<div class="right-icon">
+								<div class="btn-opt">
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons btn btn-primary show-recomm2" >create </span>							
-								    <span class="material-icons" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
-									<span class="material-icons dots" > more_vert </span>
+									<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
+								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
+									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
+									<div class="report-wrap" style="display: none;" >
+										<input type="hidden" th:value="${re.memberId}">
+										<input type="hidden" th:value="re+${re.reCommentNo}">
+										<input type="radio" id="Rereport-1" name="report-reason" value="욕설">
+										<label for="Rereport-1" class="report btn-primary">욕설</label>
+										<input type="radio" id="Rereport-2" name="report-reason" value="혐오발언">
+										<label for="Rereport-2" class="report btn-primary">혐오발언</label>
+										<input type="radio" id="Rereport-3" name="report-reason"  value="스포일러">
+										<label for="Rereport-3" class="report btn-primary">스포일러</label>
+										<input type="radio" id="Rereport-4" name="report-reason" value="도배">
+										<label for="Rereport-4" class="report btn-primary">도배</label>
+									</div>						
 								</div>
 				<!-- 대댓글 입력 -->
-								<div class="input-box2" th:if="${session.member != null}">				
+								<div class="input-box2" style="background-color: transparent;" th:if="${session.member != null}">				
+									 
+									<textarea class="re-comm2" name="reCommentContent"></textarea>
 									<div>
-										<span class="material-icons">subdirectory_arrow_right</span>									
-									</div>  
-									<textarea class="re-comm" name="reCommentContent"></textarea>
-									<div>
-										<button type="button" class="btn-primary"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );"> 등록</button>
+										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );">수정</button>
 									</div>
 								</div>
 							</th:block>	
@@ -317,10 +409,53 @@
 				
 			</div>	
 			
+	<!-- 본문 수정 모달 -->
+			<button id="edit-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
+			<div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+	            <div class="modal-dialog">
+	                <div class="modal-content">
+	                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
+	                    <div class="container">
+	                        <div class="row justify-content-center">
+	                            <div class="col-lg-8">
+	                                <div class="modal-body">
+	                                    <!-- Project details-->
+	                                    <h6 class="text-uppercase">댓글수정</h6>
+	                                    <p class="item-intro text-muted">코멘트를 수정하세요</p>
+	                                    
+	                                    <div class="inputCommentBox">
+													<div>
+														<span class="material-icons">account_box</span>									
+													</div>  
+													
+		                                    <form action="/comment/update" class="comment-update-frm"   method="post">
+														<input type="hidden" name="commentNo" >
+														
+														<div class="input-item">
+															<textarea name="commentContent" ></textarea>
+														</div>
+													
+														<button  class="btn btn-primary btn-l text-uppercase" data-bs-success="modal" type="submit">
+		                                       			 <i class="fas fa-times me-1"></i>
+		                                       				 수정
+		                                   				</button>
+											</form>
+		                                   				
+													
+													<!--  <input type="hidden" name="commentNo" th:value="${c.commentNo}">-->
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
 			
-			<!-- 모달 -->
-			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#modal"></button>
-	        <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog">
+			
+			<!-- 신고 모달 -->
+			<button id="report-modal-btn" style="display:none" data-bs-toggle="modal" data-bs-target="#report-modal"></button>
+	        <div class="portfolio-modal modal fade" id="report-modal" tabindex="-1" role="dialog">
 	           <div class="modal-dialog">
 	                <div class="modal-content rating-modal">
 	                    <div class="close-modal" data-bs-dismiss="modal"><img src="/assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -333,9 +468,10 @@
 	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 글을</span><br>
 	                                   <span class="item-intro fs-1 fw-bolder" id="reason-confirm"></span>	
 	                                   <span class="item-intro fs-1 fw-bolder text-muted">의 이유로 신고 하시겠습니까?</span>
+	                                   <p class="item-intro fw-bolder mt-5" style="color: #dc3545">허위 신고시 불이익이 있을 수 있습니다.</p>
 	                                   <div class="btn-wrap mt-5">
 		                                   <button class="btn btn-primary btn-xl" data-bs-dismiss="modal"
-												th:onClick="insertReport(this);" >
+												th:onClick="insertReport();" >
 		                                   		<span class="material-icons" style="font-size : 25px;">radio_button_unchecked</span>확인</button>		
 		                                   <button class="btn btn-secondary btn-xl" data-bs-dismiss="modal" type="button">
 		                                   		<span class="material-icons" style="font-size : 25px;">close</span>취소</button>
@@ -356,17 +492,20 @@
 	<script src="/js/sweetalert.min.js"></script>
 	<script th:inline="javascript">
 	const loginMemberId = [[${session.member?.memberId}]];
+	let reportBtn;
 	
 		// '...' 누르면 나오게 하는 이벤트
-		$("#dots").on("click",function(){
-			$(".report-wrap").toggle();
+		$(".dots").on("click",function(){
+			$(this).parent().find(".report-wrap").toggle();
 		});
 		//댓글창 누르면 나오게 하는 이벤트
 		$(".show-recomm").on("click",function(){
-			$(this).parent().parent().next().toggle();
+			$(this).parent().parent().next().slideToggle();
 		});
 		//신고 클릭시 전송 이벤트
 		$("[name=report-reason]").on("click",function(){
+			reportBtn = $(this).parent().parent().find(".dots");
+			$(this).parent().hide();
 			const reportedId = $(this).parent().children().eq(0).val();
 			const reportReason = $(this).val();
 			const writeNo = $(this).parent().children().eq(1).val();
@@ -376,7 +515,7 @@
 			$("#report-modal-btn").click();
 		});
 		//신고 접수 함수
-		function insertReport(obj,memberId,commentNo){
+		function insertReport(){
 			const reporterId = [[${session.member?.memberId}]];
 			const reportedId = $("#reported-id").text();
 			const reason = $("#reason-confirm").text();
@@ -389,12 +528,13 @@
 					console.log("success");
 				},
 				error : function(error){
-					console.log("Error");
+					reportBtn.next().show();
+					reportBtn.hide();
 				}
 			});
 		}
 		
-		
+		/*
 		$(".windowShow").on("click",function(){
 			const index = $(".windowShow").index(this); 
 			if($(this).text() === "▼"){
@@ -405,8 +545,8 @@
 			
 			$(".inputBox").eq(index).slideToggle();
 		});
-		
-				
+		*/
+			
 		
 		function windowComment(obj,memberId,commentNo,contentNo){		
 			console.log(commentNo);
@@ -417,7 +557,7 @@
 			form.attr("action","/comment/reComm");//<form action="/notice/updateComment"></form>
 			form.attr("method","post"); 	//<form action="/notice/updateComment" method="post"></form>
 			
-			//form.hide();
+			form.hide();
 			
 			//2. form태그 내부에 전송하고 싶은 데이터를 input, textarea, select..등등의 태그로 삽입
 			const memberIdInput = $("<input>"); 
@@ -448,8 +588,12 @@
 		};
 		
 		
+		
+		
 		$(".show-recomm2").on("click",function(){
-			$(this).parent().next().toggle();
+			//const reCommContent = $(this).parent().prev().prev().text();
+			//$(this).parent().prev().children().text();
+			$(this).parent().next().slideToggle();
 		});
 		
 		function windowComment2(obj,reCommentNo,commentNo){		
@@ -515,8 +659,65 @@
 				
 			});
 		}
+		function commUpdate(commentNo){			
+			  				
+			$("[name=commentNo]").val(commentNo);
+			
+		};
+		
+		function commDelete(commentNo){
+			swal({
+				title : "댓글 삭제",
+				text : "댓글 삭제 할까요?",
+				icon : "warning",
+				buttons : {
+					cancel : {
+						text : "취소",
+						value : false,
+						visible : true,
+						className: "btn-secondary",
+						closeModal : true
+					},
+					confirm : {
+						text:"삭제",
+						value: true,
+						visible : true,
+						className: "btn-primary",
+						closeModal : true									
+					}
+				}				
+			}).then(function(isConfirm){
+				console.log(isConfirm); 
+				
+				if(isConfirm){
+					location.href="/comment/commDelete?commentNo="+commentNo;
+				}
+				
+			});
+		}
 		
 		
+		function likepush(obj,commentNo){
+			//thumb_up     //thumb_up_off_alt
+			//현재 상태를 구분
+			const currentText = $(obj).text();
+			const isLike = (currentText === "thumb_up_off_alt")?0:1;
+			$.ajax({
+				url: "/comment/likepush",
+				data : {commentNo : commentNo , isLike: isLike},
+				type : "post",
+				success : function(data){
+					//아이콘 변경
+					if(isLike === 0){
+						$(obj).text("thumb_up");
+					}else{
+						$(obj).text("thumb_up_off_alt");
+					}
+					//좋아요 갯수 변경
+					$(obj).next().text(data);
+				}
+			})
+		}
 	</script>
 	
 	

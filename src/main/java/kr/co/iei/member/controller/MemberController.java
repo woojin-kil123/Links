@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberSerivce;
 import kr.co.iei.member.model.vo.BuMember;
@@ -54,7 +56,7 @@ public String adminMsg(Model model) {
 		 model.addAttribute("icon","error");
 		 model.addAttribute("loc","/member/loginFrm");
 		 return "common/msg";
-	 }else if(member.getDel()=="Y"){
+	 }else if(member.getDel().equals("Y")){
 		 model.addAttribute("title","로그인 실패");
 		 model.addAttribute("text","이미 탈퇴한 회원입니다.");
 		 model.addAttribute("icon","error");
@@ -157,8 +159,8 @@ public String adminMsg(Model model) {
  @GetMapping(value="/delete")
  
  public String delete(@SessionAttribute Member member, Model model) {
-	 int memberNo = member.getMemberNo();
-	 int result =memberService.deleteMember(memberNo);
+	 String memberId = member.getMemberId();
+	 int result =memberService.deleteMember(memberId);
 	 if(result>0) {
 		 model.addAttribute("title","회원 탈퇴 완료");
 		 model.addAttribute("text","수고하셨습니다");
@@ -261,5 +263,20 @@ public String adminMsg(Model model) {
 	 int result= memberService.ajaxscoreNo(MemberId);
 	 return result;
  }
- 
+ 	//문의 페이지 이동 컨트롤러 
+	@GetMapping("/inquiryFrm")
+	public String inquiyFrm(HttpServletRequest request, Model model) {
+		HttpSession session =  request.getSession();
+		Member m = (Member)session.getAttribute("member");
+		String memberRole = m.getMemberRole();
+		if(memberRole.equals("business")) {
+			int memberNo = m.getMemberNo();
+			BuMember bm = memberService.selectBusiness(memberNo);
+			model.addAttribute("companyName",bm.getCompanyName());
+			model.addAttribute("companyNo",bm.getCompanyNo());
+		}
+		model.addAttribute("member",m);		
+		
+		return "member/inquiryFrm";
+	}
 }

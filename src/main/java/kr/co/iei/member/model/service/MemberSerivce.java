@@ -34,9 +34,9 @@ public class MemberSerivce {
 		return result;
 	}
 	@Transactional
-	public int deleteMember(int memberNo) {
-		int result=memberDao.deleteMember(memberNo);
-		int result2 =memberDao.insertdeleteMember(memberNo);
+	public int deleteMember(String memberId) {
+		int result=memberDao.deleteMember(memberId);
+		int result2 =memberDao.insertdeleteMember(memberId);
 		return result;
 	}	
 	
@@ -68,6 +68,11 @@ public class MemberSerivce {
 		int result =memberDao.ajaxscoreNo(MemberId);
 		return result;
 		
+	}
+	//사업자 정보 읽어오는 서비스
+	public BuMember selectBusiness(int memberNo) {
+		BuMember bm = memberDao.selectBusiness(memberNo);
+		return bm;
 	}
 	
 }

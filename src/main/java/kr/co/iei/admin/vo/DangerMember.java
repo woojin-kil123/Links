@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Business {
-	private String companyName;
-	private String inquiryCategory;
+public class DangerMember {
+	private String memberId;
 	private String memberPhone;
-	private String inquiryDate;
-	private String inquiryProgress;
+	private String memberEmail;
+	private int warningLevel;
+	private int reported;
+	private int falseReport;
 }

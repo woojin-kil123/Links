@@ -7,64 +7,59 @@
 	*{
 	font-family: ns-r;
 	}
-.find-container{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	}
+
 .page-title{
 	font-size: 32px;
     font-weight: bold;
+	height: 60px;
+	line-height: 60px;
+	margin-bottom: 40px;	
 	 padding-bottom : 40px;
 	 text-align: center;
 	}
 #join{
-	padding-bottom: 50px;
 	width: 150px;
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
+	margin: 0 auto;
 }	
 #bu-join{
-	margin-top: 20px;
-	padding-bottom: 50px;
 	width: 150px;
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
+	margin: 0 auto;
+	margin-top: 40px;
 }	
-.page-title{
-	font-size: 27px;
-	height: 60px;
-	line-height: 60px;
-	margin-bottom: 20px;	
-	 padding-bottom : 40px;
-	 text-align: center;
+	body{
+	    display: flex;
+	    flex-direction: column;
+	    height: 100vh;
 	}
-	
+	#section-wrap{
+		flex-grow: 1;
+		padding-top:150px;	
+	}
+	.btn-loc{
+	display: flex;
+	}
 </style>
 </head>
 <body>
 <th:block th:include="common/header"></th:block>
-<main class="content find-container">
-		<section class="section find-wrap">
+<main class="content find-container" id=section-wrap>
+		<section class="section find-wrap"  style="padding: 0;">
 			<div class="page-title">회원가입</div>
-			<div>
-		<button class="btn-primary" id="join" >일반 회원가입</button>
-			</div>
-			<div>
-			<button class="btn-primary" id="bu-join" >사업자 회원가입</button>
-			</div>
+			<form action="/member/joinFrm" method="get" class="btn-loc">
+		<button class="btn-primary " id="join" >일반 회원가입</button>
+			</form>
+					<form action="/member/bujoinFrm" method="get" class="btn-loc">
+			<button class="btn-primary " id="bu-join" >사업자 회원가입</button>
+				</form>
 		</section>
 	</main>
-	<script>
-		$("#join").on("click",function(){
-		location.href="/member/joinFrm";			
-		})
-		$("#bu-join").on("click",function(){
-		location.href="/member/bujoinFrm";		
-		})
-	</script>
+
 <th:block th:include="common/footer"></th:block>
 </body>
 </html>

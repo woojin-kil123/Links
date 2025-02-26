@@ -9,8 +9,6 @@
 	}
 	.find-container{
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	}
 .page-title{
 		font-size: 32px;
@@ -21,9 +19,7 @@
 	.find-wrap .input-wrap{
 		padding : 25px 30px;
 	}
-	.idfind-button-box{
-	padding : 50px 100px;
-	}
+
 	.idfind-button-box>button{
 		width: 100%
 	}
@@ -35,25 +31,28 @@
 	.input-wrap{
 	display:flex;
 	width: 100%;
+	margin: 0 auto;
+	margin-top: 20px;
 	}
 	.input-type{
 	width: 45%;
 	display: flex;
-	margin-left: 10px;
+
 	}
 	.input-title{
-	padding-top: 10px;
 	width: 20%;	
 	text-align: center;
 	}
 	.find-wrap{
-		width: 1000px;
+		width: 800px;
 		margin: 0 auto;
 		padding-top : 150px;
 		text-align: center
 	}
 	.lg{
 	align-content: center;	
+	margin: 0 auto;
+	height: 35px;
 	}
 	.page-title{
 	font-size: 27px;
@@ -64,15 +63,27 @@
 	 text-align: center;
 	}
 	.input-wrap{
-margin-left: 100px;
+	margin-left: 100px;
 }
+body{
+	    display: flex;
+	    flex-direction: column;
+	    height: 100vh;
+	}
+	#section-wrap{
+		flex-grow: 1;
+			
+	}
+	.login-form{
+	margin: 0 auto;
+	}
 </style>
 <body>
 <th:block th:include="common/header"></th:block>
-	<main class="content find-container">
-		<section class="section find-wrap">
+	<main class="content find-container" id="section-wrap">
+		<section class="section find-wrap" >
 			<div class="page-title">아이디 찾기</div>
-			<form action="/member/idFind" class="form-control" method="get">
+			<form action="/member/idFind" class="form-control login-form" method="get">
 			<div class="input-wrap">
 			<div class="input-title">
 				<label for="memberName">이름</label>
@@ -90,7 +101,7 @@ margin-left: 100px;
 				</div>
 				</div>
 				<div class="idfind-button-box">
-					<button type="submit" class="btn-primary lg" style="width:20%; margin-right:100px;">아이디찾기</button>
+					<button type="submit" class="btn-primary lg" style="width:20%; ">아이디찾기</button>
 				</div>
 			</form>
 		</section>

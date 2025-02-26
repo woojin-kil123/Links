@@ -27,16 +27,49 @@ public class webConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		//로그인 인터셉터 경로 추가
 		registry.addInterceptor(new LoginInterceptor())
-				.addPathPatterns("/member/logout",
+				.addPathPatterns(
 								"/member/mypage",
 								"/member/delete",
 								"/member/changeinfo",
-								"/notice/**"
+								"/member/inquiryFrm",
+								"/member/ajaxcommNo",
+								"/member/ajaxscoreNo",
+								"member/inquiryFrm",
+								"/report/**",
+								"/comment/**",
+								"/contents/insertRating",
+								"/contents/insertContentLike",
+								"/contents/deleteContentLike",
+								"/contents/myContents",
+								"/contents/selectMyContents",
+								"/admin/**"
+								
 								)
-				.excludePathPatterns(	
+				.excludePathPatterns("/admin/plusAdClick",
+									"/admin/adUrl",
+									"/admin/insertInquiry",
+									"/admin/insertReport",
+									"/comment/mCommentMemberList",
+									"/comment/count",
+									"/comment/newMovieComment"
 									);
 		//관리자 페이지 기능 경로 추가
 		registry.addInterceptor(new AdminInterceptor())
-				.addPathPatterns("");
+				.addPathPatterns("/admin/**",
+								"/news//writeFrmEditor",
+								"/news/write",
+								"/news/delete",
+								"/news/updateFrm",
+								"/news/update",
+								"/news/editorImage"
+								)
+				.excludePathPatterns(
+								"/admin/plusAdClick",
+								"/admin/adUrl",
+								"/admin/insertInquiry",
+								"/admin/insertReport",
+								"/comment/mCommentMemberList",
+								"/comment/count"
+						);
 	}
 }

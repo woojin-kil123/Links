@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.admin.model.dao.AdminDao;
 import kr.co.iei.admin.vo.Ad;
+import kr.co.iei.admin.vo.Inquiry;
 import kr.co.iei.admin.vo.Report;
 import kr.co.iei.admin.vo.Stats;
 
@@ -56,8 +57,52 @@ public class AdminService {
 		}
 		return result;
 	}
-	
 	public String getAdUrlByPosition(String position) {
 		return adminDao.getAdUrlByPosition(position);
+	}
+	@Transactional
+	public int updateInquiry(int inquiryProgress, int inquiryNo) {
+		int result = adminDao.updateInquiryProgress(inquiryProgress, inquiryNo);
+		return result;
+	}
+	@Transactional
+	public int insertInquiry(Inquiry i) {
+		int result = adminDao.insertInquiry(i);
+		return result;
+	}
+	public Inquiry selectInquiry(int inquiryNo) {
+		Inquiry i = adminDao.selectInquiry(inquiryNo);
+		return i;
+	}
+	public List normalView() {
+		List list = adminDao.normalView();
+		return list;
+	}
+	public int updateReport(Report r) {
+		int result = adminDao.updateReport(r);
+		return result;
+	}
+	public List dangerUserList() {
+		List list = adminDao.dangerUserList();
+		return list;
+	}
+	@Transactional
+	public void updateWarningLevel(String memberId) {
+		adminDao.updateWarningLevel(memberId);
+	}
+	@Transactional
+	public void kickMember(String memberId) {
+		int result = adminDao.kickMember(memberId);
+		if(result>0){
+			adminDao.insertKickedMember(memberId);
+		}
+	}
+	public List kickedMember() {
+		List list = adminDao.kickedMember();
+		return list;
+	}
+	@Transactional
+	public void plusAdClick(String adPosition) {
+		adminDao.plusAdClick(adPosition);
 	}
 }

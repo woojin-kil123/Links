@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -42,9 +42,7 @@
 	border-bottom: 1px solid black;
 	width : 100%
 	}
-	.input-title{
-	padding-top: 10px;
-	}
+
 	.email{
 	width:35%;
 	margin-right: 10px;
@@ -96,6 +94,13 @@ margin-left: 10px;
 	}
 	.input-wrap{
 margin-left: 100px;
+}
+#auth-code{
+margin: 0 auto;
+margin-top: 5px;
+}
+#auth-btn{
+margin-top: 10px;
 }
 </style>
 </head>
@@ -158,25 +163,22 @@ margin-left: 100px;
 	document.querySelector("form[action='/member/pwFind']").addEventListener("submit", function (event) {
 	    event.preventDefault(); // 기본 제출 막기
 	    let isValid = true;
-	 	const memberId=$("#memberId").val();
-	 	const memberName=$("#memberName").val();
-	 	const memberEmail=$("#memberEmail").val();
-	    if (memberId="" ) {
+	    let memberId = document.getElementById("memberId").value.trim();
+	    let memberName = document.getElementById("memberName").value.trim();
+	    let memberEmail = document.getElementById("memberEmail").value.trim();
+	    if (!memberId) {
 	        alert("아이디를 입력하세요");
 	        isValid = false;
 	    }
-	    if (memberName ="") {
+	    if (!memberName) {
 	        alert("이름을 입력하세요");
 	        isValid = false;
 	    }
-	    if (memberEmail ="") {
+	    if (!memberEmail) {
 	        alert("이메일을 입력하세요");
 	        isValid = false;
 	    }
-	    if (!mailCode) {
-	        alert("이메일 인증을 완료해주세요.");
-	        isValid = false;
-	    }
+	    
 	    if (isValid) {
 	        this.submit();
 	    }
@@ -225,6 +227,10 @@ margin-left: 100px;
 				$("#auth-code").prop("readonly",true);
 				$("#auth-btn").prop("disabled",true);
 				$("#time-zone").removeId;
+				const memberEmail1 =$("#memberEmail1").val();
+				const memberEmail2 =$("#memberEmail2").val();
+				const memberEmail= memberEmail1+"@"+memberEmail2
+				$("#memberEmail").val(memberEmail);
 			}else{
 				$("#authMsg").text("인증 번호를 확인해 주세요");
 				$("#authMsg").css("color","red");

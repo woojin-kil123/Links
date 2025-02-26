@@ -46,15 +46,16 @@
 }
 
 .stat-info h3 {
+	font-family : ns-b;
     margin: 0;
     text-align : center;
-    font-size: 16px;
+    font-size: 18px;
     color: #333;
 }
 
 .stat-info p {
     margin: 5px 0 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #007bff;
 }
@@ -66,6 +67,7 @@
 }
 
 .tab-btn {
+	font-family : ns-r;
 	width : 15%;
     padding: 10px 15px;
     border: none;
@@ -73,10 +75,11 @@
     background-color: #ddd;
     margin: 0 5px;
     border-radius: 5px;
+    font-size : 20px;
 }
 
 .tab-btn.active {
-	font-weight: bolder;
+	font-family : ns-b;
     background-color: #FFC800;
     color: white;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -84,12 +87,13 @@
 
 .table-container {
     width: 100%;
+    min-height : 200px;
 }
 
 .table-container table {
     width: 100%;
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .table-container table input,select{
@@ -98,6 +102,7 @@
 
 /* 헤더 스타일 */
 .table-container th {
+	font-family : ns-b;
     background-color: #ffcc00;
     color: #fff;
 }
@@ -161,7 +166,7 @@
 	<th:block th:include="common/header"></th:block>
 	<section class="page-section" id="services">
 		<div class="container mt-5">
-	    	<h2>운영 통계</h2>
+	    	<h1>운영 통계</h1>
 		    <div class="stats-container mt-3">
 	        <div class="stat-box">
 	            <div class="stat-icon "><span class="material-icons ">groups</span></div>
@@ -193,14 +198,14 @@
 	        </div>
 	    </div>
 	    
-		<h2 class= "mt-5">관리 메뉴</h2>
+		<h1 class= "mt-5">관리 메뉴</h1>
 	    <!-- 메뉴 탭 -->
 	    <div class="tab-menu mt-3">
 	        <button class="tab-btn active" data-target="business">사업자 문의</button>
-	        <button class="tab-btn" data-target="user-inquiry">사용자 문의</button>
+	        <button class="tab-btn" data-target="normal">사용자 문의</button>
 	        <button class="tab-btn" data-target="ads">광고 관리</button>
-	        <button class="tab-btn" data-target="report-comments">신고 코멘트</button>
-	        <button class="tab-btn" data-target="dangerous-users">위험 회원</button>
+	        <button class="tab-btn" data-target="report">신고 코멘트</button>
+	        <button class="tab-btn" data-target="dangerUser">위험 회원</button>
 	    </div>
 	
 	    <!-- 테이블 컨테이너 -->
@@ -208,95 +213,171 @@
 		    <!-- 사업자 문의 -->
 		    <div id="business" class="tab-content active">
 		        <table id="business-table">
-	                <tr>
-	                    <th style="width : 20%;">사업자명</th>
-	                    <th style="width : 10%;">카테고리</th>
-	                    <th style="width : 20%;">연락처</th>
-	                    <th style="width : 20%;">등록일</th>
-	                    <th style="width : 10%;">진행 상태</th>
-	                    <th style="width : 10%;">관리</th>
-	                </tr>
-	                <!-- 데이터 추가 영역 -->
+		        	<thead>
+		                <tr>
+		                	<th style="width : 10%;">문의번호</th>	
+		                    <th style="width : 20%;">사업자명</th>
+		                    <th style="width : 20%;">연락처</th>
+		                    <th style="width : 20%;">등록일</th>
+		                    <th style="width : 10%;">진행 상태</th>
+		                    <th style="width : 20%;">관리</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+						<tr>
+							<td colspan=6 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr>                
+	                </tbody>
 		        </table>
 		    </div>
-		
 		    <!-- 사용자 문의 -->
-		    <div id="user-inquiry" class="tab-content">
-		        <table id="user-inquiry-table">
-	                <tr>
-	                    <th>사용자 ID</th>
-	                    <th>문의 카테고리</th>
-	                    <th>내용</th>
-	                    <th>날짜</th>
-	                    <th>관리</th>
-	                </tr>
-		                <!-- 데이터 추가 영역 -->
+		    <div id="normal" class="tab-content">
+		        <table id="normal-table">
+		        	<thead>
+		                <tr>
+		                    <th style="width : 10%;">문의번호</th>	
+		                    <th style="width : 20%;">문의 ID</th>
+		                    <th style="width : 20%;">연락처</th>
+		                    <th style="width : 20%;">등록일</th>
+		                    <th style="width : 10%;">진행 상태</th>
+		                    <th style="width : 20%;">관리</th>
+		                </tr>
+	                </thead>
+		            <tbody>
+		            	<tr>
+							<td colspan=6 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr> 
+		            </tbody>
 		        </table>
 		    </div>
-		
 		    <!-- 신고 코멘트 -->
-		    <div id="report-comments" class="tab-content">
-		        <table id="report-comments-table">
-	                <tr>
-	                    <th>코멘트 번호</th>
-	                    <th>신고자</th>
-	                    <th>피신고자</th>
-	                    <th>신고 사유</th>
-	                    <th>등록일</th>
-	                    <th>관리</th>
-	                </tr>
-		                <!-- 데이터 추가 영역 -->
+		    <div id="report" class="tab-content">
+		        <table id="report-table">
+		        	<thead>
+		                <tr>
+		                    <th style="width : 10%;">코멘트 번호</th>
+		                    <th style="width : 15%;">신고자</th>
+		                    <th style="width : 15%;">피신고자</th>
+		                    <th style="width : 20%;">신고 사유</th>
+		                    <th style="width : 15%;">등록일</th>
+		                    <th style="width : 25%;">관리</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+		                <tr>
+							<td colspan=6 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr> 
+		            </tbody>
 		        </table>
 		    </div>
 		    
 		    <!-- 광고 관리 -->
 		    <div id="ads" class="tab-content">
 		        <table id="ads-table">
-	                <tr>
-	                	<th style="width : 10%;">문의번호</th>
-	                    <th style="width : 20%;">사업자명</th>
-	                    <th style="width : 10%;">광고 위치</th>
-	                    <th style="width : 30%;">URL</th>
-	                    <th style="width : 15%;">만료일</th>
-	                    <th style="width : 15%;">관리</th>
-	                </tr>
+		        	<thead>
+		                <tr>
+		                	<th style="width : 10%;">문의번호</th>
+		                    <th style="width : 15%;">사업자명</th>
+		                    <th style="width : 10%;">광고 위치</th>
+		                    <th style="width : 30%;">URL</th>
+		                    <th style="width : 10%;">클릭 수</th>
+		                    <th style="width : 15%;">만료일</th>
+		                    <th style="width : 15%;">관리</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+	                	<tr>
+							<td colspan=6 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr> 
+	                </tbody>
 		        </table>
 		        <!-- <button class="add-btn"><span class="material-icons">add</span></button> -->
 		    </div>
 		
 		    <!-- 위험 회원 -->
-		    <div id="dangerous-users" class="tab-content">
-		        <table id="dangerous-users-table">
-	                <tr>
-	                    <th>사용자명</th>
-	                    <th>위험도</th>
-	                    <th>상태</th>
-	                    <th>관리</th>
-	                </tr>
-		                <!-- 데이터 추가 영역 -->
+		    <div id="dangerUser" class="tab-content">
+		        <table id="dangerUser-table">
+		        	<thead>
+		                <tr>
+		                    <th style="width : 15%;">회원ID</th>
+		                    <th style="width : 15%;">전화번호</th>
+		                    <th style="width : 20%;">Email</th>
+		                    <th style="width : 10%;">받은신고</th>
+		                    <th style="width : 10%;">허위신고</th>
+		                    <th style="width : 10%;">현재 등급</th>
+		                    <th style="width : 20%;">관리</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+	                	<tr>
+							<td colspan=7 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr> 
+	                </tbody>
 		        </table>
 		    </div>
 		</div>
-	    <h2 class= "mt-5">검색</h2>
-	    
-	</div>
+	   	<h1 class="mt-5">강제 탈퇴 회원</h1>
+	    <div class="table-container">
+		    <!-- 강제 탈퇴 회원 -->
+		    <div id="kicked">
+		        <table id="kicked-table">
+		        	<thead>
+		                <tr>
+		                	<th style="width : 20%;">탈퇴ID</th>	
+		                    <th style="width : 20%;">전화번호</th>
+		                    <th style="width : 20%;">Email</th>
+		                    <th style="width : 20%;">탈퇴일</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+						<tr>
+							<td colspan=4 class="btn-info" style="opacity: 0.5">등록된 정보가 없습니다.</td>
+						</tr>                
+	                </tbody>
+		        </table>
+		    </div>
+		</div>
 	</section>	
 	<script src="/js/datepicker.js"></script> 
 	<script src="/js/datepicker.ko.js"></script>
 	<script>
 
-	
-	
-    $(".tab-btn").click(function () {
+    $(".tab-btn").on("click",function () {
         $(".tab-btn").removeClass("active");
         $(this).addClass("active");
         $(".tab-content").removeClass("active");
         //data 사용하면 자료형 그대로 가져오기때문에 문자열로 더해짐
         const activeTab = $(this).data("target")
         $("#"+activeTab).addClass("active");
-             
+        
+        //돌아갈 함수 설정
+		loadTap(activeTab);
     });
 	
+    function kicked(){
+    	$.ajax({
+            url: "/admin/kickedMember",
+            method: "GET",
+            success: function (data) {
+            	if(data!=""){
+	            	const table = $("#kicked-table>tbody");
+	            	table.empty();
+	                $.each(data, function (index, item) {
+	                	const row = $("<tr>");
+	                    row.append($("<td>").text(item.memberId));
+	                    row.append($("<td>").text(item.memberPhone));
+	                    row.append($("<td>").text(item.memberEmail));
+	                    row.append($("<td>").text(item.delDate));
+	                    table.append(row);
+	                });
+            	}
+            },
+            error : function(){
+            	console.log("error");
+            }
+        });
+    }
+    
 	//통계불러오기
     function loadStats() {
         $.ajax({
@@ -320,17 +401,49 @@
             url: "/admin/businessView",
             method: "GET",
             success: function (data) {
-            	const table = $("#business-table");
-                $.each(data, function (index, item) {
-                	const row = $("<tr>");
-                    row.append($("<td>").text(item.companyName));
-                    row.append($("<td>").text(item.inquiryCategory));
-                    row.append($("<td>").text(item.memberPhone));
-                    row.append($("<td>").text(item.inquiryDate));
-                    row.append($("<td>").text(item.inquiryProgress));
-                    row.append($("<td>").append($("<button></button>").addClass("manage-btn btn-primary").text("관리")));
-                    table.append(row);
-                });
+            	if(data!=""){
+	            	const table = $("#business-table>tbody");
+	            	table.empty();
+	                $.each(data, function (index, item) {
+	                	const row = $("<tr>");
+	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
+							const inquiryNo = $(this).text();
+							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
+	                	}));
+	                    row.append($("<td>").text(item.companyName));
+	                    row.append($("<td>").text(item.memberPhone));
+	                    row.append($("<td>").text(item.inquiryDate));
+	                    row.append($("<td>").text("미처리").css("color","#dc3545"));
+	                    
+	                    const btns = $("<td>");
+	                    btns.append($("<button>").addClass("manage-btn btn-secondary").text("삭제").on("click",function(){
+	                    	const btn = $(this);
+	                    	const inquiryNo = btn.closest("tr").children().first().text();
+							$.ajax({
+								url : "/admin/updateInquiry",
+								data : {"inquiryProgress" : 0, "inquiryNo":inquiryNo},
+								success: function(data){
+									btn.closest("tbody").empty();
+									BusinessView();
+								}
+							});
+	                    }));
+	                    btns.append($("<button>").addClass("manage-btn btn-primary").text("승인").on("click",function(){
+	                    	const btn = $(this);
+	                    	const inquiryNo = btn.closest("tr").children().first().text();
+							$.ajax({
+								url : "/admin/updateInquiry",
+								data : {"inquiryProgress" : 2, "inquiryNo":inquiryNo},
+								success: function(data){
+									btn.closest("tbody").empty();
+									BusinessView();
+								}
+							});//ajax 종료                    		
+	                    }));
+	                    row.append(btns);
+	                    table.append(row);
+	                });
+            	}
             },
             error: function () {
                 console.error("사업자 문의 데이터 로드 실패");
@@ -339,26 +452,58 @@
     }
 	
     // 사용자 문의
-    function loadUserInquiryData() {
-        $.ajax({
-            url: "/get_user_inquiry_data",
+    function normalView() {
+    	$.ajax({
+            url: "/admin/noramlView",
             method: "GET",
-            dataType: "json",
             success: function (data) {
-                const tableBody = $("#user-inquiry-table");
-
-                $.each(data, function (index, item) {
-                	const row = $("<tr></tr>");
-                    row.append($("<td></td>").text(item.user_id));
-                    row.append($("<td></td>").text(item.category));
-                    row.append($("<td></td>").text(item.content));
-                    row.append($("<td></td>").text(item.date));
-                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").text("관리")));
-                    tableBody.append(row);
-                });
+            	if(data!=""){
+	            	const table = $("#normal-table>tbody");
+	            	table.empty();
+	                $.each(data, function (index, item) {
+	                	const row = $("<tr>");
+	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
+							const inquiryNo = $(this).text();
+							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
+	                	}));
+	                    row.append($("<td>").text(item.memberId));
+	                    row.append($("<td>").text(item.memberPhone));
+	                    row.append($("<td>").text(item.inquiryDate));
+	                    row.append($("<td>").text("미처리").css("color","#dc3545"));
+	                    
+	                    const btns = $("<td>");
+	                    btns.append($("<button>").addClass("manage-btn btn-secondary").text("삭제").on("click",function(){
+	                    	const btn = $(this);
+	                    	const inquiryNo = btn.closest("tr").children().first().text();
+							$.ajax({
+								url : "/admin/updateInquiry",
+								data : {"inquiryProgress" : 0, "inquiryNo":inquiryNo},
+								success: function(data){
+									btn.closest("tbody").empty();
+									BusinessView();
+									//허위 문의 report?
+								}
+							});
+	                    }));
+	                    btns.append($("<button>").addClass("manage-btn btn-primary").text("처리완료").on("click",function(){
+	                    	const btn = $(this);
+	                    	const inquiryNo = btn.closest("tr").children().first().text();
+							$.ajax({
+								url : "/admin/updateInquiry",
+								data : {"inquiryProgress" : 4, "inquiryNo":inquiryNo},
+								success: function(data){
+									btn.closest("tbody").empty();
+									BusinessView();
+								}
+							});//ajax 종료                    		
+	                    }));
+	                    row.append(btns);
+	                    table.append(row);
+	                });
+            	}
             },
             error: function () {
-                console.error("사용자 문의 데이터 로드 실패");
+                console.error("사업자 문의 데이터 로드 실패");
             }
         });
     }
@@ -368,144 +513,183 @@
             url: "/admin/adView",
             method: "GET",
             success: function (data) {
-            	console.log(data);
-            	const table = $("#ads-table");
-            	let inputRow;
-            	let addBtn;
-                $.each(data, function (index, item) {
-                	if(item.inquiryProgress==3){
-	                	const row = $("<tr>").addClass("ad-data");
-	                	row.append($("<td>").text(item.inquiryNo));
-	                    row.append($("<td>").text(item.companyName));
-	                    row.append($("<td>").text(item.adPosition));
-	                    row.append($("<td>").text(item.adUrl));
-	                    row.append($("<td>").text(item.expireDate));
-	                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("삭제").on("click",function(){
-	                    	const inquiryNo = $(this).closest("tr").children().first().text();
-	                    	$.ajax({
-	                    		url:"/admin/deleteAd",
-	                    		data : {"inquiryNo":inquiryNo},
-	                    		success : function(data){
-	                    			$(".ad-data").remove();
-	                    			//$(this).closest("tr").remove();
-                                	$(".add-btn").remove();
-                                	adView();
-	                    		}
-	                    	})
-	                    })));
-	                    table.append(row);
-                	}
-                	if (item.inquiryProgress == 2) {
-                        // SELECT 박스 추가
-                        let select;
-                        //inputRow가 없는 경우 select태그 생성
-                        if (!inputRow) {
-                            select = $("<select>").addClass("form-control inquiry-select");
-                            select.append($("<option>").val("").text("선택"));
-                         	// 모든 inquiryNo 옵션 추가
-                            $.each(data, function (_, optionItem) {
-                                if (optionItem.inquiryProgress == 2) {
-                                    select.append($("<option>").val(optionItem.inquiryNo).text(optionItem.inquiryNo));
-                                }
-                            });
-                            const selectTd = $("<td>").append(select);
-                            // 입력 tr
-                            inputRow = $("<tr>").addClass("input-hidden ad-data")
-                            const companyNameInput = $("<input>").addClass("form-control companyName");
-                            const adPositionInput = $("<input>").addClass("form-control");
-                            const adUrlInput = $("<input>").addClass("form-control");
-                            const expireDateInput = $("<input>").addClass("form-control").attr("id", "datepicker"); 
-
-                            inputRow.append(selectTd);
-                            inputRow.append($("<td>").append(companyNameInput));
-                            inputRow.append($("<td>").append(adPositionInput));
-                            inputRow.append($("<td>").append(adUrlInput));
-                            inputRow.append($("<td>").append(expireDateInput));
-
-                            const btns = $("<td>");
-                            btns.append($("<button>").addClass("manage-btn btn-secondary").text("취소").on("click", function () {
-                                    	$(this).closest("tr").addClass("input-hidden");
-                                    	$(".add-btn").show();
-                                   	 })
-                            );
-                            btns.append($("<button>").addClass("manage-btn btn-primary").text("추가").on("click", function () {
-                                        const inquiryNo = $(".inquiry-select").val();
-                                        const input = $(this).closest("tr").find("input");
-                                        $.ajax({
-                                            url: "/admin/insertAd",
-                                            type: "post",
-                                            data: {
-                                            	"inquiryNo" : inquiryNo,
-                                                "companyName": input.eq(0).val(),
-                                                "adPosition": input.eq(1).val(),
-                                                "adUrl": input.eq(2).val(),
-                                                "expireDate": input.eq(3).val()
-                                            },
-                                            success: function (data) {
-                                            	$(".ad-data").remove();
-                                            	$(".add-btn").remove();
-                                                adView();
-                                            },
-                                        });
-                                    })
-                            );
-                            inputRow.append(btns);
-                            table.append(inputRow);
-
-                            // 날짜 선택 라이브러리 적용
-                            $("#datepicker").datepicker({
-                                language: "ko",
-                                setDate : "today"
-                            });
-
-                            // SELECT 값 변경 시 해당 행만 표시하고 값 자동 채우기
-                            select.on("change", function () {
-                                const selectedNo = $(this).val();
-                                const selectedItem = data.find((d) => d.inquiryNo == selectedNo);
-                                $(".input-hidden").hide(); // 모든 행 숨김
-                                inputRow.show(); // 선택한 행만 보이게
-                                if (selectedItem) {
-                                    // 선택한 행에 데이터 채우기
-                                    companyNameInput.val(selectedItem.companyName);
-                                }
-                            });
-                        }
-                        if (!addBtn){
-                        	addBtn = $("<button>").on("click",function(){
-                        		$(".input-hidden").removeClass("input-hidden");
-        						$(this).css("display","none");
-                        	});	
-	                        $("#ads").append(addBtn.addClass("add-btn").append($("<span>").addClass("material-icons").text("add")));
-                        }
-                    }//PROFRESS ==2 인경우 끝
-                });
+            	if(data!=""){
+	            	const table = $("#ads-table>tbody");
+	            	table.empty();
+	            	$(".add-btn").remove();
+	            	let inputRow;
+	            	let addBtn;
+	                $.each(data, function (index, item) {
+	                	if(item.inquiryProgress==3){
+		                	const row = $("<tr>");
+		                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
+								const inquiryNo = $(this).text();
+								location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
+		                	}));
+		                    row.append($("<td>").text(item.companyName));
+		                    row.append($("<td>").text(item.adPosition));
+		                    row.append($("<td>").text(item.adUrl));
+		                    row.append($("<td>").text(item.adClick));
+		                    row.append($("<td>").text(item.expireDate));
+		                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("삭제").on("click",function(){
+		                    	const btn = $(this);
+		                    	const inquiryNo = btn.closest("tr").children().first().text();
+		                    	$.ajax({
+		                    		url:"/admin/deleteAd",
+		                    		data : {"inquiryNo":inquiryNo},
+		                    		success : function(data){
+		                    			//$(this).closest("tr").remove();
+	                                	adView();
+		                    		}
+		                    	})
+		                    })));
+		                    table.append(row);
+	                	}
+	                	if (item.inquiryProgress == 2) {
+	                        // SELECT 박스 추가
+	                        let select;
+	                        //inputRow가 없는 경우 select태그 생성
+	                        if (!inputRow) {
+	                            select = $("<select>").addClass("form-control inquiry-select");
+	                            select.append($("<option>").val("").text("선택"));
+	                         	// 모든 inquiryNo 옵션 추가
+	                            $.each(data, function (_, optionItem) {
+	                                if (optionItem.inquiryProgress == 2) {
+	                                    select.append($("<option>").val(optionItem.inquiryNo).text(optionItem.inquiryNo));
+	                                }
+	                            });
+	                            const selectTd = $("<td>").append(select);
+	                            // 입력 tr
+	                            inputRow = $("<tr>").addClass("input-hidden")
+	                            const companyNameInput = $("<input>").addClass("form-control companyName");
+	                            const adPositionInput = $("<input>").addClass("form-control");
+	                            const adUrlInput = $("<input>").addClass("form-control");
+	                            const expireDateInput = $("<input>").addClass("form-control").attr("id", "datepicker"); 
+	
+	                            inputRow.append(selectTd);
+	                            inputRow.append($("<td>").append(companyNameInput));
+	                            inputRow.append($("<td>").append(adPositionInput));
+	                            inputRow.append($("<td>").append(adUrlInput));
+	                            inputRow.append($("<td>").append(expireDateInput));
+	
+	                            const btns = $("<td>");
+	                            btns.append($("<button>").addClass("manage-btn btn-secondary").text("취소").on("click", function () {
+	                                    	$(this).closest("tr").addClass("input-hidden");
+	                                    	$(".add-btn").show();
+	                                   	 })
+	                            );
+	                            btns.append($("<button>").addClass("manage-btn btn-primary").text("추가").on("click", function () {
+	                            			const btn =$(this);
+	                                        const inquiryNo = $(".inquiry-select").val();
+	                                        const input = btn.closest("tr").find("input");
+	                                        $.ajax({
+	                                            url: "/admin/insertAd",
+	                                            type: "post",
+	                                            data: {
+	                                            	"inquiryNo" : inquiryNo,
+	                                                "companyName": input.eq(0).val(),
+	                                                "adPosition": input.eq(1).val(),
+	                                                "adUrl": input.eq(2).val(),
+	                                                "expireDate": input.eq(3).val()
+	                                            },
+	                                            success: function (data) {
+	                                                adView();
+	                                            },
+	                                        });
+	                                    })
+	                            );
+	                            inputRow.append(btns);
+	                            table.append(inputRow);
+	
+	                            // 날짜 선택 라이브러리 적용
+	                            $("#datepicker").datepicker({
+	                                language: "ko",
+	                                setDate : "today"
+	                            });
+	
+	                            // SELECT 값 변경 시 해당 행만 표시하고 값 자동 채우기
+	                            select.on("change", function () {
+	                                const selectedNo = $(this).val();
+	                                const selectedItem = data.find((d) => d.inquiryNo == selectedNo);
+	                                $(".input-hidden").hide(); // 모든 행 숨김
+	                                inputRow.show(); // 선택한 행만 보이게
+	                                if (selectedItem) {
+	                                    // 선택한 행에 데이터 채우기
+	                                    companyNameInput.val(selectedItem.companyName);
+	                                }
+	                            });
+	                        }
+	                        if (!addBtn){
+	                        	addBtn = $("<button>").on("click",function(){
+	                        		$(".input-hidden").removeClass("input-hidden");
+	        						$(this).css("display","none");
+	                        	});	
+		                        $("#ads").append(addBtn.addClass("add-btn").append($("<span>").addClass("material-icons").text("add")));
+	                        }
+	                    }//PROFRESS ==2 인경우 끝
+	                });
+	            }
             }
         });
     }
-
-    
-
     // 신고 코멘트 
     function newReport() {
         $.ajax({
             url: "/admin/newReport",
             method: "GET",
             success: function (data) {
-                const table = $("#report-comments-table");
-
-                $.each(data, function (index, item) {
-                	const row = $("<tr>");
-                	const writeNo = $("<td>").text(item.writeNo).css("cursor","pointer").on("click",function(){
-                    	location.href="/comment/commentView?commentNo="+item.writeNo;
-                    });
-                    row.append(writeNo);
-                    row.append($("<td>").text(item.reporterMemberId));
-                    row.append($("<td>").text(item.reportedMemberId));
-                    row.append($("<td>").text(item.reportReason));
-                    row.append($("<td>").text(item.regDate));
-                    row.append($("<td>").append($("<button>").addClass("manage-btn btn-primary").text("관리")));
-                    table.append(row);
-                });
+            	if(data!=""){
+	                const table = $("#report-table>tbody");
+	                table.empty();
+	                $.each(data, function (index, item) {
+	                	const row = $("<tr>");
+	                	const writeNo = $("<td>").text(item.writeNo).addClass("btn-link").css("cursor","pointer").on("click",function(){
+	                		if(item.writeNo.substring(0,2)==="re"){
+	                			location.href="/comment/recommentView?recommentNo="+item.writeNo.substring(2);
+	                		}else{
+		                    	location.href="/comment/commentView?commentNo="+item.writeNo;
+	                		}
+	                    });
+	                    row.append(writeNo);
+	                    row.append($("<td>").text(item.reporterMemberId));
+	                    row.append($("<td>").text(item.reportedMemberId));
+	                    row.append($("<td>").text(item.reportReason));
+	                    row.append($("<td>").text(item.regDate));
+	                    const btns = $("<td>");
+	                    btns.append($("<button>").addClass("manage-btn btn-secondary").text("허위 신고").on("click", function () {
+	                    			const tr = $(this).closest("tr");
+	                            	tr.addClass("input-hidden");
+	                            	$(".add-btn").show();
+	                            	const writeNo = tr.children().eq(0).text();
+	                            	$.ajax({
+	                            		url: "/admin/updateReport",
+	                                    type: "get",
+	                                    data : {"writeNo": writeNo, "reportYn": "n"},
+	                                    success:function(data){
+											                                    	
+	                                    }
+	                            	})
+	                           	 })
+	                    );
+	                    btns.append($("<button>").addClass("manage-btn btn-primary").text("신고 접수").on("click", function () {
+		                    	const tr = $(this).closest("tr");
+		                    	tr.addClass("input-hidden");
+		                    	$(".add-btn").show();
+		                    	const writeNo = tr.children().eq(0).text();
+		                    	$.ajax({
+		                    		url: "/admin/updateReport",
+		                            type: "get",
+		                            data : {"writeNo": writeNo, "reportYn": "y"},
+		                            success:function(data){
+										//일정 이상 신고물 삭제              	
+		                            }
+		                    	})
+		                   	 })
+	                    );
+	                    row.append(btns);
+	                    table.append(row);
+	                });
+            	}
             },
             error: function () {
                 console.error("신고 코멘트 데이터 로드 실패");
@@ -514,70 +698,88 @@
     }
 
     // 위험 회원 
-    function loadDangerousUsersData() {
+    function dangerUserList() {
         $.ajax({
-            url: "/get_dangerous_users_data",
+            url: "/admin/dangerUserList",
             method: "GET",
-            dataType: "json",
             success: function (data) {
-                var tableBody = $("#dangerous-users-table");
-                tableBody.empty();
-
-                $.each(data, function (index, item) {
-                    var row = $("<tr></tr>");
-                    row.append($("<td></td>").text(item.username));
-                    row.append($("<td></td>").text(item.risk_level));
-                    row.append($("<td></td>").text(item.status));
-                    row.append($("<td></td>").append($("<button></button>").addClass("manage-btn").attr("data-id", item.id).text("관리")));
-                    tableBody.append(row);
-                });
+            	if(data!=""){
+	                var table = $("#dangerUser-table>tbody");
+	                table.empty();
+	                $.each(data, function (index, item) {
+	                	const row = $("<tr>");
+	                    row.append($("<td>").text(item.memberId));
+	                    row.append($("<td>").text(item.memberPhone));
+	                    row.append($("<td>").text(item.memberEmail));
+	                    row.append($("<td>").text(item.reported));
+	                    row.append($("<td>").text(item.falseReport));
+	                    const warningZone = $("<td>");
+	                    let warningLevel = "일반"
+	                   	if(item.warningLevel==2){
+	                   		warningLevel = "위험"
+	                   		warningZone.css("color","#dc3545");
+	                   	}
+	                    row.append(warningZone.text(warningLevel));
+		                const btns = $("<td>");
+	                    if(item.warningLevel<2){
+		                    btns.append($("<button>").addClass("manage-btn btn-primary").text("경고").on("click", function () {
+		                    			const tr = $(this).closest("tr");
+		                            	$(".add-btn").show();
+		                            	const memberId = tr.children().eq(0).text();
+		                            	$.ajax({
+		                            		//경고처리
+		                            		url: "/admin/updateWarningLevel",
+		                                    type: "get",
+		                                    data : {"memberId": memberId},
+		                                    success:function(data){
+		                                    	
+		                                    }
+		                            	})
+		                           	 })
+		                    );
+	                    }
+	                    btns.append($("<button>").addClass("manage-btn btn-danger").text("강제탈퇴").on("click", function () {
+		                    	const tr = $(this).closest("tr");
+		                    	$(".add-btn").show();
+		                    	const memberId = tr.children().eq(0).text();
+		                    	$.ajax({
+		                    		//강제탈퇴
+		                    		url: "/admin/kickMember",
+		                            type: "get",
+		                            data : {"memberId": memberId},
+		                            success:function(data){
+		                            	kicked();                                   	
+		                            }
+		                    	})
+		                   	 })
+	                    );
+	                    row.append(btns);
+	                    table.append(row);
+	                });
+            	}
             },
             error: function () {
                 console.error("위험 회원 데이터 로드 실패");
             }
         });
     }
-    
 
-    $(document).on("click", ".edit", function () {
-        let type = $(this).data("type");
-        let id = $(this).data("id");
-
-        let newData = prompt("수정할 내용을 입력하세요:");
-        if (newData) {
-            $.ajax({
-                url: `/api/${type}/${id}`,
-                method: "PUT",
-                data: JSON.stringify({ newData }),
-                success: function () {
-                    loadData(type);
-                },
-            });
-        }
-    });
-
-    $(document).on("click", ".delete", function () {
-        let type = $(this).data("type");
-        let id = $(this).data("id");
-
-        if (confirm("삭제하시겠습니까?")) {
-            $.ajax({
-                url: `/api/${type}/${id}`,
-                method: "DELETE",
-                success: function () {
-                    loadData(type);
-                },
-            });
-        }
-    });
-
-	$(document).ready(function () {
-		loadStats();
-		BusinessView();
-		newReport();
-		adView();
-	});
-	
+	function loadTap(data){
+		if(data=="business"){
+			BusinessView();
+		}else if(data=="normal"){
+			normalView()
+		}else if(data=="report"){
+			newReport();
+		}else if(data=="ads"){
+			adView();
+		}else if(data=="dangerUser"){
+			dangerUserList();
+		}
+	}
+	loadStats();
+	BusinessView();
+	kicked();
 	</script>	
 	<th:block th:include="common/footer"></th:block>
 </body>

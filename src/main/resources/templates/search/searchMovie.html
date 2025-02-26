@@ -57,13 +57,14 @@
 		    </div>
 		</div>
 		<div class="ad-banner">
-				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; height: 150px;">
+			<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
 		</div>
     </div>
 	</section>
     <th:block th:include="common/footer"></th:block>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script src="/js/movieDetail.js"></script>
     <script inline="javascript">
     const query = $("#queryValue").val().trim();
     if (!query || query === "undefined") {
@@ -105,86 +106,7 @@
         $(".ad-banner").before(noResultDiv);
     }
     
-    function makeSlide(obj1,obj2){
-		const movies = obj1;
-		const carouselContent = obj2;
-        let slideIndex = 0;
-        let indexNo= 1;
-        for (let i = 0; i < movies.length; i += 5) {
-            let moviesSlice = movies.slice(i, i + 5);
-            let isActive = slideIndex === 0 ? "active" : "";
-            let slide = $("<div>").addClass(`carousel-item ${isActive}`);
-            let row = $("<div>").addClass("row d-flex ");
-
-            
-            $.each(moviesSlice, function (index, movie) {
-                let col = $("<div>").addClass("col-md-2 mx-1");
-				let imgSrc = "https://image.tmdb.org/t/p/w342";				
-                if(movie.posterPath!=null){
-                	imgSrc += movie.posterPath;
-                }else{
-                	imgSrc = "/image/No_Image.jpg";
-                }
-                let card = $("<div>").addClass("card");
-                const id = movie.movieId;
-                card.on('click',function(){
-                	location.href = "/api/movieDetail?movieId="+id;
-                });
-                let rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
-                let img = $("<img>").addClass("card-img-top").attr("src", imgSrc);
-                let imgDiv = $("<div>").addClass("img-div").append(img);
-
-                let cardBody = $("<div>").addClass("card-body");
-                let title = $("<div>").addClass("card-title").text(movie.title);
-                let info = $("<div>").addClass("card-info").text(movie.releaseDate);
-                
-                let rating = $("<div>").addClass("rating");
-                let genreInfo = $("<div>").addClass("genre-info");
-    			if((movie.genreIds).length==0){
-    				genreInfo.text("");
-    			}
-                $.each(movie.genreIds, function(index, genre){
-                	const p = $("<p>").append(genre);
-                	genreInfo.append(p);
-                });
-                // 카드 조립
-                cardBody.append(title, info, rating, genreInfo);
-                card.append(rankBadge, imgDiv, cardBody);
-                col.append(card);
-                row.append(col);
-            });
-            slide.append(row);
-            carouselContent.append(slide);
-            slideIndex++;
-        }
-	}
-  
-
-    
-    $(document).ready(function() {
-	    // AD_POSITION 값을 매개변수로 전달
-	    let position = 'H';
-	    let requestUrl = '/admin/adUrl';
-	    
-	    //console.log("AJAX 요청 URL: " + requestUrl);
-
-	    $.ajax({
-	        url: requestUrl,              // URL에 매개변수 전달
-	        type: 'GET',
-	        data: {"position" : position},  // Query Parameter로 전달
-	        dataType: 'text',
-	        success: function(adUrl) {
-	            //console.log("응답 adUrl: " + adUrl);
-	            $(".ad-banner img").attr("src", "/image/"+adUrl);
-	        },
-	        error: function(xhr, status, error) {
-	            console.log("AJAX 요청 실패:");
-	            console.log("Status: " + status);
-	            console.log("Error: " + error);
-	            console.log(xhr);
-	        }
-	    });
-	});
+    loadAd('B');
     </script>
 </body>
 </html>
