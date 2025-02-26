@@ -106,14 +106,14 @@
 		
 		display:flex;
 		justify-content : space-between;
-		cursor: pointer;
+		
 	}
 	.btn-opt>span{
 		width: 18px;
 		height: 18px;
 		margin-top: 5px;
 		margin-left: 15px;
-		cursor: pointer;		
+				
 	}
 	.left-icon{
 		color: #FFC800;
@@ -153,9 +153,14 @@
 								<th th:text= "${c.memberId}" style="width:13%;"></th>
 								<th th:text= "${c.contentTitle}" style="width:64%;"></th>								
 								<th class="star-wrap" style="width:17%;" >
-
-									<span th:each="num : ${#numbers.sequence(1,c.starPoint)}" class="material-icons star-gold"> star</span>
-							        <span th:if="${c.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-c.starPoint)}" class="material-icons star-gray"> star</span>
+									
+									<span th:if="${c.starPoint ==0 }" class="material-icons star-gray"> star</span>
+									<span th:if="${c.starPoint ==0 }" class="material-icons star-gray"> star</span>
+									<span th:if="${c.starPoint ==0 }" class="material-icons star-gray"> star</span>
+									<span th:if="${c.starPoint ==0 }" class="material-icons star-gray"> star</span>
+									<span th:if="${c.starPoint ==0 }" class="material-icons star-gray"> star</span>
+									<span th:if="${c.starPoint !=0 }" th:each="num : ${#numbers.sequence(1,c.starPoint)}" class="material-icons star-gold"> star</span>
+								    <span th:if="${c.starPoint !=0 && c.starPoint != 5}" th:each="num : ${#numbers.sequence(1,(5-c.starPoint))}" class="material-icons star-gray"> star</span>
 							        
 								</th>
 							</tr>						
