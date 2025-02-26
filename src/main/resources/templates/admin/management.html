@@ -406,8 +406,8 @@
 	            	table.empty();
 	                $.each(data, function (index, item) {
 	                	const row = $("<tr>");
-	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-							const inquiryNo = $(this).text().css("cursor","pointer");
+	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").css("cursor","pointer").on("click",function(){
+							const inquiryNo = $(this).text();
 							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 	                	}));
 	                    row.append($("<td>").text(item.companyName));
@@ -462,8 +462,8 @@
 	            	table.empty();
 	                $.each(data, function (index, item) {
 	                	const row = $("<tr>");
-	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-							const inquiryNo = $(this).text().css("cursor","pointer");
+	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").css("cursor","pointer").on("click",function(){
+							const inquiryNo = $(this).text();
 							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 	                	}));
 	                    row.append($("<td>").text(item.memberId));
@@ -523,7 +523,7 @@
 	                	if(item.inquiryProgress==3){
 		                	const row = $("<tr>");
 		                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-								const inquiryNo = $(this).text().css("cursor","pointer");
+								const inquiryNo = $(this).text();
 								location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 		                	}));
 		                    row.append($("<td>").text(item.companyName));
