@@ -32,28 +32,44 @@ public class webConfig implements WebMvcConfigurer{
 								"/member/delete",
 								"/member/changeinfo",
 								"/member/inquiryFrm",
-								"/admin/**",
+								"/member/ajaxcommNo",
+								"/member/ajaxscoreNo",
+								"member/inquiryFrm",
 								"/report/**",
 								"/comment/**",
 								"/contents/insertRating",
 								"/contents/insertContentLike",
 								"/contents/deleteContentLike",
 								"/contents/myContents",
-								"/contents/selectMyContents"
+								"/contents/selectMyContents",
+								"/admin/**"
+								
+								)
+				.excludePathPatterns("/admin/plusAdClick",
+									"/admin/adUrl",
+									"/admin/insertInquiry",
+									"/admin/insertReport",
+									"/comment/mCommentMemberList",
+									"/comment/count",
+									"/comment/newMovieComment"
+									);
+		//관리자 페이지 기능 경로 추가
+		registry.addInterceptor(new AdminInterceptor())
+				.addPathPatterns("/admin/**",
+								"/news//writeFrmEditor",
+								"/news/write",
+								"/news/delete",
+								"/news/updateFrm",
+								"/news/update",
+								"/news/editorImage"
 								)
 				.excludePathPatterns(
 								"/admin/plusAdClick",
 								"/admin/adUrl",
 								"/admin/insertInquiry",
 								"/admin/insertReport",
-								"/comment/mCommentMemberList"
-									);
-		//관리자 페이지 기능 경로 추가
-		registry.addInterceptor(new AdminInterceptor())
-				.addPathPatterns(
-								)
-				.excludePathPatterns(
-						
+								"/comment/mCommentMemberList",
+								"/comment/count"
 						);
 	}
 }

@@ -87,7 +87,10 @@ function makeSlide(obj1,obj2){
             	location.href = "/api/movieDetail?movieId="+id;
             });
             const rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
-            const img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+			const img = $("<img>").addClass("card-img-top").attr("src", imgSrc)
+			if(movie.posterPath==null){
+					img.attr("src", "/image/No_Image.jpg")
+				}
             const imgDiv = $("<div>").addClass("img-div").append(img);
 
             const cardBody = $("<div>").addClass("card-body");

@@ -194,20 +194,35 @@
 		    <div class= "contact-text">
 		        <p>Tel : 070-8241-9234</p>
 		        <p>Email : Links@kh.or.kr</p>
-		        <p>Address : 서울시 **구 **로 00빌딩 0층</p>
+		        <p>Address : 서울시 영등포구 선유2로 57 이레빌딩 19층 A강의장</p>
 	        </div>
         </div>
 	</div>		
 	<script  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xwce1oonfu&submodules=geocoder"></script>
 	<script>
 	    function initMap() {
-	        var mapOptions = {
-	            center: new naver.maps.LatLng(37.5665, 126.9780), // 서울 시청 좌표 예제
-	            zoom: 15
+	        const mapOptions = {
+	            center: new naver.maps.LatLng(37.5338622, 126.8967695), 
+	            zoom : 18,
+				zoomControl : true,
+				zoomControlOptions : {
+					position : naver.maps.Position.TOP_RIGHT,
+					style: naver.maps.ZoomControlStyle.SMALL
+				}
 	        };
-	        var map = new naver.maps.Map('map', mapOptions);
+	        const map = new naver.maps.Map('map', mapOptions);
+	        const marker = new naver.maps.Marker({
+				position : new naver.maps.LatLng(37.5338622, 126.8967695),
+				map : map 	//선언해둔 지도 객체를 value 로 대입
+			});
+	        
 	    }
+	    
+	    
+	    
 	    window.onload = initMap;
+	    
+	    
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
