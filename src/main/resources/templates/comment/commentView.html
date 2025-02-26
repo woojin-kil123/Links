@@ -339,8 +339,6 @@
 
 						<span class="material-icons show-recomm">textsms </span>
 
-						
-
 						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
@@ -382,7 +380,7 @@
 							<th:block th:if="${session.member.memberId == re.memberId}">
 								<div class="btn-opt">
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+									<span class="material-icons dots" th:if="${session.member.memberId!=re.memberId}"> more_vert </span>
 									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
 								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
 									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
