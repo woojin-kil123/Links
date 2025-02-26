@@ -3,6 +3,7 @@ package kr.co.iei.contents.model.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -55,9 +56,15 @@ public class ContentsDao {
 		return result;
 	}
 	public int selectMemberStar(ContentStar cs) {
+		int result=0;
 		String query = "select starpoint from content_star where content_no=? and member_id=? ";
 		Object[] params = {cs.getContentNo(),cs.getMemberId()};
-		int result = jdbc.queryForObject(query, Integer.class, params);
+		try {
+			result = jdbc.queryForObject(query, Integer.class, params);
+			
+		}catch(EmptyResultDataAccessException e) {
+			return result;
+		}
 		return result;
 	}
 	public int insertContentLike(ContentStar cs) {
