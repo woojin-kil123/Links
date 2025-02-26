@@ -58,7 +58,7 @@ public class AdminDao {
 
 	public List businessView() {
 		String query = "select * from business_view";
-		List list = jdbc.query(query, inquiryRowMapper);
+		List list = jdbc.query(query, businessRowMapper);
 		return list;
 	}
 
@@ -165,5 +165,11 @@ public class AdminDao {
 		String query = "select * from kicked_user_view";
 		List list = jdbc.query(query, kickedRowMapper);
 		return list;
+	}
+
+	public void plusAdClick(String adPosition) {
+		String query = "update ad set ad_click=ad_click+1 where ad_position=?";
+		Object[] params = {adPosition};
+		jdbc.update(query, params);
 	}
 }

@@ -1,7 +1,7 @@
 function commentList(movieId) {
 	console.log(movieId);
 	$.ajax({
-		url : "/comment/oneMovieComment",
+		url : "/comment/oneMovieComments",
 		data : {"contentNo":"m"+movieId},
 		success : function(comments){
 			if(comments.length==0){
@@ -30,22 +30,19 @@ function commentList(movieId) {
 	              const memberId = $("<span>").text(comment.memberId);
 
 	              userInfo.append(userImg, memberId);
-	              const title = $("<span>").addClass("comment-title").text(comment.contentTitle);
+	              const title = $("<span>").addClass("comment-title").text(comment.movieTitle);
 	              header.append(userInfo, title);
 
 				   
 	              const rating = $("<div>").addClass("comment-rating");
 	              for (let j = 0; j < 5; j++) {
-	                   const star = $("<span>").addClass("star").text(j < comment.rating ? "★" : "☆");
+	                   const star = $("<span>").addClass("star").text(j < comment.starPoint ? "★" : " ");
 	                   rating.append(star);
 	              }
 
 	              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
 	              const footer = $("<div>").addClass("comment-footer");
-	              const like = $("<span>").append($("<i>").addClass("icon 👍"), comment.likeCount);
-	              const dislike = $("<span>").append($("<i>").addClass("icon 💔"), comment.isLike);
 	               
-	              footer.append(like, dislike);
 	              card.append(header, rating, body, footer);
 	              row.append(card);
 	           });
@@ -90,7 +87,10 @@ function makeSlide(obj1,obj2){
             	location.href = "/api/movieDetail?movieId="+id;
             });
             const rankBadge = $("<div>").addClass("rank-badge").text(indexNo++);
-            const img = $("<img>").addClass("card-img-top").attr("src", imgSrc).attr("alt", "this.src=/image/No_Image.jpg");
+			const img = $("<img>").addClass("card-img-top").attr("src", imgSrc)
+			if(movie.posterPath==null){
+					img.attr("src", "/image/No_Image.jpg")
+				}
             const imgDiv = $("<div>").addClass("img-div").append(img);
 
             const cardBody = $("<div>").addClass("card-body");
@@ -116,5 +116,35 @@ function makeSlide(obj1,obj2){
         slideIndex++;
     }
 }
+function loadAd(position){
+	let requestUrl = '/admin/adUrl';
+	    
+	    //console.log("AJAX 요청 URL: " + requestUrl);
+	    $.ajax({
+	        url: requestUrl,              // URL에 매개변수 전달
+	        type: 'GET',
+	        data: {"position" : position},  // Query Parameter로 전달
+	        dataType: 'text',
+	        success: function(adUrl) {
+	            //console.log("응답 adUrl: " + adUrl);
+	            $(".ad-banner img").attr("src", "/image/"+adUrl).css("cursor","pointer").on("click",function(){
+					$.ajax({
+						url : "/admin/plusAdClick",
+						data : {"adPosition":position},
+						success : function(){
+							location.href = "https://kh-academy.co.kr/main/main.kh";
+						}
+					})
+				});
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("AJAX 요청 실패:");
+	            console.log("Status: " + status);
+	            console.log("Error: " + error);
+	            console.log(xhr);
+	        }
+	    });
 
-
+}
+	    
+	    

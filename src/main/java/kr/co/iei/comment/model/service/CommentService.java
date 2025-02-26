@@ -119,7 +119,11 @@ public class CommentService {
 	}
 
 	public List oneMovieComment(String contentNo) {
-		List list = commentDao.oneMovieComment(contentNo);
+		List<Comment> list = commentDao.oneMovieComment(contentNo);
+		for(Comment c : list) {
+			int starP = commentDao.starP(c.getMemberId(),contentNo);
+			c.setStarPoint(starP);
+		}
 		return list;
 	}
 
@@ -147,10 +151,6 @@ public class CommentService {
 			comm.setReCommCount(reCommCount);
 		}
 		
-		
-		
-		
-		
 		return list;
 	}
 
@@ -163,11 +163,13 @@ public class CommentService {
 		return result;
 	}
 	public List newMovieComment() {
-		List list = commentDao.selectNewMovieCommList();
+		List<Comment> list = commentDao.selectNewMovieCommList();
+		for(Comment c : list) {
+			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			c.setStarPoint(starP);
+		}
 		return list;
-
 	}
-	
 	
 	@Transactional
 	public int reCommUpdate(ReComment rc) {
