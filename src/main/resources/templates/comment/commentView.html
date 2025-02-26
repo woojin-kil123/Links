@@ -18,7 +18,6 @@
 	.page-title{		
 		width:800px;
 		height: 200px;		
-		overflow: hidden;
 		
 	}
 	
@@ -26,17 +25,19 @@
 		margin-left: 10px;
 		margin-top: 10px;
 		font-size: 27px;
-		font-weight: 600;				
+		font-weight: 750;
+		font-family: na-b;			
 		float: left;
 	
 	}
 	.movie-summary{		
-		width: 130px;
-		height: 195px;
+		width: 270px;
+		
 		margin-right: 20px;
 		
 		background-color: #D9D9D9;		
 		float: right;
+		margin-bottom: 20px;
 		
 	}
 		
@@ -58,6 +59,7 @@
 		border : 1px solid #ffc800;
 		background-color: #fcf8e3;
 		box-sizing: border-box;
+		margin-top: 100px;
 	}
 	.line1{
 		width: 780px;
@@ -303,7 +305,7 @@
 		<div class="content" style="margin: 20px auto;">
 			<div class="page-title">
 				<div th:text=${m.movieTitle} class="movie-title" >제목</div>
-				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:100%"></div>	
+				<div class="movie-summary"><img th:src="${m.posterPath}" style="width: 100%; height:150%;"></div>	
 			</div>		
 				<div class="comment-box" >
 					<table class="line1">
@@ -315,15 +317,21 @@
 							<th style="width:67%;"></th>								
 							<th class="star-wrap" style="width:17%;" >
 							
-								<span th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
-							    <span th:if="${comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-comm.starPoint)}" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint !=0 }" th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
+							    <span th:if="${comm.starPoint !=0 && comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,(5-comm.starPoint))}" class="material-icons star-gray"> star</span>
+							    
 						        
 							</th>
 						<tr>			
 					</table>
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
 					
-					<div class="btn-opt">
+					<div class="btn-opt">						
 						<span class="like-box">
 							<span th:if="${comm.isLike ==1}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up</span>
 							<span th:if="${session.member != null && comm.isLike ==0}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up_off_alt</span>
@@ -333,13 +341,12 @@
 
 						<span class="material-icons show-recomm">textsms </span>
 
-						
-
 						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
-						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
-						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
+						<!-- 코멘트 버튼 -->
+						<span class="material-icons bin" th:if="${session.member.memberId ==comm.memberId }" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
+						<span class="material-icons pencil" th:if="${session.member.memberId == comm.memberId }" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -373,13 +380,13 @@
 							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
 						</div>						
 						<th:block th:if="${session.member != null}">	
-							<th:block th:if="${session.member.memberId == re.memberId}">
 								<div class="btn-opt">
+								<!-- 코멘트 댓글 버튼 -->
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+									<span class="material-icons dots" th:if="${session.member.memberId!=re.memberId}"> more_vert </span>
 									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
-								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
-									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
+								    <span class="material-icons bin" th:if="${session.member.memberId == re.memberId}" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]]);">delete_forever</span>
+									<span class="material-icons  pencil2 show-recomm2" th:if="${session.member.memberId == re.memberId}"  >create </span>	
 									<div class="report-wrap" style="display: none;" >
 										<input type="hidden" th:value="${re.memberId}">
 										<input type="hidden" th:value="re+${re.reCommentNo}">
@@ -393,15 +400,14 @@
 										<label for="Rereport-4" class="report btn-primary">도배</label>
 									</div>						
 								</div>
-				<!-- 대댓글 입력 -->
+						<!-- 대댓글 입력 -->
 								<div class="input-box2" style="background-color: transparent;" th:if="${session.member != null}">				
 									 
 									<textarea class="re-comm2" name="reCommentContent"></textarea>
 									<div>
-										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );">수정</button>
+										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );" th:if="${session.member.memberId == re.memberId}">수정</button>
 									</div>
 								</div>
-							</th:block>	
 						</th:block>
 					</div>
 					

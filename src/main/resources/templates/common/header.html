@@ -290,11 +290,14 @@
                 </th:block>
 
                 <!-- 문의 아이콘 -->
+                <th:block th:if="${session.member != null and session.member.memberRole != 'admin'}">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="/member/inquiryFrm">
+                    <a class="nav-link d-flex align-items-center" href="/member/inquiryFrm" >
                         <span class="material-icons">contact_support</span>
                     </a>
                 </li>
+                </th:block>
+                </th:block>
             </ul>
         </div>
     </div>

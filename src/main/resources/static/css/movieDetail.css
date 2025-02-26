@@ -155,8 +155,39 @@
 		display:flex;
 	}
 
+.comment-card {
+    width: 300px;
+    background: #f9f6ec;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-	
-		
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+}
+
+.user-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.comment-title {
+    font-weight: bold;
+    color: #333;
+}
+
+
 		
 		

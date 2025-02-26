@@ -39,11 +39,11 @@ function commentList(movieId) {
 	                   const star = $("<span>").addClass("star").text(j < comment.starPoint ? "★" : " ");
 	                   rating.append(star);
 	              }
-
 	              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
 	              const footer = $("<div>").addClass("comment-footer");
 	               
-	              card.append(header, rating, body, footer);
+				  footer.append(rating);
+	              card.append(header, body, footer);
 	              row.append(card);
 	           });
 

@@ -202,8 +202,8 @@ public String adminMsg(Model model) {
 		 model.addAttribute("loc","/member/find");
 		 return "common/msg";
 	 }else {
-		 model.addAttribute("title","아이디 찾기 성공");
-		 model.addAttribute("text",member.getMemberId());
+		 model.addAttribute("title",member.getMemberId());
+		 model.addAttribute("text","아이디 찾기 성공"	);
 		 model.addAttribute("icon","success");
 		 model.addAttribute("loc","/member/find");
 		 return "common/msg";
