@@ -29,7 +29,7 @@ public class ContentsService {
 	@Transactional
 	public int insertRating(ContentStar cs) {
 		int result = contentsDao.insertRating(cs);
-		int avgStar = contentsDao.selectAvgPoint(cs.getContentNo());
+		long avgStar = contentsDao.selectAvgPoint(cs.getContentNo());
 		String movieId = cs.getContentNo().substring(1);
 		result += contentsDao.updateMovieStar(avgStar,movieId);
 		return result;

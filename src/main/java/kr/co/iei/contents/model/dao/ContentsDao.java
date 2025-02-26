@@ -43,13 +43,13 @@ public class ContentsDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
-	public int selectAvgPoint(String contentNo) {
+	public long selectAvgPoint(String contentNo) {
 		String query = "select avg(starpoint) from content_star where content_no=?";
 		Object[] params = {contentNo};
-		int avgStar = jdbc.queryForObject(query, Integer.class, params);
+		long avgStar = jdbc.queryForObject(query, Long.class, params);
  		return avgStar;
 	}
-	public int updateMovieStar(int avgStar, String movieId) {
+	public int updateMovieStar(long avgStar, String movieId) {
 		String query = "update movie set movie_avgpoint = ? where movie_id= ?";
 		Object[] params = {avgStar, movieId};
 		int result = jdbc.update(query,params);
