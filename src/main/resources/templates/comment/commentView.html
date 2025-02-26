@@ -378,15 +378,13 @@
 							<div th:text= "${re.reCommentContent}" class="movie-re-comment"></div>
 						</div>						
 						<th:block th:if="${session.member != null}">	
-							<th:block th:if="${session.member.memberId == re.memberId}">
 								<div class="btn-opt">
 								<!-- 코멘트 댓글 버튼 -->
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons dots" th:if="${session.member.memberId ==comm.memberId  }"> more_vert </span>
 									<span class="material-icons dots" th:if="${session.member.memberId!=re.memberId}"> more_vert </span>
 									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
-								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]]);">delete_forever</span>
-									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
+								    <span class="material-icons bin" th:if="${session.member.memberId == re.memberId}" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]]);">delete_forever</span>
+									<span class="material-icons  pencil2 show-recomm2" th:if="${session.member.memberId == re.memberId}"  >create </span>	
 									<div class="report-wrap" style="display: none;" >
 										<input type="hidden" th:value="${re.memberId}">
 										<input type="hidden" th:value="re+${re.reCommentNo}">
@@ -400,15 +398,14 @@
 										<label for="Rereport-4" class="report btn-primary">도배</label>
 									</div>						
 								</div>
-				<!-- 대댓글 입력 -->
+						<!-- 대댓글 입력 -->
 								<div class="input-box2" style="background-color: transparent;" th:if="${session.member != null}">				
 									 
 									<textarea class="re-comm2" name="reCommentContent"></textarea>
 									<div>
-										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );">수정</button>
+										<button type="button" class="btn-primary btn-form"  th:onclick="windowComment2(this,[[${re.reCommentNo}]],[[${re.CommentNo}]] );" th:if="${session.member.memberId == re.memberId}">수정</button>
 									</div>
 								</div>
-							</th:block>	
 						</th:block>
 					</div>
 					
