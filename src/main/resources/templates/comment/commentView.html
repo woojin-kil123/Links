@@ -315,8 +315,14 @@
 							<th style="width:67%;"></th>								
 							<th class="star-wrap" style="width:17%;" >
 							
-								<span th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
-							    <span th:if="${comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,5-comm.starPoint)}" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint ==0 }" class="material-icons star-gray"> star</span>
+								<span th:if="${comm.starPoint !=0 }" th:each="num : ${#numbers.sequence(1,comm.starPoint)}" class="material-icons star-gold"> star</span>
+							    <span th:if="${comm.starPoint !=0 && comm.starPoint != 5}" th:each="num : ${#numbers.sequence(1,(5-comm.starPoint))}" class="material-icons star-gray"> star</span>
+							    
 						        
 							</th>
 						<tr>			
