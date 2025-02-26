@@ -30,7 +30,7 @@ private JavaMailSender sender;
 			//받는사람
 			helper.setTo(receiver);
 			//제목
-			helper.setSubject(emailContent);
+			helper.setSubject(emailTitle);
 			//내용
 			helper.setText(emailContent, true);  //true :html로 인식 시키기
 			//이메일 전송
