@@ -51,7 +51,8 @@ public class webConfig implements WebMvcConfigurer{
 									"/admin/insertReport",
 									"/comment/mCommentMemberList",
 									"/comment/count",
-									"/comment/newMovieComment"
+									"/comment/newMovieComment",
+									"/comment/oneMovieComments"
 									);
 		//관리자 페이지 기능 경로 추가
 		registry.addInterceptor(new AdminInterceptor())
