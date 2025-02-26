@@ -276,13 +276,13 @@
 		        <table id="ads-table">
 		        	<thead>
 		                <tr>
-		                	<th style="width : 10%;">문의번호</th>
+		                	<th style="width : 8%;">문의번호</th>
 		                    <th style="width : 15%;">사업자명</th>
-		                    <th style="width : 10%;">광고 위치</th>
-		                    <th style="width : 30%;">URL</th>
+		                    <th style="width : 8%;">광고위치</th>
+		                    <th style="width : 28%;">URL</th>
 		                    <th style="width : 10%;">클릭 수</th>
 		                    <th style="width : 15%;">만료일</th>
-		                    <th style="width : 15%;">관리</th>
+		                    <th style="width : 20%;">관리</th>
 		                </tr>
 	                </thead>
 	                <tbody>
@@ -407,7 +407,7 @@
 	                $.each(data, function (index, item) {
 	                	const row = $("<tr>");
 	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-							const inquiryNo = $(this).text();
+							const inquiryNo = $(this).text().css("cursor","pointer");
 							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 	                	}));
 	                    row.append($("<td>").text(item.companyName));
@@ -463,7 +463,7 @@
 	                $.each(data, function (index, item) {
 	                	const row = $("<tr>");
 	                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-							const inquiryNo = $(this).text();
+							const inquiryNo = $(this).text().css("cursor","pointer");
 							location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 	                	}));
 	                    row.append($("<td>").text(item.memberId));
@@ -523,7 +523,7 @@
 	                	if(item.inquiryProgress==3){
 		                	const row = $("<tr>");
 		                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-								const inquiryNo = $(this).text();
+								const inquiryNo = $(this).text().css("cursor","pointer");
 								location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 		                	}));
 		                    row.append($("<td>").text(item.companyName));
@@ -570,6 +570,7 @@
 	                            inputRow.append($("<td>").append(companyNameInput));
 	                            inputRow.append($("<td>").append(adPositionInput));
 	                            inputRow.append($("<td>").append(adUrlInput));
+	                            inputRow.append($("<td>").text("-"));
 	                            inputRow.append($("<td>").append(expireDateInput));
 	
 	                            const btns = $("<td>");

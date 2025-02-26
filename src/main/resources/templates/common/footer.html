@@ -720,7 +720,6 @@
 	                    url: "/comment/count", // 서버에서 코멘트 개수를 가져오는 엔드포인트
 	                    type: "GET",
 	                    success: function(data) {
-	                    	console.log(data);
 	                        $("#commentCount").text(data); // ✅ 가져온 데이터를 HTML에 반영
 	                    },
 	                    error: function(xhr, status, error) {
