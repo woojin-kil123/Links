@@ -329,7 +329,7 @@
 					</table>
 					<div th:text= "${comm.commentContent}" class="movie-comment"></div>
 					
-					<div class="btn-opt">
+					<div class="btn-opt">						
 						<span class="like-box">
 							<span th:if="${comm.isLike ==1}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up</span>
 							<span th:if="${session.member != null && comm.isLike ==0}" class="material-icons" th:onclick="likepush(this,[[${comm.commentNo}]]);">thumb_up_off_alt</span>
@@ -339,13 +339,13 @@
 
 						<span class="material-icons show-recomm">textsms </span>
 
-						
 
 						<span class="count" th:text="${comm.reCommCount}">  </span>
 						<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
 						<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
-						<span class="material-icons bin" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
-						<span class="material-icons pencil" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
+						<!-- 코멘트 버튼 -->
+						<span class="material-icons bin" th:if="${session.member.memberId ==comm.memberId }" th:onclick="commDelete([[${comm.commentNo}]]);">delete_forever</span>
+						<span class="material-icons pencil" th:if="${session.member.memberId == comm.memberId }" id="edit-content" data-bs-toggle="modal" data-bs-target="#modal" th:onclick="commUpdate([[${comm.commentNo}]]);">create</span>
 						<div class="report-wrap" style="display: none;" >
 							<input type="hidden" th:value="${comm.memberId}">
 							<input type="hidden" th:value="${comm.commentNo}">
@@ -381,10 +381,11 @@
 						<th:block th:if="${session.member != null}">	
 							<th:block th:if="${session.member.memberId == re.memberId}">
 								<div class="btn-opt">
+								<!-- 코멘트 댓글 버튼 -->
 									<!-- th:onclick="windowComment2(this,[[${session.member.memberId}]],[[${re.reCommentNo}]],[[${comm.contentNo}]] );" -->								
-									<span class="material-icons dots" th:if="${session.member.memberId!=comm.memberId}"> more_vert </span>
+									<span class="material-icons dots" th:if="${session.member.memberId ==comm.memberId  }"> more_vert </span>
 									<span class="report-msg" style="display:none;">이미 신고한 글 입니다.</span>
-								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]])  ;">delete_forever</span>
+								    <span class="material-icons bin" th:onclick="reCommDelete([[${re.reCommentNo}]],[[${re.CommentNo}]]);">delete_forever</span>
 									<span class="material-icons  pencil2 show-recomm2"  >create </span>	
 									<div class="report-wrap" style="display: none;" >
 										<input type="hidden" th:value="${re.memberId}">
