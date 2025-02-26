@@ -122,7 +122,12 @@ public class CommentService {
 		List<Comment> list = commentDao.oneMovieComment(contentNo);
 		for(Comment c : list) {
 			int starP = commentDao.starP(c.getMemberId(),contentNo);
+			String movieId = c.getContentNo().substring(1);
+			DbMovie m = commentDao.selectMovieInfo(movieId);
 			c.setStarPoint(starP);
+			c.setMovieTitle(m.getMovieTitle());
+			c.setPosterPath(m.getPosterPath());
+			System.out.println(c);
 		}
 		return list;
 	}
@@ -166,7 +171,11 @@ public class CommentService {
 		List<Comment> list = commentDao.selectNewMovieCommList();
 		for(Comment c : list) {
 			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			String movieId = c.getContentNo().substring(1);
+			DbMovie m = commentDao.selectMovieInfo(movieId);
 			c.setStarPoint(starP);
+			c.setMovieTitle(m.getMovieTitle());
+			c.setPosterPath(m.getPosterPath());
 		}
 		return list;
 	}
