@@ -91,8 +91,8 @@ public class MemberDao {
 	}
 
 	public Member selectOneMemberPw(Member m) {
-		String query = "select * from member where member_id=? and member_name=? ";
-		Object[] params = { m.getMemberId(), m.getMemberName() };
+		String query = "select * from member where member_id=? and member_name=? and member_email=?";
+		Object[] params = { m.getMemberId(), m.getMemberName(), m.getMemberEmail()};
 		List list = jdbc.query(query, memberRowMapper, params);
 		if (list.isEmpty()) {
 			return null;
