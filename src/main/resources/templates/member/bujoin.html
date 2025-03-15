@@ -157,10 +157,10 @@ label{
 				</div>
 				<div class="input-wrap">
 					<div class="input-title">
-						<label for="businessNo">사업자 번호</label>
+						<label for="companyNo">사업자 번호</label>
 					</div>
 					<div class="input-type">
-						<input type="text" class="form-control" name="businessNo" id="businessNo">
+						<input type="text" class="form-control" name="companyNo" id="companyNo">
 						<input type="hidden" name="businessName" id="businessName">
 					</div>
 					<button type="button" class="btn-primary" id="check">사업자번호  확인</button>
@@ -208,7 +208,7 @@ label{
 	    let memberName = document.getElementById("memberName").value.trim();
 	    let memberPhone = document.getElementById("memberPhone").value.trim();
 	    let memberEmail = document.getElementById("memberEmail").value.trim();
-	    let businessNo = document.getElementById("businessNo").value.trim();
+	    let companyNo = document.getElementById("companyNo").value.trim();
 	    let businessName = document.getElementById("businessName").value.trim();
 	    if (!memberName || !/^[가-힣]{2,5}$|^[a-zA-Z]{2,20}$/.test(memberName)) {
 	        alert("이름을 올바르게 입력하세요 (한글 2~5자 또는 영문 2~20자)");
@@ -223,7 +223,7 @@ label{
 	        isValid = false;
 	    }
 	 
-	    if (!businessNo) {
+	    if (!companyNo) {
 	        alert("사업자 번호를 입력해주세요.");
 	        isValid = false;
 	    }
@@ -298,26 +298,25 @@ label{
 		let comapnyNo= 0;
 		$("#check").on("click",function(){
 			$(".no-check-msg").removeClass("invalid").removeClass("valid");
-			const businessNo =$("#businessNo").val().trim();
-			if(!businessNo){
+			const companyNo =$("#companyNo").val().trim();
+			if(!companyNo){
 				$(".no-check-msg").text("사업자 번호를 입력해주세요.");
 		        $(".no-check-msg").addClass("invalid");
 			}
 			$.ajax({
-				url :"/company/check",
+				url :"/api/check",
 				type: "get",
-				data : {businessNo : businessNo},
+				data : {companyNo : companyNo},
 				success: function(result){
-					 companyName=result.companyName;
-					 $("#businessName").val(companyName)
-					 $(".no-check-msg").text("존재하는 사업자입니다");
+					businessName=result;
+					$("#businessName").val(businessName);
+					$(".no-check-msg").text("존재하는 사업자입니다");
 					$(".no-check-msg").addClass("valid");
 				},
 				error: function(){
 					$(".no-check-msg").text("존재하지 않는 사업자입니다");
 					$(".no-check-msg").addClass("invalid");
-				},
-				
+				},		
 			});
 		});
 	
@@ -335,7 +334,7 @@ label{
 			}else{
 				
 			$.ajax({
-				url :"/etc/sendCode",
+				url :"/api/sendCode",
 				type:"get",
 				data : {receiver : memberEmail},
 				success : function(data){
