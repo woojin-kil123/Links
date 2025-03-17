@@ -11,16 +11,12 @@ function commentList(movieId) {
 			let slideIndex = 0;
 	       for (let i = 0; i < comments.length; i += 4) {
 				$(".nocomment-msg").hide();	
-			
 	           const commentSlice = comments.slice(i, i + 4);
 	           let isActive = slideIndex === 0 ? "active" : "";
 	           const slide = $("<div>").addClass(`carousel-item ${isActive}`);
 	           const row = $("<div>").addClass("d-flex justify-content-between");
-
 	           $.each(commentSlice, function (index, comment) {
 	              const card = $("<div>").addClass("comment-card").css("cursor","pointer");
-				  //코멘트 눌럿을때 해당 코멘트 상세보기 이동
-				  
 				  card.on("click",function(){
 					location.href="/comment/commentView?commentNo="+comment.commentNo;
 				   });
@@ -32,8 +28,6 @@ function commentList(movieId) {
 	              userInfo.append(userImg, memberId);
 	              const title = $("<span>").addClass("comment-title").text(comment.movieTitle);
 	              header.append(userInfo, title);
-
-				   
 	              const rating = $("<div>").addClass("comment-rating");
 	              for (let j = 0; j < 5; j++) {
 	                   const star = $("<span>").addClass("star").text(j < comment.starPoint ? "★" : " ");
@@ -41,12 +35,10 @@ function commentList(movieId) {
 	              }
 	              const body = $("<div>").addClass("comment-body").text(comment.commentContent);
 	              const footer = $("<div>").addClass("comment-footer");
-	               
 				  footer.append(rating);
 	              card.append(header, body, footer);
 	              row.append(card);
 	           });
-
 	           slide.append(row);
 	           carouselInner.append(slide);
 	           slideIndex++;
@@ -79,7 +71,6 @@ function makeSlide(obj1,obj2){
         
         $.each(moviesSlice, function (index, movie) {
             const col = $("<div>").addClass("col-md-2 mx-1");
-
             const imgSrc = "https://image.tmdb.org/t/p/w342"+movie.posterPath;
             const card = $("<div>").addClass("card");
             const id = movie.movieId;
@@ -92,11 +83,9 @@ function makeSlide(obj1,obj2){
 					img.attr("src", "/image/No_Image.jpg")
 				}
             const imgDiv = $("<div>").addClass("img-div").append(img);
-
             const cardBody = $("<div>").addClass("card-body");
             const title = $("<div>").addClass("card-title").text(movie.title);
             const info = $("<div>").addClass("card-info").text(movie.releaseDate);
-            
             const genreInfo = $("<div>").addClass("genre-info");
 			if((movie.genreIds).length==0){
 				genreInfo.text("");
@@ -105,7 +94,6 @@ function makeSlide(obj1,obj2){
             	const p = $("<p>").append(genre);
             	genreInfo.append(p);
             });
-            // 카드 조립
             cardBody.append(title, info, genreInfo);
             card.append(rankBadge, imgDiv, cardBody);
             col.append(card);
@@ -119,14 +107,12 @@ function makeSlide(obj1,obj2){
 function loadAd(position){
 	let requestUrl = '/admin/adUrl';
 	    
-	    //console.log("AJAX 요청 URL: " + requestUrl);
 	    $.ajax({
-	        url: requestUrl,              // URL에 매개변수 전달
+	        url: requestUrl,              
 	        type: 'GET',
-	        data: {"position" : position},  // Query Parameter로 전달
+	        data: {"position" : position},  
 	        dataType: 'text',
 	        success: function(adUrl) {
-	            //console.log("응답 adUrl: " + adUrl);
 	            $(".ad-banner img").attr("src", "/image/"+adUrl).css("cursor","pointer").on("click",function(){
 					$.ajax({
 						url : "/admin/plusAdClick",
@@ -137,11 +123,8 @@ function loadAd(position){
 					})
 				});
 	        },
-	        error: function(xhr, status, error) {
-	            console.log("AJAX 요청 실패:");
-	            console.log("Status: " + status);
+	        error: function(error) {
 	            console.log("Error: " + error);
-	            console.log(xhr);
 	        }
 	    });
 

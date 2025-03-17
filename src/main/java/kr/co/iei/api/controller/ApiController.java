@@ -55,7 +55,6 @@ public class ApiController {
 		try {
 			movie = apiService.movieDetail(movieId);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		model.addAttribute("movie",movie);

@@ -31,14 +31,11 @@ public class ApiService {
 	
 	private List movieList(String result) {
 		List movieList = new ArrayList<ApiMovie>();
-		
 		JsonObject object = (JsonObject)JsonParser.parseString(result);
 	 	JsonArray results = object.get("results").getAsJsonArray();
 	 	for(int i=0; i<results.size(); i++){
 	 		ApiMovie movie = new ApiMovie();
 	 		JsonObject movieInfo = results.get(i).getAsJsonObject();
-	 		//movie.setBackdropPath(movieInfo.get("backdrop_path").getAsString());
-	 		
 	 		JsonArray genres = movieInfo.get("genre_ids").getAsJsonArray();
 	 		List genresList = new ArrayList<String>();
 	 		for(int j=0;j<genres.size();j++) {
@@ -49,12 +46,9 @@ public class ApiService {
 	 		movie.setGenreIds(genresList);
 	 		movie.setMovieId(movieInfo.get("id").getAsString());
 	 		movie.setTitle(movieInfo.get("title").getAsString());
-	 		//movie.setOriginalTitle(movieInfo.get("original_title").getAsString());
-	 		//movie.setOverview(movieInfo.get("overview").getAsString());
 	 		try {
 	 			movie.setPosterPath(movieInfo.get("poster_path").getAsString());
 	 		}catch (UnsupportedOperationException e) {
-	 			
 			}
 	 		movie.setReleaseDate(movieInfo.get("release_date").getAsString());
 	 		movieList.add(movie);
@@ -75,7 +69,6 @@ public class ApiService {
         return movieList;
     }
     
-    //"popular?language=ko-kr&page=1&region=kr"
 	public ApiMovie movieDetail(int movieId) throws IOException {
 		ApiMovie movie = new ApiMovie();
     	String query = movieId+"?language=ko-kr";

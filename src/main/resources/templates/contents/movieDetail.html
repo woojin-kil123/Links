@@ -186,7 +186,6 @@
 			$(".rating").click();
 		}
 	});
-	//작업해
 	$("#like").on("click",function(){
 		if($(this).hasClass("liking")){
 			//좋아요 누르는 작업해야함
@@ -213,7 +212,6 @@
 			}
 		})			
 	}
-	//링크연결
 	$("#link").on("click",function(){
 		$.ajax({
 			url : "/contents/plusLinkClick",
@@ -223,9 +221,7 @@
 				location.href = "http://www.cgv.co.kr/search/?query="+movieTitle;
 			}
 		});
-		
 	});
-	
 	$(".rating-submit").on("click",function(){
 		const value = $(".rating-input").text();
 		$.ajax({
@@ -238,7 +234,6 @@
 			}
 		})
 	});
-
 	$(".comment-submit").on("click",function(){
 		const commentContent = $(this).parent().prev().find("#content").val();
 		 
@@ -277,6 +272,7 @@
 						if(data.movieAvgPoint==null){
 							$("#avg-star-input").text("아직 평가가 없어요 ㅠㅠ");
 						}else{
+							
 							$("#avg-star-input").text((parseFloat(data.movieAvgPoint).toFixed(1))).addClass("fs-2");
 						}
 						$("#link").attr("href",data.moviePlatform);
