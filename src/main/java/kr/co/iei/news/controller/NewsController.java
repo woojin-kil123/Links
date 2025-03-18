@@ -42,10 +42,11 @@ public class NewsController {
 	
 	@GetMapping(value="/list")
 	public String newsList(Model model, int reqPage) {
-		NewsListData nld = newsService.selectNewsList(reqPage);
-		model.addAttribute("list",nld.getList());
-		model.addAttribute("pageNavi",nld.getPageNavi());
-		return "news/list";
+	    NewsListData nld = newsService.selectNewsList(reqPage);
+	    model.addAttribute("importantNewsList", nld.getImportantNewsList()); 
+	    model.addAttribute("pagedNewsList", nld.getPagedNewsList()); 
+	    model.addAttribute("pageNavi", nld.getPageNavi());
+	    return "news/list";
 	}
 	
 	@GetMapping(value="/writeFrmEditor")

@@ -42,10 +42,8 @@ public class FileUtils {
 		}
 		return filepath;
 	}
-
 	public void downloadFile(String savepath, String filename, String filepath, HttpServletResponse response) {
 		String downFile = savepath+filepath;
-		
 		try {
 			FileInputStream fis = new FileInputStream(downFile);
 			BufferedInputStream bis = new BufferedInputStream(fis);
@@ -54,7 +52,6 @@ public class FileUtils {
 			String resFilename = new String(filename.getBytes("UTF-8"),"ISO-8859-1");
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition","attachment;filename="+resFilename);
-			
 			while(true) {
 				int read = bis.read();
 				if(read != -1) {

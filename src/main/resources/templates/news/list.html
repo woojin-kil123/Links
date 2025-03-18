@@ -5,39 +5,44 @@
 <title>News List</title>
 <link rel="stylesheet" href="/css/default.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	rel="stylesheet">
 <style>
-	.content-list{
-		margin-top: 80px;
-	}
-	.list-tbl-wrap{
-		width: 80%;
-		height : 500px;
-		margin-top : 15px;
-		margin: auto;
-	}
-	.list-footer{
-		width: 80%;
-		margin: auto;
-	}
-	.news-list-wrap{
-		width: 1200px;
-		margin: 0 auto;
-	}
-	.list-tbl-wrap{
-		height : 500px;
-		margin-top : 15px;
-	}
-	#pageNavi{
-		margin-top : 30px;
-	}
-	#write-btn{
-		display : inline-block;
-	}
-	.page-title{
-		width: 80%;
-		margin: auto;
-	}
+.content-list {
+	margin-top: 80px;
+}
+
+.list-tbl-wrap {
+	width: 80%;
+	margin-top: 15px;
+	margin: auto;
+}
+
+.list-footer {
+	width: 80%;
+	margin: auto;
+}
+
+.news-list-wrap {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.list-tbl-wrap {
+	margin-top: 15px;
+}
+
+#pageNavi {
+	margin-top: 30px;
+}
+
+#write-btn {
+	display: inline-block;
+}
+
+.page-title {
+	width: 80%;
+	margin: auto;
+}
 </style>
 </head>
 <body>
@@ -48,33 +53,45 @@
 			<div class="list-tbl-wrap">
 				<table class="tbl tbl-hover">
 					<tr>
-						<th style="width:10%;">글번호</th>
-						<th style="width:45%;">제목</th>
-						<th style="width:15%;">작성자</th>
-						<th style="width:20%;">작성일</th>
-						<th style="width:10%;">조회수</th>
+						<th style="width: 10%;">글번호</th>
+						<th style="width: 45%;">제목</th>
+						<th style="width: 15%;">작성자</th>
+						<th style="width: 20%;">작성일</th>
+						<th style="width: 10%;">조회수</th>
 					</tr>
-					<tr th:each="news : ${list}" th:if="${news.newsNotice == 1}" style='background-color: rgba(255, 241, 0, 0.1);'>
+					
+					<!-- 중요 공지 (상단 고정) -->
+					<tr th:each="news : ${importantNewsList}"
+						style="background-color: rgba(255, 241, 0, 0.1);">
 						<td><span class="material-icons">flag</span></td>
-						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
+						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}"
+							th:text="${news.newsTitle}"></a></td>
 						<td th:text="${news.memberId}"></td>
 						<td th:text="${news.newsRegDate}"></td>
 						<td th:text="${news.newsReadCount}"></td>
 					</tr>
-					<tr th:each="news : ${list}" th:if="${news.newsNotice == 0}">
+
+					<!-- 일반 소식 (페이지네이션) -->
+					<tr th:each="news : ${pagedNewsList}">
 						<td th:text="${news.newsNo}"></td>
-						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}" th:text="${news.newsTitle}"></a></td>
+						<td><a th:href="@{/news/view(newsNo=${news.newsNo})}"
+							th:text="${news.newsTitle}"></a></td>
 						<td th:text="${news.memberId}"></td>
 						<td th:text="${news.newsRegDate}"></td>
 						<td th:text="${news.newsReadCount}"></td>
 					</tr>
+					
 				</table>
 			</div>
-			<div class="list-footer" style="display: flex; justify-content: flex-end; margin-top: 30px;">
-				<a th:if="${session.member != null && session.member.memberRole == 'admin'}" href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
+			<div class="list-footer"
+				style="display: flex; justify-content: flex-end; margin-top: 30px;">
+				<a
+					th:if="${session.member != null && session.member.memberRole == 'admin'}"
+					href="/news/writeFrmEditor" class="btn-primary" id="write-btn">등록하기</a>
 			</div>
-			<div id="pageNavi" th:utext="${pageNavi}" style="margin-bottom: 50px;"></div>
-		</section>	
+			<div id="pageNavi" th:utext="${pageNavi}"
+				style="margin-bottom: 50px;"></div>
+		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
 </body>

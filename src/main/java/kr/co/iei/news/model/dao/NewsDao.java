@@ -20,17 +20,15 @@ public class NewsDao {
 	@Autowired
 	private NewsFileRowMapper newsFileRowMapper;
 	
-	public List selectNewsList(int start, int end) {
-		String query = "select * from (select rownum as rnum, n.* from (select * from news order by news_no desc)n) where rnum between ? and ?";
-		Object[] params = {start, end};
-		List list = jdbc.query(query, newsRowMapper, params);
-		return list;
+	public List<News> selectNewsList(int start, int end) {
+	    String query = "SELECT * FROM (SELECT rownum AS rnum, n.* FROM (SELECT * FROM news WHERE news_notice = 0 ORDER BY news_no DESC) n) WHERE rnum BETWEEN ? AND ?";
+	    Object[] params = {start, end};
+	    return jdbc.query(query, newsRowMapper, params);
 	}
 
 	public int selectNewsTotalCount() {
-		String query = "select count(*) from news";
-		int totalCount = jdbc.queryForObject(query, Integer.class);
-		return totalCount;
+	    String query = "SELECT COUNT(*) FROM news WHERE news_notice = 0";
+	    return jdbc.queryForObject(query, Integer.class);
 	}
 
 	public int insertNews(News n) {
@@ -47,10 +45,10 @@ public class NewsDao {
 	}
 
 	public int insertNewsFile(NewsFile newsFile) {
-		String query = "insert into news_file values(news_file_seq.nextval,?,?,?)";
-		Object[] params = {newsFile.getNewsNo(), newsFile.getFilename(), newsFile.getFilepath()};
-		int result = jdbc.update(query, params);
-		return result;
+	    String query = "INSERT INTO NEWS_FILE VALUES (NEWS_FILE_SEQ.NEXTVAL, ?, ?, ?)";
+	    Object[] params = {newsFile.getNewsNo(), newsFile.getFilename(), newsFile.getFilepath()};
+	    int result = jdbc.update(query, params);
+	    return result;
 	}
 
 	public News selectOneNews(int newsNo) {
@@ -107,4 +105,17 @@ public class NewsDao {
 		int result = jdbc.update(query,params);
 		return result;
 	}
+	
+	public List<News> selectImportantNews() {
+	    String query = "SELECT * FROM news WHERE news_notice = 1 ORDER BY news_no DESC";
+	    return jdbc.query(query, newsRowMapper);
+	}
+	
+	public List<News> selectPagedNews(int start, int end) {
+	    String query = "SELECT * FROM (SELECT rownum AS rnum, n.* FROM (SELECT * FROM news WHERE news_notice = 0 ORDER BY news_no DESC) n) WHERE rnum BETWEEN ? AND ?";
+	    Object[] params = {start, end};
+	    return jdbc.query(query, newsRowMapper, params);
+	}
+
+
 }

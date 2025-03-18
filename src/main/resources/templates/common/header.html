@@ -299,62 +299,50 @@
         </div>
     </div>
 </nav>
-<script>
-	$(document).ready(function() {
-	    const notificationBtn = $("#notificationBtn");
-	    const notificationPopup = $("#notificationPopup");
-	    const reportReasonElement = $("#reportReason");
-	    const reportReasonWrap = $("#reportReason-wrap");
-	
-	    // ✅ 알림 버튼 클릭 시 알림 창 표시/숨김 토글 및 AJAX 요청
-	    notificationBtn.on("click", function(event) {
-	        event.preventDefault(); // 기본 링크 동작 방지
-	        notificationPopup.toggleClass("show");
-	
-	        // 알림 팝업이 열렸을 때만 AJAX 요청
-	        if (notificationPopup.hasClass("show")) {
-	            $.ajax({
-	                url: "/report/check",
-	                type: "GET",
-	                success: function(data) {
-	                    // ✅ 데이터가 성공적으로 로드되면 업데이트
-	                    //console.log("AJAX Success: " + data);
-	                 	reportReasonWrap.empty();
-	                 	
-	                    if(data == "😊 좋은 하루 되세요."){
-	                    	const liMsg1 = $("<li>");
-	                    	liMsg1.text(data);
-	                    	reportReasonWrap.append(liMsg1);	    
-		                    notificationPopup.toggle();
-	                    }else{
-	                    	const liMsg1 = $("<li>");
-	                    	liMsg1.text(data);
-	                    	reportReasonWrap.append(liMsg1);	                    	
-	                    	const liMsg2 = $("<li>");
-	                    	const warningMsg2 = "운영 정책을 준수해 주십시오.";
-	                    	liMsg2.append(warningMsg2);
-	                    	reportReasonWrap.append(liMsg2);
-		                    notificationPopup.toggle();
-	                    }
-	                },
-	                error: function(xhr, status, error) {
-	                    console.error("AJAX Error: " + error);
-	                    console.error("Response Status: " + status);
-	                    console.error("Response Text: " + xhr.responseText);
-	                }
-	            });
-	        }
-	    });
-	
-	    // ✅ 화면 클릭 시 알림 창 닫기 (버튼 제외)
-	    $(document).on("click", function(event) {
-	        // 클릭한 요소가 알림 버튼 또는 알림 팝업 내부가 아닐 때만 닫기
-	        if (!notificationBtn.is(event.target) && !notificationPopup.is(event.target) && notificationPopup.has(event.target).length === 0) {
-	            notificationPopup.removeClass("show");
-	        }
-	    });
-	});
-	
+	<script>
+		$(document).ready(function() {
+		    const notificationBtn = $("#notificationBtn");
+		    const notificationPopup = $("#notificationPopup");
+		    const reportReasonElement = $("#reportReason");
+		    const reportReasonWrap = $("#reportReason-wrap");
+		    notificationBtn.on("click", function(event) {
+		        event.preventDefault();
+		        notificationPopup.toggleClass("show");
+		        if (notificationPopup.hasClass("show")) {
+		            $.ajax({
+		                url: "/report/check",
+		                type: "GET",
+		                success: function(data) {
+		                 	reportReasonWrap.empty();
+		                    if(data == "😊 좋은 하루 되세요."){
+		                    	const liMsg1 = $("<li>");
+		                    	liMsg1.text(data);
+		                    	reportReasonWrap.append(liMsg1);	    
+			                    notificationPopup.toggle();
+		                    }else{
+		                    	const liMsg1 = $("<li>");
+		                    	liMsg1.text(data);
+		                    	reportReasonWrap.append(liMsg1);	                    	
+		                    	const liMsg2 = $("<li>");
+		                    	const warningMsg2 = "운영 정책을 준수해 주십시오.";
+		                    	liMsg2.append(warningMsg2);
+		                    	reportReasonWrap.append(liMsg2);
+			                    notificationPopup.toggle();
+		                    }
+		                },
+		                error: function(xhr, status, error) {
+		                }
+		            });
+		        }
+		    });
+		    $(document).on("click", function(event) {
+		        if (!notificationBtn.is(event.target) && !notificationPopup.is(event.target)
+		        						&& notificationPopup.has(event.target).length === 0) {
+		            notificationPopup.removeClass("show");
+		        }
+		    });
+		});
+		
 	$(document).ready(function() {
 		$.ajax({
             url: "/report/checkWarningLv",
@@ -365,10 +353,8 @@
                 }
             },
             error: function(xhr, status, error) {
-                console.error("AJAX 요청 오류:", error);
             }
         });
-		
 		setInterval(function() {
 	        $.ajax({
 	            url: "/report/checkWarningLv",
@@ -379,7 +365,6 @@
 	                }
 	            },
 	            error: function(xhr, status, error) {
-	                console.error("AJAX 요청 오류:", error);
 	            }
 	        });
 	    }, 60000);

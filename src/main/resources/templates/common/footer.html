@@ -714,21 +714,18 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script>
 	        $(document).ready(function() {
-	            //AJAX 요청으로 코멘트 개수 가져오기
 	            function fetchCommentCount() {
 	                $.ajax({
-	                    url: "/comment/count", // 서버에서 코멘트 개수를 가져오는 엔드포인트
+	                    url: "/comment/count",
 	                    type: "GET",
 	                    success: function(data) {
 	                    	console.log(data);
-	                        $("#commentCount").text(data); // ✅ 가져온 데이터를 HTML에 반영
+	                        $("#commentCount").text(data);
 	                    },
 	                    error: function(xhr, status, error) {
-	                        console.error("Error fetching comment count:", error);
 	                    }
 	                });
 	            }
-	            // 페이지 로드 시 코멘트 개수 가져오기
 	            fetchCommentCount();
 	            setInterval(fetchCommentCount, 10000);
 	        });
