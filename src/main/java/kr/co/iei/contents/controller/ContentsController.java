@@ -1,7 +1,10 @@
 package kr.co.iei.contents.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.contents.model.service.ContentsService;
+import kr.co.iei.contents.model.vo.ApiMovie;
 import kr.co.iei.contents.model.vo.ContentStar;
 import kr.co.iei.contents.model.vo.DbMovie;
 
@@ -71,6 +75,24 @@ public class ContentsController {
 	public int selectMemberLike(ContentStar cs) {
 		int result = contentsService.selectMemberLike(cs);
 		return result;
+	}
+	@ResponseBody
+	@GetMapping("/plusLinkClick")
+	public int plusLinkClick(int movieId) {
+		int result = contentsService.plusLinkClick(movieId);
+		return result;
+	}
+	@GetMapping("/myContents")
+	public String myContents(String memberId, Model model) {
+		model.addAttribute("memberId",memberId);
+		return "contents/myContents";
+	}
+	
+	@ResponseBody
+	@GetMapping("/selectMyContents")
+	public List selectMyContents(String memberId) {
+		List list = contentsService.myContents(memberId);
+		return list;
 	}
 	
 }

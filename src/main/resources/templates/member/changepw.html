@@ -8,29 +8,42 @@
 	font-family: ns-r;
 	}
 	.input-wrap{
-	display:flex;
+	margin:0 auto;	
 	width: 100%;
 	}
 	.input-title{
 	width: 20%;
+	margin: 0 auto;
+	 margin-bottom: 15px;
+	}
+	.find-wrap{
+		width: 800px;
+		margin: 0 auto;
+		padding-top : 150px;
+		text-align: center
 	}
 	.change-container{
+		width:100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	}
 	.input-type{
 	width:40%;
+		margin: 0 auto;
 	}
 	.page-title{
+	margin: 0 auto;
 	font-size: 32px;
     font-weight: bold;
 	 padding-bottom : 40px;
 	 text-align: center;
+	
 	}
 	
-	.find-wrap .input-wrap{
-		padding : 15px 30px;
+	
+	.input-wrap {
+		margin: 0 auto;
 	}
 	.pwchange-button-box{
 	padding : 20px 30px;
@@ -42,10 +55,9 @@
 	border :none;
 	border-bottom: 1px solid black;
 	width : 100%;
-	align-content: left;
 	}
-	.input-wrap{
-margin-left: 100px;
+.loc{
+	margin-top: 15px;
 }
 </style>
 </head>
@@ -53,7 +65,7 @@ margin-left: 100px;
 <th:block th:include="common/header"></th:block>
 
 	<main class="content change-container">
-		<section class="section find-wrap" style="padding-top:100px; padding-bottom:80px;">
+		<section class="section find-wrap" >
 			<div class="page-title">비밀번호 변경</div>
 			<form action="/member/pwchange"  class="form-control" method="get">
 			<div class="input-wrap">
@@ -63,7 +75,8 @@ margin-left: 100px;
 				<div class="input-type">
 						<input type="password" class="form-control" name="memberPw" id="memberPw">
 				</div>
-				<div class="input-title">
+					<p class="input-msg pw-regex-msg"></p>
+				<div class="input-title loc">
 						<label for="memberPwRe">새 비밀번호확인</label>
 				</div>
 				<div class="input-type">
@@ -74,7 +87,7 @@ margin-left: 100px;
 				<input type="hidden" name="memberId" id="memberId" th:value="${memberId}">
 				</div>
 				<div class="pwchange-button-box">
-					<button type="submit" class="btn-primary lg">비밀번호 변경</button>
+					<button type="submit" class="btn-primary lg" style="width: 200px;">비밀번호 변경</button>
 				</div>
 				</div>
 			</form>
@@ -87,7 +100,7 @@ margin-left: 100px;
 	    let isValid = true;
 	    let memberPw = document.getElementById("memberPw").value.trim();
 	    let memberPwRe = document.getElementById("memberPwRe").value.trim();
-	    if (!memberPw || !/^(?=.*[A-Za-z])[A-Za-z]{8,}$/.test(memberPw)) {
+	    if (!memberPw || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z]{8,}$/.test(memberPw)) {
 	        alert("비밀번호는 8자 이상이며, 영문, 숫자 포함해야 합니다.");
 	        isValid = false;
 	    }
@@ -95,6 +108,18 @@ margin-left: 100px;
 	    if (isValid) {
 	        this.submit();
 	    }
+	});
+	$("#memberPw").on("focusout",function(){
+		$(".pw-regex-msg").removeClass("invalid").removeClass("valid");
+		let memberPw = document.getElementById("memberPw").value.trim();
+	    if (!memberPw || !/^[a-zA-Z0-9]{8,}$/.test(memberPw)) {
+	    	$(".pw-regex-msg").text("비밀번호 형식: 8자 이상, 영문, 숫자를 포함해야됩니다");
+	    	$(".pw-regex-msg").addClass("invalid");
+	    }else{
+	    	$(".pw-regex-msg").text("사용가능한 비밀번호입니다");
+	    	$(".pw-regex-msg").addClass("valid");
+	    }
+		
 	});
 	$("#memberPwRe").on("focusout",function(){
 		$(".pw-check-msg").removeClass("invalid").removeClass("valid");

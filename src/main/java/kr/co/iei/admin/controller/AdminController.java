@@ -75,7 +75,12 @@ public class AdminController {
 	public void updateInquiry(int inquiryProgress, int inquiryNo) {
 		int result = adminService.updateInquiry(inquiryProgress,inquiryNo);
 	}
-	
+
+	@ResponseBody
+	@GetMapping("/plusAdClick")
+	public void plusAdClick(String adPosition) {
+		adminService.plusAdClick(adPosition);
+	}
 	
 	@ResponseBody
 	@GetMapping("/adUrl")
@@ -115,6 +120,29 @@ public class AdminController {
 	@GetMapping("/updateReport")
 	public void updateReport(Report r) {
 		int result = adminService.updateReport(r);
+	}
+	
+	@ResponseBody
+	@GetMapping("/dangerUserList")
+	public List dangerUserList() {
+		List list = adminService.dangerUserList();
+		return list;
+	}
+	@ResponseBody
+	@GetMapping("/updateWarningLevel")
+	public void updateWarningLevel(String memberId) {
+		adminService.updateWarningLevel(memberId);
+	}
+	@ResponseBody
+	@GetMapping("/kickMember")
+	public void kickMember(String memberId) {
+		adminService.kickMember(memberId);
+	}	
+	@ResponseBody
+	@GetMapping("/kickedMember")
+	public List kickedMember() {
+		List list = adminService.kickedMember();
+		return list;
 	}
 	
 }

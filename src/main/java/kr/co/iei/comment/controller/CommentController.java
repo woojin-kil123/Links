@@ -26,9 +26,9 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러, 건들지말것
+	//영화 세부페이지에서 영화에대한 코멘트 조회 오는 컨트롤러
 	@ResponseBody
-	@GetMapping("oneMovieComment")
+	@GetMapping("oneMovieComments")
 	public List oneMovieComment(String contentNo) {
 		List list = commentService.oneMovieComment(contentNo);
 		return list;
@@ -62,8 +62,6 @@ public class CommentController {
 		//코멘트리스트 모델에 담기
 		model.addAttribute("list", list);
 		
-		
-		
 		return "comment/mCommentMemberList";
 	}
 	
@@ -86,10 +84,14 @@ public class CommentController {
 		return "comment/commentView";
 	}
 	
+	//코멘트 히스토리
 	@GetMapping(value="/myCommentList")
-	public String myCommentList(String contentNo, Model model) {
-		List list = commentService.mCommentList(contentNo );		
-		model.addAttribute("list", list);		
+	public String myCommentList(String memberId, Model model) {
+		List list = commentService.myCommentList(memberId);
+		
+		//코멘트리스트 모델에 담기
+		 
+		model.addAttribute("list", list);	
 		return "comment/myCommentList";
 	}
 	
@@ -162,6 +164,7 @@ public class CommentController {
 	//댓글 번호를 받으면 해당 코멘트로 연결해주는 컨트롤러
 	@GetMapping("/recommentView")
 	public String recommentView(int recommentNo) {
+		System.out.println(recommentNo);
 		int commentNo = commentService.selectRefCommentNo(recommentNo);
 		return "redirect:/comment/commentView?commentNo="+commentNo;
 

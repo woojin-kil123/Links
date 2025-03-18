@@ -1,8 +1,11 @@
 package kr.co.iei.comment.model.dao;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.beans.factory.parsing.EmptyReaderEventListener;
+import org.springframework.core.NestedRuntimeException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -46,15 +49,15 @@ public class CommentDao {
 		return list;
 	}
 
-	public List mCommentList(String contentNo) {
-		String query = "select * from comm where content_no like '%'||?||'%' order by COMMENT_NO DESC";
-		Object[] params= {contentNo};
+	public List mCommentList(String memberId) {
+		String query = "select * from comm where member_id= ? order by comment_no desc" ; 
+		Object[] params= {memberId};
 		List list = jdbc.query(query,commentRowMapper,params);
-		
 			
 		return list;
 	}
-
+	
+	
 	public String movieCode(String partTwo) {
 		String query = "select movie_title from movie where movie_id = ?";
 		Object[] params= {partTwo};
@@ -190,17 +193,38 @@ public class CommentDao {
 	}
 
 	
-
 	
-
-		
-	
-	
+	//댓글의 comment번호 조회해오는 dao
 	public int selectRefCommentNo(int recommentNo) {
 		String query = "select comment_no from re_comm where re_comment_no=?";
-		int result = jdbc.queryForObject(query, Integer.class);
+		Object[] param = {recommentNo};
+		int result = jdbc.queryForObject(query, Integer.class,param);
 		return result;
 	}
+
+	
+
+	public int starP(String memberId, String contentNo) {
+		int starP = 0;
+		String query = " select starpoint from content_star where member_id = ? and content_no = ? " ;
+		Object[] param = {memberId,contentNo};
+		try {
+			starP = jdbc.queryForObject(query, Integer.class, param);
+		}
+		catch(EmptyResultDataAccessException e) {
+		}
+		
+		return starP;
+	}
+	
+	
+	
+	
+
+	
+
+	
+		
 	
 
 }

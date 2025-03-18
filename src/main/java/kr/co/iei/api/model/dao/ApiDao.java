@@ -1,4 +1,4 @@
-package kr.co.iei.contents.model.dao;
+package kr.co.iei.api.model.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

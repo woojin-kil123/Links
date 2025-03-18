@@ -57,15 +57,13 @@
 		    </div>
 		</div>
 		<div class="ad-banner">
-				<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; height: 150px;">
+			<img src="/image/bannerad_0.jpg" alt="배너광고" style="width: 1200px; margin-bottom: 40px;">
 		</div>
     </div>
 	</section>
     <th:block th:include="common/footer"></th:block>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-    
-    
     <script inline="javascript">
 	    const query = $("#queryValue").val().trim();
 	    if (!query || query === "undefined") {
@@ -92,6 +90,7 @@
 				}    
 			});
 		}
+
 	    function createNoResultDiv() {
 	        const noResultDiv = `
 	            <div class="no-result">

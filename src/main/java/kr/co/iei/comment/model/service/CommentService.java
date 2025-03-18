@@ -1,5 +1,6 @@
 package kr.co.iei.comment.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,15 @@ public class CommentService {
 			int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
 			//댓글 갯수만 조회해서 INT 로 리턴받은것
 			int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
+			//별점 받기
+			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			
 			//2. 조회 결과를 c에 저장
 			c.setContentTitle(movie.getMovieTitle());
 			c.setPosterPath(movie.getPosterPath());		
 			c.setLikeCount(likeCount);
 			c.setReCommCount(reCommCount);
+			c.setStarPoint(starP);
 		}
 		//코멘트 테이블에서 데이터 읽어온 Comment 객체마다 movieTitle 변수와 posterPath 변수에 데이터 저장
 		return list;
@@ -89,8 +94,11 @@ public class CommentService {
 		//댓글수, 좋아요수를 구해야함
 		int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());		
 		int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
+		int starPoint = commentDao.starP(c.getMemberId(),c.getContentNo());
+		
 		c.setLikeCount(likeCount);
 		c.setReCommCount(reCommCount);
+		c.setStarPoint(starPoint);
 		
 		return c;
 	}
@@ -111,7 +119,16 @@ public class CommentService {
 	}
 
 	public List oneMovieComment(String contentNo) {
-		List list = commentDao.oneMovieComment(contentNo);
+		List<Comment> list = commentDao.oneMovieComment(contentNo);
+		for(Comment c : list) {
+			int starP = commentDao.starP(c.getMemberId(),contentNo);
+			String movieId = c.getContentNo().substring(1);
+			DbMovie m = commentDao.selectMovieInfo(movieId);
+			c.setStarPoint(starP);
+			c.setMovieTitle(m.getMovieTitle());
+			c.setPosterPath(m.getPosterPath());
+			System.out.println(c);
+		}
 		return list;
 	}
 
@@ -139,10 +156,6 @@ public class CommentService {
 			comm.setReCommCount(reCommCount);
 		}
 		
-		
-		
-		
-		
 		return list;
 	}
 
@@ -155,11 +168,17 @@ public class CommentService {
 		return result;
 	}
 	public List newMovieComment() {
-		List list = commentDao.selectNewMovieCommList();
+		List<Comment> list = commentDao.selectNewMovieCommList();
+		for(Comment c : list) {
+			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			String movieId = c.getContentNo().substring(1);
+			DbMovie m = commentDao.selectMovieInfo(movieId);
+			c.setStarPoint(starP);
+			c.setMovieTitle(m.getMovieTitle());
+			c.setPosterPath(m.getPosterPath());
+		}
 		return list;
-
 	}
-	
 	
 	@Transactional
 	public int reCommUpdate(ReComment rc) {
@@ -190,8 +209,34 @@ public class CommentService {
 		int result = commentDao.selectRefCommentNo(recommentNo);
 		return result;
 	}
-	
 
+	
+		
+		
+	
+	//memberId 개인 코멘트 페이지
+	public List myCommentList(String memberId) {
+		List<Comment> list = commentDao.mCommentList(memberId);
+		for(Comment c : list ) {
+			//1. contentNo 로 movie테이블을 조회해서 movie_title, poster_path 조회
+			String movieId = c.getContentNo().substring(1);
+			DbMovie movie = commentDao.selectMovieInfo(movieId);
+			int likeCount = commentDao.selectCommentLikeCount(c.getCommentNo());
+			//댓글 갯수만 조회해서 INT 로 리턴받은것
+			int reCommCount = commentDao.selectReCommCount(c.getCommentNo());
+			//별점 받기
+			int starP = commentDao.starP(c.getMemberId(),c.getContentNo());
+			
+			//2. 조회 결과를 c에 저장
+			c.setContentTitle(movie.getMovieTitle());
+			c.setPosterPath(movie.getPosterPath());		
+			c.setLikeCount(likeCount);
+			c.setReCommCount(reCommCount);
+			c.setStarPoint(starP);
+		}
+		//코멘트 테이블에서 데이터 읽어온 Comment 객체마다 movieTitle 변수와 posterPath 변수에 데이터 저장
+		return list;
+	}
 	
 	
 }

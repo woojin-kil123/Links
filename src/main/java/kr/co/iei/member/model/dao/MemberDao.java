@@ -63,16 +63,16 @@ public class MemberDao {
 		return result;
 	}
 
-	public int deleteMember(int memberNo) {
-		String query = "update member set del_yn ='Y' where member_no=?";
-		Object[] params = { memberNo };
+	public int deleteMember(String memberId) {
+		String query = "update member set del_yn ='Y' where member_Id=?";
+		Object[] params = { memberId };
 		int result = jdbc.update(query, params);
 		return result;
 	}
 
-	public int insertdeleteMember(int memberNo) {
+	public int insertdeleteMember(String memberId) {
 		String query = "insert into del_member values(del_member_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),'N')";
-		Object[] params = { memberNo };
+		Object[] params = { memberId };
 		int result2 = jdbc.update(query, params);
 		return result2;
 	}
@@ -91,8 +91,8 @@ public class MemberDao {
 	}
 
 	public Member selectOneMemberPw(Member m) {
-		String query = "select * from member where member_id=? and member_name=? ";
-		Object[] params = { m.getMemberId(), m.getMemberName() };
+		String query = "select * from member where member_id=? and member_name=? and member_email=?";
+		Object[] params = { m.getMemberId(), m.getMemberName(), m.getMemberEmail()};
 		List list = jdbc.query(query, memberRowMapper, params);
 		if (list.isEmpty()) {
 			return null;

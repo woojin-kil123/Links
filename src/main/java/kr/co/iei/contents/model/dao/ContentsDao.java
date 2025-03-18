@@ -3,6 +3,7 @@ package kr.co.iei.contents.model.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -42,22 +43,28 @@ public class ContentsDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
-	public int selectAvgPoint(String contentNo) {
+	public double selectAvgPoint(String contentNo) {
 		String query = "select avg(starpoint) from content_star where content_no=?";
 		Object[] params = {contentNo};
-		int avgStar = jdbc.queryForObject(query, Integer.class, params);
+		double avgStar = jdbc.queryForObject(query, Double.class, params);
  		return avgStar;
 	}
-	public int updateMovieStar(int avgStar, String movieId) {
+	public int updateMovieStar(double avgStar, String movieId) {
 		String query = "update movie set movie_avgpoint = ? where movie_id= ?";
 		Object[] params = {avgStar, movieId};
 		int result = jdbc.update(query,params);
 		return result;
 	}
 	public int selectMemberStar(ContentStar cs) {
+		int result=0;
 		String query = "select starpoint from content_star where content_no=? and member_id=? ";
 		Object[] params = {cs.getContentNo(),cs.getMemberId()};
-		int result = jdbc.queryForObject(query, Integer.class, params);
+		try {
+			result = jdbc.queryForObject(query, Integer.class, params);
+			
+		}catch(EmptyResultDataAccessException e) {
+			return result;
+		}
 		return result;
 	}
 	public int insertContentLike(ContentStar cs) {
@@ -73,10 +80,22 @@ public class ContentsDao {
 		return result;
 	}
 	public int selectMemberLike(ContentStar cs) {
-		System.out.println(cs);
 		String query = "select count(*) from content_like where content_no=? and member_id=? ";
 		Object[] params = {cs.getContentNo(),cs.getMemberId()};
 		int result = jdbc.queryForObject(query, Integer.class, params);
 		return result;
+	}
+	public int plusLinkClick(int movieId) {
+		String query = "update movie set link_click=link_click+1 where movie_id=?";
+		Object[] params = {movieId};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public List<String> selectContentLike(String memberId) {
+		String query = "select content_no from content_like where member_id=?";
+		Object[] params = {memberId};
+		List<String> list = jdbc.queryForList(query,String.class ,params);
+		return list;
 	}
 }

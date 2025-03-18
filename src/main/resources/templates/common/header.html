@@ -206,7 +206,7 @@
 	    display: flex; /* Flexbox 적용 */
 	    align-items: center; /* 세로 중앙 정렬 */
 	    gap: 10px; /* span 요소 간격 조절 */
-	    height: 50px; /* 예시 높이 (필요 시 조정) */
+	    min-height: 50px; /* 예시 높이 (필요 시 조정) */
 	    justify-content: center;
 	    background-color: black;
 	    font-size: 18px;
@@ -222,7 +222,7 @@
   	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
         <!-- 로고 -->
-        <a class="navbar-brand" href="/ref/sample">
+        <a class="navbar-brand" href="/">
             <img src="/image/links_logo.svg" style="margin-left: 15px;">
         </a>
 
@@ -260,7 +260,7 @@
 
                 <!-- 검색창 -->
                 <li class="nav-item d-flex">
-                    <form action="/search/searchMovie" method="get" class="d-flex gap-2" >
+                    <form action="/api/searchMovie" method="get" class="d-flex gap-2" >
 				        <input type="text" name="query" class="form-control search-input searchQuery" placeholder="영화, 키워드 검색">
 				        <button type="submit" class="search-btn">
 				            <span class="material-icons searchBtn">search</span>
@@ -278,23 +278,26 @@
                 <th:block th:if="${session.member != null}">
                     <th:block th:if="${session.member.memberRole == 'normal'}">
 
-                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage"><span class="material-icons">account_circle</span></a></li>
                     </th:block>
                     <th:block th:if="${session.member.memberRole == 'business'}">
-                        <li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/member/mypage"><span class="material-icons">account_circle</span></a></li>
                     </th:block>
                     <th:block th:if="${session.member.memberRole == 'admin'}">
                         <li class="nav-item"><a class="nav-link" href="/admin/management">관리자페이지</a></li>
                     </th:block>
-                    <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/member/logout"><span class="material-icons">logout</span></a></li>
                 </th:block>
 
                 <!-- 문의 아이콘 -->
+                <th:block th:if="${session.member != null and session.member.memberRole != 'admin'}">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="/member/inquiryFrm">
+                    <a class="nav-link d-flex align-items-center" href="/member/inquiryFrm" >
                         <span class="material-icons">contact_support</span>
                     </a>
                 </li>
+                </th:block>
+                </th:block>
             </ul>
         </div>
     </div>

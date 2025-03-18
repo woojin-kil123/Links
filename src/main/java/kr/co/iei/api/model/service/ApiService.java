@@ -1,4 +1,4 @@
-package kr.co.iei.contents.model.service;
+package kr.co.iei.api.model.service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -16,28 +17,25 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.co.iei.contents.model.dao.ApiDao;
+import kr.co.iei.api.model.dao.ApiDao;
 import kr.co.iei.contents.model.vo.ApiMovie;
 
 @Service
 public class ApiService {
 	private String url = "https://api.themoviedb.org/3/movie/";
-	//private String apiUrl = "https://api.themoviedb.org/3/movie/changes?page=1";
-	private String apiKey = "7bf2a455f3dd6b2ff509cd182bb2888f";
+	@Value("${tmdb.api.key}")
+	private String apiKey;
 
 	@Autowired
 	private ApiDao apiDao;
 	
 	private List movieList(String result) {
 		List movieList = new ArrayList<ApiMovie>();
-		
 		JsonObject object = (JsonObject)JsonParser.parseString(result);
 	 	JsonArray results = object.get("results").getAsJsonArray();
 	 	for(int i=0; i<results.size(); i++){
 	 		ApiMovie movie = new ApiMovie();
 	 		JsonObject movieInfo = results.get(i).getAsJsonObject();
-	 		//movie.setBackdropPath(movieInfo.get("backdrop_path").getAsString());
-	 		
 	 		JsonArray genres = movieInfo.get("genre_ids").getAsJsonArray();
 	 		List genresList = new ArrayList<String>();
 	 		for(int j=0;j<genres.size();j++) {
@@ -48,14 +46,10 @@ public class ApiService {
 	 		movie.setGenreIds(genresList);
 	 		movie.setMovieId(movieInfo.get("id").getAsString());
 	 		movie.setTitle(movieInfo.get("title").getAsString());
-	 		//movie.setOriginalTitle(movieInfo.get("original_title").getAsString());
-	 		//movie.setOverview(movieInfo.get("overview").getAsString());
 	 		try {
 	 			movie.setPosterPath(movieInfo.get("poster_path").getAsString());
 	 		}catch (UnsupportedOperationException e) {
-	 			
 			}
-	 		
 	 		movie.setReleaseDate(movieInfo.get("release_date").getAsString());
 	 		movieList.add(movie);
 	 	}
@@ -75,7 +69,6 @@ public class ApiService {
         return movieList;
     }
     
-    //"popular?language=ko-kr&page=1&region=kr"
 	public ApiMovie movieDetail(int movieId) throws IOException {
 		ApiMovie movie = new ApiMovie();
     	String query = movieId+"?language=ko-kr";
@@ -185,55 +178,5 @@ public class ApiService {
     	movieList = movieList(result);
         return movieList;
 	}
-	
-	
-	
-    /*
-    @Transactional
-    public void insertGenres() {
-    	
-    	String url = "https://api.themoviedb.org/3/genre/movie/list?api_key=7bf2a455f3dd6b2ff509cd182bb2888f&language=ko";
-    	try {
-			String result = Jsoup.connect(url)
-					.data("resultType", "json")
-					.ignoreContentType(true)
-					.get()
-					.text();
-			JsonObject object = (JsonObject)JsonParser.parseString(result);
-			JsonArray genres = object.get("genres").getAsJsonArray();
-			for(int i=0; i<genres.size(); i++) {
-				JsonObject obj = genres.get(i).getAsJsonObject();
-				String hashId  = "mg"+obj.get("id").getAsInt();
-				String hashName = "#"+obj.get("name").getAsString();
-				int addInsert = apiDao.insertGenres(hashId,hashName);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-
-	@Transactional
-	public void insertCountry() {
-		String url = "https://api.themoviedb.org/3/configuration/countries?api_key=7bf2a455f3dd6b2ff509cd182bb2888f&language=ko";
-		try {
-			String result = Jsoup.connect(url)
-					.data("resultType", "json")
-					.ignoreContentType(true)
-					.get()
-					.text();
-			JsonArray array = (JsonArray)JsonParser.parseString(result);
-			for(int i=0; i<array.size(); i++) {
-			JsonObject countries = array.get(i).getAsJsonObject();
-				String eng  = countries.get("iso_3166_1").getAsString();
-				String ko = countries.get("native_name").getAsString();
-				int addInsert = apiDao.insertCountry(eng,ko);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    */
 
 }
