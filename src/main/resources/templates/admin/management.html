@@ -522,8 +522,8 @@
 	                $.each(data, function (index, item) {
 	                	if(item.inquiryProgress==3){
 		                	const row = $("<tr>");
-		                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").on("click",function(){
-								const inquiryNo = $(this).text();
+		                	row.append($("<td>").text(item.inquiryNo).addClass("btn-link").css("cursor","pointer").on("click",function(){
+		                		const inquiryNo = $(this).text();
 								location.href="/admin/inquiryView?inquiryNo="+inquiryNo;
 		                	}));
 		                    row.append($("<td>").text(item.companyName));
@@ -733,7 +733,7 @@
 		                                    type: "get",
 		                                    data : {"memberId": memberId},
 		                                    success:function(data){
-		                                    	
+		                                    	dangerUserList();
 		                                    }
 		                            	})
 		                           	 })
@@ -749,6 +749,7 @@
 		                            type: "get",
 		                            data : {"memberId": memberId},
 		                            success:function(data){
+		                            	dangerUserList();
 		                            	kicked();                                   	
 		                            }
 		                    	})

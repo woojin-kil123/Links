@@ -143,7 +143,7 @@ public class AdminDao {
 	}
 
 	public void updateWarningLevel(String memberId) {
-		String query = "update member set warningLevel=2 where member_id=?";
+		String query = "update member set warning_level=2 where member_id=?";
 		Object[] params = {memberId};
 		jdbc.update(query, memberId);
 	}
